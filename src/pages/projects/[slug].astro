@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const all = await getCollection('projects');
+  const sorted = all.sort((a, b) => a.data.order - b.data.order);
+  return sorted.map((entry, idx) => ({
+    params: { slug: entry.slug },
+    props: {
+      entry,
+      prev: idx > 0 ? sorted[idx - 1] : null,
+      next: idx < sorted.length - 1 ? sorted[idx + 1] : null
+    }
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'projects'>;
+  prev: CollectionEntry<'projects'> | null;
+  next: CollectionEntry<'projects'> | null;
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await entry.render();
+const data = entry.data;
+---
+<BaseLayout
+  title={`${data.title} - Sagar Ahuja`}
+  description={data.summary}
+>
+  <article class="article">
+    <div class="container-narrow">
+      <header>
+        <a href="/work" class="crumb">&larr; All work</a>
+        <h1>{data.title}</h1>
+        <p class="deck">{data.summary}</p>
+        <div class="meta-row">
+          <span><strong>{data.company}</strong></span>
+          {data.role && <span>{data.role}</span>}
+          <span>{data.year}</span>
+          {data.timeframe && <span>{data.timeframe}</span>}
+        </div>
+      </header>
+
+      {data.metrics && data.metrics.length > 0 && (
+        <div class="metric-strip">
+          {data.metrics.map(m => (
+            <div class="cell">
+              <span class="value">{m.value}</span>
+              <span class="label">{m.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div class="body">
+        <Content />
+      </div>
+
+      <div class="nav-footer">
+        {prev ? (
+          <a href={`/projects/${prev.slug}`}>&larr; {prev.data.title}</a>
+        ) : <span></span>}
+        {next ? (
+          <a href={`/projects/${next.slug}`}>{next.data.title} &rarr;</a>
+        ) : <span></span>}
+      </div>
+    </div>
+  </article>
+</BaseLayout>

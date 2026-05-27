@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const sideProjects = await getCollection('side-projects');
+const sorted = sideProjects.sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Building outside work - Sagar Ahuja">
+  <section class="section">
+    <div class="container">
+      <div class="eyebrow">Builds, not just plans</div>
+      <h1 style="margin-bottom:1rem;">Building outside work</h1>
+      <p style="font-size:1.1rem;color:var(--text-muted);max-width:680px;margin-bottom:3rem;">
+        Projects I built outside of formal work. Included because they demonstrate product thinking, ownership, and willingness to ship.
+      </p>
+      <div class="side-grid">
+        {sorted.map(sp => (
+          <article class="side-card">
+            <div class="top-row" style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:0.78rem;color:var(--text-dim);">
+              <span>{sp.data.type}</span>
+              <span>{sp.data.year}</span>
+            </div>
+            <h3>{sp.data.title}</h3>
+            <p class="summary" style="color:var(--text-muted);">{sp.data.summary}</p>
+            {sp.data.tags && sp.data.tags.length > 0 && (
+              <div class="tags">
+                {sp.data.tags.map((t: string) => <span class="tag">{t}</span>)}
+              </div>
+            )}
+            <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+              <a href={`/side-projects/${sp.slug}`} class="external">Read more -&gt;</a>
+              {sp.data.link && (
+                <a href={sp.data.link} target="_blank" rel="noopener" class="external">{sp.data.linkLabel ?? 'Open'} ↗</a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

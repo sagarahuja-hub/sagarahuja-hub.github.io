@@ -1,0 +1,52 @@
+---
+import Icon from './Icon.astro';
+
+interface Metric {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  href: string;
+  title: string;
+  company: string;
+  year: string;
+  summary: string;
+  tags?: string[];
+  metrics?: Metric[];
+  icon?: string;
+}
+
+const { href, title, company, year, summary, tags = [], metrics = [], icon } = Astro.props;
+---
+<a href={href} class="project-card">
+  <div class="top-row">
+    <span class="company">{company}</span>
+    <span>{year}</span>
+  </div>
+  <div class="card-head">
+    {icon && (
+      <span class="card-icon" aria-hidden="true">
+        <Icon name={icon} size={20} />
+      </span>
+    )}
+    <h3>{title}</h3>
+  </div>
+  <p class="summary">{summary}</p>
+  {tags.length > 0 && (
+    <div class="tags">
+      {tags.slice(0, 4).map(t => <span class="tag">{t}</span>)}
+    </div>
+  )}
+  {metrics.length > 0 && (
+    <div class="metrics">
+      {metrics.slice(0, 3).map(m => (
+        <div class="metric">
+          <span class="value">{m.value}</span>
+          <span class="label">{m.label}</span>
+        </div>
+      ))}
+    </div>
+  )}
+  <span class="read-more">Read case study →</span>
+</a>

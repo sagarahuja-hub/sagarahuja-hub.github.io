@@ -1,0 +1,359 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+
+const stats = [
+  { num: '11', label: 'Years of experience' },
+  { num: '4', label: 'Companies / orgs' },
+  { num: '17+', label: 'Shipped initiatives' },
+  { num: '10M+', label: 'Users impacted' }
+];
+
+const career = [
+  { label: 'Tech Mahindra', years: '2013-2016', cls: 's4' },
+  { label: 'Teach For India', years: '2016-2018', cls: 's3' },
+  { label: 'Games24x7', years: '2019-2025', cls: 's2' },
+  { label: 'Skillz', years: '2025-2026', cls: 's1' }
+];
+
+const allFilters = ['All', 'AI', 'Growth', 'Lifecycle', 'Platform', 'Monetization', 'Education'];
+
+const experience = [
+  {
+    date: 'Mar 2025 - Feb 2026',
+    title: 'Senior Product Manager',
+    org: 'Skillz | Bengaluru, India',
+    tags: ['AI', 'Lifecycle', 'Monetization', 'LiveOps'],
+    intro: 'Overhauled multi-year lifecycle and monetization strategy for a publicly listed US B2C platform, unifying loyalty, communications, and personalization into a coherent end-to-end user journey.',
+    bullets: [
+      'Redesigned loyalty program reward logic to tie incentives to user actions instead of static tier membership, reducing reward spend by <span class="hl">30%</span> and driving <span class="hl">9% net revenue uplift</span> through higher engagement.',
+      'Identified a Daily Challenges design flaw causing abrupt user progress resets. Reprioritized roadmap to fix root cause over new feature delivery, improving D14 retention by <span class="hl">10%</span> and delivering <span class="hl">5% net revenue uplift</span>.',
+      'Aligned Marketing, Analytics, and Engineering to rebuild lifecycle targeting from batch to real-time, delivering <span class="hl">6% net revenue uplift</span> and uncovering <span class="hl">2 undetected funnel drop-offs</span>.',
+      'Uncovered an unaddressed operational gap in campaign execution and built a 0 to 1 AI-powered lifecycle tool, automating end-to-end campaign creation, targeting, and reporting, reducing execution effort by <span class="hl">50%</span>.'
+    ]
+  },
+  {
+    date: 'Jun 2019 - Feb 2025',
+    title: 'Senior Product Manager',
+    org: 'Games24x7 | Bengaluru, India',
+    tags: ['Growth', 'Personalization', 'Experimentation', 'Platform'],
+    intro: 'Led platform and growth product strategy for Indian B2C apps with <span class="hl">10M+ users</span>, scaling retention, monetization, and experimentation across all products.',
+    bullets: [
+      'Anchored app redesign in user research across <span class="hl">100+ players</span>, building a configurable, real-time architecture serving distinct experiences per cohort, improving new user retention by <span class="hl">9%</span> and existing user revenue per user by <span class="hl">3%</span>.',
+      'Established an org-wide experimentation platform from scratch for A/B testing, feature flags, and instant rollouts, removing release cycle bottlenecks across all product teams and cutting app release dependency by <span class="hl">82%</span>.',
+      'Designed a dynamic monetization system targeting each user\'s specific friction point across frequency, session value, and retention, driving <span class="hl">15% revenue per user uplift</span> for new users and <span class="hl">4%</span> for existing users.',
+      'Defined analytics and monitoring platform strategy enabling visibility across funnels, cohorts, and health metrics, reducing issue detection time from <span class="hl">2 days to 5 minutes</span> and eliminating engineering dependency for data access.'
+    ]
+  },
+  {
+    date: 'Jun 2016 - Apr 2018',
+    title: 'Fellow and Fellow Advisor',
+    org: 'Teach For India | Bengaluru, India',
+    tags: ['Education', 'Partnerships', 'Scale'],
+    intro: 'Owned program strategy and execution for <span class="hl">1,000+ students</span> and <span class="hl">25+ Fellows</span>, designing solutions, driving adoption, and scaling impact through institutional partnerships.',
+    bullets: [
+      'Designed and launched Tarabati, a digital learning program for <span class="hl">20+ government teachers</span>, delivering <span class="hl">65% improvement</span> in student learning outcomes.',
+      'Built and scaled <span class="hl">11+ institutional partnerships</span> including Harvard University, Apple, and Cisco to deliver high-impact learning programs at scale.'
+    ]
+  },
+  {
+    date: 'Jun 2013 - May 2016',
+    title: 'Business Development Manager',
+    org: 'Tech Mahindra | Nigeria and India',
+    tags: ['BFSI', 'Market Entry', 'Data Governance'],
+    intro: 'Owned end-to-end market entry and business development for West Africa, building commercial presence from the ground up in an unfamiliar market.',
+    bullets: [
+      'Led West Africa market entry, identifying opportunities, building go-to-market solutions, and driving <span class="hl">$100K</span> in annual revenue in a new market.',
+      'Defined data governance framework and business rules for enterprise reporting systems, improving data quality from <span class="hl">5% to 95%</span>.'
+    ]
+  }
+];
+
+const education = [
+  {
+    date: '2018 - 2019',
+    title: 'MBA',
+    org: 'Indian School of Business (ISB) | Hyderabad, India'
+  },
+  {
+    date: '2009 - 2013',
+    title: 'B.Tech',
+    org: 'University of Petroleum and Energy Studies (UPES) | Dehradun, India'
+  }
+];
+
+const certifications = [
+  {
+    date: '07/2024',
+    title: 'Stanford Product Management Certificate',
+    org: 'Stanford University'
+  },
+  {
+    date: '03/2016',
+    title: 'Sales and Marketing',
+    org: 'Indian Institute of Foreign Trade (IIFT), Delhi'
+  }
+];
+
+const awards = [
+  'Games24x7 Business Impact Award',
+  'ISB Torch Bearer Award',
+  'ISB Merit Scholarship Award',
+  'Tech Mahindra Excellence Award'
+];
+
+const interests = [
+  {
+    title: 'National Level Chess Player',
+    description: 'Represented Haryana at 4 National Tournaments. Represented India at 1 International Tournament.'
+  },
+  {
+    title: 'Travelling',
+    description: 'Roots across 4 Indian regions and Nigeria. Kept exploring ever since - 15+ countries, 5 continents.'
+  },
+  {
+    title: 'Martial Arts',
+    description: 'Trained in Karate - Brown IV belt.'
+  }
+];
+
+// Tag color rotation: index 0 = default, 1 = alt-1 (cyan), 2 = alt-2 (green), then repeat
+const tagAltClass = (i: number): string => {
+  const mod = i % 3;
+  if (mod === 1) return 'alt-1';
+  if (mod === 2) return 'alt-2';
+  return '';
+};
+---
+<BaseLayout title="Resume - Sagar Ahuja">
+  <section class="section">
+    <div class="container">
+      <div class="eyebrow">Experience timeline</div>
+      <h1 style="margin-bottom:0.5rem;">Resume</h1>
+      <div class="resume-band"></div>
+      <p style="font-size:1.05rem;color:var(--text-muted);max-width:680px;margin-bottom:2rem;">
+        <strong style="color:var(--text);">Product builder</strong> with <span class="hl">11 years</span> of experience, including <span class="hl">7 years</span> in product. Recent focus is on AI-native product systems for personalization, lifecycle, and growth. Track record of driving measurable revenue and retention outcomes across large-scale B2C products. Actively engaged in independent product consulting for a startup and an NGO.
+      </p>
+
+      <div style="display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:1.5rem;">
+        <a href="/resume.pdf" download class="contact-card" style="flex:0 1 auto;padding:0.8rem 1.2rem;">
+          <span class="label">Download</span>
+          <span class="value" style="font-size:0.95rem;">Resume PDF ↓</span>
+        </a>
+        <a href="https://linkedin.com/in/sagar-ahuja-/" target="_blank" rel="noopener" class="contact-card" style="flex:0 1 auto;padding:0.8rem 1.2rem;">
+          <span class="label">LinkedIn</span>
+          <span class="value" style="font-size:0.95rem;">linkedin.com/in/sagar-ahuja-</span>
+        </a>
+        <a href="mailto:sagarahuja@gmail.com" class="contact-card" style="flex:0 1 auto;padding:0.8rem 1.2rem;">
+          <span class="label">Email</span>
+          <span class="value" style="font-size:0.95rem;">sagarahuja@gmail.com</span>
+        </a>
+        <button id="print-resume" type="button" class="contact-card" style="flex:0 1 auto;padding:0.8rem 1.2rem;cursor:pointer;background:var(--bg-card);border:1px solid var(--border);font:inherit;color:inherit;text-align:left;display:flex;flex-direction:column;gap:0.4rem;">
+          <span class="label">Page</span>
+          <span class="value" style="font-size:0.95rem;display:inline-flex;align-items:center;gap:0.4rem;"><Icon name="printer" size={16} /> Print resume</span>
+        </button>
+      </div>
+
+      <div class="resume-stats">
+        {stats.map(s => (
+          <div class="stat">
+            <span class="num">{s.num}</span>
+            <span class="label">{s.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="career-bar">
+        <h4>Career timeline</h4>
+        <div class="bar-row">
+          {career.map(c => (
+            <div class={`seg ${c.cls}`}>
+              <span class="lbl">{c.label}</span>
+              <span class="yrs">{c.years}</span>
+            </div>
+          ))}
+        </div>
+        <div class="axis">
+          <span>2013</span>
+          <span>2026</span>
+        </div>
+      </div>
+
+      <div class="section-title with-icon">
+        <div>
+          <span class="section-heading-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </span>
+          <div>
+            <div class="eyebrow">Professional</div>
+            <h2>Experience</h2>
+          </div>
+        </div>
+      </div>
+      <div class="filter-bar" role="group" aria-label="Filter experience by tag">
+        <span class="chip-label">Filter</span>
+        {allFilters.map(f => (
+          <button type="button" class={`filter-chip ${f === 'All' ? 'active' : ''}`} data-filter={f}>{f}</button>
+        ))}
+      </div>
+
+      <div class="timeline" id="experience-timeline">
+        {experience.map(item => (
+          <div class="timeline-item" data-tags={item.tags.join('|')}>
+            <div class="date">{item.date}</div>
+            <div>
+              <h3>{item.title}</h3>
+              <div class="org">{item.org}</div>
+              {item.tags && item.tags.length > 0 && (
+                <div class="role-tags">
+                  {item.tags.map((t: string, i: number) => (
+                    <span class={`role-tag ${tagAltClass(i)}`}>{t}</span>
+                  ))}
+                </div>
+              )}
+              <p set:html={item.intro} style="font-style:italic;color:var(--text-muted);font-size:0.95rem;margin-bottom:0.75rem;"></p>
+              <ul>
+                {item.bullets.map(b => <li set:html={b}></li>)}
+              </ul>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <script is:inline>
+        (function() {
+          const chips = document.querySelectorAll('.filter-chip');
+          const items = document.querySelectorAll('#experience-timeline .timeline-item');
+          chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+              const filter = chip.getAttribute('data-filter');
+              chips.forEach(c => c.classList.remove('active'));
+              chip.classList.add('active');
+              items.forEach(item => {
+                const tags = (item.getAttribute('data-tags') || '').split('|');
+                if (filter === 'All' || tags.includes(filter)) {
+                  item.classList.remove('is-hidden');
+                } else {
+                  item.classList.add('is-hidden');
+                }
+              });
+            });
+          });
+          const printBtn = document.getElementById('print-resume');
+          if (printBtn) printBtn.addEventListener('click', () => window.print());
+        })();
+      </script>
+
+      <div class="section-title with-icon" style="margin-top:4rem;">
+        <div>
+          <span class="section-heading-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6"/><path d="M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </span>
+          <div>
+            <div class="eyebrow">Academic</div>
+            <h2>Education</h2>
+          </div>
+        </div>
+      </div>
+      <div class="timeline">
+        {education.map(item => (
+          <div class="timeline-item">
+            <div class="date">{item.date}</div>
+            <div>
+              <h3>{item.title}</h3>
+              <div class="org">{item.org}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="section-title with-icon" style="margin-top:4rem;">
+        <div>
+          <span class="section-heading-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+          </span>
+          <div>
+            <div class="eyebrow">Continued learning</div>
+            <h2>Certifications</h2>
+          </div>
+        </div>
+      </div>
+      <div class="timeline">
+        {certifications.map(item => (
+          <div class="timeline-item">
+            <div class="date">{item.date}</div>
+            <div>
+              <h3>{item.title}</h3>
+              <div class="org">{item.org}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="section-title with-icon" style="margin-top:4rem;">
+        <div>
+          <span class="section-heading-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+          </span>
+          <div>
+            <div class="eyebrow">Recognition</div>
+            <h2>Awards</h2>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;">
+        {awards.map(a => (
+          <div class="side-card" style="padding:1.25rem;">
+            <p style="color:var(--text);font-size:0.98rem;font-weight:500;">{a}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="section-title with-icon" style="margin-top:4rem;">
+        <div>
+          <span class="section-heading-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </span>
+          <div>
+            <div class="eyebrow">Outside work</div>
+            <h2>Interests</h2>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+        {interests.map(i => (
+          <div class="side-card">
+            <h3 style="font-size:1.05rem;">{i.title}</h3>
+            <p style="color:var(--text-muted);font-size:0.95rem;">{i.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="section-title with-icon" style="margin-top:4rem;">
+        <div>
+          <span class="section-heading-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </span>
+          <div>
+            <div class="eyebrow">Domain</div>
+            <h2>Strengths and exposure</h2>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;">
+        <div class="side-card">
+          <h3 style="font-size:1.05rem;">Domain strengths</h3>
+          <p style="color:var(--text-muted);font-size:0.95rem;">Engagement and Lifecycle Management, Loyalty and Retention Mechanics, Monetization, Experimentation Platforms, Analytics and Monitoring, LiveOps, Personalization, AI-Enabled Workflows.</p>
+        </div>
+        <div class="side-card">
+          <h3 style="font-size:1.05rem;">Industry exposure</h3>
+          <p style="color:var(--text-muted);font-size:0.95rem;">Gaming (India and US), EdTech, BFSI (West Africa).</p>
+        </div>
+        <div class="side-card">
+          <h3 style="font-size:1.05rem;">Tools and craft</h3>
+          <p style="color:var(--text-muted);font-size:0.95rem;">A/B testing, cohort analytics, user research, CleverTap, predictive segmentation models, agentic AI for operational workflows.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

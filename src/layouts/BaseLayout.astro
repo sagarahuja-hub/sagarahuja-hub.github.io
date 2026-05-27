@@ -1,0 +1,113 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  pathname?: string;
+}
+
+const {
+  title = 'Sagar Ahuja - Product Builder',
+  description = 'Product builder shipping AI-native systems for personalization, lifecycle, and growth. 11 years across gaming, growth, and engagement. Most recently at Skillz, previously Games24x7.',
+  pathname
+} = Astro.props;
+
+const currentPath = pathname ?? Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={new URL(currentPath, Astro.site).href} />
+    <script is:inline>
+      (function() {
+        try {
+          var stored = localStorage.getItem('theme');
+          var theme = stored === 'dark' ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <Header currentPath={currentPath} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+
+    <script is:inline>
+      (function() {
+        // Cursor-following glow (desktop only, respects reduced motion)
+        const glow = document.querySelector('.cursor-glow');
+        if (glow && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          let targetX = window.innerWidth / 2;
+          let targetY = window.innerHeight / 2;
+          let currentX = targetX;
+          let currentY = targetY;
+          let active = false;
+          document.addEventListener('mousemove', (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+            if (!active) { active = true; glow.style.opacity = '1'; }
+          }, { passive: true });
+          document.addEventListener('mouseleave', () => {
+            glow.style.opacity = '0';
+          });
+          function tick() {
+            currentX += (targetX - currentX) * 0.12;
+            currentY += (targetY - currentY) * 0.12;
+            glow.style.transform = `translate3d(${currentX - 250}px, ${currentY - 250}px, 0)`;
+            requestAnimationFrame(tick);
+          }
+          tick();
+        }
+      })();
+      (function() {
+        if (typeof IntersectionObserver === 'undefined') {
+          document.querySelectorAll('.reveal, .reveal-stagger, .impact-row').forEach(el => el.classList.add('visible'));
+          return;
+        }
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+
+        // Stagger the impact chart rows individually
+        document.querySelectorAll('.impact-row').forEach((row, idx) => {
+          const localIo = new IntersectionObserver((entries, obs) => {
+            entries.forEach(e => {
+              if (e.isIntersecting) {
+                setTimeout(() => e.target.classList.add('visible'), idx * 90);
+                obs.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.5 });
+          localIo.observe(row);
+        });
+      })();
+    </script>
+  </body>
+</html>

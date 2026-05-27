@@ -1,0 +1,260 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import StatsStrip from '../components/StatsStrip.astro';
+import PageNav from '../components/PageNav.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const featured = allProjects
+  .filter(p => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const sideProjects = await getCollection('side-projects');
+const sortedSide = sideProjects.sort((a, b) => a.data.order - b.data.order);
+
+const experiencePreview = [
+  {
+    when: 'Mar 2025 - Feb 2026',
+    title: 'Senior Product Manager',
+    where: 'Skillz',
+    blurb: 'Led Engagement, Monetization, and LiveOps. Owned the full user lifecycle and shipped loyalty, lifecycle, and agentic AI tooling across the platform.'
+  },
+  {
+    when: 'Jun 2019 - Feb 2025',
+    title: 'Senior Product Manager',
+    where: 'Games24x7',
+    blurb: 'Led platform and growth product strategy for B2C apps with 10M+ users. Built the cohort-configurable app architecture, experimentation engine, and analytics platform used company-wide.'
+  },
+  {
+    when: 'Jun 2016 - Apr 2018',
+    title: 'Fellow and Fellow Advisor',
+    where: 'Teach For India',
+    blurb: 'Owned program strategy for 1,000+ students and 25+ Fellows. Designed Tarabati, a digital learning program with 65% uplift in student learning outcomes.'
+  },
+  {
+    when: 'Jun 2013 - May 2016',
+    title: 'Business Development Manager',
+    where: 'Tech Mahindra',
+    blurb: 'Led West Africa market entry for BFSI. Drove $100K annual revenue in a new market and improved enterprise reporting data quality from 5% to 95%.'
+  }
+];
+---
+<BaseLayout
+  title="Sagar Ahuja - Senior Product Manager"
+  description="Senior Product Manager. 11 years experience, 7 in PM. Gaming, growth, engagement, monetization, AI-enabled product workflows."
+>
+  <PageNav />
+
+  <section class="hero">
+    <div class="container">
+      <span class="status">Open to AI PM, Senior PM, Lead PM, and Group PM roles</span>
+      <h1>
+        I am a <span class="gradient-text">builder at heart</span>. I love experimenting, creating new user experiences and staying close to new technologies.
+      </h1>
+      <p class="builder-line">
+        A product builder shipping the AI-native systems powering personalization, lifecycle, and growth.
+      </p>
+      <p class="lede">
+        11 years of experience, 7 in product. Most recently at <strong>Skillz</strong>, leading engagement, monetization, LiveOps, and a 0-to-1 agentic AI tool for campaign automation. Previously at <strong>Games24x7</strong>, owning the experimentation engine, ML-driven communications, and personalization across all games.
+      </p>
+      <div class="ctas">
+        <a href="#contact" class="btn btn-primary">Get in touch <span class="arrow">→</span></a>
+        <a href="#work" class="btn btn-secondary">See case studies</a>
+      </div>
+
+      <StatsStrip />
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">Selected work</div>
+          <h2><a href="/work" class="h2-link">Case studies <span class="arrow">→</span></a></h2>
+        </div>
+        <a href="/work" class="link">See all 17 projects →</a>
+      </div>
+      <div class="project-grid reveal-stagger">
+        {featured.map(p => (
+          <ProjectCard
+            href={`/projects/${p.slug}`}
+            title={p.data.title}
+            company={p.data.company}
+            year={p.data.year}
+            summary={p.data.summary}
+            tags={p.data.tags}
+            metrics={p.data.metrics}
+            icon={p.data.icon}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="side-projects">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">Builds, not just plans</div>
+          <h2><a href="/side-projects" class="h2-link">Building outside work <span class="arrow">→</span></a></h2>
+        </div>
+        <a href="/side-projects" class="link">See all →</a>
+      </div>
+      <div class="side-grid reveal-stagger">
+        {sortedSide.map(sp => (
+          <article class="side-card">
+            <div class="top-row" style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:0.78rem;color:var(--text-dim);">
+              <span>{sp.data.type}</span>
+              <span>{sp.data.year}</span>
+            </div>
+            <h3>{sp.data.title}</h3>
+            <p class="summary" style="color:var(--text-muted);">{sp.data.summary}</p>
+            {sp.data.tags && sp.data.tags.length > 0 && (
+              <div class="tags">
+                {sp.data.tags.map((t: string) => <span class="tag">{t}</span>)}
+              </div>
+            )}
+            <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
+              <a href={`/side-projects/${sp.slug}`} class="external">Read more →</a>
+              {sp.data.link && (
+                <a href={sp.data.link} target="_blank" rel="noopener" class="external">{sp.data.linkLabel ?? 'Open'} ↗</a>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <h2>Who am I?</h2>
+        </div>
+      </div>
+      <div class="about-wrap">
+        <div class="about-text reveal">
+          <div class="about-photo">
+            <img src="/sagar.jpg" alt="Sagar Ahuja portrait" width="400" height="600" />
+          </div>
+          <p>
+            I am a <strong>product builder</strong> with 11 years of experience, 7 in product. My obsession is figuring out <strong>why users behave the way they do</strong>, and shipping the systems that turn that understanding into growth - increasingly built on AI.
+          </p>
+          <p>
+            Most recently at <strong>Skillz</strong> (US-listed gaming company), I owned the full user lifecycle - engagement, loyalty, LiveOps, and lifecycle communications. I also identified an operational gap in marketing and built a 0-to-1 <strong>agentic AI tool</strong> that automated the entire campaign lifecycle (briefing, content, targeting, scheduling, reporting), cutting execution effort by 50%.
+          </p>
+          <p>
+            Before that, at <strong>Games24x7</strong>, I led the Growth Platform charter - the experimentation engine, <strong>ML-driven communications</strong>, personalization systems, and analytics infrastructure used across all games. The work I am most proud of is the app redesign: we rebuilt the architecture so the app could be configured differently for each user cohort in real time, with the experimentation engine running parallel A/B tests without app releases. Result: 9% higher new user retention and 3% ARPU uplift.
+          </p>
+
+          <h3>Before product</h3>
+          <p>
+            MBA at the <strong>Indian School of Business (ISB)</strong>. Before that, business development for Tech Mahindra in Nigeria (BFSI domain, West Africa) and a Teach For India fellowship where I taught 60 kids using technology. That was my first real lesson in user behavior and engagement. I still mentor a few of those students. Some are in college now, which is a strange and wonderful thing to witness.
+          </p>
+
+          <h3>What I am drawn to now</h3>
+          <p>
+            Ambiguous problem spaces where the answer is not obvious, the data is incomplete, and strong product judgment is what separates a good outcome from a great one. Lately I am especially drawn to <strong>AI-native product surfaces</strong> - places where LLMs, agents, and ML change the unit economics of what a product team can ship and how fast a user experience can adapt.
+          </p>
+
+          <h3>Roots and pursuits</h3>
+          <p>
+            State-level chess champion and 4-time national-level player. Travelled internationally representing India in a school cultural exchange. From an ONGC family, I have lived across India from Gujarat to Assam, Andhra Pradesh to Uttarakhand. That and Nigeria taught me to read and adapt to different cultures quickly. Brown IV belt in Karate. 15+ countries, 5 continents.
+          </p>
+        </div>
+
+        <div class="about-panels reveal-stagger">
+          <div class="panel">
+            <h4>Domain strengths</h4>
+            <ul>
+              <li><strong>AI-Enabled Product Systems</strong></li>
+              <li>Personalization and ML</li>
+              <li>Experimentation Platforms</li>
+              <li>Engagement and Lifecycle</li>
+              <li>Loyalty and Retention</li>
+              <li>Monetization</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h4>Industries</h4>
+            <ul>
+              <li>Gaming (India and US)</li>
+              <li>EdTech</li>
+              <li>BFSI (West Africa)</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h4>Education</h4>
+            <ul>
+              <li><strong>ISB</strong> MBA, 2018-2019</li>
+              <li><strong>Stanford</strong> Product Management Certificate, 2024</li>
+              <li><strong>UPES</strong> B.Tech, 2009-2013</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h4>Currently exploring</h4>
+            <ul>
+              <li>Agentic AI in operational workflows</li>
+              <li>AI-native lifecycle and personalization</li>
+              <li>LLMs as a unit-economics lever</li>
+              <li>Behavioral economics in product design</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">Career</div>
+          <h2><a href="/resume" class="h2-link">Experience <span class="arrow">→</span></a></h2>
+        </div>
+        <a href="/resume" class="link">Full resume →</a>
+      </div>
+      <div class="experience-preview reveal-stagger">
+        {experiencePreview.map(e => (
+          <div class="exp-card">
+            <div class="when">{e.when}</div>
+            <h3>{e.title}</h3>
+            <div class="where">{e.where}</div>
+            <p>{e.blurb}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">Get in touch</div>
+          <h2>Want to talk?</h2>
+        </div>
+      </div>
+      <p style="font-size:1.05rem;color:var(--text-muted);max-width:680px;">
+        I am currently exploring AI PM, Senior PM, Lead PM, and Group PM roles. If you are hiring, building something interesting, or just want to compare notes on product, I would be glad to hear from you.
+      </p>
+      <div class="contact-block">
+        <a href="mailto:sagarahuja@gmail.com" class="contact-card">
+          <span class="label">Email</span>
+          <span class="value">sagarahuja@gmail.com</span>
+        </a>
+        <a href="https://linkedin.com/in/sagar-ahuja-/" target="_blank" rel="noopener" class="contact-card">
+          <span class="label">LinkedIn</span>
+          <span class="value">linkedin.com/in/sagar-ahuja-</span>
+        </a>
+        <a href="/resume.pdf" download class="contact-card">
+          <span class="label">Resume</span>
+          <span class="value">Download PDF ↓</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

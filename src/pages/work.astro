@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const sorted = allProjects.sort((a, b) => a.data.order - b.data.order);
+
+const filters = ['All', 'AI', 'Growth', 'Platform', 'Monetization', 'Engagement', 'Lifecycle', 'Experimentation'];
+---
+<BaseLayout
+  title="Work - Sagar Ahuja"
+  description="Selected product work by Sagar Ahuja across Skillz and Games24x7. Growth, engagement, monetization, experimentation, and AI-enabled workflows."
+>
+  <section class="section">
+    <div class="container">
+      <div class="eyebrow">All projects</div>
+      <h1 style="margin-bottom:1rem;">Work</h1>
+      <p style="font-size:1.05rem;color:var(--text-muted);max-width:680px;margin-bottom:1.5rem;">
+        A curated set of product work across loyalty, lifecycle, experimentation, personalization, and AI-enabled workflows. Each project links to a longer case study with context, approach, and outcome.
+      </p>
+
+      <div class="filter-bar" role="group" aria-label="Filter projects by tag">
+        <span class="chip-label">Filter</span>
+        {filters.map(f => (
+          <button type="button" class={`filter-chip ${f === 'All' ? 'active' : ''}`} data-filter={f}>{f}</button>
+        ))}
+      </div>
+
+      <p id="work-count" style="font-family:var(--font-mono);font-size:0.82rem;color:var(--text-dim);margin-bottom:1.5rem;">
+        Showing all {sorted.length} projects
+      </p>
+
+      <div class="project-grid" id="work-grid">
+        {sorted.map(p => (
+          <div class="card-wrap" data-tags={p.data.tags.join('|').toLowerCase()}>
+            <ProjectCard
+              href={`/projects/${p.slug}`}
+              title={p.data.title}
+              company={p.data.company}
+              year={p.data.year}
+              summary={p.data.summary}
+              tags={p.data.tags}
+              metrics={p.data.metrics}
+              icon={p.data.icon}
+            />
+          </div>
+        ))}
+      </div>
+
+      <p id="work-empty" style="display:none;font-family:var(--font-mono);font-size:0.9rem;color:var(--text-muted);text-align:center;padding:3rem 0;">
+        No projects match this filter. <button type="button" id="reset-filter" style="color:var(--accent);background:none;border:none;font:inherit;cursor:pointer;text-decoration:underline;">Show all →</button>
+      </p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function() {
+      const chips = document.querySelectorAll('.filter-chip');
+      const cards = document.querySelectorAll('#work-grid .card-wrap');
+      const count = document.getElementById('work-count');
+      const empty = document.getElementById('work-empty');
+      const grid = document.getElementById('work-grid');
+      const total = cards.length;
+
+      function apply(filter) {
+        const f = filter.toLowerCase();
+        let visible = 0;
+        cards.forEach(card => {
+          const tags = (card.getAttribute('data-tags') || '');
+          if (f === 'all' || tags.split('|').some(t => t === f || t.includes(f))) {
+            card.classList.remove('is-hidden');
+            visible++;
+          } else {
+            card.classList.add('is-hidden');
+          }
+        });
+        if (count) count.textContent = filter === 'All'
+          ? `Showing all ${total} projects`
+          : `Showing ${visible} of ${total} projects tagged "${filter}"`;
+        if (empty && grid) {
+          empty.style.display = visible === 0 ? 'block' : 'none';
+          grid.style.display = visible === 0 ? 'none' : '';
+        }
+      }
+
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          chips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          apply(chip.getAttribute('data-filter') || 'All');
+        });
+      });
+
+      const reset = document.getElementById('reset-filter');
+      if (reset) reset.addEventListener('click', () => {
+        chips.forEach(c => c.classList.toggle('active', c.getAttribute('data-filter') === 'All'));
+        apply('All');
+      });
+    })();
+  </script>
+</BaseLayout>

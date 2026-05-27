@@ -1,0 +1,31 @@
+---
+const stats = [
+  { num: '11', label: 'Years of experience' },
+  { num: '7', label: 'Years in product management' },
+  { num: '10M+', label: 'Users impacted across products' },
+  { num: '17+', label: 'Shipped product initiatives' }
+];
+---
+<div class="stats-strip">
+  {stats.map(s => (
+    <div class="stat">
+      <span class="num">{s.num}</span>
+      <span class="label">{s.label}</span>
+    </div>
+  ))}
+</div>
+
+<div class="credentials">
+  <div class="credentials-row">
+    <span class="row-label">Companies</span>
+    <span class="brand-tag brand-skillz"><span class="dot-sm"></span>Skillz</span>
+    <span class="brand-tag brand-g24x7"><span class="dot-sm"></span>Games24x7</span>
+    <span class="brand-tag brand-tfi"><span class="dot-sm"></span>Teach For India</span>
+    <span class="brand-tag brand-tm"><span class="dot-sm"></span>Tech Mahindra</span>
+  </div>
+  <div class="credentials-row">
+    <span class="row-label">Education</span>
+    <span class="brand-tag brand-isb"><span class="dot-sm"></span>ISB MBA</span>
+    <span class="brand-tag brand-stanford"><span class="dot-sm"></span>Stanford Product Management</span>
+  </div>
+</div>

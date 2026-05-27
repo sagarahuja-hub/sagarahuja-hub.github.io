@@ -1,0 +1,26 @@
+---
+const rows = [
+  { value: '+50%', label: 'Marketing efficiency', ctx: 'AI Lifecycle Tool · Skillz', bar: 100 },
+  { value: '+35%', label: 'Challenges adoption', ctx: 'Game Screen Tooltips · G24x7', bar: 90 },
+  { value: '+30%', label: 'Notification open rate', ctx: 'Smart Communications · G24x7', bar: 82 },
+  { value: '-30%', label: 'Loyalty incentive cost', ctx: 'Loyalty Revamp · Skillz', bar: 82 },
+  { value: '+15%', label: 'New user ARPU', ctx: 'Money Multiplier · G24x7', bar: 60 },
+  { value: '+9%', label: 'New user retention', ctx: 'App Redesign · G24x7', bar: 50 },
+  { value: '-82%', label: 'App release dependency', ctx: 'Experimentation Platform · G24x7', bar: 95 },
+  { value: '2d → 5m', label: 'Issue detection time', ctx: 'Analytics Platform · G24x7', bar: 88 }
+];
+---
+<div class="impact-chart reveal">
+  <h3>Career impact at a glance</h3>
+  <div class="sub">Selected outcomes across 7 years in product</div>
+  {rows.map(r => (
+    <div class="impact-row" data-bar-width={`${r.bar}%`} style={`--bar-width: ${r.bar}%`}>
+      <div class="label">
+        {r.label}
+        <span class="ctx">{r.ctx}</span>
+      </div>
+      <div class="bar-wrap"><div class="bar"></div></div>
+      <div class="value">{r.value}</div>
+    </div>
+  ))}
+</div>

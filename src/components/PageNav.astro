@@ -1,0 +1,58 @@
+---
+const sections = [
+  { id: 'work', label: 'Work' },
+  { id: 'side-projects', label: 'Outside work' },
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'contact', label: 'Contact' }
+];
+---
+<div id="page-nav" class="page-nav" aria-label="On this page">
+  <div class="inner">
+    <span class="label">On this page</span>
+    {sections.map(s => (
+      <a href={`#${s.id}`} data-anchor={s.id}>{s.label}</a>
+    ))}
+  </div>
+</div>
+
+<script is:inline>
+  (function() {
+    const nav = document.getElementById('page-nav');
+    if (!nav) return;
+    const heroEnd = document.querySelector('.hero');
+    if (!heroEnd) return;
+
+    const showAfter = () => {
+      const rect = heroEnd.getBoundingClientRect();
+      if (rect.bottom < 80) nav.classList.add('visible');
+      else nav.classList.remove('visible');
+    };
+
+    showAfter();
+    window.addEventListener('scroll', showAfter, { passive: true });
+
+    // Active section highlight
+    const links = nav.querySelectorAll('[data-anchor]');
+    const sectionMap = new Map();
+    links.forEach(l => {
+      const id = l.getAttribute('data-anchor');
+      const sec = document.getElementById(id);
+      if (sec) sectionMap.set(sec, l);
+    });
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const link = sectionMap.get(entry.target);
+          if (!link) return;
+          if (entry.isIntersecting) {
+            links.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px', threshold: 0 });
+      sectionMap.forEach((_, sec) => io.observe(sec));
+    }
+  })();
+</script>
