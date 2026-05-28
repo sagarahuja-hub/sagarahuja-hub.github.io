@@ -16,7 +16,12 @@ const projects = defineCollection({
     })).default([]),
     featured: z.boolean().default(false),
     order: z.number().default(100),
-    icon: z.string().optional()
+    icon: z.string().optional(),
+    screenshots: z.array(z.object({
+      src: z.string(),
+      caption: z.string().optional(),
+      alt: z.string().optional()
+    })).default([])
   })
 });
 

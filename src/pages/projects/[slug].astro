@@ -59,6 +59,22 @@ const data = entry.data;
         <Content />
       </div>
 
+      {data.screenshots && data.screenshots.length > 0 && (
+        <section class="screenshots">
+          <h2>Screens</h2>
+          <div class={`screenshot-grid count-${data.screenshots.length}`}>
+            {data.screenshots.map((s) => (
+              <figure class="screenshot">
+                <a href={s.src} target="_blank" rel="noopener" aria-label={s.alt ?? s.caption ?? 'View screenshot'}>
+                  <img src={s.src} alt={s.alt ?? s.caption ?? ''} loading="lazy" />
+                </a>
+                {s.caption && <figcaption>{s.caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        </section>
+      )}
+
       <div class="nav-footer">
         {prev ? (
           <a href={`/projects/${prev.slug}`}>&larr; {prev.data.title}</a>

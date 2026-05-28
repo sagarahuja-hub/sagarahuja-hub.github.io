@@ -16,6 +16,13 @@ metrics:
     label: ARPU (existing)
   - value: "-"
     label: Incentive cost reduced
+screenshots:
+  - src: /case-studies/money-multiplier-hooked-model.png
+    caption: The Hooked Model - the behavioral framework that inspired the mechanic.
+    alt: Hooked Model diagram showing Trigger, Action, Variable Reward, Investment
+  - src: /case-studies/money-multiplier-unlocked.png
+    caption: Multiplier card unlocked - users earn a 2x-100x multiplier to apply on a follow-up game.
+    alt: Multiplier card unlocked screen
 ---
 
 ## Context

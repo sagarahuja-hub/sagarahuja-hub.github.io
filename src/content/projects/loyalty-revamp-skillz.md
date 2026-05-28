@@ -14,6 +14,10 @@ metrics:
     label: Incentive cost
   - value: "+9%"
     label: ARPU
+screenshots:
+  - src: /case-studies/loyalty-skillz-tier.png
+    caption: Tier-specific benefits replaced flat-rate Ticketz multipliers - the Sapphire tier shown above.
+    alt: Skillz Rewardz Sapphire tier benefits screen
 ---
 
 ## Context

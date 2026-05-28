@@ -16,6 +16,19 @@ metrics:
     label: ARPU (existing)
   - value: "-82%"
     label: App release dependency
+screenshots:
+  - src: /case-studies/app-redesign-old-lobby.png
+    caption: Before - the original landscape lobby. One design for all users.
+    alt: Landscape lobby screenshot showing Cash Games, Rummy Rumble, Tournaments, and Practice
+  - src: /case-studies/app-redesign-new-1.png
+    caption: After - default cohort. Portrait, single-hand, with surfaced game formats.
+    alt: Portrait lobby with game formats and mega table
+  - src: /case-studies/app-redesign-new-2.png
+    caption: Cohort variant - active-tournament user gets a Take Seat nudge inline.
+    alt: Portrait lobby variant with joined tournament Take Seat prompt
+  - src: /case-studies/app-redesign-new-3.png
+    caption: Cohort variant - same architecture, different content priority per segment.
+    alt: Portrait lobby variant for a different cohort
 ---
 
 ## Context
