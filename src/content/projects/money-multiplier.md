@@ -20,9 +20,18 @@ screenshots:
   - src: /case-studies/money-multiplier-hooked-model.png
     caption: The Hooked Model - the behavioral framework that inspired the mechanic.
     alt: Hooked Model diagram showing Trigger, Action, Variable Reward, Investment
-  - src: /case-studies/money-multiplier-unlocked.png
-    caption: Multiplier card unlocked - users earn a 2x-100x multiplier to apply on a follow-up game.
-    alt: Multiplier card unlocked screen
+  - src: /case-studies/money-multiplier-earn.png
+    caption: Step 1 - Earn. Complete a challenge (here, play 5 Points Rummy games) to unlock a 2x multiplier.
+    alt: Earn Multiplier tab showing a challenge to play 5 games to unlock a 2x multiplier
+  - src: /case-studies/money-multiplier-apply.png
+    caption: Step 2 - Apply. Earned multipliers (2x to 100x) are ready to apply to a chosen game.
+    alt: Apply Multiplier tab showing earned 2x, 5x, and 7x multipliers ready to apply
+  - src: /case-studies/money-multiplier-game-start.png
+    caption: Step 3 - Play. The selected game starts with a 5x multiplier banner visible to the player.
+    alt: Multiplier game starting screen with a 5x Multiplier Game banner
+  - src: /case-studies/money-multiplier-winnings.png
+    caption: Step 4 - Win multiplied. Winnings are multiplied at the end (here, ₹100 x 5 = ₹500).
+    alt: Game result showing 5x congratulations and winnings multiplied to 500
 ---
 
 ## Context
