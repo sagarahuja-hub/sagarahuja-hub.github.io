@@ -14,13 +14,26 @@ const sideProjects = await getCollection('side-projects');
 const sortedSide = sideProjects.sort((a, b) => a.data.order - b.data.order);
 
 const principles = [
-  { text: 'First we saw the forest - grouping users into cohorts. Now we see every tree - building for the individual.', source: 'App Redesign' },
-  { text: 'Decompose the metric before celebrating the lift.', source: 'Money Multiplier V1' },
-  { text: 'Ship narrow and reversible when the cost of waiting beats the cost of being wrong.', source: 'Smart Communications' },
-  { text: 'Launch is the starting line, not the finish line.', source: 'Loyalty Revamp - Skillz' },
-  { text: 'Anchor every cross-functional debate to the goal everyone already shares.', source: 'Platform Roadmap Separation' },
-  { text: 'Ownership beyond your scope starts with absorbing the risk yourself.', source: 'AI Workflows' },
-  { text: 'When data is the blocker, find the cheap experiment that creates it.', source: 'Challenges Tooltips' }
+  {
+    text: 'Earlier we built for the forest - grouping users into cohorts. Now we build for every tree - every individual user.',
+    slug: 'app-redesign-cohort-lobby',
+    project: 'App Redesign'
+  },
+  {
+    text: 'Launch is the starting line, not the finish line.',
+    slug: 'loyalty-revamp-skillz',
+    project: 'Loyalty Program Revamp'
+  },
+  {
+    text: 'When data is the blocker, find the cheap experiment that creates it.',
+    slug: 'challenges-tooltips',
+    project: 'Challenges Adoption'
+  },
+  {
+    text: 'Anchor every cross-functional debate to the goal everyone already shares.',
+    slug: 'platform-roadmap-separation',
+    project: 'Platform Roadmap Separation'
+  }
 ];
 
 const experiencePreview = [
@@ -98,6 +111,7 @@ const experiencePreview = [
             metrics={p.data.metrics}
             icon={p.data.icon}
             quote={p.data.quote}
+            featured={true}
           />
         ))}
       </div>
@@ -220,20 +234,32 @@ const experiencePreview = [
           </div>
         </div>
 
-        <section class="principles-block reveal">
-          <h3>Principles I work by</h3>
-          <ol class="principles">
-            {principles.map((p, i) => (
-              <li class="principle">
-                <span class="num">{String(i + 1).padStart(2, '0')}</span>
-                <div class="body">
-                  <p class="text">{p.text}</p>
-                  <p class="source">{p.source}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </section>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <section class="section" id="principles">
+    <div class="container">
+      <div class="section-title">
+        <div>
+          <div class="eyebrow">How I think</div>
+          <h2>Principles I work by</h2>
+        </div>
+        <span class="link" style="font-family:var(--font-mono);font-size:0.85rem;color:var(--text-muted);">Click any principle to see the case study it came from →</span>
+      </div>
+      <div class="principles-grid reveal-stagger">
+        {principles.map((p, i) => (
+          <a href={`/projects/${p.slug}`} class="principle-card">
+            <span class="pnum">PRINCIPLE {String(i + 1).padStart(2, '0')}</span>
+            <p class="ptext">{p.text}</p>
+            <div class="pmeta">
+              <span>From {p.project}</span>
+              <span class="arrow">→</span>
+            </div>
+          </a>
+        ))}
       </div>
     </div>
   </section>
