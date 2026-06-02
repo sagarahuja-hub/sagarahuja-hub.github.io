@@ -9,7 +9,7 @@ tags: [Growth, Personalization, Experimentation, Mobile]
 featured: true
 order: 1
 icon: smartphone
-image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=1200&h=240&fit=crop&q=80"
+image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&h=240&fit=crop&q=80"
 quote: "Optimizing for the average user means under-serving every cohort."
 metrics:
   - value: "+9%"

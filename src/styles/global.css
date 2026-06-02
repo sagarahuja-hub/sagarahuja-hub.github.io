@@ -433,10 +433,14 @@ p { color: var(--text-muted); }
   background-size: cover;
   background-position: center;
   z-index: -2;
-  opacity: 0.92;
+  opacity: 0.55;
 }
 .hero[data-has-bg="true"]::before {
   background-image: url('/hero-bg.jpg');
+}
+:root[data-theme="light"] .hero::before,
+:root:not([data-theme="dark"]) .hero::before {
+  opacity: 0.35;
 }
 .hero::after {
   content: '';

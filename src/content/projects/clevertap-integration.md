@@ -9,7 +9,7 @@ tags: [Lifecycle, Marketing, Data Infrastructure]
 featured: false
 order: 11
 icon: send
-image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=240&fit=crop&q=80"
+image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=240&fit=crop&q=80"
 quote: "Trust is rebuilt by raising the value bar, not by apologizing."
 metrics:
   - value: "+6%"

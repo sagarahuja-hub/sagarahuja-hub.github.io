@@ -9,7 +9,7 @@ tags: [AI, Operational Excellence, Ownership]
 featured: true
 order: 5
 icon: cpu
-image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&h=240&fit=crop&q=80"
+image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=240&fit=crop&q=80"
 quote: "Build the proof yourself before you ask for the org's permission."
 metrics:
   - value: "+20%"

@@ -8,7 +8,7 @@ tags: [AI, Operational Excellence, PM Tools]
 featured: false
 order: 17
 icon: file-text
-image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=240&fit=crop&q=80"
+image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1200&h=240&fit=crop&q=80"
 quote: "One source of truth. Four stakeholder formats. Zero reformatting."
 metrics:
   - value: "1 -> 4"

@@ -9,6 +9,7 @@ tags: [Engagement, Retention, Customer Obsession]
 featured: false
 order: 10
 icon: target
+image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=1200&h=240&fit=crop&q=80"
 quote: "When complaints repeat, the bug is usually in the design, not the messaging."
 metrics:
   - value: "+10%"

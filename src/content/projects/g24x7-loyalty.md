@@ -9,7 +9,7 @@ tags: [Loyalty, Responsible Growth, Data Science]
 featured: false
 order: 12
 icon: shield
-image: "https://images.unsplash.com/photo-1605792657660-596af9009e82?w=1200&h=240&fit=crop&q=80"
+image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=1200&h=240&fit=crop&q=80"
 quote: "Responsible growth means choosing which users not to monetize."
 metrics:
   - value: "+2%"

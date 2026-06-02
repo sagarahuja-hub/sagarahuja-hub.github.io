@@ -7,7 +7,7 @@ tags: [Product Audit, Gaming, Strategy]
 order: 2
 icon: file-text
 status: Completed
-image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&h=240&fit=crop&q=80"
+image: "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=1200&h=240&fit=crop&q=80"
 ---
 
 ## What it is
