@@ -5,6 +5,8 @@ year: "2026"
 summary: Ground-up audit of Playsimple Cryptogram - a 15-month-old casual word puzzle with 1.6M downloads and a 4.9-star iOS rating. 9 sections, 12 prioritized opportunities, full 3-quarter implementation plan. Prepared independently. Not assigned. Not guided.
 tags: [Product Audit, Gaming, Strategy]
 order: 2
+icon: file-text
+status: Completed
 ---
 
 ## What it is

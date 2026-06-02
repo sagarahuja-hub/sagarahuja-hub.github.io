@@ -7,6 +7,8 @@ link: https://sagarassignment1.replit.app/
 linkLabel: Try the live app
 tags: [AI, Decision Support, End-to-end build]
 order: 1
+icon: sparkles
+status: Live
 ---
 
 ## What it is

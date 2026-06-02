@@ -1,0 +1,56 @@
+---
+import CardVisual from './CardVisual.astro';
+
+interface Props {
+  slug: string;
+  title: string;
+  type: string;
+  year: string;
+  summary: string;
+  tags?: string[];
+  link?: string;
+  linkLabel?: string;
+  icon?: string;
+  status?: string;
+}
+
+const {
+  slug,
+  title,
+  type,
+  year,
+  summary,
+  tags = [],
+  link,
+  linkLabel = 'Open',
+  icon,
+  status = 'Completed'
+} = Astro.props;
+---
+<article class="side-card">
+  <CardVisual icon={icon} status={status} />
+  <span class="corner tl" aria-hidden="true"></span>
+  <span class="corner tr" aria-hidden="true"></span>
+  <span class="corner bl" aria-hidden="true"></span>
+  <span class="corner br" aria-hidden="true"></span>
+
+  <div class="card-body">
+    <div class="top-row" style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:0.76rem;color:var(--text-dim);">
+      <span>{type}</span>
+      <span>{year}</span>
+    </div>
+    <h3>{title}</h3>
+    <p class="summary" style="color:var(--text-muted);font-size:0.95rem;flex:1;">{summary}</p>
+    {tags.length > 0 && (
+      <div class="tags">
+        {tags.map((t: string) => <span class="tag">{t}</span>)}
+      </div>
+    )}
+    <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
+      <a href={`/side-projects/${slug}`} class="external">Read more →</a>
+      {link && (
+        <a href={link} target="_blank" rel="noopener" class="external">{linkLabel} ↗</a>
+      )}
+    </div>
+  </div>
+</article>

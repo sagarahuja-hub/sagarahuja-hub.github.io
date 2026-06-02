@@ -37,7 +37,9 @@ const sideProjects = defineCollection({
     link: z.string().url().optional(),
     linkLabel: z.string().optional(),
     tags: z.array(z.string()).default([]),
-    order: z.number().default(100)
+    order: z.number().default(100),
+    icon: z.string().optional(),
+    status: z.string().default('Completed')
   })
 });
 

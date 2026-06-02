@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import StatsStrip from '../components/StatsStrip.astro';
 import PageNav from '../components/PageNav.astro';
+import SideProjectCard from '../components/SideProjectCard.astro';
 import { getCollection } from 'astro:content';
 
 const allProjects = await getCollection('projects');
@@ -69,7 +70,7 @@ const experiencePreview = [
 >
   <PageNav />
 
-  <section class="hero">
+  <section class="hero" data-has-bg="true">
     <div class="container">
       <span class="status">Open to AI PM, Senior PM, Lead PM, and Group PM roles</span>
       <h1>
@@ -132,25 +133,18 @@ const experiencePreview = [
       </div>
       <div class="side-grid reveal-stagger">
         {sortedSide.map(sp => (
-          <article class="side-card">
-            <div class="top-row" style="display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:0.78rem;color:var(--text-dim);">
-              <span>{sp.data.type}</span>
-              <span>{sp.data.year}</span>
-            </div>
-            <h3>{sp.data.title}</h3>
-            <p class="summary" style="color:var(--text-muted);">{sp.data.summary}</p>
-            {sp.data.tags && sp.data.tags.length > 0 && (
-              <div class="tags">
-                {sp.data.tags.map((t: string) => <span class="tag">{t}</span>)}
-              </div>
-            )}
-            <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;">
-              <a href={`/side-projects/${sp.slug}`} class="external">Read more →</a>
-              {sp.data.link && (
-                <a href={sp.data.link} target="_blank" rel="noopener" class="external">{sp.data.linkLabel ?? 'Open'} ↗</a>
-              )}
-            </div>
-          </article>
+          <SideProjectCard
+            slug={sp.slug}
+            title={sp.data.title}
+            type={sp.data.type}
+            year={sp.data.year}
+            summary={sp.data.summary}
+            tags={sp.data.tags}
+            link={sp.data.link}
+            linkLabel={sp.data.linkLabel}
+            icon={sp.data.icon}
+            status={sp.data.status}
+          />
         ))}
       </div>
     </div>
