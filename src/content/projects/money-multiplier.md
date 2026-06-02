@@ -4,7 +4,7 @@ company: Games24x7
 role: Senior PM, Growth Charter
 year: "2022"
 timeframe: 8 months
-summary: A first-of-its-kind variable reward mechanic in Indian rummy, inspired by Nir Eyal's Hooked Model. Shipped V1, learned the wrong behavior was being optimized, redesigned around a multi-lever ARPU framework.
+summary: A first-of-its-kind variable reward mechanic in Indian rummy, inspired by Nir Eyal's Hooked Model. Shipped V1, learned the wrong behavior was being optimized, redesigned around a multi-lever ARPU framework. Became a reusable internal playbook for growth.
 tags: [Growth, Monetization, Behavioral Design]
 featured: true
 order: 3
@@ -14,8 +14,6 @@ metrics:
     label: ARPU (new users)
   - value: "+4%"
     label: ARPU (existing)
-  - value: "-"
-    label: Incentive cost reduced
 screenshots:
   - src: /case-studies/money-multiplier-hooked-model.png
     caption: The Hooked Model - the behavioral framework that inspired the mechanic.
