@@ -9,6 +9,7 @@ tags: [AI, LiveOps, Marketing Automation, Agentic Systems]
 featured: true
 order: 4
 icon: sparkles
+quote: "Agentic AI is only useful in operations if a non-technical user can drive it."
 metrics:
   - value: "+50%"
     label: Marketing efficiency

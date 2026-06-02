@@ -8,6 +8,7 @@ tags: [Stakeholder Management, Strategy, Platform]
 featured: false
 order: 15
 icon: map
+quote: "Skip the charter argument. Speak the goal everyone already cares about."
 metrics:
   - value: "Separate"
     label: Platform roadmap

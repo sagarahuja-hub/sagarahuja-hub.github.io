@@ -9,13 +9,6 @@ const stats = [
   { num: '10M+', label: 'Users impacted' }
 ];
 
-const career = [
-  { label: 'Tech Mahindra', years: '2013-2016', cls: 's4' },
-  { label: 'Teach For India', years: '2016-2018', cls: 's3' },
-  { label: 'Games24x7', years: '2019-2025', cls: 's2' },
-  { label: 'Skillz', years: '2025-2026', cls: 's1' }
-];
-
 const allFilters = ['All', 'AI', 'Growth', 'Lifecycle', 'Platform', 'Monetization', 'Education'];
 
 const experience = [
@@ -163,21 +156,6 @@ const tagAltClass = (i: number): string => {
         ))}
       </div>
 
-      <div class="career-bar">
-        <h4>Career timeline</h4>
-        <div class="bar-row">
-          {career.map(c => (
-            <div class={`seg ${c.cls}`}>
-              <span class="lbl">{c.label}</span>
-              <span class="yrs">{c.years}</span>
-            </div>
-          ))}
-        </div>
-        <div class="axis">
-          <span>2013</span>
-          <span>2026</span>
-        </div>
-      </div>
 
       <div class="section-title with-icon">
         <div>

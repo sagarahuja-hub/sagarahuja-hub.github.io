@@ -9,6 +9,7 @@ tags: [AI, Operational Excellence, Ownership]
 featured: true
 order: 5
 icon: cpu
+quote: "Build the proof yourself before you ask for the org's permission."
 metrics:
   - value: "+20%"
     label: PM execution efficiency

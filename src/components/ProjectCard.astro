@@ -15,9 +15,10 @@ interface Props {
   tags?: string[];
   metrics?: Metric[];
   icon?: string;
+  quote?: string;
 }
 
-const { href, title, company, year, summary, tags = [], metrics = [], icon } = Astro.props;
+const { href, title, company, year, summary, tags = [], metrics = [], icon, quote } = Astro.props;
 ---
 <a href={href} class="project-card">
   <div class="top-row">
@@ -32,6 +33,9 @@ const { href, title, company, year, summary, tags = [], metrics = [], icon } = A
     )}
     <h3>{title}</h3>
   </div>
+  {quote && (
+    <p class="card-quote">{quote}</p>
+  )}
   <p class="summary">{summary}</p>
   {tags.length > 0 && (
     <div class="tags">

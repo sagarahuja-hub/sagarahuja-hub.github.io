@@ -9,6 +9,7 @@ tags: [Growth, Personalization, Experimentation, Mobile]
 featured: true
 order: 1
 icon: smartphone
+quote: "Optimizing for the average user means under-serving every cohort."
 metrics:
   - value: "+9%"
     label: New user retention

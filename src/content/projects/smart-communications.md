@@ -9,6 +9,7 @@ tags: [Machine Learning, Personalization, Communications]
 featured: true
 order: 6
 icon: bell
+quote: "A two-way door deserves speed, not committees."
 metrics:
   - value: "+30%"
     label: Open rate

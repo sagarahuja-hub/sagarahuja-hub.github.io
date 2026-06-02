@@ -9,6 +9,7 @@ tags: [Growth, Monetization, Behavioral Design]
 featured: true
 order: 3
 icon: trending-up
+quote: "Top-line wins can hide compositional changes. Decompose before celebrating."
 metrics:
   - value: "+15%"
     label: ARPU (new users)

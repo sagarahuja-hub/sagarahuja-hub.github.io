@@ -9,6 +9,7 @@ tags: [Lifecycle, Marketing, Data Infrastructure]
 featured: false
 order: 11
 icon: send
+quote: "Trust is rebuilt by raising the value bar, not by apologizing."
 metrics:
   - value: "+6%"
     label: Net revenue

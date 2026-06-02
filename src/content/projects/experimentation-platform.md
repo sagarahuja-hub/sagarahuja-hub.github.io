@@ -9,6 +9,7 @@ tags: [Platform, Experimentation, Infrastructure]
 featured: false
 order: 7
 icon: flask
+quote: "Velocity compounds. Decouple experimentation from releases and the gains keep coming back."
 metrics:
   - value: "-82%"
     label: App release dependency

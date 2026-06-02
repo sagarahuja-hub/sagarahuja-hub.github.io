@@ -8,6 +8,7 @@ tags: [Leadership, Cross-Functional, Process]
 featured: false
 order: 14
 icon: check-circle
+quote: "Lost the debate. Built the checklist that won the launch."
 metrics: []
 ---
 

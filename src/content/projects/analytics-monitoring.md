@@ -9,6 +9,7 @@ tags: [Platform, Analytics, Observability]
 featured: false
 order: 8
 icon: activity
+quote: "Two days to detect a problem is two days too late."
 metrics:
   - value: "2d -> 5m"
     label: Issue detection

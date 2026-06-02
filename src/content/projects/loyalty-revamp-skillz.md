@@ -9,6 +9,7 @@ tags: [Loyalty, Monetization, Engagement, LiveOps]
 featured: true
 order: 2
 icon: award
+quote: "The first month after launch is where the program actually gets designed."
 metrics:
   - value: "-30%"
     label: Incentive cost

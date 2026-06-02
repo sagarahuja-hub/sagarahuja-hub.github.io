@@ -9,6 +9,7 @@ tags: [Engagement, Retention, Customer Obsession]
 featured: false
 order: 10
 icon: target
+quote: "When complaints repeat, the bug is usually in the design, not the messaging."
 metrics:
   - value: "+10%"
     label: D14 retention

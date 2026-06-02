@@ -713,6 +713,31 @@ p { color: var(--text-muted); }
 }
 @media (min-width: 768px) { .project-card h3 { font-size: 1.2rem; } }
 
+.project-card .card-quote {
+  font-style: italic;
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.45;
+  padding: 0.35rem 0 0.35rem 1.5rem;
+  position: relative;
+  margin: 0;
+}
+.project-card .card-quote::before {
+  content: '\201C';
+  position: absolute;
+  left: -2px;
+  top: -10px;
+  font-size: 2.4rem;
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1;
+  font-weight: 700;
+}
+
 .project-card .summary {
   color: var(--text-muted);
   font-size: 0.92rem;

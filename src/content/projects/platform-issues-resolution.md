@@ -8,6 +8,7 @@ tags: [Operational Excellence, Tech Debt, Ownership]
 featured: false
 order: 16
 icon: wrench
+quote: "Structural problems deserve structural fixes. Five root causes beat a hundred fires."
 metrics:
   - value: "~0"
     label: Recurring issues

@@ -9,6 +9,7 @@ tags: [Innovation, Invent and Simplify, MVP]
 featured: false
 order: 13
 icon: tv
+quote: "A QR code replaced a camera rig. The simplest answer wins."
 metrics:
   - value: "MVP"
     label: Category-first

@@ -8,6 +8,7 @@ tags: [AI, Operational Excellence, PM Tools]
 featured: false
 order: 17
 icon: file-text
+quote: "One source of truth. Four stakeholder formats. Zero reformatting."
 metrics:
   - value: "1 -> 4"
     label: Format multiplexing

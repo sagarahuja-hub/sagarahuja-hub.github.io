@@ -9,6 +9,7 @@ tags: [Loyalty, Responsible Growth, Data Science]
 featured: false
 order: 12
 icon: shield
+quote: "Responsible growth means choosing which users not to monetize."
 metrics:
   - value: "+2%"
     label: Net revenue
