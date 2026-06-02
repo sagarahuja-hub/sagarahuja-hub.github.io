@@ -45,15 +45,42 @@ const data = entry.data;
       </header>
 
       {data.metrics && data.metrics.length > 0 && (
-        <div class="metric-strip">
-          {data.metrics.map(m => (
-            <div class="cell">
-              <span class="value">{m.value}</span>
-              <span class="label">{m.label}</span>
-            </div>
-          ))}
+        <div class="metric-strip" id="metric-strip">
+          {data.metrics.map(m => {
+            const pctMatch = m.value.match(/(\d+(?:\.\d+)?)%/);
+            const pct = pctMatch ? Math.min(100, parseFloat(pctMatch[1])) : null;
+            return (
+              <div class="cell">
+                <span class="value">{m.value}</span>
+                <span class="label">{m.label}</span>
+                {pct !== null && (
+                  <div class="bar"><div class="bar-fill" style={`--bar-w: ${pct}%`}></div></div>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
+
+      <script is:inline>
+        (function() {
+          const strip = document.getElementById('metric-strip');
+          if (!strip) return;
+          if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver((entries) => {
+              entries.forEach(e => {
+                if (e.isIntersecting) {
+                  strip.classList.add('visible');
+                  io.disconnect();
+                }
+              });
+            }, { threshold: 0.3 });
+            io.observe(strip);
+          } else {
+            strip.classList.add('visible');
+          }
+        })();
+      </script>
 
       <div class="body">
         <Content />

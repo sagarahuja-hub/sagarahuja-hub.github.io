@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import StatsStrip from '../components/StatsStrip.astro';
+import DonutChart from '../components/DonutChart.astro';
 import PageNav from '../components/PageNav.astro';
 import { getCollection } from 'astro:content';
 
@@ -93,6 +94,8 @@ const experiencePreview = [
     </div>
   </section>
 
+  <hr class="section-divider" />
+
   <section class="section" id="side-projects">
     <div class="container">
       <div class="section-title">
@@ -127,6 +130,8 @@ const experiencePreview = [
       </div>
     </div>
   </section>
+
+  <hr class="section-divider" />
 
   <section class="section" id="about">
     <div class="container">
@@ -165,6 +170,8 @@ const experiencePreview = [
             State-level chess champion and 4-time national-level player. Travelled internationally representing India in a school cultural exchange. From an ONGC family, I have lived across India from Gujarat to Assam, Andhra Pradesh to Uttarakhand. That and Nigeria taught me to read and adapt to different cultures quickly. Brown IV belt in Karate. 15+ countries, 5 continents.
           </p>
         </div>
+
+        <DonutChart />
 
         <div class="about-panels reveal-stagger">
           <div class="panel">
@@ -208,6 +215,8 @@ const experiencePreview = [
     </div>
   </section>
 
+  <hr class="section-divider" />
+
   <section class="section" id="experience">
     <div class="container">
       <div class="section-title">
@@ -229,6 +238,8 @@ const experiencePreview = [
       </div>
     </div>
   </section>
+
+  <hr class="section-divider" />
 
   <section class="section" id="contact">
     <div class="container">

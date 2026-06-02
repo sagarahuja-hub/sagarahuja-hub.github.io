@@ -1,15 +1,15 @@
 ---
 const stats = [
-  { num: '11', label: 'Years of experience' },
-  { num: '7', label: 'Years in product management' },
-  { num: '10M+', label: 'Users impacted across products' },
-  { num: '17+', label: 'Shipped product initiatives' }
+  { num: '11', target: 11, suffix: '', label: 'Years of experience' },
+  { num: '7', target: 7, suffix: '', label: 'Years in product management' },
+  { num: '10M+', target: 10, suffix: 'M+', label: 'Users impacted across products' },
+  { num: '17+', target: 17, suffix: '+', label: 'Shipped product initiatives' }
 ];
 ---
-<div class="stats-strip">
+<div class="stats-strip" id="stats-strip">
   {stats.map(s => (
     <div class="stat">
-      <span class="num">{s.num}</span>
+      <span class="num" data-target={s.target} data-suffix={s.suffix}>{s.num}</span>
       <span class="label">{s.label}</span>
     </div>
   ))}
@@ -29,3 +29,44 @@ const stats = [
     <span class="brand-tag brand-stanford"><span class="dot-sm"></span>Stanford Product Management</span>
   </div>
 </div>
+
+<script is:inline>
+  (function() {
+    const root = document.getElementById('stats-strip');
+    if (!root) return;
+    const nums = root.querySelectorAll('.num[data-target]');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+    function animate(el) {
+      const target = parseInt(el.getAttribute('data-target'), 10);
+      const suffix = el.getAttribute('data-suffix') || '';
+      const duration = 1100;
+      const start = performance.now();
+      el.textContent = '0' + suffix;
+      function tick(now) {
+        const p = Math.min(1, (now - start) / duration);
+        const v = Math.round(target * easeOutCubic(p));
+        el.textContent = v + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target + suffix;
+      }
+      requestAnimationFrame(tick);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            nums.forEach(animate);
+            io.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+      io.observe(root);
+    } else {
+      nums.forEach(animate);
+    }
+  })();
+</script>
