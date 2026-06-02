@@ -9,6 +9,7 @@ tags: [AI, Decision Support, End-to-end build]
 order: 1
 icon: sparkles
 status: Live
+image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&h=240&fit=crop&q=80"
 ---
 
 ## What it is

@@ -9,6 +9,7 @@ tags: [Loyalty, Monetization, Engagement, LiveOps]
 featured: true
 order: 2
 icon: award
+image: "https://images.unsplash.com/photo-1605792657660-596af9009e82?w=1200&h=240&fit=crop&q=80"
 quote: "The first month after launch is where the program actually gets designed."
 metrics:
   - value: "-30%"

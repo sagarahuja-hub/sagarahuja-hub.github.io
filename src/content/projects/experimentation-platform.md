@@ -9,6 +9,7 @@ tags: [Platform, Experimentation, Infrastructure]
 featured: false
 order: 7
 icon: flask
+image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1200&h=240&fit=crop&q=80"
 quote: "Velocity compounds. Decouple experimentation from releases and the gains keep coming back."
 metrics:
   - value: "-82%"

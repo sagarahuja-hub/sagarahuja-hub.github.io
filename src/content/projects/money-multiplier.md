@@ -9,6 +9,7 @@ tags: [Growth, Monetization, Behavioral Design]
 featured: true
 order: 3
 icon: trending-up
+image: "https://images.unsplash.com/photo-1605792657660-596af9009e82?w=1200&h=240&fit=crop&q=80"
 quote: "Top-line wins can hide compositional changes. Decompose before celebrating."
 metrics:
   - value: "+15%"

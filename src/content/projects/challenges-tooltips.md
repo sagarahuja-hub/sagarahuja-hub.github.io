@@ -9,6 +9,7 @@ tags: [Growth, Experimentation, Ambiguity]
 featured: false
 order: 9
 icon: lightbulb
+image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1200&h=240&fit=crop&q=80"
 quote: "When leadership wants data and you have none, build the data with what is already there."
 metrics:
   - value: "+35%"

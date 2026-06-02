@@ -9,6 +9,7 @@ tags: [Platform, Analytics, Observability]
 featured: false
 order: 8
 icon: activity
+image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=240&fit=crop&q=80"
 quote: "Two days to detect a problem is two days too late."
 metrics:
   - value: "2d -> 5m"

@@ -4,9 +4,11 @@ import Icon from './Icon.astro';
 interface Props {
   icon?: string;
   status?: string;
+  image?: string;
+  alt?: string;
 }
 
-const { icon = 'target', status = 'Completed' } = Astro.props;
+const { icon = 'target', status = 'Completed', image, alt = '' } = Astro.props;
 
 const ICON_GRADIENTS: Record<string, { from: string; to: string }> = {
   sparkles: { from: '#8b5cf6', to: '#ec4899' },
@@ -33,16 +35,20 @@ const bg = `linear-gradient(135deg, ${palette.from} 0%, ${palette.to} 100%)`;
 const statusKey = status.toLowerCase();
 ---
 <div class="card-visual">
-  <div class="gen" style={`background: ${bg};`}>
-    <svg viewBox="0 0 240 135" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.18;mix-blend-mode:soft-light;pointer-events:none;" aria-hidden="true">
-      <defs>
-        <pattern id={`dots-${icon}`} x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
-          <circle cx="2" cy="2" r="1" fill="#fff"></circle>
-        </pattern>
-      </defs>
-      <rect width="100%" height="100%" fill={`url(#dots-${icon})`}></rect>
-    </svg>
-    <Icon name={icon} size={64} class="icon-lg" />
-  </div>
+  {image ? (
+    <img src={image} alt={alt} loading="lazy" />
+  ) : (
+    <div class="gen" style={`background: ${bg};`}>
+      <svg viewBox="0 0 240 135" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.18;mix-blend-mode:soft-light;pointer-events:none;" aria-hidden="true">
+        <defs>
+          <pattern id={`dots-${icon}`} x="0" y="0" width="14" height="14" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="1" fill="#fff"></circle>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill={`url(#dots-${icon})`}></rect>
+      </svg>
+      <Icon name={icon} size={36} class="icon-lg" />
+    </div>
+  )}
   <span class="status" data-status={statusKey}>{status}</span>
 </div>

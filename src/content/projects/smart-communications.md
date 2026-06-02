@@ -9,6 +9,7 @@ tags: [Machine Learning, Personalization, Communications]
 featured: true
 order: 6
 icon: bell
+image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=240&fit=crop&q=80"
 quote: "A two-way door deserves speed, not committees."
 metrics:
   - value: "+30%"

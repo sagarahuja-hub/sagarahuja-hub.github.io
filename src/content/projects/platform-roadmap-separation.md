@@ -8,6 +8,7 @@ tags: [Stakeholder Management, Strategy, Platform]
 featured: false
 order: 15
 icon: map
+image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=240&fit=crop&q=80"
 quote: "Skip the charter argument. Speak the goal everyone already cares about."
 metrics:
   - value: "Separate"

@@ -19,6 +19,7 @@ const projects = defineCollection({
     icon: z.string().optional(),
     quote: z.string().optional(),
     status: z.string().default('Completed'),
+    image: z.string().optional(),
     screenshots: z.array(z.object({
       src: z.string(),
       caption: z.string().optional(),
@@ -39,7 +40,8 @@ const sideProjects = defineCollection({
     tags: z.array(z.string()).default([]),
     order: z.number().default(100),
     icon: z.string().optional(),
-    status: z.string().default('Completed')
+    status: z.string().default('Completed'),
+    image: z.string().optional()
   })
 });
 

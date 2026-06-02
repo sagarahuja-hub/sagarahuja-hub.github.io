@@ -105,7 +105,7 @@ main { flex: 1; position: relative; z-index: 1; }
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(79, 70, 229, 0.10) 0%, rgba(6, 182, 212, 0.06) 30%, transparent 65%);
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.030) 0%, rgba(6, 182, 212, 0.018) 30%, transparent 65%);
   filter: blur(40px);
   pointer-events: none;
   z-index: 0;
@@ -116,7 +116,7 @@ main { flex: 1; position: relative; z-index: 1; }
   display: none;
 }
 :root[data-theme="dark"] .cursor-glow {
-  background: radial-gradient(circle, rgba(129, 140, 248, 0.14) 0%, rgba(34, 211, 238, 0.08) 30%, transparent 65%);
+  background: radial-gradient(circle, rgba(129, 140, 248, 0.042) 0%, rgba(34, 211, 238, 0.024) 30%, transparent 65%);
 }
 @media (hover: hover) and (pointer: fine) {
   .cursor-glow { display: block; }
@@ -443,16 +443,16 @@ p { color: var(--text-muted); }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 30% 50%, transparent 0%, rgba(11, 13, 18, 0.4) 60%, rgba(11, 13, 18, 0.85) 100%),
-    linear-gradient(180deg, rgba(11, 13, 18, 0.3) 0%, rgba(11, 13, 18, 0.7) 100%);
+    radial-gradient(circle at 30% 50%, transparent 0%, rgba(11, 13, 18, 0.28) 60%, rgba(11, 13, 18, 0.595) 100%),
+    linear-gradient(180deg, rgba(11, 13, 18, 0.21) 0%, rgba(11, 13, 18, 0.49) 100%);
   z-index: -1;
   pointer-events: none;
 }
 :root[data-theme="light"] .hero::after,
 :root:not([data-theme="dark"]) .hero::after {
   background:
-    radial-gradient(circle at 30% 50%, rgba(250, 251, 252, 0.55) 0%, rgba(250, 251, 252, 0.85) 60%, rgba(250, 251, 252, 0.95) 100%),
-    linear-gradient(180deg, rgba(250, 251, 252, 0.5) 0%, rgba(250, 251, 252, 0.92) 100%);
+    radial-gradient(circle at 30% 50%, rgba(250, 251, 252, 0.385) 0%, rgba(250, 251, 252, 0.595) 60%, rgba(250, 251, 252, 0.665) 100%),
+    linear-gradient(180deg, rgba(250, 251, 252, 0.35) 0%, rgba(250, 251, 252, 0.644) 100%);
 }
 
 @keyframes float-slow {

@@ -19,12 +19,13 @@ interface Props {
   quote?: string;
   featured?: boolean;
   status?: string;
+  image?: string;
 }
 
-const { href, title, company, year, summary, tags = [], metrics = [], icon, quote, featured = false, status = 'Completed' } = Astro.props;
+const { href, title, company, year, summary, tags = [], metrics = [], icon, quote, featured = false, status = 'Completed', image } = Astro.props;
 ---
 <a href={href} class={`project-card ${featured ? 'is-featured' : ''}`}>
-  <CardVisual icon={icon} status={status} />
+  <CardVisual icon={icon} status={status} image={image} alt={title} />
   <span class="corner tl" aria-hidden="true"></span>
   <span class="corner tr" aria-hidden="true"></span>
   <span class="corner bl" aria-hidden="true"></span>

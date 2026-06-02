@@ -12,6 +12,7 @@ interface Props {
   linkLabel?: string;
   icon?: string;
   status?: string;
+  image?: string;
 }
 
 const {
@@ -24,11 +25,12 @@ const {
   link,
   linkLabel = 'Open',
   icon,
-  status = 'Completed'
+  status = 'Completed',
+  image
 } = Astro.props;
 ---
 <article class="side-card">
-  <CardVisual icon={icon} status={status} />
+  <CardVisual icon={icon} status={status} image={image} alt={title} />
   <span class="corner tl" aria-hidden="true"></span>
   <span class="corner tr" aria-hidden="true"></span>
   <span class="corner bl" aria-hidden="true"></span>
