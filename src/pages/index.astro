@@ -14,6 +14,16 @@ const featured = allProjects
 const sideProjects = await getCollection('side-projects');
 const sortedSide = sideProjects.sort((a, b) => a.data.order - b.data.order);
 
+const principles = [
+  { text: 'First we saw the forest - grouping users into cohorts. Now we see every tree - building for the individual.', source: 'App Redesign' },
+  { text: 'Decompose the metric before celebrating the lift.', source: 'Money Multiplier V1' },
+  { text: 'Ship narrow and reversible when the cost of waiting beats the cost of being wrong.', source: 'Smart Communications' },
+  { text: 'Launch is the starting line, not the finish line.', source: 'Loyalty Revamp - Skillz' },
+  { text: 'Anchor every cross-functional debate to the goal everyone already shares.', source: 'Platform Roadmap Separation' },
+  { text: 'Ownership beyond your scope starts with absorbing the risk yourself.', source: 'AI Workflows' },
+  { text: 'When data is the blocker, find the cheap experiment that creates it.', source: 'Challenges Tooltips' }
+];
+
 const experiencePreview = [
   {
     when: 'Mar 2025 - Feb 2026',
@@ -211,6 +221,21 @@ const experiencePreview = [
             </ul>
           </div>
         </div>
+
+        <section class="principles-block reveal">
+          <h3>Principles I work by</h3>
+          <ol class="principles">
+            {principles.map((p, i) => (
+              <li class="principle">
+                <span class="num">{String(i + 1).padStart(2, '0')}</span>
+                <div class="body">
+                  <p class="text">{p.text}</p>
+                  <p class="source">{p.source}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
       </div>
     </div>
   </section>
