@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activity Discovery Center - Concept Note</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:        #1A3358;
+    --navy-mid:    #2B5CA8;
+    --navy-light:  #DAE8F7;
+    --navy-border: #7EB5E8;
+    --tag-bg:      #D0E6F9;
+    --gold-dark:   #7A530A;
+    --gold-mid:    #C98F12;
+    --gold-light:  #FEF5DC;
+    --gold-border: #E8C268;
+    --teal-light:  #E4F5F2;
+    --teal-border: #5BBFAF;
+    --teal-text:   #1A6B60;
+    --coral:       #C24B27;
+    --gray-bg:     #F4F4F1;
+    --gray-border: #DEDEDD;
+    --muted:       #6B6B68;
+    --body:        #2E2E2C;
+    --white:       #FFFFFF;
+    --blue-strip:  #1E4A8A;
+    --radius:      6px;
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body:    'DM Sans', system-ui, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--body);
+    background: #F7F8FA;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 880px;
+    margin: 0 auto;
+    background: var(--white);
+    padding: 32px 28px 40px;
+  }
+
+  /* HEADER */
+  .header { margin-bottom: 0; }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+    background: var(--tag-bg);
+    border: 1px solid var(--navy-border);
+    padding: 4px 12px;
+    border-radius: 3px;
+    margin-bottom: 16px;
+  }
+
+  .header-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+  }
+
+  .headline {
+    font-family: var(--font-display);
+    font-size: clamp(26px, 4vw, 36px);
+    line-height: 1.15;
+    color: var(--body);
+    margin-bottom: 12px;
+  }
+
+  .headline span { color: var(--navy-mid); }
+
+  .subhead {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    max-width: 520px;
+    font-weight: 300;
+  }
+
+  .meta-box {
+    background: var(--white);
+    border-left: 2px solid var(--gray-border);
+    padding: 4px 0 4px 16px;
+    min-width: 160px;
+    flex-shrink: 0;
+  }
+
+  .meta-row { margin-bottom: 12px; }
+  .meta-row:last-child { margin-bottom: 0; }
+  .meta-label { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+  .meta-value { font-size: 13px; font-weight: 600; color: var(--body); line-height: 1.3; }
+
+  /* DIVIDER */
+  .divider {
+    border: none;
+    border-top: 2px solid var(--navy);
+    margin: 20px 0;
+  }
+  .divider-light {
+    border: none;
+    border-top: 1px solid var(--gray-border);
+    margin: 24px 0;
+  }
+
+  /* POSITIONING BANNER */
+  .positioning {
+    background: var(--navy);
+    border-radius: var(--radius);
+    padding: 22px 28px;
+    margin-bottom: 28px;
+  }
+
+  .positioning-quote {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(14px, 2.2vw, 17px);
+    color: var(--white);
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+
+  .positioning-quote span { color: var(--navy-light); }
+
+  .positioning-sub {
+    font-size: 12px;
+    color: #9AABB8;
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  /* TWO COLUMN */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  /* SECTION */
+  .section { margin-bottom: 26px; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    color: var(--navy);
+    padding-bottom: 6px;
+    border-bottom: 1px solid #B8D5F0;
+    margin-bottom: 10px;
+  }
+
+  .section-body {
+    font-size: 13px;
+    color: var(--body);
+    line-height: 1.65;
+    font-weight: 300;
+    margin-bottom: 10px;
+  }
+
+  /* PROBLEM CARDS */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .problem-card {
+    background: var(--gray-bg);
+    border: 1px solid var(--gray-border);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+  }
+
+  .problem-num {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--coral);
+    line-height: 1;
+    margin-bottom: 5px;
+    font-family: var(--font-display);
+  }
+
+  .problem-text {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* SCHEDULE */
+  .schedule-note {
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+    margin-bottom: 14px;
+  }
+
+  .day-card {
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: var(--radius);
+    padding: 8px 4px;
+    text-align: center;
+  }
+
+  .day-name {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+
+  .day-activity {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--body);
+    line-height: 1.3;
+  }
+
+  /* TIERS */
+  .tiers-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--body);
+    margin-bottom: 8px;
+  }
+
+  .tier-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .tier-card {
+    border-radius: var(--radius);
+    padding: 10px 12px;
+  }
+
+  .tier-card.t1 { background: var(--navy-light); border: 1px solid var(--navy-border); }
+  .tier-card.t2 { background: var(--gold-light); border: 1px solid var(--gold-border); }
+
+  .tier-badge {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .t1 .tier-badge { color: var(--navy); }
+  .t2 .tier-badge { color: var(--gold-dark); }
+
+  .tier-title {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .t1 .tier-title { color: #112440; }
+  .t2 .tier-title { color: #5C3B08; }
+
+  .tier-list { list-style: none; }
+  .tier-list li {
+    font-size: 11.5px;
+    line-height: 1.55;
+    padding-left: 10px;
+    position: relative;
+  }
+  .tier-list li::before { content: '-'; position: absolute; left: 0; color: #AAA; }
+  .t1 .tier-list li { color: var(--navy); }
+  .t2 .tier-list li { color: var(--gold-dark); }
+
+  /* PILLARS */
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .pillar-card {
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+  }
+
+  .pillar-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--body);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .pillar-dot {
+    width: 6px; height: 6px;
+    background: var(--navy-mid);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+
+  .pillar-body { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
+
+  /* NICHE STRIP */
+  .niche-strip {
+    background: var(--teal-light);
+    border-left: 3px solid var(--teal-border);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 10px 14px;
+    margin-top: 8px;
+  }
+
+  .niche-label {
+    font-size: 10.5px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 8px;
+  }
+
+  .niche-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .niche-pill {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--teal-text);
+    background: rgba(91,191,175,0.15);
+    border: 1px solid var(--teal-border);
+    border-radius: 20px;
+    padding: 3px 10px;
+  }
+
+  /* INSIGHT STRIP */
+  .insight-strip {
+    background: var(--gray-bg);
+    border-left: 3px solid var(--blue-strip);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: #444;
+    line-height: 1.6;
+    margin-top: 8px;
+    font-weight: 300;
+  }
+
+  /* FOOTER RULE */
+  .footer-rule { margin-top: 28px; }
+
+  /* MOBILE */
+  @media (max-width: 640px) {
+    .page { padding: 20px 16px 32px; }
+
+    .header-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .meta-box {
+      border-left: none;
+      border-top: 1px solid var(--gray-border);
+      padding: 14px 0 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .meta-row { margin-bottom: 0; }
+
+    .two-col {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+
+    .col-left { margin-bottom: 8px; }
+
+    .problem-grid { grid-template-columns: 1fr 1fr; gap: 7px; }
+
+    .schedule-grid { grid-template-columns: repeat(5,1fr); gap: 4px; }
+
+    .day-activity { font-size: 10px; }
+
+    .tier-grid { grid-template-columns: 1fr 1fr; }
+
+    .pillar-grid { grid-template-columns: 1fr 1fr; }
+
+    .positioning { padding: 18px 18px; }
+
+    .headline { font-size: 24px; }
+
+    .niche-pills { gap: 5px; }
+  }
+
+  @media (max-width: 380px) {
+    .problem-grid { grid-template-columns: 1fr; }
+    .tier-grid    { grid-template-columns: 1fr; }
+    .pillar-grid  { grid-template-columns: 1fr; }
+    .schedule-grid { grid-template-columns: repeat(3,1fr); }
+    .schedule-grid .day-card:nth-child(n+4) { display: none; }
+    .schedule-grid::after {
+      content: '+ more activities';
+      font-size: 10px;
+      color: var(--muted);
+      font-style: italic;
+      grid-column: 1/-1;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="tag">Concept Note</div>
+    <div class="header-grid">
+      <div class="header-left">
+        <h1 class="headline">
+          An extracurricular discovery center<br>
+          built for finding the calling,<br>
+          <span>not filling the calendar</span>
+        </h1>
+        <p class="subhead">A structured, multi-activity environment where children explore a different discipline each day of the week - under one roof, with qualified instructors, guided by a dedicated coach.</p>
+      </div>
+      <div class="meta-box">
+        <div class="meta-row">
+          <div class="meta-label">Target age</div>
+          <div class="meta-value">6 - 10 years</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">Segment</div>
+          <div class="meta-value">IB / IGCSE / Cambridge</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">City</div>
+          <div class="meta-value">Bengaluru</div>
+        </div>
+        <div class="meta-row">
+          <div class="meta-label">Session</div>
+          <div class="meta-value">1 hr/day, 3-5 days/week</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- POSITIONING BANNER -->
+  <div class="positioning">
+    <p class="positioning-quote">
+      "We expose your child to activities you did not know to look for,
+      <span>taught by people qualified to teach them."</span>
+    </p>
+    <p class="positioning-sub">Designed for ages 6-10 - the discovery years, before the academic years begin.</p>
+  </div>
+
+  <!-- TWO COLUMN BODY -->
+  <div class="two-col">
+
+    <!-- LEFT -->
+    <div class="col-left">
+
+      <div class="section">
+        <div class="section-label">The Problem</div>
+        <p class="section-body">Parents want to expose children to as many extracurriculars as possible - but the current model is slow, narrow, and penalises early exit.</p>
+        <div class="problem-grid">
+          <div class="problem-card">
+            <div class="problem-num">01</div>
+            <div class="problem-text">Sequential discovery - one activity at a time, months per cycle</div>
+          </div>
+          <div class="problem-card">
+            <div class="problem-num">02</div>
+            <div class="problem-text">Limited range - parents default to the same 5-6 familiar activities</div>
+          </div>
+          <div class="problem-card">
+            <div class="problem-num">03</div>
+            <div class="problem-text">Sunk cost lock-in - paid enrollment discourages early exit</div>
+          </div>
+          <div class="problem-card">
+            <div class="problem-num">04</div>
+            <div class="problem-text">Hidden callings - many passions are never found because the activity was never tried, or never even considered</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">The Idea</div>
+        <p class="section-body">A child attends the center up to five days a week. Each day is a different activity - one hour per session. Once a milestone threshold is reached per discipline, the child deepens it or rotates. All under one enrollment.</p>
+        <p class="schedule-note">Sample weekly rotation (illustrative)</p>
+        <div class="schedule-grid">
+          <div class="day-card"><div class="day-name">Mon</div><div class="day-activity">Swimming</div></div>
+          <div class="day-card"><div class="day-name">Tue</div><div class="day-activity">Dramatics</div></div>
+          <div class="day-card"><div class="day-name">Wed</div><div class="day-activity">Robotics</div></div>
+          <div class="day-card"><div class="day-name">Thu</div><div class="day-activity">Pottery</div></div>
+          <div class="day-card"><div class="day-name">Fri</div><div class="day-activity">Football</div></div>
+        </div>
+        <p class="tiers-label">Activities span two tiers:</p>
+        <div class="tier-grid">
+          <div class="tier-card t1">
+            <div class="tier-badge">Tier 1 - In Center</div>
+            <div class="tier-title">Daily rotation activities</div>
+            <ul class="tier-list">
+              <li>Robotics, dramatics, coding</li>
+              <li>Music, martial arts, art</li>
+              <li>Storytelling, creative writing</li>
+            </ul>
+          </div>
+          <div class="tier-card t2">
+            <div class="tier-badge">Tier 2 - Partner Visits</div>
+            <div class="tier-title">Curated exposure trips</div>
+            <ul class="tier-list">
+              <li>Horse riding, polo, golf</li>
+              <li>Fencing, archery</li>
+              <li>Scheduled monthly per cohort</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="col-right">
+
+      <div class="section">
+        <div class="section-label">Key Pillars</div>
+        <div class="pillar-grid">
+          <div class="pillar-card">
+            <div class="pillar-title"><span class="pillar-dot"></span>Expert instructors per discipline</div>
+            <div class="pillar-body">Each activity taught by a qualified specialist. Children receive a genuine experience from day one.</div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-title"><span class="pillar-dot"></span>In-house career coach</div>
+            <div class="pillar-body">Tracks engagement, surfaces early signals of aptitude, and guides when to deepen or move on.</div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-title"><span class="pillar-dot"></span>Single enrollment, one fee</div>
+            <div class="pillar-body">No juggling separate institutes, schedules, or payments. One center handles everything.</div>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-title"><span class="pillar-dot"></span>Milestone-based progression</div>
+            <div class="pillar-body">Advancement tracked by structured milestones per activity - not just hours clocked.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">The Hidden Opportunity Layer</div>
+        <p class="section-body">Most parents draw from a small set of familiar activities. Many of the highest-potential disciplines never enter their consideration set - not because of disinterest, but because of low visibility.</p>
+        <p class="section-body">These are precisely the activities where talent pools are thinnest, competition is structurally lower, and profile differentiation is highest.</p>
+        <div class="niche-strip">
+          <div class="niche-label">Activities parents rarely think to look for:</div>
+          <div class="niche-pills">
+            <span class="niche-pill">Horse riding</span>
+            <span class="niche-pill">Polo</span>
+            <span class="niche-pill">Golf</span>
+            <span class="niche-pill">Fencing</span>
+            <span class="niche-pill">Archery</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Why Bengaluru, Why Now</div>
+        <p class="section-body">International board schools (IB, IGCSE, Cambridge) are growing rapidly - Bengaluru ranks among the fastest-growing hubs in India. These curricula place explicit weight on extracurricular portfolios and holistic development.</p>
+        <div class="insight-strip">
+          Parents in these schools are already primed to invest in structured extracurricular exploration - making this a reachable, motivated audience without needing to build the behaviour from scratch.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="divider footer-rule">
+
+</div>
+</body>
+</html>
