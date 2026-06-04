@@ -14,7 +14,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       --fc-green-light: #A8C5A0;
       --fc-bg: #F5F0E8;
       --fc-card-bg: #EDE8DE;
-      --fc-card-bg-warm: #E8E0D0;
       --fc-border: #C8D9C6;
       --fc-body: #1C2B1A;
       --fc-secondary: #4A5A48;
@@ -24,6 +23,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       --fc-highlight-bg: rgba(28, 74, 30, 0.06);
       --fc-radius: 4px;
       --fc-radius-lg: 8px;
+      --fc-radius-pill: 999px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
@@ -38,9 +38,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .fc-page { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
     @media (min-width: 720px) { .fc-page { padding: 56px 32px 96px; } }
 
-    .fc-serif { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; }
-
-    /* Inline emphasis utilities */
+    /* Inline emphasis */
     strong.k {
       color: var(--fc-green);
       font-weight: 600;
@@ -51,7 +49,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     }
     em.c { color: var(--fc-secondary); font-style: italic; font-weight: 500; }
 
-    /* Eyebrow label */
     .fc-eyebrow {
       font-family: 'Inter', sans-serif;
       font-size: 11.5px;
@@ -61,7 +58,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       color: var(--fc-green);
       display: inline-block;
     }
-    .fc-eyebrow-light { color: var(--fc-green-light); }
 
     /* ===== Section 1: Header ===== */
     .fc-header {
@@ -103,155 +99,371 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .fc-header .contact-block a:hover { color: var(--fc-green); }
     @media (max-width: 540px) { .fc-header .contact-block { text-align: left; } }
 
-    /* ===== Dark green blocks (Hook + CTA) ===== */
-    .fc-dark-block {
-      background: var(--fc-green);
-      color: var(--fc-cream-text);
-      padding: 28px;
-      border-radius: var(--fc-radius-lg);
+    /* ===== Today's Specials section (mirrors FirstClub app) ===== */
+    .fc-specials {
       margin: 36px 0;
-      position: relative;
-    }
-    @media (min-width: 720px) { .fc-dark-block { padding: 36px 40px; } }
-    .fc-dark-block .fc-eyebrow {
-      color: var(--fc-green-light);
-      margin-bottom: 16px;
-      display: block;
-    }
-    .fc-dark-block h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-weight: 500;
-      font-size: 22px;
-      line-height: 1.35;
-      color: var(--fc-cream-text);
-      margin-bottom: 16px;
-      letter-spacing: -0.005em;
-    }
-    @media (min-width: 720px) { .fc-dark-block h2 { font-size: 25px; } }
-    .fc-dark-block h2 em { font-style: italic; color: var(--fc-green-light); font-weight: 400; }
-    .fc-dark-block p {
-      color: var(--fc-cream-dim);
-      font-size: 13.5px;
-      line-height: 1.75;
-    }
-    .fc-dark-block p strong { color: var(--fc-cream-text); font-weight: 600; }
-
-    /* ===== Product card ===== */
-    .fc-product-card {
-      background: #fff;
-      border: 1px solid var(--fc-border);
+      padding: 32px 18px 36px;
+      background: linear-gradient(180deg, #E8EFC5 0%, #F4ECC8 100%);
       border-radius: var(--fc-radius-lg);
+      position: relative;
       overflow: hidden;
-      margin: 36px 0 12px;
-      box-shadow: 0 2px 8px rgba(28, 74, 30, 0.05);
     }
-    .fc-product-card .pc-inner { display: grid; grid-template-columns: 1fr; gap: 0; }
-    @media (min-width: 720px) {
-      .fc-product-card .pc-inner { grid-template-columns: 40% 60%; }
+    .fc-specials::before {
+      content: 'SPECIALS';
+      position: absolute;
+      top: 14px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 72px;
+      font-weight: 700;
+      color: rgba(28, 74, 30, 0.07);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      z-index: 0;
+      user-select: none;
+      pointer-events: none;
+      line-height: 1;
     }
-    .fc-product-card .pc-left {
-      padding: 28px;
-      background: var(--fc-card-bg);
-      border-bottom: 1px solid var(--fc-border);
+    @media (min-width: 720px) { .fc-specials::before { font-size: 112px; top: 20px; } }
+    @media (min-width: 720px) { .fc-specials { padding: 44px 24px 44px; } }
+
+    .fc-specials .ts-head {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 22px;
     }
-    @media (min-width: 720px) {
-      .fc-product-card .pc-left { border-bottom: none; border-right: 1px solid var(--fc-border); }
+    .fc-specials .ts-head h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--fc-green);
+      line-height: 1.1;
+      margin-bottom: 6px;
+      letter-spacing: -0.015em;
     }
-    .fc-product-card .pc-photo {
+    @media (min-width: 720px) { .fc-specials .ts-head h2 { font-size: 36px; } }
+    .fc-specials .ts-head .sub {
+      font-size: 14px;
+      color: var(--fc-green-soft);
+      font-weight: 400;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .fc-specials .ts-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    @media (min-width: 540px) {
+      .fc-specials .ts-cards { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    }
+
+    .fc-special-card {
+      border-radius: var(--fc-radius-lg);
+      padding: 14px 12px 16px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .fc-special-card.sc-1 { background: linear-gradient(180deg, #FFE4B5 0%, #FFD78A 100%); }
+    .fc-special-card.sc-2 { background: linear-gradient(180deg, #DCE8B8 0%, #C0DC9C 100%); }
+    .fc-special-card.sc-3 { background: linear-gradient(180deg, #FFE0B0 0%, #FFC97D 100%); }
+
+    .fc-special-card .sc-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      line-height: 1.25;
+      padding: 0 6px;
+      min-height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fc-special-card.sc-1 .sc-label { color: #8A5A18; }
+    .fc-special-card.sc-2 .sc-label { color: #3F6B22; }
+    .fc-special-card.sc-3 .sc-label { color: #8A5A18; }
+
+    .fc-special-card .sc-image {
       width: 100%;
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 4 / 3;
       border-radius: var(--fc-radius);
       overflow: hidden;
-      background: #fff;
-      border: 1px solid var(--fc-border);
-      margin-bottom: 16px;
+      background: rgba(255, 255, 255, 0.35);
     }
-    .fc-product-card .pc-photo img {
+    .fc-special-card .sc-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 22%;
       display: block;
     }
-    .fc-product-card .pc-pick {
-      font-size: 10.5px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--fc-green);
-      margin-bottom: 8px;
-    }
-    .fc-product-card .pc-name {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 26px;
-      font-weight: 600;
-      color: var(--fc-green);
-      letter-spacing: -0.015em;
-      margin-bottom: 4px;
-      line-height: 1.1;
-    }
-    .fc-product-card .pc-tagline { font-size: 13px; color: var(--fc-secondary); font-weight: 400; }
-    .fc-product-card .pc-right { padding: 24px 28px 28px; }
-    .fc-product-card .pc-section + .pc-section { margin-top: 18px; }
-    .fc-product-card .pc-section-label {
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--fc-green);
-      margin-bottom: 9px;
-      padding-top: 9px;
-      border-top: 1px solid var(--fc-border);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .fc-product-card .pc-section-label::before {
-      content: '';
-      width: 14px;
-      height: 2px;
-      background: var(--fc-green);
-      flex-shrink: 0;
-    }
-    .fc-product-card .pc-section:first-child .pc-section-label {
-      padding-top: 0;
-      border-top: none;
-    }
-    .fc-product-card .pc-section ul { list-style: none; padding: 0; margin: 0; }
-    .fc-product-card .pc-section ul li {
+    .fc-special-card .sc-caption {
+      font-family: 'Inter', sans-serif;
       font-size: 13.5px;
-      color: var(--fc-body);
-      line-height: 1.65;
-      padding: 2px 0 2px 14px;
-      position: relative;
-    }
-    .fc-product-card .pc-section ul li::before {
-      content: '·';
-      position: absolute;
-      left: 3px;
-      top: -2px;
-      color: var(--fc-green);
       font-weight: 700;
-    }
-    .fc-product-card .pc-section p {
-      font-size: 13.5px;
       color: var(--fc-body);
-      line-height: 1.65;
+      line-height: 1.3;
+      padding: 4px 4px 0;
     }
-    .fc-product-card-footer {
-      font-size: 11.5px;
+    .fc-special-card .sc-meta {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
       color: var(--fc-secondary);
-      text-align: center;
-      margin-bottom: 36px;
-      font-style: italic;
-      letter-spacing: 0.02em;
+      font-weight: 500;
     }
 
-    /* ===== Section 4 header + framing pull-quote ===== */
-    .fc-section-head {
-      margin-top: 64px;
+    /* ===== Product page mock card (mirrors FirstClub product page) ===== */
+    .fc-pp {
+      max-width: 520px;
+      margin: 36px auto 24px;
+      background: #fff;
+      border: 1px solid var(--fc-border);
+      border-radius: var(--fc-radius-lg);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(28, 74, 30, 0.08);
+    }
+    .fc-pp .pp-nav {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--fc-border);
+      font-size: 14px;
+      gap: 12px;
+    }
+    .fc-pp .pp-nav .back {
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fc-body);
+      font-size: 18px;
+      cursor: default;
+    }
+    .fc-pp .pp-nav .title {
+      flex: 1;
+      font-weight: 700;
+      color: var(--fc-body);
+      font-size: 15px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .fc-pp .pp-nav .share {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #f3efe5;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--fc-secondary);
+      font-size: 13px;
+    }
+
+    .fc-pp .pp-hero {
+      background: linear-gradient(180deg, #E8DCB0 0%, #DCC788 100%);
+      padding: 28px 24px 36px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 320px;
+    }
+    .fc-pp .pp-hero img {
+      width: 200px;
+      height: 240px;
+      border-radius: 10px;
+      object-fit: cover;
+      object-position: center 22%;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    }
+    .fc-pp .pp-dots {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 4px;
+      padding: 5px 9px;
+      background: rgba(0, 0, 0, 0.18);
+      border-radius: var(--fc-radius-pill);
+    }
+    .fc-pp .pp-dots span {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.55);
+    }
+    .fc-pp .pp-dots span.active {
+      background: #fff;
+      width: 16px;
+      border-radius: 2px;
+    }
+
+    .fc-pp .pp-pills {
+      display: flex;
+      gap: 8px;
+      padding: 14px 16px 8px;
+      flex-wrap: wrap;
+    }
+    .fc-pp .pp-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: var(--fc-radius-pill);
+      border: 1px solid var(--fc-border);
+      font-size: 11.5px;
+      color: var(--fc-body);
+      font-weight: 500;
+      background: #fff;
+      white-space: nowrap;
+    }
+    .fc-pp .pp-pill.featured {
+      background: rgba(168, 197, 160, 0.20);
+      border-color: var(--fc-green-light);
+      color: var(--fc-green);
+    }
+    .fc-pp .pp-pill .leaf {
+      width: 9px;
+      height: 9px;
+      background: var(--fc-green);
+      transform: rotate(45deg);
+      border-radius: 2px;
+    }
+
+    .fc-pp .pp-brand {
+      padding: 6px 16px 0;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--fc-muted);
+      text-transform: uppercase;
+    }
+    .fc-pp .pp-title {
+      padding: 4px 16px 0;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--fc-body);
+      line-height: 1.18;
+      letter-spacing: -0.015em;
+    }
+    .fc-pp .pp-weight {
+      padding: 2px 16px 0;
+      font-size: 14px;
+      color: var(--fc-muted);
+      font-weight: 400;
+    }
+    .fc-pp .pp-price {
+      padding: 10px 16px 18px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .fc-pp .pp-price-now {
+      font-family: 'Inter', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--fc-body);
+    }
+    .fc-pp .pp-price-was {
+      font-size: 14px;
+      color: var(--fc-muted);
+      text-decoration: line-through;
+    }
+
+    .fc-pp .pp-about {
+      padding: 22px 18px 8px;
+      border-top: 1px solid var(--fc-border);
+    }
+    .fc-pp .pp-about h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--fc-body);
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+    .fc-pp .pp-about p {
+      font-size: 14px;
+      color: var(--fc-body);
+      line-height: 1.7;
       margin-bottom: 12px;
     }
+    .fc-pp .pp-about .pp-section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--fc-body);
+      margin-top: 18px;
+      margin-bottom: 6px;
+    }
+    .fc-pp .pp-about ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 8px;
+    }
+    .fc-pp .pp-about ul li {
+      font-size: 14px;
+      color: var(--fc-body);
+      line-height: 1.7;
+      padding: 1px 0;
+    }
+    .fc-pp .pp-about .pp-refund {
+      margin-top: 18px;
+      padding: 12px 14px;
+      background: var(--fc-card-bg);
+      border-left: 3px solid var(--fc-green);
+      border-radius: var(--fc-radius);
+      font-size: 13.5px;
+      color: var(--fc-secondary);
+      line-height: 1.6;
+    }
+    .fc-pp .pp-about .pp-refund strong { color: var(--fc-green); font-weight: 700; }
+
+    .fc-pp .pp-cta-row {
+      padding: 20px 18px 24px;
+      background: #fff;
+      border-top: 1px solid var(--fc-border);
+    }
+    .fc-pp .pp-cta {
+      display: block;
+      width: 100%;
+      padding: 17px 24px;
+      background: var(--fc-green);
+      color: var(--fc-cream-text);
+      text-align: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--fc-radius-pill);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+      letter-spacing: 0.005em;
+      box-shadow: 0 4px 12px rgba(28, 74, 30, 0.25);
+    }
+    .fc-pp .pp-cta:hover {
+      background: var(--fc-green-soft);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(28, 74, 30, 0.32);
+    }
+
+    /* ===== Section header + framing pull-quote ===== */
+    .fc-section-head { margin-top: 64px; margin-bottom: 12px; }
     .fc-section-head .eyebrow-row {
       display: flex;
       align-items: center;
@@ -295,7 +507,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     @media (min-width: 720px) { .fc-framing .quote { font-size: 23px; } }
     .fc-framing .quote::before {
       content: '"';
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Playfair Display', serif;
       font-size: 1.4em;
       line-height: 1;
       vertical-align: -0.05em;
@@ -304,7 +516,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     }
     .fc-framing .quote::after {
       content: '"';
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: 'Playfair Display', serif;
       font-size: 1.4em;
       line-height: 1;
       vertical-align: -0.05em;
@@ -372,10 +584,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       background: var(--fc-green);
       flex-shrink: 0;
     }
-    .fc-problem .pr-block:first-of-type .pr-label {
-      padding-top: 0;
-      border-top: none;
-    }
+    .fc-problem .pr-block:first-of-type .pr-label { padding-top: 0; border-top: none; }
     .fc-problem .pr-block p {
       font-size: 14.5px;
       color: var(--fc-body);
@@ -384,7 +593,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     }
     .fc-problem .pr-block p:last-child { margin-bottom: 0; }
 
-    /* Drop cap on first paragraph of each problem */
     .fc-problem .pr-block:first-of-type p:first-of-type::first-letter {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 3.6em;
@@ -410,7 +618,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       font-weight: 400;
     }
 
-    /* Mini callout inside a problem (for sentences worth emphasising) */
     .fc-callout {
       margin: 14px 0;
       padding: 12px 16px;
@@ -465,12 +672,29 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     }
     .fc-why .closing strong { color: var(--fc-green); font-weight: 700; }
 
-    /* ===== CTA contact ===== */
-    .fc-cta-contact {
-      margin-top: 22px;
-      text-align: right;
-      font-family: 'Inter', sans-serif;
+    /* ===== CTA dark block ===== */
+    .fc-dark-block {
+      background: var(--fc-green);
+      color: var(--fc-cream-text);
+      padding: 28px;
+      border-radius: var(--fc-radius-lg);
+      margin: 36px 0;
+      position: relative;
     }
+    @media (min-width: 720px) { .fc-dark-block { padding: 36px 40px; } }
+    .fc-dark-block h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 1.35;
+      color: var(--fc-cream-text);
+      margin-bottom: 16px;
+      letter-spacing: -0.005em;
+    }
+    @media (min-width: 720px) { .fc-dark-block h2 { font-size: 25px; } }
+    .fc-dark-block p { color: var(--fc-cream-dim); font-size: 13.5px; line-height: 1.75; }
+    .fc-dark-block p strong { color: var(--fc-cream-text); font-weight: 600; }
+    .fc-cta-contact { margin-top: 22px; text-align: right; }
     .fc-cta-contact .label {
       font-size: 10.5px;
       font-weight: 700;
@@ -521,72 +745,110 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
     </header>
 
-    {/* ============ Section 2: Hook ============ */}
-    <section class="fc-dark-block">
-      <span class="fc-eyebrow fc-eyebrow-light">Today's Special · June 2026</span>
-      <h2>
-        FirstClub just closed a <em>$55M Series B</em>.<br />
-        The next 12 months are about building the systems that take this from <strong>170,000 households</strong> to <strong>1 million</strong>.<br />
-        That is the work I want to do.
-      </h2>
-      <p>
-        I have used the product, studied the business, and identified <strong>four specific product problems</strong> that need to be solved in the next 12 months. Not feature requests - infrastructure gaps. The kind that are manageable at 170,000 households and breaking at scale. I have laid them out below, with proposed solutions and indicative ROI for each.
-      </p>
-    </section>
-
-    {/* ============ Section 3: Product card ============ */}
-    <article class="fc-product-card">
-      <div class="pc-inner">
-        <div class="pc-left">
-          <div class="pc-photo">
-            <img src="/sagar.jpg" alt="Sagar Ahuja portrait" />
+    {/* ============ Section 2: Today's Specials (FirstClub app style) ============ */}
+    <section class="fc-specials">
+      <div class="ts-head">
+        <h2>Today's Specials</h2>
+        <div class="sub">Your daily ritual of product talent</div>
+      </div>
+      <div class="ts-cards">
+        <div class="fc-special-card sc-1">
+          <div class="sc-label">Fresh off<br />Series B</div>
+          <div class="sc-image">
+            <img src="https://images.unsplash.com/photo-1605792657660-596af9009e82?w=600&h=450&fit=crop&q=80" alt="" loading="lazy" />
           </div>
-          <div class="pc-pick">Member's Pick</div>
-          <div class="pc-name">Sagar Ahuja</div>
-          <div class="pc-tagline">Senior Product Leader</div>
+          <div class="sc-caption">$55M raised · June 2026</div>
+          <div class="sc-meta">170,000 households today</div>
         </div>
-        <div class="pc-right">
-          <div class="pc-section">
-            <div class="pc-section-label">Category</div>
-            <p>Personalisation · ML Systems · Engagement Loops · Platform Scaling</p>
+        <div class="fc-special-card sc-2">
+          <div class="sc-label">Member's<br />Pick</div>
+          <div class="sc-image">
+            <img src="https://images.unsplash.com/photo-1505816014357-96b5ff457e9a?w=600&h=450&fit=crop&q=80" alt="" loading="lazy" />
           </div>
-          <div class="pc-section">
-            <div class="pc-section-label">Ingredients</div>
-            <ul>
-              <li>11 years of product experience, 7 in PM</li>
-              <li>Consumer mobile platform expertise (Skillz)</li>
-              <li>Engagement and retention system design</li>
-              <li>Subscription and monetisation product builds</li>
-              <li>Available immediately - no notice period</li>
-            </ul>
+          <div class="sc-caption">Built for FirstClub</div>
+          <div class="sc-meta">Curated, not just listed</div>
+        </div>
+        <div class="fc-special-card sc-3">
+          <div class="sc-label">Season's<br />Best</div>
+          <div class="sc-image">
+            <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=450&fit=crop&q=80" alt="" loading="lazy" />
           </div>
-          <div class="pc-section">
-            <div class="pc-section-label">Banned Ingredients</div>
-            <ul>
-              <li>Vanity metrics</li>
-              <li>Roadmaps driven by the loudest stakeholder</li>
-              <li>Features shipped without defined success criteria</li>
-              <li>Surface-level user research</li>
-            </ul>
-          </div>
-          <div class="pc-section">
-            <div class="pc-section-label">Quality Check</div>
-            <ul>
-              <li>Passed the FirstClub problem analysis</li>
-              <li>Blind-tested against 4 real product gaps</li>
-              <li>Origin: Bengaluru, India</li>
-            </ul>
-          </div>
-          <div class="pc-section">
-            <div class="pc-section-label">Shelf Life</div>
-            <ul>
-              <li>Open-ended. Best consumed at scale.</li>
-            </ul>
-          </div>
+          <div class="sc-caption">Available now</div>
+          <div class="sc-meta">Zero notice period</div>
         </div>
       </div>
+    </section>
+
+    {/* ============ Section 3: Product page mock (mirrors FirstClub product page) ============ */}
+    <article class="fc-pp">
+      <div class="pp-nav">
+        <span class="back" aria-hidden="true">←</span>
+        <span class="title">The Sagar Ahuja (Senior Pr...)</span>
+        <span class="share" aria-hidden="true">↑</span>
+      </div>
+      <div class="pp-hero">
+        <img src="/sagar.jpg" alt="Sagar Ahuja portrait" />
+        <div class="pp-dots" aria-hidden="true">
+          <span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+      <div class="pp-pills">
+        <span class="pp-pill featured">
+          <span class="leaf" aria-hidden="true"></span>
+          Zero notice period
+        </span>
+        <span class="pp-pill">Easy to onboard</span>
+        <span class="pp-pill">72 hrs Trial</span>
+      </div>
+      <div class="pp-brand">The Sagar Ahuja</div>
+      <h2 class="pp-title">The Sagar Ahuja<br />(Senior Product Leader)</h2>
+      <div class="pp-weight">11+ years · 7 in product</div>
+      <div class="pp-price">
+        <span class="pp-price-now">0 days</span>
+        <span class="pp-price-was">90 days notice</span>
+      </div>
+
+      <div class="pp-about">
+        <h3>About This Product</h3>
+        <p>
+          The Sagar Ahuja (Senior Product Leader) is a high-quality product builder designed to support consumer platform scaling, retention systems, and post-Series B momentum, with a 12-month build thesis already mapped to FirstClub's exact infrastructure gaps.
+        </p>
+
+        <div class="pp-section-title">Why You'll Love Him:</div>
+        <ul>
+          <li>11 years of product experience, 7 in PM</li>
+          <li>Built consumer mobile platforms at Skillz</li>
+          <li>Designed ML-driven engagement and retention systems</li>
+          <li>Shipped subscription and monetisation programs</li>
+          <li>Available immediately - no notice period</li>
+        </ul>
+
+        <div class="pp-section-title">How to Use:</div>
+        <ul>
+          <li>Onboard in week one - no 90-day hiring cycle</li>
+          <li>Assign first to personalisation or membership infrastructure</li>
+          <li>Pair with engineering, category, and marketing teams</li>
+          <li>Best deployed at scale, not at concept stage</li>
+          <li>Compounds when given platform-level ownership</li>
+        </ul>
+
+        <div class="pp-section-title">Banned Ingredients:</div>
+        <ul>
+          <li>Vanity metrics</li>
+          <li>Roadmaps driven by the loudest stakeholder</li>
+          <li>Features shipped without defined success criteria</li>
+          <li>Surface-level user research</li>
+        </ul>
+
+        <div class="pp-refund">
+          <strong>*Regarding the Trial:</strong> 72 hours after the first conversation, if not the right fit - no further commitment. Just a coffee in the books and a sharper view of the four problems below.
+        </div>
+      </div>
+
+      <div class="pp-cta-row">
+        <a href="mailto:sagarahuja@gmail.com?subject=Add%20Sagar%20to%20FirstClub" class="pp-cta">Add to FirstClub</a>
+      </div>
     </article>
-    <div class="fc-product-card-footer">Prepared for exclusive partnership with FirstClub</div>
 
     {/* ============ Section 4: Four problems ============ */}
     <div class="fc-section-head">
