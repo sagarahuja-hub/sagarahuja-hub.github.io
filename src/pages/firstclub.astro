@@ -24,9 +24,10 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       --fc-radius: 4px;
       --fc-radius-lg: 8px;
       --fc-radius-pill: 999px;
+      --fc-ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
       background: var(--fc-bg);
@@ -59,6 +60,29 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       display: inline-block;
     }
 
+    /* Reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.7s var(--fc-ease), transform 0.7s var(--fc-ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.55s var(--fc-ease), transform 0.55s var(--fc-ease);
+    }
+    .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.0s; }
+    .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.10s; }
+    .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.20s; }
+    .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.30s; }
+    .reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-stagger > * { opacity: 1; transform: none; transition: none; }
+    }
+
     /* ===== Section 1: Header ===== */
     .fc-header {
       display: flex;
@@ -67,7 +91,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       gap: 24px;
       padding-bottom: 18px;
       border-bottom: 2px solid var(--fc-green);
-      margin-bottom: 36px;
+      margin-bottom: 32px;
       flex-wrap: wrap;
     }
     .fc-header .name-block .name {
@@ -99,10 +123,10 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .fc-header .contact-block a:hover { color: var(--fc-green); }
     @media (max-width: 540px) { .fc-header .contact-block { text-align: left; } }
 
-    /* ===== Today's Specials section (mirrors FirstClub app) ===== */
+    /* ===== Today's Specials section ===== */
     .fc-specials {
-      margin: 36px 0;
-      padding: 32px 18px 36px;
+      margin: 28px 0;
+      padding: 28px 16px 30px;
       background: linear-gradient(180deg, #E8EFC5 0%, #F4ECC8 100%);
       border-radius: var(--fc-radius-lg);
       position: relative;
@@ -111,12 +135,12 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .fc-specials::before {
       content: 'SPECIALS';
       position: absolute;
-      top: 14px;
+      top: 10px;
       left: 0;
       right: 0;
       text-align: center;
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 72px;
+      font-size: 64px;
       font-weight: 700;
       color: rgba(28, 74, 30, 0.07);
       letter-spacing: 0.14em;
@@ -126,53 +150,57 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       pointer-events: none;
       line-height: 1;
     }
-    @media (min-width: 720px) { .fc-specials::before { font-size: 112px; top: 20px; } }
-    @media (min-width: 720px) { .fc-specials { padding: 44px 24px 44px; } }
+    @media (min-width: 720px) { .fc-specials::before { font-size: 100px; top: 16px; } }
+    @media (min-width: 720px) { .fc-specials { padding: 38px 22px 38px; } }
 
     .fc-specials .ts-head {
       text-align: center;
       position: relative;
       z-index: 1;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
     .fc-specials .ts-head h2 {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 30px;
+      font-size: 28px;
       font-weight: 700;
       color: var(--fc-green);
       line-height: 1.1;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       letter-spacing: -0.015em;
     }
-    @media (min-width: 720px) { .fc-specials .ts-head h2 { font-size: 36px; } }
+    @media (min-width: 720px) { .fc-specials .ts-head h2 { font-size: 34px; } }
     .fc-specials .ts-head .sub {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--fc-green-soft);
       font-weight: 400;
-      font-family: 'Inter', sans-serif;
     }
 
     .fc-specials .ts-cards {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 10px;
       position: relative;
       z-index: 1;
     }
     @media (min-width: 540px) {
-      .fc-specials .ts-cards { grid-template-columns: repeat(3, 1fr); gap: 12px; }
+      .fc-specials .ts-cards { grid-template-columns: repeat(3, 1fr); gap: 10px; }
     }
 
     .fc-special-card {
       border-radius: var(--fc-radius-lg);
-      padding: 14px 12px 16px;
+      padding: 12px 10px 14px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       position: relative;
       overflow: hidden;
+      transition: transform 0.3s var(--fc-ease), box-shadow 0.3s var(--fc-ease);
+    }
+    .fc-special-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(28, 74, 30, 0.12);
     }
     .fc-special-card.sc-1 { background: linear-gradient(180deg, #FFE4B5 0%, #FFD78A 100%); }
     .fc-special-card.sc-2 { background: linear-gradient(180deg, #DCE8B8 0%, #C0DC9C 100%); }
@@ -180,13 +208,13 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
     .fc-special-card .sc-label {
       font-family: 'Inter', sans-serif;
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 700;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
       line-height: 1.25;
       padding: 0 6px;
-      min-height: 28px;
+      min-height: 26px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -196,34 +224,45 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .fc-special-card.sc-3 .sc-label { color: #8A5A18; }
 
     .fc-special-card .sc-image {
-      width: 100%;
-      aspect-ratio: 4 / 3;
+      width: 70%;
+      aspect-ratio: 1 / 1;
       border-radius: var(--fc-radius);
       overflow: hidden;
       background: rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    @media (max-width: 540px) { .fc-special-card .sc-image { width: 50%; max-width: 110px; } }
     .fc-special-card .sc-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.4s var(--fc-ease);
+    }
+    .fc-special-card:hover .sc-image img { transform: scale(1.06); }
+    .fc-special-card .sc-image svg {
+      width: 50%;
+      height: 50%;
+      color: rgba(28, 74, 30, 0.7);
     }
     .fc-special-card .sc-caption {
       font-family: 'Inter', sans-serif;
-      font-size: 13.5px;
+      font-size: 12.5px;
       font-weight: 700;
       color: var(--fc-body);
-      line-height: 1.3;
-      padding: 4px 4px 0;
+      line-height: 1.25;
+      padding: 2px 4px 0;
     }
     .fc-special-card .sc-meta {
       font-family: 'Inter', sans-serif;
-      font-size: 11px;
+      font-size: 10.5px;
       color: var(--fc-secondary);
       font-weight: 500;
     }
 
-    /* ===== Product page mock card (mirrors FirstClub product page) ===== */
+    /* ===== Product page mock ===== */
     .fc-pp {
       max-width: 520px;
       margin: 36px auto 24px;
@@ -249,13 +288,12 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       justify-content: center;
       color: var(--fc-body);
       font-size: 18px;
-      cursor: default;
     }
     .fc-pp .pp-nav .title {
       flex: 1;
       font-weight: 700;
       color: var(--fc-body);
-      font-size: 15px;
+      font-size: 14.5px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -272,16 +310,31 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       font-size: 13px;
     }
 
+    /* Scrollable gallery */
     .fc-pp .pp-hero {
       background: linear-gradient(180deg, #E8DCB0 0%, #DCC788 100%);
-      padding: 28px 24px 36px;
       position: relative;
+    }
+    .fc-pp .pp-gallery {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 28px 0 36px;
+      gap: 0;
+    }
+    .fc-pp .pp-gallery::-webkit-scrollbar { display: none; }
+    .fc-pp .pp-gallery .pp-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 320px;
+      min-height: 280px;
     }
-    .fc-pp .pp-hero img {
+    .fc-pp .pp-gallery img {
       width: 200px;
       height: 240px;
       border-radius: 10px;
@@ -296,20 +349,23 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       transform: translateX(-50%);
       display: flex;
       gap: 4px;
-      padding: 5px 9px;
-      background: rgba(0, 0, 0, 0.18);
+      padding: 5px 10px;
+      background: rgba(0, 0, 0, 0.22);
       border-radius: var(--fc-radius-pill);
+      z-index: 2;
+      backdrop-filter: blur(6px);
     }
     .fc-pp .pp-dots span {
-      width: 4px;
-      height: 4px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.55);
+      transition: width 0.3s var(--fc-ease), background 0.3s var(--fc-ease);
     }
     .fc-pp .pp-dots span.active {
       background: #fff;
-      width: 16px;
-      border-radius: 2px;
+      width: 18px;
+      border-radius: 3px;
     }
 
     .fc-pp .pp-pills {
@@ -322,7 +378,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 5px 10px;
+      padding: 5px 11px;
       border-radius: var(--fc-radius-pill);
       border: 1px solid var(--fc-border);
       font-size: 11.5px;
@@ -331,18 +387,13 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       background: #fff;
       white-space: nowrap;
     }
+    .fc-pp .pp-pill svg { width: 11px; height: 11px; flex-shrink: 0; }
     .fc-pp .pp-pill.featured {
       background: rgba(168, 197, 160, 0.20);
       border-color: var(--fc-green-light);
       color: var(--fc-green);
     }
-    .fc-pp .pp-pill .leaf {
-      width: 9px;
-      height: 9px;
-      background: var(--fc-green);
-      transform: rotate(45deg);
-      border-radius: 2px;
-    }
+    .fc-pp .pp-pill.featured svg { color: var(--fc-green); }
 
     .fc-pp .pp-brand {
       padding: 6px 16px 0;
@@ -355,12 +406,13 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .fc-pp .pp-title {
       padding: 4px 16px 0;
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
       color: var(--fc-body);
-      line-height: 1.18;
+      line-height: 1.2;
       letter-spacing: -0.015em;
     }
+    @media (min-width: 540px) { .fc-pp .pp-title { font-size: 24px; } }
     .fc-pp .pp-weight {
       padding: 2px 16px 0;
       font-size: 14px;
@@ -408,7 +460,16 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       font-weight: 600;
       color: var(--fc-body);
       margin-top: 18px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .fc-pp .pp-about .pp-section-title svg {
+      width: 16px;
+      height: 16px;
+      color: var(--fc-green);
+      flex-shrink: 0;
     }
     .fc-pp .pp-about ul {
       list-style: none;
@@ -419,7 +480,38 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       font-size: 14px;
       color: var(--fc-body);
       line-height: 1.7;
-      padding: 1px 0;
+      padding: 2px 0 2px 22px;
+      position: relative;
+    }
+    .fc-pp .pp-about ul.pp-check li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 14px;
+      height: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231C4A1E' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: 14px;
+    }
+    .fc-pp .pp-about ul.pp-cross li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 14px;
+      height: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23B91C1C' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'%3E%3C/line%3E%3Cline x1='6' y1='6' x2='18' y2='18'%3E%3C/line%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: 14px;
+    }
+    .fc-pp .pp-about ul.pp-arrow li::before {
+      content: '›';
+      position: absolute;
+      left: 4px;
+      top: 0;
+      color: var(--fc-green);
+      font-weight: 700;
     }
     .fc-pp .pp-about .pp-refund {
       margin-top: 18px;
@@ -439,7 +531,10 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       border-top: 1px solid var(--fc-border);
     }
     .fc-pp .pp-cta {
-      display: block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       width: 100%;
       padding: 17px 24px;
       background: var(--fc-green);
@@ -455,15 +550,38 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       transition: background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
       letter-spacing: 0.005em;
       box-shadow: 0 4px 12px rgba(28, 74, 30, 0.25);
+      position: relative;
+      overflow: hidden;
     }
     .fc-pp .pp-cta:hover {
       background: var(--fc-green-soft);
       transform: translateY(-1px);
       box-shadow: 0 6px 16px rgba(28, 74, 30, 0.32);
     }
+    .fc-pp .pp-cta:active { transform: translateY(0); }
+    .fc-pp .pp-cta svg { width: 18px; height: 18px; }
+
+    /* Soft pulse around CTA to draw eye */
+    .fc-pp .pp-cta::after {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: var(--fc-radius-pill);
+      box-shadow: 0 0 0 0 rgba(28, 74, 30, 0.4);
+      animation: ppPulse 2.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes ppPulse {
+      0% { box-shadow: 0 0 0 0 rgba(28, 74, 30, 0.32); }
+      70% { box-shadow: 0 0 0 14px rgba(28, 74, 30, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(28, 74, 30, 0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fc-pp .pp-cta::after { animation: none; }
+    }
 
     /* ===== Section header + framing pull-quote ===== */
-    .fc-section-head { margin-top: 64px; margin-bottom: 12px; }
+    .fc-section-head { margin-top: 56px; margin-bottom: 12px; }
     .fc-section-head .eyebrow-row {
       display: flex;
       align-items: center;
@@ -488,7 +606,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     @media (min-width: 720px) { .fc-section-head h2 { font-size: 34px; } }
 
     .fc-framing {
-      margin: 28px 0 36px;
+      margin: 24px 0 30px;
       padding: 22px 26px;
       background: var(--fc-card-bg);
       border-left: 4px solid var(--fc-green);
@@ -535,35 +653,40 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       border: 1px solid var(--fc-border);
       border-left: 4px solid var(--fc-green);
       border-radius: var(--fc-radius);
-      padding: 28px 28px 28px 30px;
-      margin-bottom: 24px;
+      padding: 26px 26px 26px 28px;
+      margin-bottom: 22px;
       position: relative;
+      transition: transform 0.3s var(--fc-ease), box-shadow 0.3s var(--fc-ease);
     }
-    @media (min-width: 720px) { .fc-problem { padding: 34px 38px 34px 40px; } }
+    .fc-problem:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(28, 74, 30, 0.08);
+    }
+    @media (min-width: 720px) { .fc-problem { padding: 30px 34px 30px 36px; } }
 
     .fc-problem .pr-num {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 60px;
+      font-size: 56px;
       font-weight: 400;
       color: var(--fc-green-light);
       line-height: 1;
       margin-bottom: 6px;
       letter-spacing: -0.02em;
     }
-    @media (min-width: 720px) { .fc-problem .pr-num { font-size: 72px; } }
+    @media (min-width: 720px) { .fc-problem .pr-num { font-size: 68px; } }
 
     .fc-problem .pr-title {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 600;
       color: var(--fc-green);
       line-height: 1.3;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       letter-spacing: -0.01em;
     }
-    @media (min-width: 720px) { .fc-problem .pr-title { font-size: 24px; } }
+    @media (min-width: 720px) { .fc-problem .pr-title { font-size: 23px; } }
 
-    .fc-problem .pr-block + .pr-block { margin-top: 24px; }
+    .fc-problem .pr-block + .pr-block { margin-top: 22px; }
     .fc-problem .pr-label {
       font-size: 12px;
       font-weight: 700;
@@ -571,62 +694,73 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       text-transform: uppercase;
       color: var(--fc-green);
       margin-bottom: 12px;
-      padding-top: 16px;
+      padding-top: 14px;
       border-top: 1px solid var(--fc-border);
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .fc-problem .pr-label::before {
-      content: '';
-      width: 18px;
-      height: 2px;
-      background: var(--fc-green);
+    .fc-problem .pr-label svg {
+      width: 14px;
+      height: 14px;
+      color: var(--fc-green);
       flex-shrink: 0;
     }
     .fc-problem .pr-block:first-of-type .pr-label { padding-top: 0; border-top: none; }
     .fc-problem .pr-block p {
       font-size: 14.5px;
       color: var(--fc-body);
-      line-height: 1.75;
-      margin-bottom: 12px;
+      line-height: 1.7;
+      margin-bottom: 10px;
     }
     .fc-problem .pr-block p:last-child { margin-bottom: 0; }
-
-    .fc-problem .pr-block:first-of-type p:first-of-type::first-letter {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 3.6em;
-      float: left;
-      line-height: 0.9;
-      margin: 6px 10px 0 0;
+    .fc-problem .pr-block ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 8px 0 0;
+    }
+    .fc-problem .pr-block ul li {
+      font-size: 14px;
+      color: var(--fc-body);
+      line-height: 1.65;
+      padding: 4px 0 4px 22px;
+      position: relative;
+    }
+    .fc-problem .pr-block ul li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 14px;
+      height: 14px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231C4A1E' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: 14px;
+    }
+    .fc-problem .pr-block ul li strong {
       color: var(--fc-green);
       font-weight: 600;
     }
 
-    .fc-problem .pr-sub {
-      font-weight: 700;
+    .fc-problem .pr-block:first-of-type p:first-of-type::first-letter {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 3.4em;
+      float: left;
+      line-height: 0.9;
+      margin: 5px 9px 0 0;
       color: var(--fc-green);
-      margin-top: 18px;
-      margin-bottom: 6px;
-      display: block;
-      font-size: 14.5px;
-      letter-spacing: -0.005em;
-    }
-    .fc-problem .pr-sub::before {
-      content: '› ';
-      color: var(--fc-green-light);
-      font-weight: 400;
+      font-weight: 600;
     }
 
     .fc-callout {
-      margin: 14px 0;
+      margin: 12px 0;
       padding: 12px 16px;
       background: rgba(28, 74, 30, 0.05);
       border-left: 3px solid var(--fc-green-soft);
       border-radius: 0 var(--fc-radius) var(--fc-radius) 0;
       font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
-      font-size: 15.5px;
+      font-size: 15px;
       color: var(--fc-green);
       line-height: 1.5;
       letter-spacing: -0.005em;
@@ -678,7 +812,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       color: var(--fc-cream-text);
       padding: 28px;
       border-radius: var(--fc-radius-lg);
-      margin: 36px 0;
+      margin: 32px 0;
       position: relative;
     }
     @media (min-width: 720px) { .fc-dark-block { padding: 36px 40px; } }
@@ -724,16 +858,12 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       color: var(--fc-muted);
       font-style: italic;
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { transition: none !important; animation: none !important; }
-    }
   </style>
 
   <div class="fc-page">
 
     {/* ============ Section 1: Header ============ */}
-    <header class="fc-header">
+    <header class="fc-header reveal">
       <div class="name-block">
         <div class="name">Sagar Ahuja</div>
         <div class="role">Product Leader · 7 years in PM · Available now</div>
@@ -745,25 +875,35 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
     </header>
 
-    {/* ============ Section 2: Today's Specials (FirstClub app style) ============ */}
-    <section class="fc-specials">
+    {/* ============ Section 2: Today's Specials ============ */}
+    <section class="fc-specials reveal">
       <div class="ts-head">
         <h2>Today's Specials</h2>
         <div class="sub">Your daily ritual of product talent</div>
       </div>
-      <div class="ts-cards">
+      <div class="ts-cards reveal-stagger">
         <div class="fc-special-card sc-1">
-          <div class="sc-label">Fresh off<br />Series B</div>
+          <div class="sc-label">Limited<br />Edition</div>
           <div class="sc-image">
-            <img src="https://images.unsplash.com/photo-1605792657660-596af9009e82?w=600&h=450&fit=crop&q=80" alt="" loading="lazy" />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+              <path d="M4 22h16"/>
+              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+            </svg>
           </div>
-          <div class="sc-caption">$55M raised · June 2026</div>
-          <div class="sc-meta">170,000 households today</div>
+          <div class="sc-caption">1 of 1, hand-crafted</div>
+          <div class="sc-meta">11+ years aged</div>
         </div>
         <div class="fc-special-card sc-2">
           <div class="sc-label">Member's<br />Pick</div>
           <div class="sc-image">
-            <img src="https://images.unsplash.com/photo-1505816014357-96b5ff457e9a?w=600&h=450&fit=crop&q=80" alt="" loading="lazy" />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="8" r="6"/>
+              <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
+            </svg>
           </div>
           <div class="sc-caption">Built for FirstClub</div>
           <div class="sc-meta">Curated, not just listed</div>
@@ -771,7 +911,10 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         <div class="fc-special-card sc-3">
           <div class="sc-label">Season's<br />Best</div>
           <div class="sc-image">
-            <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=450&fit=crop&q=80" alt="" loading="lazy" />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <polyline points="12 6 12 12 16 14"/>
+            </svg>
           </div>
           <div class="sc-caption">Available now</div>
           <div class="sc-meta">Zero notice period</div>
@@ -779,29 +922,49 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
     </section>
 
-    {/* ============ Section 3: Product page mock (mirrors FirstClub product page) ============ */}
-    <article class="fc-pp">
+    {/* ============ Section 3: Product page mock ============ */}
+    <article class="fc-pp reveal">
       <div class="pp-nav">
         <span class="back" aria-hidden="true">←</span>
-        <span class="title">The Sagar Ahuja (Senior Pr...)</span>
+        <span class="title">Senior Product Leader (Light Noti...)</span>
         <span class="share" aria-hidden="true">↑</span>
       </div>
       <div class="pp-hero">
-        <img src="/sagar.jpg" alt="Sagar Ahuja portrait" />
-        <div class="pp-dots" aria-hidden="true">
-          <span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        <div class="pp-gallery" id="pp-gallery">
+          <div class="pp-slide"><img src="/firstclub/sagar-1.jpg" alt="Sagar Ahuja portrait 1" /></div>
+          <div class="pp-slide"><img src="/firstclub/sagar-2.jpg" alt="Sagar Ahuja portrait 2" /></div>
+          <div class="pp-slide"><img src="/firstclub/sagar-3.jpg" alt="Sagar Ahuja portrait 3" /></div>
+          <div class="pp-slide"><img src="/firstclub/sagar-4.jpg" alt="Sagar Ahuja portrait 4" /></div>
+        </div>
+        <div class="pp-dots" id="pp-dots" aria-hidden="true">
+          <span class="active"></span><span></span><span></span><span></span>
         </div>
       </div>
+
       <div class="pp-pills">
         <span class="pp-pill featured">
-          <span class="leaf" aria-hidden="true"></span>
-          Zero notice period
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+            <path d="M2 21c0-3 1.85-5.36 5.08-6"/>
+          </svg>
+          Zero added fluff
         </span>
-        <span class="pp-pill">Easy to onboard</span>
-        <span class="pp-pill">72 hrs Trial</span>
+        <span class="pp-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          Easy to onboard
+        </span>
+        <span class="pp-pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          72 hrs Trial
+        </span>
       </div>
-      <div class="pp-brand">The Sagar Ahuja</div>
-      <h2 class="pp-title">The Sagar Ahuja<br />(Senior Product Leader)</h2>
+      <div class="pp-brand">Sagar Ahuja</div>
+      <h2 class="pp-title">Senior Product Leader<br />(Light Notice)</h2>
       <div class="pp-weight">11+ years · 7 in product</div>
       <div class="pp-price">
         <span class="pp-price-now">0 days</span>
@@ -811,11 +974,14 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       <div class="pp-about">
         <h3>About This Product</h3>
         <p>
-          The Sagar Ahuja (Senior Product Leader) is a high-quality product builder designed to support consumer platform scaling, retention systems, and post-Series B momentum, with a 12-month build thesis already mapped to FirstClub's exact infrastructure gaps.
+          Sagar Ahuja Senior Product Leader is a high-quality product builder designed to support consumer platform scaling, retention systems, and post-Series B momentum, with a 12-month build thesis already mapped to FirstClub's exact infrastructure gaps.
         </p>
 
-        <div class="pp-section-title">Why You'll Love Him:</div>
-        <ul>
+        <div class="pp-section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Why You'll Love Him:
+        </div>
+        <ul class="pp-check">
           <li>11 years of product experience, 7 in PM</li>
           <li>Built consumer mobile platforms at Skillz</li>
           <li>Designed ML-driven engagement and retention systems</li>
@@ -823,8 +989,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           <li>Available immediately - no notice period</li>
         </ul>
 
-        <div class="pp-section-title">How to Use:</div>
-        <ul>
+        <div class="pp-section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          How to Use:
+        </div>
+        <ul class="pp-arrow">
           <li>Onboard in week one - no 90-day hiring cycle</li>
           <li>Assign first to personalisation or membership infrastructure</li>
           <li>Pair with engineering, category, and marketing teams</li>
@@ -832,8 +1001,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           <li>Compounds when given platform-level ownership</li>
         </ul>
 
-        <div class="pp-section-title">Banned Ingredients:</div>
-        <ul>
+        <div class="pp-section-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          Banned Ingredients:
+        </div>
+        <ul class="pp-cross">
           <li>Vanity metrics</li>
           <li>Roadmaps driven by the loudest stakeholder</li>
           <li>Features shipped without defined success criteria</li>
@@ -846,133 +1018,147 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
 
       <div class="pp-cta-row">
-        <a href="mailto:sagarahuja@gmail.com?subject=Add%20Sagar%20to%20FirstClub" class="pp-cta">Add to FirstClub</a>
+        <a href="mailto:sagarahuja@gmail.com?subject=Add%20Sagar%20to%20FirstClub" class="pp-cta">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="21" r="1"/>
+            <circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          Add to FirstClub
+        </a>
       </div>
     </article>
 
     {/* ============ Section 4: Four problems ============ */}
-    <div class="fc-section-head">
+    <div class="fc-section-head reveal">
       <div class="eyebrow-row">
         <span class="fc-eyebrow">The 12-month thesis</span>
       </div>
       <h2>From 170,000 to 1,000,000 households.</h2>
     </div>
-    <div class="fc-framing">
+    <div class="fc-framing reveal">
       <p class="quote">Many things that work at 170,000 households break at 1 million.</p>
       <p class="tail">These are the four that matter most in the next 12 months.</p>
     </div>
 
-    {/* --------- Problem 1 --------- */}
-    <article class="fc-problem">
+    {/* --------- Problem 1 (succinct) --------- */}
+    <article class="fc-problem reveal">
       <div class="pr-num">01</div>
       <h3 class="pr-title">Personalisation - the app treats 170,000 households the same way</h3>
 
       <div class="pr-block">
-        <span class="pr-label">Problem</span>
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Problem
+        </span>
         <p>
-          The <em class="c">"Today"</em> home page is editorially curated but identical for every user. <em class="c">"Your usuals"</em> is a passive reorder list - it shows what you have bought before but does nothing predictive with that data. There is no neighbourhood intelligence, no individual feed. FirstClub sits on one of the richest behavioural datasets in Indian consumer commerce and uses <strong>almost none of it</strong> at the product surface.
+          <em class="c">"Today"</em> is editorially curated but identical for everyone. <em class="c">"Your usuals"</em> is a passive reorder list - no prediction, no neighbourhood intelligence, no individual feed. FirstClub sits on one of the richest behavioural datasets in Indian consumer commerce and uses <strong>almost none of it</strong> at the surface.
         </p>
-        <div class="fc-callout">A browse experience that shows everyone the same content becomes repetitive by order 10. Personalisation is what keeps the browse model fresh at scale.</div>
+        <div class="fc-callout">A browse experience that shows everyone the same content becomes repetitive by order 10.</div>
         <p>
-          And unlike any competitor, FirstClub has a <strong class="k">structural data advantage</strong>: a concentrated user base in identifiable apartment societies. That is <em class="c">community data</em>, not just location data.
-        </p>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">Solution</span>
-        <span class="pr-sub">Personalised Home Page</span>
-        <p>
-          Move from one editorial <em class="c">"Today"</em> feed to a dynamically composed page per user. A household that primarily orders fresh produce sees different featured sections than one that orders supplements and imported snacks. Category weights, featured brands, and occasion collections respond to individual order history and browse behaviour. <strong>The UX structure stays the same - the content layer becomes personal.</strong>
-        </p>
-        <span class="pr-sub">ML-Powered "Your Usuals"</span>
-        <p>
-          Transform the tab from a static list to a <strong>predictive replenishment engine</strong>. The system learns individual consumption cadences per category. If a user buys curd every 5-7 days, surface it on day 5 with a contextual nudge. When a product is out of stock, suggest a quality-matched substitute that has passed the same ingredient standards - not just the nearest price match. The goal is to eliminate the gap between <em class="c">"I need this"</em> and <em class="c">"it arrives"</em> without the user having to think about it.
-        </p>
-        <span class="pr-sub">Society-Level Recommendations</span>
-        <p>
-          A feature showing <em class="c">"Most ordered in your society this week"</em> or <em class="c">"Your neighbours are trying this"</em> does three things simultaneously: provides social proof without relying on public internet reviews, drives discovery of unfamiliar brands through trusted community behaviour, and reinforces the club identity. An unfamiliar brand ordered by <strong>40 families in your building</strong> does not feel unfamiliar anymore. <strong>No competitor can build this</strong> without replicating FirstClub's concentrated go-to-market.
+          Unlike any competitor, FirstClub has a <strong class="k">structural data advantage</strong>: a concentrated user base in identifiable apartment societies. <em class="c">Community data, not just location data.</em>
         </p>
       </div>
 
       <div class="pr-block">
-        <span class="pr-label">Success Metrics</span>
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          Solution
+        </span>
+        <ul>
+          <li><strong>Personalised Home Page</strong> - dynamically composed per user. Category weights and featured brands respond to individual order and browse history. UX structure stays; content layer becomes personal.</li>
+          <li><strong>ML-Powered "Your Usuals"</strong> - predictive replenishment engine. Curd every 5-7 days? Surface on day 5. Out of stock? Suggest a quality-matched substitute that passed the same ingredient bar.</li>
+          <li><strong>Society-Level Recommendations</strong> - "Most ordered in your society this week." Social proof, discovery via trusted neighbours, club identity. An unfamiliar brand ordered by 40 families in your building does not feel unfamiliar anymore.</li>
+        </ul>
+      </div>
+
+      <div class="pr-block">
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+          Success Metrics
+        </span>
         <p>
-          Orders per month: personalised feed users vs. control group. Add-to-cart rate on ML-surfaced <em class="c">"Your usuals"</em> nudges vs. manual reorder. Click-through and conversion on society recommendations. Repeat purchase rate on products first discovered through society data.
+          Orders per month: personalised feed vs. control. Add-to-cart rate on ML "Your usuals" nudges vs. manual reorder. Conversion on society recommendations. Repeat-purchase rate on products discovered through society data.
         </p>
       </div>
 
       <div class="pr-block">
-        <span class="pr-label">ROI</span>
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          ROI
+        </span>
         <p>
-          A 1-2 additional SKU per basket from a well-timed nudge or society recommendation is <strong class="k">₹150-300 per order</strong>. At <strong>4+ orders per month</strong> across <strong>170,000 households</strong>, even a conservative <strong class="k">15% basket lift</strong> from personalisation represents significant GMV. The compounding value is <em class="c">stickiness</em> - a product that learns you is structurally harder to replace than one that lists things.
+          1-2 added SKUs per basket = <strong class="k">₹150-300/order</strong>. At <strong>4+ orders/month × 170,000 households</strong>, a conservative <strong class="k">15% basket lift</strong> from personalisation is real GMV. Compounding value: stickiness - a product that learns you is structurally harder to replace.
         </p>
       </div>
     </article>
 
-    {/* --------- Problem 2 --------- */}
-    <article class="fc-problem">
+    {/* --------- Problem 2 (succinct) --------- */}
+    <article class="fc-problem reveal">
       <div class="pr-num">02</div>
       <h3 class="pr-title">Multi-city quality at scale is an unsolved product problem</h3>
 
       <div class="pr-block">
-        <span class="pr-label">Problem</span>
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Problem
+        </span>
         <p>
-          Quality curation in Bengaluru is <em class="c">founder-led and manual</em> - blind taste tests, personal supplier relationships, central ingredient checks. This is the right approach for 0 to 1. <strong>Hyderabad has just launched</strong> with 3 stores. Hyderabad's food culture is materially different: biryani masala, mutton, Irani chai, local dairy. A Bengaluru-mirrored catalogue will underperform. But there is no product infrastructure to run a Hyderabad-specific curation in parallel - no tool for local supplier discovery, no system for city-specific testing, no way to manage two city catalogues without doubling manual effort.
+          Quality curation in Bengaluru is <em class="c">founder-led and manual</em> - blind tastings, personal supplier relationships, central checks. Right tool for 0 to 1. <strong>Hyderabad has just launched</strong> with 3 stores and a materially different food culture - biryani masala, mutton, Irani chai, local dairy. A Bengaluru-mirrored catalogue underperforms. But there is no infrastructure to run a Hyderabad-specific curation in parallel.
         </p>
         <div class="fc-callout">Founder-led curation is the right tool for proof of concept. It is the wrong tool for five cities simultaneously.</div>
         <p>
-          Series B capital is explicitly allocated to <strong>geographic expansion</strong>. If each new city requires the same leadership involvement as Bengaluru, expansion becomes the bottleneck. If quality is inconsistent across cities, the trust built over two years in Bengaluru gets damaged nationally <em class="c">before it exists</em>.
+          Series B capital is explicitly for <strong>geographic expansion</strong>. If each new city needs the same leadership involvement as Bengaluru, expansion is the bottleneck. Inconsistent quality across cities damages national trust <em class="c">before it exists</em>.
         </p>
       </div>
 
       <div class="pr-block">
-        <span class="pr-label">Solution</span>
-        <span class="pr-sub">Curation OS - Internal Tool</span>
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          Solution
+        </span>
+        <ul>
+          <li><strong>Curation OS</strong> - internal product for supplier onboarding, blind-test scoring, ingredient compliance, catalogue approval per city. Lifts the work out of spreadsheets and WhatsApp. A team of 3-4 runs curation across cities <em class="c">simultaneously</em>.</li>
+          <li><strong>Community Sourcing for Local Curation</strong> - "nominate a brand" for FirstClub members in each new city. They know local premium better than a Bengaluru-based team. 2-week response window. Converts engaged users into <em class="c">brand evangelists</em>.</li>
+          <li><strong>Local Occasion Calendar</strong> - Hyderabad gets Eid and Bathukamma. Chennai gets Pongal. Mumbai gets Ganesh Chaturthi. Auto-surface city-specific collections rather than defaulting to Bengaluru's.</li>
+          <li><strong>Dark Store Micro-Assortment</strong> - core SKUs stay fixed across stores; a portion flexes by neighbourhood data (tech park vs. multigenerational colony). Quality consistent; assortment locally relevant.</li>
+          <li><strong>Quality Consistency Audits</strong> - quarterly spot-check re-tests of high-volume catalogue SKUs. The quality promise should not <em class="c">degrade silently</em> as supplier relationships age.</li>
+        </ul>
+      </div>
+
+      <div class="pr-block">
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+          Success Metrics
+        </span>
         <p>
-          A lightweight internal product for the category team to manage supplier onboarding, blind test scoring, ingredient compliance tracking, and catalogue approval per city. This process currently lives in spreadsheets and WhatsApp. Systematising it allows a team of <strong>3-4 people</strong> to run curation across multiple cities <em class="c">simultaneously</em> rather than sequentially. The product that makes quality scalable without headcount growing linearly with geography.
-        </p>
-        <span class="pr-sub">Community Sourcing for Local Curation</span>
-        <p>
-          A <em class="c">"nominate a brand"</em> mechanism for FirstClub members in each new city. They know the local premium landscape better than a Bengaluru-based category team. A nominated brand should receive a quality test invite within <strong>2 weeks</strong> - speed of response is the difference between a city feeling locally owned and one that feels centrally managed. Converts engaged local users into <em class="c">brand evangelists</em>.
-        </p>
-        <span class="pr-sub">Local Occasion Calendar</span>
-        <p>
-          Each city runs its own festival cycle. Hyderabad: <em class="c">Eid, Bathukamma</em>. Chennai: <em class="c">Pongal</em>. Mumbai: <em class="c">Ganesh Chaturthi</em>. Auto-surface city-specific occasion collections based on the local calendar rather than defaulting to Bengaluru's. Lightweight infrastructure change, high local relevance signal.
-        </p>
-        <span class="pr-sub">Dark Store Micro-Assortment Intelligence</span>
-        <p>
-          A store near a tech park serves a different household profile than one near a multigenerational residential colony. Build a rule system for store-level assortment customisation within the city catalogue - core SKUs stay fixed across all stores, a portion flexes based on neighbourhood data. <strong>Quality stays consistent; assortment stays locally relevant.</strong>
-        </p>
-        <span class="pr-sub">Quality Consistency Audits</span>
-        <p>
-          Supplier quality at onboarding is not the same as supplier quality at month 18. Build quarterly spot-check re-testing for high-volume SKUs already in the catalogue. The quality promise should not <em class="c">degrade silently</em> as supplier relationships age and volume pressure builds.
+          Time from city launch to first 10,000 orders (Hyderabad baseline vs. next). D30 repeat rate in new city vs. Bengaluru. % of city catalogue locally sourced by day 90. SKUs per category manager across cities.
         </p>
       </div>
 
       <div class="pr-block">
-        <span class="pr-label">Success Metrics</span>
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          ROI
+        </span>
         <p>
-          Time from city launch to first 10,000 orders - Hyderabad baseline vs. next city. Repeat purchase rate at 30 days in new city vs. Bengaluru benchmark. % of city catalogue locally sourced by day 90. SKUs managed per category manager across cities.
-        </p>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">ROI</span>
-        <p>
-          A city that launches with a localised catalogue retains <strong class="k">20-30% more users</strong> in the first 90 days than one that feels imported. At <strong>₹1,200 AOV</strong> and 4+ orders per month, <strong>5,000 additional retained households</strong> in a single city represents <strong class="k">₹2.9 crore in additional annualised GMV</strong>. Across 4 city launches, the infrastructure investment pays back in the first city. Every city after that is <em class="c">compounding return</em>.
+          A localised launch retains <strong class="k">20-30% more users</strong> in the first 90 days. At <strong>₹1,200 AOV</strong> × 4+ orders/month, 5,000 additional retained households per city = <strong class="k">₹2.9 crore additional annualised GMV</strong>. Infrastructure pays back in the first city; every city after is <em class="c">compounding return</em>.
         </p>
       </div>
     </article>
 
-    {/* --------- Problem 3 --------- */}
-    <article class="fc-problem">
+    {/* --------- Problem 3 (succinct) --------- */}
+    <article class="fc-problem reveal">
       <div class="pr-num">03</div>
       <h3 class="pr-title">Discovery gap - customers do not trust what they cannot recognise</h3>
 
       <div class="pr-block">
-        <span class="pr-label">Problem</span>
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Problem
+        </span>
         <p>
-          <strong>60% of the catalogue</strong> is exclusive or unfamiliar brands. Product copy is good but brand context does not exist - no explanation of why a brand passed the quality bar, what was tested, what the panel found. A real user described opening the app as <em class="c">"the same feeling as walking into a Nature's Basket - a subtle fear of overspending"</em> - triggered before a single price is seen. The quality promise is the entire brand, but it is <strong>invisible at the point of purchase</strong>.
+          <strong>60% of the catalogue</strong> is exclusive or unfamiliar brands. Product copy is good but brand context is missing - no explanation of why a brand passed the quality bar. A real user described opening the app as <em class="c">"the same feeling as walking into a Nature's Basket - a subtle fear of overspending"</em> - triggered before a single price is seen.
         </p>
         <div class="fc-callout">In Bengaluru, word-of-mouth in premium apartment clusters does the trust-building work. That does not travel.</div>
         <p>
@@ -981,89 +1167,98 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
 
       <div class="pr-block">
-        <span class="pr-label">Solution</span>
-        <span class="pr-sub">"Why This Brand" Chip on Every Product Card</span>
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          Solution
+        </span>
+        <ul>
+          <li><strong>"Why This Brand" chip on every product card</strong> - one line, factual: <em class="c">"Cold-pressed in small batches. No hexane extraction."</em> Highest-leverage, lowest-effort change in this set.</li>
+          <li><strong>Brand Story Micro-Pages</strong> - 3-4 screens per brand, accessible with one tap from the product card. Founder photo, what the curation team found, one panel quote.</li>
+          <li><strong>Pre-Delivery Expectation Setting</strong> - the green bag, the founder note, the coriander wrap - surface them digitally right after the first order. First-order anxiety becomes anticipation.</li>
+          <li><strong>"People Who Buy X Also Trust Y"</strong> - bridge unfamiliar brands through brands they already order. No new content required.</li>
+        </ul>
+      </div>
+
+      <div class="pr-block">
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+          Success Metrics
+        </span>
         <p>
-          One line, specific, factual - not marketing copy. <em class="c">"Cold-pressed in small batches. No hexane extraction."</em> Requires a structured data layer behind every SKU. <strong>Highest-leverage, lowest-effort change</strong> in this set.
-        </p>
-        <span class="pr-sub">Brand Story Micro-Pages Inside the App</span>
-        <p>
-          3-4 screens per brand, accessible from the product card with a single tap. Founder photo, origin, what the curation team found, one quote from the tasting panel. Contextual and in the purchase flow - not a separate section the user has to navigate to.
-        </p>
-        <span class="pr-sub">Pre-Delivery Expectation Setting</span>
-        <p>
-          The green bag, coriander in dry leaves, and founder note are physical surprises today. Surface them digitally immediately after the first order is placed - a lightweight screen showing <em class="c">"Here is what arrives with your order."</em> Converts first-order anxiety into anticipation. Retains the delight without losing it to uncertainty.
-        </p>
-        <span class="pr-sub">"People Who Buy X Also Trust Y"</span>
-        <p>
-          When a user views an unfamiliar brand, surface a connection to a brand they already order. Bridge the unfamiliar through the familiar using existing order data. <strong>No new content required.</strong>
+          Add-to-cart rate on exclusive SKUs vs. known brands. Time from app-open to first add-to-cart for new-city users. Repeat rate on brands first tried through discovery features.
         </p>
       </div>
 
       <div class="pr-block">
-        <span class="pr-label">Success Metrics</span>
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          ROI
+        </span>
         <p>
-          Add-to-cart rate on exclusive SKUs vs. known brands. Time from app open to first add-to-cart for new city users. Repeat purchase rate on brands first tried through discovery features. Basket size: users who engage with brand story vs. those who do not.
-        </p>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">ROI</span>
-        <p>
-          A <strong class="k">10% improvement in add-to-cart rate</strong> on the 60% of catalogue that is exclusive has a direct AOV impact at every order across every household. The strategic number is <em class="c">wallet share</em> - every rupee spent on Blinkit because a brand felt unfamiliar is a rupee FirstClub did not earn. The discovery gap is the mechanism by which that leakage happens. Fixing it compounds across <strong>170,000 households</strong> and every new city cohort.
+          <strong class="k">10% add-to-cart lift</strong> on 60% of the catalogue compounds across every order. The strategic number is <em class="c">wallet share</em> - every rupee spent on Blinkit because a brand felt unfamiliar is a rupee FirstClub did not earn.
         </p>
       </div>
     </article>
 
-    {/* --------- Problem 4 --------- */}
-    <article class="fc-problem">
+    {/* --------- Problem 4 (succinct) --------- */}
+    <article class="fc-problem reveal">
       <div class="pr-num">04</div>
       <h3 class="pr-title">The membership product does not exist</h3>
 
       <div class="pr-block">
-        <span class="pr-label">Problem</span>
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Problem
+        </span>
         <p>
-          Ayyappan has publicly stated FirstClub's end-state is <em class="c">Costco-style</em> - profit from membership fees, products at near-cost. Today there is no paid membership. <em class="c">"Subscribe"</em> is auto-delivery scheduling. Every rupee of revenue is transactional GMV. <strong>The platform is a premium delivery app, not yet a club.</strong>
+          Ayyappan has publicly stated FirstClub's end-state is <em class="c">Costco-style</em> - profit from membership fees, products at near-cost. Today there is no paid membership. <em class="c">"Subscribe"</em> is auto-delivery scheduling. <strong>The platform is a premium delivery app, not yet a club.</strong>
         </p>
-        <div class="fc-callout">The 170,000 households placing 4+ orders per month are the warmest membership audience FirstClub will ever have.</div>
+        <div class="fc-callout">The 170,000 households placing 4+ orders/month are the warmest membership audience FirstClub will ever have.</div>
         <p>
-          Every month without a membership ask, they form habits as free users, making conversion harder later. More importantly, the Costco model cannot be validated unless it is built. <strong>A working membership product at small scale is worth more in a Series C conversation than a plan to launch one.</strong>
-        </p>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">Solution</span>
-        <p>
-          Launch a <strong>Founding Member programme</strong> - <strong class="k">5,000 limited slots</strong>, early-adopter pricing - within the next 3 months. This is not a commercial launch. It is a <em class="c">learning vehicle</em>: iterate on benefit architecture, pricing, and conversion mechanics before the stakes are high. Benefits should feel like <em class="c">access, not discounts</em> - exclusive SKUs, tasting panel invites, clubhouse access, early brand drops. Priced at <strong class="k">₹1,199/year</strong>.
-        </p>
-        <p>
-          Full commercial membership launch is the right call at approximately <strong>400,000-500,000 total households</strong>. At that scale, 25% conversion = <strong class="k">100,000+ paying members × ₹1,200/year = ₹12-15 crore ARR</strong> at near-zero marginal cost. That is when membership becomes a P&L line, not just a signal. <strong>The architecture built at 5,000 members scales directly to 100,000.</strong>
+          Every month without a membership ask, they form habits as free users - making conversion harder later. A working membership product at small scale is <strong>worth more in a Series C conversation than a plan to launch one</strong>.
         </p>
       </div>
 
       <div class="pr-block">
-        <span class="pr-label">Success Metrics</span>
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          Solution
+        </span>
+        <ul>
+          <li><strong>Founding Member programme</strong> - <strong class="k">5,000 slots</strong>, early-adopter pricing, launched in 3 months. Not a commercial launch - a <em class="c">learning vehicle</em>. Benefits feel like access, not discounts: exclusive SKUs, tasting panel invites, clubhouse access, early brand drops. Priced at <strong class="k">₹1,199/year</strong>.</li>
+          <li><strong>Full commercial launch at 400,000-500,000 households</strong>. 25% conversion × ₹1,200/year = <strong class="k">₹12-15 crore ARR</strong> at near-zero marginal cost. Architecture built at 5,000 members scales directly to 100,000.</li>
+        </ul>
+      </div>
+
+      <div class="pr-block">
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+          Success Metrics
+        </span>
         <p>
-          Founding Member conversion rate. Orders per month: paid member vs. free user. AOV: member vs. non-member. Membership retention at 3, 6, and 12 months.
+          Founding Member conversion rate. Orders/month: paid vs. free. AOV: member vs. non-member. Retention at 3, 6, 12 months.
         </p>
       </div>
 
       <div class="pr-block">
-        <span class="pr-label">ROI</span>
+        <span class="pr-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          ROI
+        </span>
         <p>
-          Revenue at current scale is not the point. <strong>The Founding Member programme proves the Costco model works in India.</strong> At 400K+ households it becomes a core revenue stream. The architecture built today at 5,000 members scales to 100,000 without rebuilding.
+          Revenue at current scale is not the point. <strong>The Founding Member programme proves the Costco model works in India.</strong> At 400K+ households it becomes a core revenue stream - built once at 5,000, scaled to 100,000 without rebuilding.
         </p>
       </div>
     </article>
 
     {/* ============ Section 5: Why me ============ */}
-    <div class="fc-section-head">
+    <div class="fc-section-head reveal">
       <div class="eyebrow-row">
         <span class="fc-eyebrow">Why I am the right person</span>
       </div>
       <h2>The four problems are <em style="font-style:italic;color:var(--fc-green-soft);">systems problems</em>.</h2>
     </div>
-    <div class="fc-why">
+    <div class="fc-why reveal">
       <p>
         They are not feature problems. Building the personalisation engine, the multi-city curation infrastructure, the discovery trust layer, and the membership architecture all require a PM who can think in platforms and operate at pace. <strong>That is a specific profile.</strong>
       </p>
@@ -1073,7 +1268,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
       <h3>On personalisation and retention</h3>
       <p>
-        I have built and iterated on engagement and retention systems for consumer products where driving habitual usage was the primary product challenge. The ML-backed nudge systems, personalised feeds, and cohort-configurable surfaces - I have shipped all of these.
+        I have built and iterated on engagement and retention systems for consumer products where driving habitual usage was the primary challenge. ML-backed nudge systems, personalised feeds, cohort-configurable surfaces - shipped.
       </p>
       <div class="metric">
         At Games24x7 I led an app redesign from a one-size-fits-all layout to a cohort-configurable architecture serving different experiences per user segment in real time. Result: <strong>9% lift</strong> in new user retention, <strong>3% ARPU uplift</strong> on existing users, and an experimentation engine that decoupled releases from rollouts - reducing app-release dependency by <strong>82%</strong>.
@@ -1081,7 +1276,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
       <h3>On membership, subscription, and monetisation</h3>
       <p>
-        I have built and revamped subscription-style monetisation systems for consumer platforms where the central commercial challenge was converting free users to paying ones while protecting unit economics - the lifecycle moments, the benefit architecture, the pricing experiments, the churn prevention flows.
+        I have revamped subscription-style monetisation for consumer platforms where converting free users to paying ones was the central commercial challenge - lifecycle moments, benefit architecture, pricing experiments, churn prevention.
       </p>
       <div class="metric">
         At Skillz I led a loyalty program revamp from upfront entitlements to engagement-driven rewards under a non-negotiable monthly launch deadline. Result: <strong>30% reduction in incentive cost</strong> against a 20% target, and a <strong>9% ARPU lift</strong>. The pattern - <em>access as the benefit, not discounts</em> - is exactly what a Founding Member programme needs.
@@ -1089,7 +1284,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
       <h3>On multi-city and platform scaling</h3>
       <p>
-        Scaling a product system from one market to many is a <em>platform-thinking</em> problem, not a geography problem. The question is always the same: <strong>what do you systematise so that the quality of output does not depend on who is in the room.</strong>
+        Scaling a product system from one market to many is a <em>platform-thinking</em> problem, not a geography problem. <strong>What do you systematise so that the quality of output does not depend on who is in the room.</strong>
       </p>
       <div class="metric">
         At Games24x7 I built and led the centralised experimentation platform from scratch - feature flags, A/B tests, real-time rollouts - which removed release-cycle bottlenecks across every product team. The same pattern (lift the manual work into shared infrastructure, then scale the org around it) is exactly what FirstClub's curation function needs as it moves from one city to five.
@@ -1101,7 +1296,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     </div>
 
     {/* ============ Section 6: CTA ============ */}
-    <section class="fc-dark-block">
+    <section class="fc-dark-block reveal">
       <h2 style="font-style:italic;">I would welcome 20 minutes.</h2>
       <p>
         Happy to go deeper on any of the problems above - or simply talk through where the most urgent need is post-Series B. <strong>No agenda beyond the conversation.</strong>
@@ -1119,4 +1314,43 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     </footer>
 
   </div>
+
+  <script slot="head" is:inline>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Reveal on scroll
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el) { io.observe(el); });
+      } else {
+        document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el) { el.classList.add('visible'); });
+      }
+
+      // Gallery dot sync
+      var gallery = document.getElementById('pp-gallery');
+      var dotsWrap = document.getElementById('pp-dots');
+      if (gallery && dotsWrap) {
+        var dots = dotsWrap.querySelectorAll('span');
+        var setActive = function(i) {
+          dots.forEach(function(d, idx) { d.classList.toggle('active', idx === i); });
+        };
+        gallery.addEventListener('scroll', function() {
+          var idx = Math.round(gallery.scrollLeft / gallery.clientWidth);
+          if (idx >= 0 && idx < dots.length) setActive(idx);
+        }, { passive: true });
+        dots.forEach(function(d, i) {
+          d.style.cursor = 'pointer';
+          d.addEventListener('click', function() {
+            gallery.scrollTo({ left: i * gallery.clientWidth, behavior: 'smooth' });
+          });
+        });
+      }
+    });
+  </script>
 </PitchLayout>
