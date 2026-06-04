@@ -1,0 +1,63 @@
+---
+/**
+ * PitchLayout - shared shell for unlisted pitch pages.
+ *
+ * Use for one-to-one company pitches accessed by direct URL only:
+ *   - sets noindex, nofollow
+ *   - sets canonical, OG, Twitter card
+ *   - loads requested Google Fonts
+ *   - leaves all styling to the page (so each pitch can mirror the target company's brand)
+ *
+ * HOW TO ADD A NEW PITCH PAGE:
+ *
+ * 1) Create src/pages/<company-slug>.astro (e.g. src/pages/acme.astro)
+ * 2) Import PitchLayout and pass title, description, slug, and a Google Fonts query
+ * 3) Put company-brand CSS inside <style slot="head" is:global>...</style>
+ *    (using CSS variables for colors/fonts so the rest of the page reads cleanly)
+ * 4) Build the body markup inside the default slot
+ * 5) Do NOT link the new page from header, footer, or any other page
+ * 6) URL is unlisted but reachable at https://sagarahuja.co/<company-slug>
+ */
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  fonts?: string; // Google Fonts query (without the css2?family= prefix)
+  ogImage?: string;
+}
+const {
+  title,
+  description,
+  slug,
+  fonts = 'Inter:wght@300;400;500;600',
+  ogImage
+} = Astro.props;
+
+const canonical = `https://sagarahuja.co/${slug}`;
+const fontsUrl = `https://fonts.googleapis.com/css2?family=${fonts}&display=swap`;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  {ogImage && <meta property="og:image" content={ogImage} />}
+  <meta name="twitter:card" content="summary" />
+  <link rel="canonical" href={canonical} />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href={fontsUrl} rel="stylesheet" />
+  <slot name="head" />
+</head>
+<body>
+  <slot />
+</body>
+</html>

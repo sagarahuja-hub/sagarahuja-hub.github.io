@@ -1,39 +1,27 @@
 ---
-const title = 'Sagar Ahuja – FirstClub Product Analysis';
-const description = '4 product problems FirstClub needs to solve in the next 12 months. Prepared by Sagar Ahuja, Senior Product Leader.';
-const canonical = 'https://sagarahuja.co/firstclub';
+import PitchLayout from '../layouts/PitchLayout.astro';
 ---
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <meta name="robots" content="noindex, nofollow" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:url" content={canonical} />
-  <meta name="twitter:card" content="summary" />
-  <link rel="canonical" href={canonical} />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <style is:global>
+<PitchLayout
+  title="Sagar Ahuja – FirstClub Product Analysis"
+  description="4 product problems FirstClub needs to solve in the next 12 months. Prepared by Sagar Ahuja, Senior Product Leader."
+  slug="firstclub"
+  fonts="Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700"
+>
+  <style slot="head" is:global>
     :root {
       --fc-green: #1C4A1E;
+      --fc-green-soft: #2A6B2D;
       --fc-green-light: #A8C5A0;
       --fc-bg: #F5F0E8;
       --fc-card-bg: #EDE8DE;
+      --fc-card-bg-warm: #E8E0D0;
       --fc-border: #C8D9C6;
       --fc-body: #1C2B1A;
       --fc-secondary: #4A5A48;
       --fc-muted: #8A9A88;
       --fc-cream-text: #F5F0E8;
       --fc-cream-dim: #C8D9C6;
+      --fc-highlight-bg: rgba(28, 74, 30, 0.06);
       --fc-radius: 4px;
       --fc-radius-lg: 8px;
     }
@@ -47,22 +35,31 @@ const canonical = 'https://sagarahuja.co/firstclub';
       line-height: 1.6;
       font-weight: 400;
     }
-    .fc-page {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
+    .fc-page { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
     @media (min-width: 720px) { .fc-page { padding: 56px 32px 96px; } }
 
     .fc-serif { font-family: 'Playfair Display', Georgia, 'Times New Roman', serif; }
 
+    /* Inline emphasis utilities */
+    strong.k {
+      color: var(--fc-green);
+      font-weight: 600;
+      background: var(--fc-highlight-bg);
+      padding: 1px 5px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+    em.c { color: var(--fc-secondary); font-style: italic; font-weight: 500; }
+
+    /* Eyebrow label */
     .fc-eyebrow {
       font-family: 'Inter', sans-serif;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--fc-green);
+      display: inline-block;
     }
     .fc-eyebrow-light { color: var(--fc-green-light); }
 
@@ -104,55 +101,53 @@ const canonical = 'https://sagarahuja.co/firstclub';
       transition: color 0.15s ease;
     }
     .fc-header .contact-block a:hover { color: var(--fc-green); }
-    @media (max-width: 540px) {
-      .fc-header .contact-block { text-align: left; }
-    }
+    @media (max-width: 540px) { .fc-header .contact-block { text-align: left; } }
 
-    /* ===== Sections 2 & 6: Dark green blocks ===== */
+    /* ===== Dark green blocks (Hook + CTA) ===== */
     .fc-dark-block {
       background: var(--fc-green);
       color: var(--fc-cream-text);
       padding: 28px;
       border-radius: var(--fc-radius-lg);
       margin: 36px 0;
+      position: relative;
     }
-    @media (min-width: 720px) { .fc-dark-block { padding: 32px 36px; } }
-    .fc-dark-block .fc-eyebrow { color: var(--fc-green-light); margin-bottom: 14px; display: block; }
+    @media (min-width: 720px) { .fc-dark-block { padding: 36px 40px; } }
+    .fc-dark-block .fc-eyebrow {
+      color: var(--fc-green-light);
+      margin-bottom: 16px;
+      display: block;
+    }
     .fc-dark-block h2 {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 500;
-      font-size: 21px;
+      font-size: 22px;
       line-height: 1.35;
       color: var(--fc-cream-text);
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       letter-spacing: -0.005em;
     }
-    @media (min-width: 720px) {
-      .fc-dark-block h2 { font-size: 23px; }
-    }
+    @media (min-width: 720px) { .fc-dark-block h2 { font-size: 25px; } }
+    .fc-dark-block h2 em { font-style: italic; color: var(--fc-green-light); font-weight: 400; }
     .fc-dark-block p {
       color: var(--fc-cream-dim);
-      font-size: 13px;
-      line-height: 1.7;
+      font-size: 13.5px;
+      line-height: 1.75;
     }
+    .fc-dark-block p strong { color: var(--fc-cream-text); font-weight: 600; }
 
-    /* ===== Section 3: Product Card ===== */
+    /* ===== Product card ===== */
     .fc-product-card {
       background: #fff;
       border: 1px solid var(--fc-border);
       border-radius: var(--fc-radius-lg);
       overflow: hidden;
-      margin: 36px 0 16px;
+      margin: 36px 0 12px;
+      box-shadow: 0 2px 8px rgba(28, 74, 30, 0.05);
     }
-    .fc-product-card .pc-inner {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
-    }
+    .fc-product-card .pc-inner { display: grid; grid-template-columns: 1fr; gap: 0; }
     @media (min-width: 720px) {
-      .fc-product-card .pc-inner {
-        grid-template-columns: 40% 60%;
-      }
+      .fc-product-card .pc-inner { grid-template-columns: 40% 60%; }
     }
     .fc-product-card .pc-left {
       padding: 28px;
@@ -160,10 +155,7 @@ const canonical = 'https://sagarahuja.co/firstclub';
       border-bottom: 1px solid var(--fc-border);
     }
     @media (min-width: 720px) {
-      .fc-product-card .pc-left {
-        border-bottom: none;
-        border-right: 1px solid var(--fc-border);
-      }
+      .fc-product-card .pc-left { border-bottom: none; border-right: 1px solid var(--fc-border); }
     }
     .fc-product-card .pc-photo {
       width: 100%;
@@ -183,165 +175,263 @@ const canonical = 'https://sagarahuja.co/firstclub';
     }
     .fc-product-card .pc-pick {
       font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
+      font-weight: 700;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--fc-green);
       margin-bottom: 8px;
     }
     .fc-product-card .pc-name {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 600;
       color: var(--fc-green);
-      letter-spacing: -0.01em;
+      letter-spacing: -0.015em;
       margin-bottom: 4px;
+      line-height: 1.1;
     }
-    .fc-product-card .pc-tagline {
-      font-size: 13px;
-      color: var(--fc-secondary);
-      font-weight: 400;
-    }
-    .fc-product-card .pc-right {
-      padding: 24px 28px 28px;
-    }
+    .fc-product-card .pc-tagline { font-size: 13px; color: var(--fc-secondary); font-weight: 400; }
+    .fc-product-card .pc-right { padding: 24px 28px 28px; }
     .fc-product-card .pc-section + .pc-section { margin-top: 18px; }
     .fc-product-card .pc-section-label {
-      font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--fc-green);
-      margin-bottom: 8px;
-      padding-top: 8px;
+      margin-bottom: 9px;
+      padding-top: 9px;
       border-top: 1px solid var(--fc-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
-    .fc-product-card .pc-section:first-child .pc-section-label { padding-top: 0; border-top: none; }
-    .fc-product-card .pc-section ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .fc-product-card .pc-section-label::before {
+      content: '';
+      width: 14px;
+      height: 2px;
+      background: var(--fc-green);
+      flex-shrink: 0;
     }
+    .fc-product-card .pc-section:first-child .pc-section-label {
+      padding-top: 0;
+      border-top: none;
+    }
+    .fc-product-card .pc-section ul { list-style: none; padding: 0; margin: 0; }
     .fc-product-card .pc-section ul li {
       font-size: 13.5px;
       color: var(--fc-body);
-      line-height: 1.6;
-      padding: 1px 0 1px 14px;
+      line-height: 1.65;
+      padding: 2px 0 2px 14px;
       position: relative;
     }
     .fc-product-card .pc-section ul li::before {
       content: '·';
       position: absolute;
-      left: 2px;
-      top: -1px;
+      left: 3px;
+      top: -2px;
       color: var(--fc-green);
       font-weight: 700;
     }
     .fc-product-card .pc-section p {
       font-size: 13.5px;
       color: var(--fc-body);
-      line-height: 1.6;
+      line-height: 1.65;
     }
     .fc-product-card-footer {
       font-size: 11.5px;
-      color: var(--fc-muted);
+      color: var(--fc-secondary);
       text-align: center;
       margin-bottom: 36px;
       font-style: italic;
+      letter-spacing: 0.02em;
     }
 
-    /* ===== Section 4: Four problems ===== */
+    /* ===== Section 4 header + framing pull-quote ===== */
     .fc-section-head {
-      margin-top: 48px;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--fc-green);
+      margin-top: 64px;
+      margin-bottom: 12px;
     }
-    .fc-section-head .fc-eyebrow {
-      font-size: 12px;
-      letter-spacing: 0.18em;
+    .fc-section-head .eyebrow-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
     }
-    .fc-section-frame {
-      font-size: 14.5px;
+    .fc-section-head .eyebrow-row::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--fc-green) 0%, transparent 100%);
+    }
+    .fc-section-head h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 600;
+      font-size: 28px;
+      line-height: 1.2;
+      color: var(--fc-green);
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+    }
+    @media (min-width: 720px) { .fc-section-head h2 { font-size: 34px; } }
+
+    .fc-framing {
+      margin: 28px 0 36px;
+      padding: 22px 26px;
+      background: var(--fc-card-bg);
+      border-left: 4px solid var(--fc-green);
+      border-radius: var(--fc-radius);
+    }
+    .fc-framing .quote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.45;
+      color: var(--fc-green);
+      margin-bottom: 8px;
+      letter-spacing: -0.005em;
+    }
+    @media (min-width: 720px) { .fc-framing .quote { font-size: 23px; } }
+    .fc-framing .quote::before {
+      content: '"';
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4em;
+      line-height: 1;
+      vertical-align: -0.05em;
+      color: var(--fc-green-light);
+      margin-right: 2px;
+    }
+    .fc-framing .quote::after {
+      content: '"';
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4em;
+      line-height: 1;
+      vertical-align: -0.05em;
+      color: var(--fc-green-light);
+    }
+    .fc-framing .tail {
+      font-size: 13.5px;
       color: var(--fc-secondary);
-      margin-bottom: 28px;
-      line-height: 1.7;
-      max-width: 720px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
     }
+
+    /* ===== Problem cards ===== */
     .fc-problem {
       background: var(--fc-card-bg);
       border: 1px solid var(--fc-border);
       border-left: 4px solid var(--fc-green);
       border-radius: var(--fc-radius);
       padding: 28px 28px 28px 30px;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
       position: relative;
     }
-    @media (min-width: 720px) { .fc-problem { padding: 32px 36px 32px 38px; } }
+    @media (min-width: 720px) { .fc-problem { padding: 34px 38px 34px 40px; } }
+
     .fc-problem .pr-num {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 56px;
+      font-size: 60px;
       font-weight: 400;
       color: var(--fc-green-light);
       line-height: 1;
       margin-bottom: 6px;
       letter-spacing: -0.02em;
     }
-    @media (min-width: 720px) {
-      .fc-problem .pr-num { font-size: 64px; }
-    }
+    @media (min-width: 720px) { .fc-problem .pr-num { font-size: 72px; } }
+
     .fc-problem .pr-title {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 20px;
+      font-size: 21px;
       font-weight: 600;
       color: var(--fc-green);
-      line-height: 1.35;
-      margin-bottom: 22px;
+      line-height: 1.3;
+      margin-bottom: 24px;
       letter-spacing: -0.01em;
     }
-    @media (min-width: 720px) {
-      .fc-problem .pr-title { font-size: 22px; }
-    }
-    .fc-problem .pr-block + .pr-block { margin-top: 22px; }
+    @media (min-width: 720px) { .fc-problem .pr-title { font-size: 24px; } }
+
+    .fc-problem .pr-block + .pr-block { margin-top: 24px; }
     .fc-problem .pr-label {
-      font-size: 10.5px;
-      font-weight: 600;
+      font-size: 12px;
+      font-weight: 700;
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--fc-green);
-      margin-bottom: 10px;
-      padding-top: 14px;
+      margin-bottom: 12px;
+      padding-top: 16px;
       border-top: 1px solid var(--fc-border);
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .fc-problem .pr-block:first-of-type .pr-label { padding-top: 0; border-top: none; }
+    .fc-problem .pr-label::before {
+      content: '';
+      width: 18px;
+      height: 2px;
+      background: var(--fc-green);
+      flex-shrink: 0;
+    }
+    .fc-problem .pr-block:first-of-type .pr-label {
+      padding-top: 0;
+      border-top: none;
+    }
     .fc-problem .pr-block p {
       font-size: 14.5px;
       color: var(--fc-body);
-      line-height: 1.7;
-      margin-bottom: 10px;
+      line-height: 1.75;
+      margin-bottom: 12px;
     }
     .fc-problem .pr-block p:last-child { margin-bottom: 0; }
-    .fc-problem .pr-block strong {
+
+    /* Drop cap on first paragraph of each problem */
+    .fc-problem .pr-block:first-of-type p:first-of-type::first-letter {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 3.6em;
+      float: left;
+      line-height: 0.9;
+      margin: 6px 10px 0 0;
       color: var(--fc-green);
       font-weight: 600;
     }
+
     .fc-problem .pr-sub {
-      font-weight: 600;
+      font-weight: 700;
       color: var(--fc-green);
-      margin-top: 16px;
+      margin-top: 18px;
       margin-bottom: 6px;
       display: block;
       font-size: 14.5px;
+      letter-spacing: -0.005em;
+    }
+    .fc-problem .pr-sub::before {
+      content: '› ';
+      color: var(--fc-green-light);
+      font-weight: 400;
     }
 
-    /* ===== Section 5: Why me ===== */
+    /* Mini callout inside a problem (for sentences worth emphasising) */
+    .fc-callout {
+      margin: 14px 0;
+      padding: 12px 16px;
+      background: rgba(28, 74, 30, 0.05);
+      border-left: 3px solid var(--fc-green-soft);
+      border-radius: 0 var(--fc-radius) var(--fc-radius) 0;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 15.5px;
+      color: var(--fc-green);
+      line-height: 1.5;
+      letter-spacing: -0.005em;
+    }
+
+    /* ===== Why me ===== */
     .fc-why h3 {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 17px;
+      font-size: 18px;
       font-weight: 600;
       color: var(--fc-green);
-      margin-top: 24px;
+      margin-top: 26px;
       margin-bottom: 10px;
       letter-spacing: -0.005em;
     }
@@ -356,21 +446,26 @@ const canonical = 'https://sagarahuja.co/firstclub';
       color: var(--fc-secondary);
       font-size: 14px;
       display: block;
-      margin-top: 6px;
-      padding-left: 14px;
+      margin-top: 8px;
+      padding: 8px 14px;
       border-left: 2px solid var(--fc-green-light);
+      background: rgba(168, 197, 160, 0.10);
+      border-radius: 0 var(--fc-radius) var(--fc-radius) 0;
     }
+    .fc-why .metric strong { color: var(--fc-green); font-weight: 700; font-style: normal; }
     .fc-why .closing {
-      margin-top: 24px;
-      padding: 18px 22px;
+      margin-top: 28px;
+      padding: 20px 24px;
       background: var(--fc-card-bg);
       border-left: 4px solid var(--fc-green);
       border-radius: var(--fc-radius);
-      font-size: 14.5px;
+      font-size: 15px;
       color: var(--fc-body);
+      line-height: 1.65;
     }
+    .fc-why .closing strong { color: var(--fc-green); font-weight: 700; }
 
-    /* ===== Section 6 CTA contact block ===== */
+    /* ===== CTA contact ===== */
     .fc-cta-contact {
       margin-top: 22px;
       text-align: right;
@@ -378,8 +473,8 @@ const canonical = 'https://sagarahuja.co/firstclub';
     }
     .fc-cta-contact .label {
       font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: 0.15em;
+      font-weight: 700;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--fc-green-light);
       margin-bottom: 6px;
@@ -393,9 +488,7 @@ const canonical = 'https://sagarahuja.co/firstclub';
       transition: opacity 0.15s ease;
     }
     .fc-cta-contact a:hover { opacity: 0.75; }
-    @media (max-width: 540px) {
-      .fc-cta-contact { text-align: left; }
-    }
+    @media (max-width: 540px) { .fc-cta-contact { text-align: left; } }
 
     /* ===== Footer ===== */
     .fc-footer {
@@ -412,8 +505,7 @@ const canonical = 'https://sagarahuja.co/firstclub';
       *, *::before, *::after { transition: none !important; animation: none !important; }
     }
   </style>
-</head>
-<body>
+
   <div class="fc-page">
 
     {/* ============ Section 1: Header ============ */}
@@ -429,16 +521,16 @@ const canonical = 'https://sagarahuja.co/firstclub';
       </div>
     </header>
 
-    {/* ============ Section 2: Hook block ============ */}
+    {/* ============ Section 2: Hook ============ */}
     <section class="fc-dark-block">
       <span class="fc-eyebrow fc-eyebrow-light">Today's Special · June 2026</span>
       <h2>
-        FirstClub just closed a $55M Series B.<br />
-        The next 12 months are about building the systems that take this from 170,000 households to 1 million.<br />
+        FirstClub just closed a <em>$55M Series B</em>.<br />
+        The next 12 months are about building the systems that take this from <strong>170,000 households</strong> to <strong>1 million</strong>.<br />
         That is the work I want to do.
       </h2>
       <p>
-        I have used the product, studied the business, and identified four specific product problems that need to be solved in the next 12 months. Not feature requests - infrastructure gaps. The kind that are manageable at 170,000 households and breaking at scale. I have laid them out below, in priority order, with proposed solutions and indicative ROI for each.
+        I have used the product, studied the business, and identified <strong>four specific product problems</strong> that need to be solved in the next 12 months. Not feature requests - infrastructure gaps. The kind that are manageable at 170,000 households and breaking at scale. I have laid them out below, with proposed solutions and indicative ROI for each.
       </p>
     </section>
 
@@ -456,7 +548,7 @@ const canonical = 'https://sagarahuja.co/firstclub';
         <div class="pc-right">
           <div class="pc-section">
             <div class="pc-section-label">Category</div>
-            <p>Consumer Product · Engagement Systems · Platform Scaling</p>
+            <p>Personalisation · ML Systems · Engagement Loops · Platform Scaling</p>
           </div>
           <div class="pc-section">
             <div class="pc-section-label">Ingredients</div>
@@ -469,7 +561,7 @@ const canonical = 'https://sagarahuja.co/firstclub';
             </ul>
           </div>
           <div class="pc-section">
-            <div class="pc-section-label">Free from</div>
+            <div class="pc-section-label">Banned Ingredients</div>
             <ul>
               <li>Vanity metrics</li>
               <li>Roadmaps driven by the loudest stakeholder</li>
@@ -478,15 +570,15 @@ const canonical = 'https://sagarahuja.co/firstclub';
             </ul>
           </div>
           <div class="pc-section">
-            <div class="pc-section-label">Quality check</div>
+            <div class="pc-section-label">Quality Check</div>
             <ul>
               <li>Passed the FirstClub problem analysis</li>
               <li>Blind-tested against 4 real product gaps</li>
-              <li>Origin: Bengaluru, India · Previously at Skillz and Games24x7</li>
+              <li>Origin: Bengaluru, India</li>
             </ul>
           </div>
           <div class="pc-section">
-            <div class="pc-section-label">Shelf life</div>
+            <div class="pc-section-label">Shelf Life</div>
             <ul>
               <li>Open-ended. Best consumed at scale.</li>
             </ul>
@@ -494,58 +586,63 @@ const canonical = 'https://sagarahuja.co/firstclub';
         </div>
       </div>
     </article>
-    <div class="fc-product-card-footer">Prepared specifically for FirstClub · June 2026</div>
+    <div class="fc-product-card-footer">Prepared for exclusive partnership with FirstClub</div>
 
     {/* ============ Section 4: Four problems ============ */}
     <div class="fc-section-head">
-      <span class="fc-eyebrow">4 Product Problems · In Priority Order</span>
+      <div class="eyebrow-row">
+        <span class="fc-eyebrow">The 12-month thesis</span>
+      </div>
+      <h2>From 170,000 to 1,000,000 households.</h2>
     </div>
-    <p class="fc-section-frame">
-      The challenge is that many things that work at 170,000 households break at 1 million. These are the four that matter most in the next 12 months.
-    </p>
+    <div class="fc-framing">
+      <p class="quote">Many things that work at 170,000 households break at 1 million.</p>
+      <p class="tail">These are the four that matter most in the next 12 months.</p>
+    </div>
 
     {/* --------- Problem 1 --------- */}
     <article class="fc-problem">
       <div class="pr-num">01</div>
-      <h3 class="pr-title">Personalisation - The App Treats 170,000 Households the Same Way</h3>
+      <h3 class="pr-title">Personalisation - the app treats 170,000 households the same way</h3>
 
       <div class="pr-block">
         <span class="pr-label">Problem</span>
         <p>
-          The "Today" home page is editorially curated but identical for every user. "Your usuals" is a passive reorder list - it shows what you have bought before but does nothing predictive with that data. There is no neighbourhood intelligence, no individual feed. FirstClub sits on one of the richest behavioural datasets in Indian consumer commerce and uses almost none of it at the product surface.
+          The <em class="c">"Today"</em> home page is editorially curated but identical for every user. <em class="c">"Your usuals"</em> is a passive reorder list - it shows what you have bought before but does nothing predictive with that data. There is no neighbourhood intelligence, no individual feed. FirstClub sits on one of the richest behavioural datasets in Indian consumer commerce and uses <strong>almost none of it</strong> at the product surface.
         </p>
+        <div class="fc-callout">A browse experience that shows everyone the same content becomes repetitive by order 10. Personalisation is what keeps the browse model fresh at scale.</div>
         <p>
-          The browse-led UX is FirstClub's primary differentiator over search-led quick commerce - but a browse experience that shows everyone the same content becomes repetitive by order 10. Personalisation is what keeps the browse model fresh at scale. And unlike any competitor, FirstClub has a structural data advantage: a concentrated user base in identifiable apartment societies. That is community data, not just location data.
+          And unlike any competitor, FirstClub has a <strong class="k">structural data advantage</strong>: a concentrated user base in identifiable apartment societies. That is <em class="c">community data</em>, not just location data.
         </p>
       </div>
 
       <div class="pr-block">
         <span class="pr-label">Solution</span>
-        <span class="pr-sub">1. Personalised Home Page</span>
+        <span class="pr-sub">Personalised Home Page</span>
         <p>
-          Move from one editorial "Today" feed to a dynamically composed page per user. A household that primarily orders fresh produce sees different featured sections than one that orders supplements and imported snacks. Category weights, featured brands, and occasion collections respond to individual order history and browse behaviour. The UX structure stays the same - the content layer becomes personal.
+          Move from one editorial <em class="c">"Today"</em> feed to a dynamically composed page per user. A household that primarily orders fresh produce sees different featured sections than one that orders supplements and imported snacks. Category weights, featured brands, and occasion collections respond to individual order history and browse behaviour. <strong>The UX structure stays the same - the content layer becomes personal.</strong>
         </p>
-        <span class="pr-sub">2. ML-Powered "Your Usuals"</span>
+        <span class="pr-sub">ML-Powered "Your Usuals"</span>
         <p>
-          Transform the tab from a static list to a predictive replenishment engine. The system learns individual consumption cadences per product category. If a user buys curd every 5-7 days, surface it on day 5 with a contextual nudge. When a product is out of stock, suggest a quality-matched substitute that has passed the same ingredient standards - not just the nearest price match. The goal is to eliminate the gap between "I need this" and "it arrives" without the user having to think about it.
+          Transform the tab from a static list to a <strong>predictive replenishment engine</strong>. The system learns individual consumption cadences per category. If a user buys curd every 5-7 days, surface it on day 5 with a contextual nudge. When a product is out of stock, suggest a quality-matched substitute that has passed the same ingredient standards - not just the nearest price match. The goal is to eliminate the gap between <em class="c">"I need this"</em> and <em class="c">"it arrives"</em> without the user having to think about it.
         </p>
-        <span class="pr-sub">3. Society-Level Recommendations</span>
+        <span class="pr-sub">Society-Level Recommendations</span>
         <p>
-          A feature showing "Most ordered in your society this week" or "Your neighbours are trying this" does three things simultaneously: provides social proof without relying on public internet reviews, drives discovery of unfamiliar brands through trusted community behaviour, and reinforces the club identity. This is also a direct answer to the discovery gap - an unfamiliar brand ordered by 40 families in your building does not feel unfamiliar anymore. No competitor can build this without replicating FirstClub's concentrated go-to-market.
+          A feature showing <em class="c">"Most ordered in your society this week"</em> or <em class="c">"Your neighbours are trying this"</em> does three things simultaneously: provides social proof without relying on public internet reviews, drives discovery of unfamiliar brands through trusted community behaviour, and reinforces the club identity. An unfamiliar brand ordered by <strong>40 families in your building</strong> does not feel unfamiliar anymore. <strong>No competitor can build this</strong> without replicating FirstClub's concentrated go-to-market.
         </p>
       </div>
 
       <div class="pr-block">
         <span class="pr-label">Success Metrics</span>
         <p>
-          Orders per month: personalised feed users vs. control group. Add-to-cart rate on ML-surfaced "Your usuals" nudges vs. manual reorder. Click-through and conversion on society recommendations. Repeat purchase rate on products first discovered through society data.
+          Orders per month: personalised feed users vs. control group. Add-to-cart rate on ML-surfaced <em class="c">"Your usuals"</em> nudges vs. manual reorder. Click-through and conversion on society recommendations. Repeat purchase rate on products first discovered through society data.
         </p>
       </div>
 
       <div class="pr-block">
         <span class="pr-label">ROI</span>
         <p>
-          A 1-2 additional SKU per basket from a well-timed nudge or society recommendation is ₹150-300 per order. At 4+ orders per month across 170,000 households, even a conservative 15% basket lift from personalisation represents significant GMV. The compounding value is stickiness - a product that learns you is structurally harder to replace than one that lists things.
+          A 1-2 additional SKU per basket from a well-timed nudge or society recommendation is <strong class="k">₹150-300 per order</strong>. At <strong>4+ orders per month</strong> across <strong>170,000 households</strong>, even a conservative <strong class="k">15% basket lift</strong> from personalisation represents significant GMV. The compounding value is <em class="c">stickiness</em> - a product that learns you is structurally harder to replace than one that lists things.
         </p>
       </div>
     </article>
@@ -553,39 +650,40 @@ const canonical = 'https://sagarahuja.co/firstclub';
     {/* --------- Problem 2 --------- */}
     <article class="fc-problem">
       <div class="pr-num">02</div>
-      <h3 class="pr-title">Multi-City Quality at Scale Is an Unsolved Product Problem</h3>
+      <h3 class="pr-title">Multi-city quality at scale is an unsolved product problem</h3>
 
       <div class="pr-block">
         <span class="pr-label">Problem</span>
         <p>
-          Quality curation in Bengaluru is founder-led and manual - blind taste tests, personal supplier relationships, central ingredient checks. This is the right approach for 0 to 1. Hyderabad has just launched with 3 stores. Hyderabad's food culture is materially different: biryani masala, mutton, Irani chai, local dairy. A Bengaluru-mirrored catalogue will underperform. But there is no product infrastructure to run a Hyderabad-specific curation in parallel - no tool for local supplier discovery, no system for city-specific testing, no way to manage two city catalogues without doubling manual effort.
+          Quality curation in Bengaluru is <em class="c">founder-led and manual</em> - blind taste tests, personal supplier relationships, central ingredient checks. This is the right approach for 0 to 1. <strong>Hyderabad has just launched</strong> with 3 stores. Hyderabad's food culture is materially different: biryani masala, mutton, Irani chai, local dairy. A Bengaluru-mirrored catalogue will underperform. But there is no product infrastructure to run a Hyderabad-specific curation in parallel - no tool for local supplier discovery, no system for city-specific testing, no way to manage two city catalogues without doubling manual effort.
         </p>
+        <div class="fc-callout">Founder-led curation is the right tool for proof of concept. It is the wrong tool for five cities simultaneously.</div>
         <p>
-          The challenge is that many things that work at 170,000 households break at 1 million households. Founder-led curation is the right tool for building proof of concept. It is the wrong tool for 5 cities simultaneously. Series B capital is explicitly allocated to geographic expansion. If each new city requires the same leadership involvement as Bengaluru, expansion becomes the bottleneck. If quality is inconsistent across cities, the trust built over two years in Bengaluru gets damaged nationally before it exists.
+          Series B capital is explicitly allocated to <strong>geographic expansion</strong>. If each new city requires the same leadership involvement as Bengaluru, expansion becomes the bottleneck. If quality is inconsistent across cities, the trust built over two years in Bengaluru gets damaged nationally <em class="c">before it exists</em>.
         </p>
       </div>
 
       <div class="pr-block">
         <span class="pr-label">Solution</span>
-        <span class="pr-sub">1. Curation OS - Internal Tool</span>
+        <span class="pr-sub">Curation OS - Internal Tool</span>
         <p>
-          A lightweight internal product for the category team to manage supplier onboarding, blind test scoring, ingredient compliance tracking, and catalogue approval per city. This process currently lives in spreadsheets and WhatsApp. Systematising it allows a team of 3-4 to run curation across multiple cities simultaneously rather than sequentially. The product that makes quality scalable without headcount growing linearly with geography.
+          A lightweight internal product for the category team to manage supplier onboarding, blind test scoring, ingredient compliance tracking, and catalogue approval per city. This process currently lives in spreadsheets and WhatsApp. Systematising it allows a team of <strong>3-4 people</strong> to run curation across multiple cities <em class="c">simultaneously</em> rather than sequentially. The product that makes quality scalable without headcount growing linearly with geography.
         </p>
-        <span class="pr-sub">2. Community Sourcing for Local Curation</span>
+        <span class="pr-sub">Community Sourcing for Local Curation</span>
         <p>
-          A "nominate a brand" mechanism for FirstClub members in each new city. They know the local premium landscape better than a Bengaluru-based category team. A nominated brand should receive a quality test invite within 2 weeks - speed of response is the difference between a city feeling locally owned and one that feels centrally managed. Converts engaged local users into brand evangelists.
+          A <em class="c">"nominate a brand"</em> mechanism for FirstClub members in each new city. They know the local premium landscape better than a Bengaluru-based category team. A nominated brand should receive a quality test invite within <strong>2 weeks</strong> - speed of response is the difference between a city feeling locally owned and one that feels centrally managed. Converts engaged local users into <em class="c">brand evangelists</em>.
         </p>
-        <span class="pr-sub">3. Local Occasion Calendar</span>
+        <span class="pr-sub">Local Occasion Calendar</span>
         <p>
-          Each city runs its own festival cycle. Hyderabad: Eid, Bathukamma. Chennai: Pongal. Mumbai: Ganesh Chaturthi. Auto-surface city-specific occasion collections based on the local calendar rather than defaulting to Bengaluru's. Lightweight infrastructure change, high local relevance signal.
+          Each city runs its own festival cycle. Hyderabad: <em class="c">Eid, Bathukamma</em>. Chennai: <em class="c">Pongal</em>. Mumbai: <em class="c">Ganesh Chaturthi</em>. Auto-surface city-specific occasion collections based on the local calendar rather than defaulting to Bengaluru's. Lightweight infrastructure change, high local relevance signal.
         </p>
-        <span class="pr-sub">4. Dark Store Micro-Assortment Intelligence</span>
+        <span class="pr-sub">Dark Store Micro-Assortment Intelligence</span>
         <p>
-          A store near a tech park serves a different household profile than one near a multigenerational residential colony. Build a rule system for store-level assortment customisation within the city catalogue - core SKUs stay fixed across all stores, a portion flexes based on neighbourhood data. Quality stays consistent; assortment stays locally relevant.
+          A store near a tech park serves a different household profile than one near a multigenerational residential colony. Build a rule system for store-level assortment customisation within the city catalogue - core SKUs stay fixed across all stores, a portion flexes based on neighbourhood data. <strong>Quality stays consistent; assortment stays locally relevant.</strong>
         </p>
-        <span class="pr-sub">5. Quality Consistency Audits</span>
+        <span class="pr-sub">Quality Consistency Audits</span>
         <p>
-          Supplier quality at onboarding is not the same as supplier quality at month 18. Build quarterly spot-check re-testing for high-volume SKUs already in the catalogue. The quality promise should not degrade silently as supplier relationships age and volume pressure builds.
+          Supplier quality at onboarding is not the same as supplier quality at month 18. Build quarterly spot-check re-testing for high-volume SKUs already in the catalogue. The quality promise should not <em class="c">degrade silently</em> as supplier relationships age and volume pressure builds.
         </p>
       </div>
 
@@ -599,7 +697,7 @@ const canonical = 'https://sagarahuja.co/firstclub';
       <div class="pr-block">
         <span class="pr-label">ROI</span>
         <p>
-          A city that launches with a localised catalogue retains 20-30% more users in the first 90 days than one that feels imported. At ₹1,200 AOV and 4+ orders per month, 5,000 additional retained households in a single city represents ₹2.9 crore in additional annualised GMV. Across 4 city launches, the infrastructure investment pays back in the first city. Every city after that is compounding return.
+          A city that launches with a localised catalogue retains <strong class="k">20-30% more users</strong> in the first 90 days than one that feels imported. At <strong>₹1,200 AOV</strong> and 4+ orders per month, <strong>5,000 additional retained households</strong> in a single city represents <strong class="k">₹2.9 crore in additional annualised GMV</strong>. Across 4 city launches, the infrastructure investment pays back in the first city. Every city after that is <em class="c">compounding return</em>.
         </p>
       </div>
     </article>
@@ -607,35 +705,36 @@ const canonical = 'https://sagarahuja.co/firstclub';
     {/* --------- Problem 3 --------- */}
     <article class="fc-problem">
       <div class="pr-num">03</div>
-      <h3 class="pr-title">Discovery Gap - Customers Do Not Trust What They Cannot Recognise</h3>
+      <h3 class="pr-title">Discovery gap - customers do not trust what they cannot recognise</h3>
 
       <div class="pr-block">
         <span class="pr-label">Problem</span>
         <p>
-          60% of the catalogue is exclusive or unfamiliar brands. Product copy is good but brand context does not exist - no explanation of why a brand passed the quality bar, what was tested, what the panel found. A real user described opening the app as "the same feeling as walking into a Nature's Basket - a subtle fear of overspending" - triggered before a single price is seen. The quality promise is the entire brand, but it is invisible at the point of purchase.
+          <strong>60% of the catalogue</strong> is exclusive or unfamiliar brands. Product copy is good but brand context does not exist - no explanation of why a brand passed the quality bar, what was tested, what the panel found. A real user described opening the app as <em class="c">"the same feeling as walking into a Nature's Basket - a subtle fear of overspending"</em> - triggered before a single price is seen. The quality promise is the entire brand, but it is <strong>invisible at the point of purchase</strong>.
         </p>
+        <div class="fc-callout">In Bengaluru, word-of-mouth in premium apartment clusters does the trust-building work. That does not travel.</div>
         <p>
-          In Bengaluru, word-of-mouth in premium apartment clusters does the trust-building work. That does not travel. Every new city launch starts from zero brand recognition. The product has to earn trust without human referrals - and today it cannot.
+          Every new city launch starts from zero brand recognition. The product has to earn trust without human referrals - and today it cannot.
         </p>
       </div>
 
       <div class="pr-block">
         <span class="pr-label">Solution</span>
-        <span class="pr-sub">1. "Why This Brand" Chip on Every Product Card</span>
+        <span class="pr-sub">"Why This Brand" Chip on Every Product Card</span>
         <p>
-          One line, specific, factual - not marketing copy. "Cold-pressed in small batches. No hexane extraction." Requires a structured data layer behind every SKU. Highest-leverage, lowest-effort change in this set.
+          One line, specific, factual - not marketing copy. <em class="c">"Cold-pressed in small batches. No hexane extraction."</em> Requires a structured data layer behind every SKU. <strong>Highest-leverage, lowest-effort change</strong> in this set.
         </p>
-        <span class="pr-sub">2. Brand Story Micro-Pages Inside the App</span>
+        <span class="pr-sub">Brand Story Micro-Pages Inside the App</span>
         <p>
           3-4 screens per brand, accessible from the product card with a single tap. Founder photo, origin, what the curation team found, one quote from the tasting panel. Contextual and in the purchase flow - not a separate section the user has to navigate to.
         </p>
-        <span class="pr-sub">3. Pre-Delivery Expectation Setting</span>
+        <span class="pr-sub">Pre-Delivery Expectation Setting</span>
         <p>
-          The green bag, coriander in dry leaves, and founder note are physical surprises today. Surface them digitally immediately after the first order is placed - a lightweight screen showing "Here is what arrives with your order." Converts first-order anxiety into anticipation. Retains the delight without losing it to uncertainty.
+          The green bag, coriander in dry leaves, and founder note are physical surprises today. Surface them digitally immediately after the first order is placed - a lightweight screen showing <em class="c">"Here is what arrives with your order."</em> Converts first-order anxiety into anticipation. Retains the delight without losing it to uncertainty.
         </p>
-        <span class="pr-sub">4. "People Who Buy X Also Trust Y"</span>
+        <span class="pr-sub">"People Who Buy X Also Trust Y"</span>
         <p>
-          When a user views an unfamiliar brand, surface a connection to a brand they already order. Bridge the unfamiliar through the familiar using existing order data. No new content required.
+          When a user views an unfamiliar brand, surface a connection to a brand they already order. Bridge the unfamiliar through the familiar using existing order data. <strong>No new content required.</strong>
         </p>
       </div>
 
@@ -649,7 +748,7 @@ const canonical = 'https://sagarahuja.co/firstclub';
       <div class="pr-block">
         <span class="pr-label">ROI</span>
         <p>
-          A 10% improvement in add-to-cart rate on the 60% of catalogue that is exclusive has a direct AOV impact at every order across every household. The strategic number is wallet share - every rupee spent on Blinkit because a brand felt unfamiliar is a rupee FirstClub did not earn. The discovery gap is the mechanism by which that leakage happens. Fixing it compounds across 170,000 households and every new city cohort.
+          A <strong class="k">10% improvement in add-to-cart rate</strong> on the 60% of catalogue that is exclusive has a direct AOV impact at every order across every household. The strategic number is <em class="c">wallet share</em> - every rupee spent on Blinkit because a brand felt unfamiliar is a rupee FirstClub did not earn. The discovery gap is the mechanism by which that leakage happens. Fixing it compounds across <strong>170,000 households</strong> and every new city cohort.
         </p>
       </div>
     </article>
@@ -657,25 +756,26 @@ const canonical = 'https://sagarahuja.co/firstclub';
     {/* --------- Problem 4 --------- */}
     <article class="fc-problem">
       <div class="pr-num">04</div>
-      <h3 class="pr-title">The Membership Product Does Not Exist</h3>
+      <h3 class="pr-title">The membership product does not exist</h3>
 
       <div class="pr-block">
         <span class="pr-label">Problem</span>
         <p>
-          Ayyappan has publicly stated FirstClub's end-state is Costco-style - profit from membership fees, products at near-cost. Today there is no paid membership. "Subscribe" is auto-delivery scheduling. Every rupee of revenue is transactional GMV. The platform is a premium delivery app, not yet a club.
+          Ayyappan has publicly stated FirstClub's end-state is <em class="c">Costco-style</em> - profit from membership fees, products at near-cost. Today there is no paid membership. <em class="c">"Subscribe"</em> is auto-delivery scheduling. Every rupee of revenue is transactional GMV. <strong>The platform is a premium delivery app, not yet a club.</strong>
         </p>
+        <div class="fc-callout">The 170,000 households placing 4+ orders per month are the warmest membership audience FirstClub will ever have.</div>
         <p>
-          The 170,000 households placing 4+ orders per month are the warmest membership audience FirstClub will ever have - every month without a membership ask, they form habits as free users, making conversion harder later. More importantly, the Costco model cannot be validated unless it is built. A working membership product at small scale is worth more in a Series C conversation than a plan to launch one.
+          Every month without a membership ask, they form habits as free users, making conversion harder later. More importantly, the Costco model cannot be validated unless it is built. <strong>A working membership product at small scale is worth more in a Series C conversation than a plan to launch one.</strong>
         </p>
       </div>
 
       <div class="pr-block">
         <span class="pr-label">Solution</span>
         <p>
-          Launch a <strong>Founding Member programme</strong> - 5,000 limited slots, early-adopter pricing - within the next 3 months. This is not a commercial launch. It is a learning vehicle: iterate on benefit architecture, pricing, and conversion mechanics before the stakes are high. Benefits should feel like access, not discounts - exclusive SKUs, tasting panel invites, clubhouse access, early brand drops. Priced at ₹1,199/year.
+          Launch a <strong>Founding Member programme</strong> - <strong class="k">5,000 limited slots</strong>, early-adopter pricing - within the next 3 months. This is not a commercial launch. It is a <em class="c">learning vehicle</em>: iterate on benefit architecture, pricing, and conversion mechanics before the stakes are high. Benefits should feel like <em class="c">access, not discounts</em> - exclusive SKUs, tasting panel invites, clubhouse access, early brand drops. Priced at <strong class="k">₹1,199/year</strong>.
         </p>
         <p>
-          Full commercial membership launch is the right call at approximately 400,000-500,000 total households. At that scale, 25% conversion = 100,000+ paying members × ₹1,200/year = ₹12-15 crore ARR at near-zero marginal cost. That is when membership becomes a P&L line, not just a signal. The architecture built at 5,000 members scales directly to 100,000.
+          Full commercial membership launch is the right call at approximately <strong>400,000-500,000 total households</strong>. At that scale, 25% conversion = <strong class="k">100,000+ paying members × ₹1,200/year = ₹12-15 crore ARR</strong> at near-zero marginal cost. That is when membership becomes a P&L line, not just a signal. <strong>The architecture built at 5,000 members scales directly to 100,000.</strong>
         </p>
       </div>
 
@@ -689,49 +789,52 @@ const canonical = 'https://sagarahuja.co/firstclub';
       <div class="pr-block">
         <span class="pr-label">ROI</span>
         <p>
-          Revenue at current scale is not the point. The Founding Member programme proves the Costco model works in India. At 400K+ households it becomes a core revenue stream. The architecture built today at 5,000 members scales to 100,000 without rebuilding.
+          Revenue at current scale is not the point. <strong>The Founding Member programme proves the Costco model works in India.</strong> At 400K+ households it becomes a core revenue stream. The architecture built today at 5,000 members scales to 100,000 without rebuilding.
         </p>
       </div>
     </article>
 
     {/* ============ Section 5: Why me ============ */}
     <div class="fc-section-head">
-      <span class="fc-eyebrow">Why I am the right person to solve this</span>
+      <div class="eyebrow-row">
+        <span class="fc-eyebrow">Why I am the right person</span>
+      </div>
+      <h2>The four problems are <em style="font-style:italic;color:var(--fc-green-soft);">systems problems</em>.</h2>
     </div>
     <div class="fc-why">
       <p>
-        These four problems share a common thread. They are not feature problems - they are <strong style="color:var(--fc-green);font-weight:600;">systems problems</strong>. Building the personalisation engine, the multi-city curation infrastructure, the discovery trust layer, and the membership architecture all require a PM who can think in platforms and operate at pace. That is a specific profile.
+        They are not feature problems. Building the personalisation engine, the multi-city curation infrastructure, the discovery trust layer, and the membership architecture all require a PM who can think in platforms and operate at pace. <strong>That is a specific profile.</strong>
       </p>
       <p>
-        My last three years across Skillz and Games24x7 were spent building consumer-facing systems for premium mobile platforms - engagement loops, retention mechanics, subscription monetisation, and personalisation at scale. The surface domain is different. The underlying product problems are not.
+        My last three years across <strong>Skillz</strong> and <strong>Games24x7</strong> were spent building consumer-facing systems for premium mobile platforms - engagement loops, retention mechanics, subscription monetisation, and personalisation at scale. The surface domain is different. The underlying product problems are not.
       </p>
 
       <h3>On personalisation and retention</h3>
       <p>
         I have built and iterated on engagement and retention systems for consumer products where driving habitual usage was the primary product challenge. The ML-backed nudge systems, personalised feeds, and cohort-configurable surfaces - I have shipped all of these.
       </p>
-      <span class="metric">
-        At Games24x7 I led an app redesign from a one-size-fits-all layout to a cohort-configurable architecture serving different experiences per user segment in real time. Result: 9% lift in new user retention and 3% ARPU uplift on existing users. The release-cycle was decoupled from experimentation, reducing app-release dependency by 82%.
-      </span>
+      <div class="metric">
+        At Games24x7 I led an app redesign from a one-size-fits-all layout to a cohort-configurable architecture serving different experiences per user segment in real time. Result: <strong>9% lift</strong> in new user retention, <strong>3% ARPU uplift</strong> on existing users, and an experimentation engine that decoupled releases from rollouts - reducing app-release dependency by <strong>82%</strong>.
+      </div>
 
       <h3>On membership, subscription, and monetisation</h3>
       <p>
         I have built and revamped subscription-style monetisation systems for consumer platforms where the central commercial challenge was converting free users to paying ones while protecting unit economics - the lifecycle moments, the benefit architecture, the pricing experiments, the churn prevention flows.
       </p>
-      <span class="metric">
-        At Skillz I led a loyalty program revamp from upfront entitlements to engagement-driven rewards under a non-negotiable monthly launch deadline. Result: 30% reduction in incentive cost against a 20% target, and a 9% ARPU lift. The same architecture pattern - access as the benefit, not discounts - is exactly what a Founding Member programme needs.
-      </span>
+      <div class="metric">
+        At Skillz I led a loyalty program revamp from upfront entitlements to engagement-driven rewards under a non-negotiable monthly launch deadline. Result: <strong>30% reduction in incentive cost</strong> against a 20% target, and a <strong>9% ARPU lift</strong>. The pattern - <em>access as the benefit, not discounts</em> - is exactly what a Founding Member programme needs.
+      </div>
 
       <h3>On multi-city and platform scaling</h3>
       <p>
-        Scaling a product system from one market to many is a platform-thinking problem, not a geography problem. The question is always the same: what do you systematise so that the quality of output does not depend on who is in the room.
+        Scaling a product system from one market to many is a <em>platform-thinking</em> problem, not a geography problem. The question is always the same: <strong>what do you systematise so that the quality of output does not depend on who is in the room.</strong>
       </p>
-      <span class="metric">
-        At Games24x7 I built and led the centralised experimentation platform from scratch - feature flags, A/B tests, and real-time rollouts - which removed release-cycle bottlenecks across every product team. The same pattern (lift the manual work into shared infrastructure, then scale the org around it) is exactly what FirstClub's curation function needs as it moves from one city to five.
-      </span>
+      <div class="metric">
+        At Games24x7 I built and led the centralised experimentation platform from scratch - feature flags, A/B tests, real-time rollouts - which removed release-cycle bottlenecks across every product team. The same pattern (lift the manual work into shared infrastructure, then scale the org around it) is exactly what FirstClub's curation function needs as it moves from one city to five.
+      </div>
 
       <div class="closing">
-        I am available immediately. A company that has closed a $55M Series B with four active infrastructure gaps and a 12-month expansion plan cannot afford a 90-day hiring cycle. I can start contributing in week one.
+        <strong>I am available immediately.</strong> A company that has closed a $55M Series B with four active infrastructure gaps and a 12-month expansion plan cannot afford a 90-day hiring cycle. I can start contributing in week one.
       </div>
     </div>
 
@@ -739,7 +842,7 @@ const canonical = 'https://sagarahuja.co/firstclub';
     <section class="fc-dark-block">
       <h2 style="font-style:italic;">I would welcome 20 minutes.</h2>
       <p>
-        Happy to go deeper on any of the problems above - or simply talk through where the most urgent need is post-Series B. No agenda beyond the conversation.
+        Happy to go deeper on any of the problems above - or simply talk through where the most urgent need is post-Series B. <strong>No agenda beyond the conversation.</strong>
       </p>
       <div class="fc-cta-contact">
         <span class="label">Reach me at</span>
@@ -750,9 +853,8 @@ const canonical = 'https://sagarahuja.co/firstclub';
 
     {/* ============ Section 7: Footer ============ */}
     <footer class="fc-footer">
-      Prepared specifically for FirstClub · June 2026 · Not indexed - shared by direct link only
+      Prepared for exclusive partnership with FirstClub · June 2026 · Not indexed - shared by direct link only
     </footer>
 
   </div>
-</body>
-</html>
+</PitchLayout>
