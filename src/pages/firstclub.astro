@@ -39,7 +39,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .fc-page { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
     @media (min-width: 720px) { .fc-page { padding: 56px 32px 96px; } }
 
-    /* Inline emphasis */
     strong.k {
       color: var(--fc-green);
       font-weight: 600;
@@ -60,30 +59,19 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       display: inline-block;
     }
 
-    /* Reveal animations */
-    .reveal {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.7s var(--fc-ease), transform 0.7s var(--fc-ease);
-    }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--fc-ease), transform 0.7s var(--fc-ease); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    .reveal-stagger > * {
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.55s var(--fc-ease), transform 0.55s var(--fc-ease);
-    }
+    .reveal-stagger > * { opacity: 0; transform: translateY(16px); transition: opacity 0.55s var(--fc-ease), transform 0.55s var(--fc-ease); }
     .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.0s; }
     .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.10s; }
     .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.20s; }
     .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.30s; }
     .reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
-
     @media (prefers-reduced-motion: reduce) {
       .reveal, .reveal-stagger > * { opacity: 1; transform: none; transition: none; }
     }
 
-    /* ===== Section 1: Header ===== */
+    /* ===== Header ===== */
     .fc-header {
       display: flex;
       justify-content: space-between;
@@ -123,24 +111,36 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .fc-header .contact-block a:hover { color: var(--fc-green); }
     @media (max-width: 540px) { .fc-header .contact-block { text-align: left; } }
 
-    /* ===== Today's Specials section ===== */
+    /* ===== UNIFIED SHOWCASE (Today's Specials + Product Page in one box) ===== */
+    .fc-showcase {
+      max-width: 560px;
+      margin: 32px auto;
+      background: #fff;
+      border: 1px solid var(--fc-border);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow:
+        0 4px 16px rgba(28, 74, 30, 0.08),
+        0 16px 40px rgba(28, 74, 30, 0.06);
+    }
+
+    /* ===== Today's Specials inside showcase ===== */
     .fc-specials {
-      margin: 28px 0;
-      padding: 28px 16px 30px;
+      padding: 24px 14px 26px;
       background: linear-gradient(180deg, #E8EFC5 0%, #F4ECC8 100%);
-      border-radius: var(--fc-radius-lg);
       position: relative;
       overflow: hidden;
+      border-bottom: 1px solid var(--fc-border);
     }
     .fc-specials::before {
       content: 'SPECIALS';
       position: absolute;
-      top: 10px;
+      top: 8px;
       left: 0;
       right: 0;
       text-align: center;
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 64px;
+      font-size: 60px;
       font-weight: 700;
       color: rgba(28, 74, 30, 0.07);
       letter-spacing: 0.14em;
@@ -150,45 +150,36 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       pointer-events: none;
       line-height: 1;
     }
-    @media (min-width: 720px) { .fc-specials::before { font-size: 100px; top: 16px; } }
-    @media (min-width: 720px) { .fc-specials { padding: 38px 22px 38px; } }
-
     .fc-specials .ts-head {
       text-align: center;
       position: relative;
       z-index: 1;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
     .fc-specials .ts-head h2 {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 700;
       color: var(--fc-green);
       line-height: 1.1;
       margin-bottom: 4px;
       letter-spacing: -0.015em;
     }
-    @media (min-width: 720px) { .fc-specials .ts-head h2 { font-size: 34px; } }
     .fc-specials .ts-head .sub {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--fc-green-soft);
       font-weight: 400;
     }
-
     .fc-specials .ts-cards {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
       position: relative;
       z-index: 1;
     }
-    @media (min-width: 540px) {
-      .fc-specials .ts-cards { grid-template-columns: repeat(3, 1fr); gap: 10px; }
-    }
-
     .fc-special-card {
       border-radius: var(--fc-radius-lg);
-      padding: 12px 10px 14px;
+      padding: 10px 8px 12px;
       text-align: center;
       display: flex;
       flex-direction: column;
@@ -205,16 +196,15 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .fc-special-card.sc-1 { background: linear-gradient(180deg, #FFE4B5 0%, #FFD78A 100%); }
     .fc-special-card.sc-2 { background: linear-gradient(180deg, #DCE8B8 0%, #C0DC9C 100%); }
     .fc-special-card.sc-3 { background: linear-gradient(180deg, #FFE0B0 0%, #FFC97D 100%); }
-
     .fc-special-card .sc-label {
       font-family: 'Inter', sans-serif;
-      font-size: 10.5px;
+      font-size: 9.5px;
       font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
       line-height: 1.25;
-      padding: 0 6px;
-      min-height: 26px;
+      padding: 0 4px;
+      min-height: 24px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -222,18 +212,17 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .fc-special-card.sc-1 .sc-label { color: #8A5A18; }
     .fc-special-card.sc-2 .sc-label { color: #3F6B22; }
     .fc-special-card.sc-3 .sc-label { color: #8A5A18; }
-
     .fc-special-card .sc-image {
-      width: 70%;
-      aspect-ratio: 1 / 1;
-      border-radius: var(--fc-radius);
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
       overflow: hidden;
-      background: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.6);
       display: flex;
       align-items: center;
       justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
-    @media (max-width: 540px) { .fc-special-card .sc-image { width: 50%; max-width: 110px; } }
     .fc-special-card .sc-image img {
       width: 100%;
       height: 100%;
@@ -241,36 +230,26 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       display: block;
       transition: transform 0.4s var(--fc-ease);
     }
-    .fc-special-card:hover .sc-image img { transform: scale(1.06); }
-    .fc-special-card .sc-image svg {
-      width: 50%;
-      height: 50%;
-      color: rgba(28, 74, 30, 0.7);
-    }
+    .fc-special-card:hover .sc-image img { transform: scale(1.1); }
     .fc-special-card .sc-caption {
       font-family: 'Inter', sans-serif;
-      font-size: 12.5px;
+      font-size: 11.5px;
       font-weight: 700;
       color: var(--fc-body);
       line-height: 1.25;
-      padding: 2px 4px 0;
+      padding: 1px 2px 0;
     }
     .fc-special-card .sc-meta {
       font-family: 'Inter', sans-serif;
-      font-size: 10.5px;
+      font-size: 9.5px;
       color: var(--fc-secondary);
       font-weight: 500;
     }
 
-    /* ===== Product page mock ===== */
+    /* ===== Product page inside showcase ===== */
     .fc-pp {
-      max-width: 520px;
-      margin: 36px auto 24px;
       background: #fff;
-      border: 1px solid var(--fc-border);
-      border-radius: var(--fc-radius-lg);
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(28, 74, 30, 0.08);
     }
     .fc-pp .pp-nav {
       display: flex;
@@ -293,7 +272,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       flex: 1;
       font-weight: 700;
       color: var(--fc-body);
-      font-size: 14.5px;
+      font-size: 15px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -310,9 +289,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       font-size: 13px;
     }
 
-    /* Scrollable gallery */
+    /* ===== Hero gallery with sneak peek + arrows ===== */
     .fc-pp .pp-hero {
-      background: linear-gradient(180deg, #E8DCB0 0%, #DCC788 100%);
+      background:
+        radial-gradient(circle at 30% 20%, rgba(168, 197, 160, 0.6) 0%, transparent 60%),
+        linear-gradient(135deg, #DCE8C8 0%, #B8CDA0 50%, #98B898 100%);
       position: relative;
     }
     .fc-pp .pp-gallery {
@@ -322,12 +303,12 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      padding: 28px 0 36px;
-      gap: 0;
+      padding: 28px 10% 38px;
+      gap: 12px;
     }
     .fc-pp .pp-gallery::-webkit-scrollbar { display: none; }
     .fc-pp .pp-gallery .pp-slide {
-      flex: 0 0 100%;
+      flex: 0 0 80%;
       scroll-snap-align: center;
       display: flex;
       align-items: center;
@@ -335,12 +316,13 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       min-height: 280px;
     }
     .fc-pp .pp-gallery img {
-      width: 200px;
+      width: 100%;
+      max-width: 200px;
       height: 240px;
-      border-radius: 10px;
+      border-radius: 12px;
       object-fit: cover;
       object-position: center 22%;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
     }
     .fc-pp .pp-dots {
       position: absolute;
@@ -350,7 +332,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       display: flex;
       gap: 4px;
       padding: 5px 10px;
-      background: rgba(0, 0, 0, 0.22);
+      background: rgba(0, 0, 0, 0.28);
       border-radius: var(--fc-radius-pill);
       z-index: 2;
       backdrop-filter: blur(6px);
@@ -361,12 +343,39 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.55);
       transition: width 0.3s var(--fc-ease), background 0.3s var(--fc-ease);
+      cursor: pointer;
     }
     .fc-pp .pp-dots span.active {
       background: #fff;
       width: 18px;
       border-radius: 3px;
     }
+
+    /* Prev/next arrows over gallery */
+    .fc-pp .pp-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--fc-green);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+      z-index: 3;
+      transition: background 0.2s var(--fc-ease), transform 0.2s var(--fc-ease), opacity 0.2s var(--fc-ease);
+    }
+    .fc-pp .pp-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.06); }
+    .fc-pp .pp-arrow:disabled { opacity: 0.4; cursor: default; }
+    .fc-pp .pp-arrow:disabled:hover { transform: translateY(-50%); }
+    .fc-pp .pp-arrow.prev { left: 12px; }
+    .fc-pp .pp-arrow.next { right: 12px; }
+    .fc-pp .pp-arrow svg { width: 16px; height: 16px; }
 
     .fc-pp .pp-pills {
       display: flex;
@@ -505,7 +514,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       background-repeat: no-repeat;
       background-size: 14px;
     }
-    .fc-pp .pp-about ul.pp-arrow li::before {
+    .fc-pp .pp-about ul.pp-arrow-list li::before {
       content: '›';
       position: absolute;
       left: 4px;
@@ -560,8 +569,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     }
     .fc-pp .pp-cta:active { transform: translateY(0); }
     .fc-pp .pp-cta svg { width: 18px; height: 18px; }
-
-    /* Soft pulse around CTA to draw eye */
     .fc-pp .pp-cta::after {
       content: '';
       position: absolute;
@@ -580,7 +587,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       .fc-pp .pp-cta::after { animation: none; }
     }
 
-    /* ===== Section header + framing pull-quote ===== */
+    /* ===== Section head + framing ===== */
     .fc-section-head { margin-top: 56px; margin-bottom: 12px; }
     .fc-section-head .eyebrow-row {
       display: flex;
@@ -623,23 +630,8 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       letter-spacing: -0.005em;
     }
     @media (min-width: 720px) { .fc-framing .quote { font-size: 23px; } }
-    .fc-framing .quote::before {
-      content: '"';
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4em;
-      line-height: 1;
-      vertical-align: -0.05em;
-      color: var(--fc-green-light);
-      margin-right: 2px;
-    }
-    .fc-framing .quote::after {
-      content: '"';
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4em;
-      line-height: 1;
-      vertical-align: -0.05em;
-      color: var(--fc-green-light);
-    }
+    .fc-framing .quote::before { content: '"'; font-family: 'Playfair Display', serif; font-size: 1.4em; line-height: 1; vertical-align: -0.05em; color: var(--fc-green-light); margin-right: 2px; }
+    .fc-framing .quote::after { content: '"'; font-family: 'Playfair Display', serif; font-size: 1.4em; line-height: 1; vertical-align: -0.05em; color: var(--fc-green-light); }
     .fc-framing .tail {
       font-size: 13.5px;
       color: var(--fc-secondary);
@@ -700,12 +692,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       align-items: center;
       gap: 10px;
     }
-    .fc-problem .pr-label svg {
-      width: 14px;
-      height: 14px;
-      color: var(--fc-green);
-      flex-shrink: 0;
-    }
+    .fc-problem .pr-label svg { width: 14px; height: 14px; color: var(--fc-green); flex-shrink: 0; }
     .fc-problem .pr-block:first-of-type .pr-label { padding-top: 0; border-top: none; }
     .fc-problem .pr-block p {
       font-size: 14.5px;
@@ -737,10 +724,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       background-repeat: no-repeat;
       background-size: 14px;
     }
-    .fc-problem .pr-block ul li strong {
-      color: var(--fc-green);
-      font-weight: 600;
-    }
+    .fc-problem .pr-block ul li strong { color: var(--fc-green); font-weight: 600; }
 
     .fc-problem .pr-block:first-of-type p:first-of-type::first-letter {
       font-family: 'Playfair Display', Georgia, serif;
@@ -862,7 +846,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
   <div class="fc-page">
 
-    {/* ============ Section 1: Header ============ */}
     <header class="fc-header reveal">
       <div class="name-block">
         <div class="name">Sagar Ahuja</div>
@@ -875,160 +858,155 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
     </header>
 
-    {/* ============ Section 2: Today's Specials ============ */}
-    <section class="fc-specials reveal">
-      <div class="ts-head">
-        <h2>Today's Specials</h2>
-        <div class="sub">Your daily ritual of product talent</div>
-      </div>
-      <div class="ts-cards reveal-stagger">
-        <div class="fc-special-card sc-1">
-          <div class="sc-label">Limited<br />Edition</div>
-          <div class="sc-image">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-              <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-              <path d="M4 22h16"/>
-              <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-              <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-              <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
-            </svg>
-          </div>
-          <div class="sc-caption">1 of 1, hand-crafted</div>
-          <div class="sc-meta">11+ years aged</div>
+    {/* ============ Unified showcase: Today's Specials + Product page ============ */}
+    <div class="fc-showcase reveal">
+
+      <section class="fc-specials">
+        <div class="ts-head">
+          <h2>Today's Specials</h2>
+          <div class="sub">Your daily ritual of product talent</div>
         </div>
-        <div class="fc-special-card sc-2">
-          <div class="sc-label">Member's<br />Pick</div>
-          <div class="sc-image">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="8" r="6"/>
-              <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/>
-            </svg>
+        <div class="ts-cards reveal-stagger">
+          <div class="fc-special-card sc-1">
+            <div class="sc-label">Limited<br />Edition</div>
+            <div class="sc-image">
+              <img src="https://images.unsplash.com/photo-1605792657660-596af9009e82?w=200&h=200&fit=crop&q=80" alt="" loading="lazy" />
+            </div>
+            <div class="sc-caption">1 of 1, hand-crafted</div>
+            <div class="sc-meta">11+ years aged</div>
           </div>
-          <div class="sc-caption">Built for FirstClub</div>
-          <div class="sc-meta">Curated, not just listed</div>
+          <div class="fc-special-card sc-2">
+            <div class="sc-label">Member's<br />Pick</div>
+            <div class="sc-image">
+              <img src="https://images.unsplash.com/photo-1505816014357-96b5ff457e9a?w=200&h=200&fit=crop&q=80" alt="" loading="lazy" />
+            </div>
+            <div class="sc-caption">Built for FirstClub</div>
+            <div class="sc-meta">Curated, not listed</div>
+          </div>
+          <div class="fc-special-card sc-3">
+            <div class="sc-label">Season's<br />Best</div>
+            <div class="sc-image">
+              <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=200&h=200&fit=crop&q=80" alt="" loading="lazy" />
+            </div>
+            <div class="sc-caption">Available now</div>
+            <div class="sc-meta">Zero notice period</div>
+          </div>
         </div>
-        <div class="fc-special-card sc-3">
-          <div class="sc-label">Season's<br />Best</div>
-          <div class="sc-image">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      </section>
+
+      <article class="fc-pp">
+        <div class="pp-nav">
+          <span class="back" aria-hidden="true">←</span>
+          <span class="title">Sagar Ahuja</span>
+          <span class="share" aria-hidden="true">↑</span>
+        </div>
+        <div class="pp-hero">
+          <button class="pp-arrow prev" type="button" id="pp-prev" aria-label="Previous photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <button class="pp-arrow next" type="button" id="pp-next" aria-label="Next photo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+          <div class="pp-gallery" id="pp-gallery">
+            <div class="pp-slide"><img src="/firstclub/sagar-4.jpg" alt="Sagar Ahuja - portrait" loading="eager" /></div>
+            <div class="pp-slide"><img src="/firstclub/sagar-1.jpg" alt="Sagar Ahuja - speaking" loading="lazy" /></div>
+            <div class="pp-slide"><img src="/firstclub/sagar-2.jpg" alt="Sagar Ahuja - studio portrait" loading="lazy" /></div>
+            <div class="pp-slide"><img src="/firstclub/sagar-3.jpg" alt="Sagar Ahuja - outdoor casual" loading="lazy" /></div>
+            <div class="pp-slide"><img src="/firstclub/sagar-5.jpg" alt="Sagar Ahuja - at ISB" loading="lazy" /></div>
+          </div>
+          <div class="pp-dots" id="pp-dots" aria-hidden="true">
+            <span class="active"></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <div class="pp-pills">
+          <span class="pp-pill featured">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+              <path d="M2 21c0-3 1.85-5.36 5.08-6"/>
+            </svg>
+            Zero added fluff
+          </span>
+          <span class="pp-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Easy to onboard
+          </span>
+          <span class="pp-pill">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="10"/>
               <polyline points="12 6 12 12 16 14"/>
             </svg>
+            72 hrs Trial
+          </span>
+        </div>
+        <div class="pp-brand">Sagar Ahuja</div>
+        <h2 class="pp-title">Senior Product Leader<br />(Light Notice)</h2>
+        <div class="pp-weight">11+ years · 7 in product</div>
+        <div class="pp-price">
+          <span class="pp-price-now">0 days</span>
+          <span class="pp-price-was">90 days notice</span>
+        </div>
+
+        <div class="pp-about">
+          <h3>About This Product</h3>
+          <p>
+            Sagar Ahuja Senior Product Leader is a high-quality product builder designed to support consumer platform scaling, retention systems, and post-Series B momentum, with a 12-month build thesis already mapped to FirstClub's exact infrastructure gaps.
+          </p>
+
+          <div class="pp-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Why You'll Love Him:
           </div>
-          <div class="sc-caption">Available now</div>
-          <div class="sc-meta">Zero notice period</div>
+          <ul class="pp-check">
+            <li>11 years of product experience, 7 in PM</li>
+            <li>Built consumer mobile platforms at Skillz</li>
+            <li>Designed ML-driven engagement and retention systems</li>
+            <li>Shipped subscription and monetisation programs</li>
+            <li>Available immediately - no notice period</li>
+          </ul>
+
+          <div class="pp-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            How to Use:
+          </div>
+          <ul class="pp-arrow-list">
+            <li>Onboard in week one - no 90-day hiring cycle</li>
+            <li>Assign first to personalisation or membership infrastructure</li>
+            <li>Pair with engineering, category, and marketing teams</li>
+            <li>Best deployed at scale, not at concept stage</li>
+            <li>Compounds when given platform-level ownership</li>
+          </ul>
+
+          <div class="pp-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+            Banned Ingredients:
+          </div>
+          <ul class="pp-cross">
+            <li>Vanity metrics</li>
+            <li>Roadmaps driven by the loudest stakeholder</li>
+            <li>Features shipped without defined success criteria</li>
+            <li>Surface-level user research</li>
+          </ul>
+
+          <div class="pp-refund">
+            <strong>*Regarding the Trial:</strong> 72 hours after the first conversation, if not the right fit - no further commitment. Just a coffee in the books and a sharper view of the four problems below.
+          </div>
         </div>
-      </div>
-    </section>
 
-    {/* ============ Section 3: Product page mock ============ */}
-    <article class="fc-pp reveal">
-      <div class="pp-nav">
-        <span class="back" aria-hidden="true">←</span>
-        <span class="title">Senior Product Leader (Light Noti...)</span>
-        <span class="share" aria-hidden="true">↑</span>
-      </div>
-      <div class="pp-hero">
-        <div class="pp-gallery" id="pp-gallery">
-          <div class="pp-slide"><img src="/firstclub/sagar-1.jpg" alt="Sagar Ahuja - on stage with mic" loading="lazy" /></div>
-          <div class="pp-slide"><img src="/firstclub/sagar-2.jpg" alt="Sagar Ahuja portrait" loading="lazy" /></div>
-          <div class="pp-slide"><img src="/firstclub/sagar-3.jpg" alt="Sagar Ahuja - outdoor casual" loading="lazy" /></div>
-          <div class="pp-slide"><img src="/firstclub/sagar-4.jpg" alt="Sagar Ahuja - corporate headshot" loading="lazy" /></div>
-          <div class="pp-slide"><img src="/firstclub/sagar-5.jpg" alt="Sagar Ahuja - at ISB" loading="lazy" /></div>
+        <div class="pp-cta-row">
+          <a href="mailto:sagarahuja@gmail.com?subject=Add%20Sagar%20to%20FirstClub" class="pp-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="9" cy="21" r="1"/>
+              <circle cx="20" cy="21" r="1"/>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            </svg>
+            Add to FirstClub
+          </a>
         </div>
-        <div class="pp-dots" id="pp-dots" aria-hidden="true">
-          <span class="active"></span><span></span><span></span><span></span><span></span>
-        </div>
-      </div>
-
-      <div class="pp-pills">
-        <span class="pp-pill featured">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
-            <path d="M2 21c0-3 1.85-5.36 5.08-6"/>
-          </svg>
-          Zero added fluff
-        </span>
-        <span class="pp-pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="20 6 9 17 4 12"/>
-          </svg>
-          Easy to onboard
-        </span>
-        <span class="pp-pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <polyline points="12 6 12 12 16 14"/>
-          </svg>
-          72 hrs Trial
-        </span>
-      </div>
-      <div class="pp-brand">Sagar Ahuja</div>
-      <h2 class="pp-title">Senior Product Leader<br />(Light Notice)</h2>
-      <div class="pp-weight">11+ years · 7 in product</div>
-      <div class="pp-price">
-        <span class="pp-price-now">0 days</span>
-        <span class="pp-price-was">90 days notice</span>
-      </div>
-
-      <div class="pp-about">
-        <h3>About This Product</h3>
-        <p>
-          Sagar Ahuja Senior Product Leader is a high-quality product builder designed to support consumer platform scaling, retention systems, and post-Series B momentum, with a 12-month build thesis already mapped to FirstClub's exact infrastructure gaps.
-        </p>
-
-        <div class="pp-section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          Why You'll Love Him:
-        </div>
-        <ul class="pp-check">
-          <li>11 years of product experience, 7 in PM</li>
-          <li>Built consumer mobile platforms at Skillz</li>
-          <li>Designed ML-driven engagement and retention systems</li>
-          <li>Shipped subscription and monetisation programs</li>
-          <li>Available immediately - no notice period</li>
-        </ul>
-
-        <div class="pp-section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-          How to Use:
-        </div>
-        <ul class="pp-arrow">
-          <li>Onboard in week one - no 90-day hiring cycle</li>
-          <li>Assign first to personalisation or membership infrastructure</li>
-          <li>Pair with engineering, category, and marketing teams</li>
-          <li>Best deployed at scale, not at concept stage</li>
-          <li>Compounds when given platform-level ownership</li>
-        </ul>
-
-        <div class="pp-section-title">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
-          Banned Ingredients:
-        </div>
-        <ul class="pp-cross">
-          <li>Vanity metrics</li>
-          <li>Roadmaps driven by the loudest stakeholder</li>
-          <li>Features shipped without defined success criteria</li>
-          <li>Surface-level user research</li>
-        </ul>
-
-        <div class="pp-refund">
-          <strong>*Regarding the Trial:</strong> 72 hours after the first conversation, if not the right fit - no further commitment. Just a coffee in the books and a sharper view of the four problems below.
-        </div>
-      </div>
-
-      <div class="pp-cta-row">
-        <a href="mailto:sagarahuja@gmail.com?subject=Add%20Sagar%20to%20FirstClub" class="pp-cta">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="9" cy="21" r="1"/>
-            <circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-          </svg>
-          Add to FirstClub
-        </a>
-      </div>
-    </article>
+      </article>
+    </div>
 
     {/* ============ Section 4: Four problems ============ */}
     <div class="fc-section-head reveal">
@@ -1042,7 +1020,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       <p class="tail">These are the four that matter most in the next 12 months.</p>
     </div>
 
-    {/* --------- Problem 1 (succinct) --------- */}
     <article class="fc-problem reveal">
       <div class="pr-num">01</div>
       <h3 class="pr-title">Personalisation - the app treats 170,000 households the same way</h3>
@@ -1094,7 +1071,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
     </article>
 
-    {/* --------- Problem 2 (succinct) --------- */}
     <article class="fc-problem reveal">
       <div class="pr-num">02</div>
       <h3 class="pr-title">Multi-city quality at scale is an unsolved product problem</h3>
@@ -1148,7 +1124,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
     </article>
 
-    {/* --------- Problem 3 (succinct) --------- */}
     <article class="fc-problem reveal">
       <div class="pr-num">03</div>
       <h3 class="pr-title">Discovery gap - customers do not trust what they cannot recognise</h3>
@@ -1201,7 +1176,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
     </article>
 
-    {/* --------- Problem 4 (succinct) --------- */}
     <article class="fc-problem reveal">
       <div class="pr-num">04</div>
       <h3 class="pr-title">The membership product does not exist</h3>
@@ -1252,7 +1226,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
     </article>
 
-    {/* ============ Section 5: Why me ============ */}
     <div class="fc-section-head reveal">
       <div class="eyebrow-row">
         <span class="fc-eyebrow">Why I am the right person</span>
@@ -1296,7 +1269,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
     </div>
 
-    {/* ============ Section 6: CTA ============ */}
     <section class="fc-dark-block reveal">
       <h2 style="font-style:italic;">I would welcome 20 minutes.</h2>
       <p>
@@ -1309,7 +1281,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
     </section>
 
-    {/* ============ Section 7: Footer ============ */}
     <footer class="fc-footer">
       Prepared for exclusive partnership with FirstClub · June 2026 · Not indexed - shared by direct link only
     </footer>
@@ -1318,7 +1289,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
   <script slot="head" is:inline>
     document.addEventListener('DOMContentLoaded', function() {
-      // Reveal on scroll
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
@@ -1333,25 +1303,48 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el) { el.classList.add('visible'); });
       }
 
-      // Gallery dot sync
       var gallery = document.getElementById('pp-gallery');
       var dotsWrap = document.getElementById('pp-dots');
-      if (gallery && dotsWrap) {
-        var dots = dotsWrap.querySelectorAll('span');
-        var setActive = function(i) {
-          dots.forEach(function(d, idx) { d.classList.toggle('active', idx === i); });
-        };
-        gallery.addEventListener('scroll', function() {
-          var idx = Math.round(gallery.scrollLeft / gallery.clientWidth);
-          if (idx >= 0 && idx < dots.length) setActive(idx);
-        }, { passive: true });
-        dots.forEach(function(d, i) {
-          d.style.cursor = 'pointer';
-          d.addEventListener('click', function() {
-            gallery.scrollTo({ left: i * gallery.clientWidth, behavior: 'smooth' });
-          });
-        });
+      var prevBtn = document.getElementById('pp-prev');
+      var nextBtn = document.getElementById('pp-next');
+      if (!gallery || !dotsWrap) return;
+      var dots = dotsWrap.querySelectorAll('span');
+      var slides = gallery.querySelectorAll('.pp-slide');
+      var total = slides.length;
+      var current = 0;
+
+      function getSlideStep() {
+        if (slides.length < 2) return gallery.clientWidth;
+        return slides[1].offsetLeft - slides[0].offsetLeft;
       }
+
+      function updateUI(i) {
+        current = i;
+        dots.forEach(function(d, idx) { d.classList.toggle('active', idx === i); });
+        if (prevBtn) prevBtn.disabled = i <= 0;
+        if (nextBtn) nextBtn.disabled = i >= total - 1;
+      }
+
+      function scrollTo(i) {
+        var step = getSlideStep();
+        var target = i * step;
+        gallery.scrollTo({ left: target, behavior: 'smooth' });
+        updateUI(i);
+      }
+
+      gallery.addEventListener('scroll', function() {
+        var step = getSlideStep();
+        if (step <= 0) return;
+        var idx = Math.round(gallery.scrollLeft / step);
+        if (idx >= 0 && idx < total && idx !== current) updateUI(idx);
+      }, { passive: true });
+
+      dots.forEach(function(d, i) {
+        d.addEventListener('click', function() { scrollTo(i); });
+      });
+      if (prevBtn) prevBtn.addEventListener('click', function() { if (current > 0) scrollTo(current - 1); });
+      if (nextBtn) nextBtn.addEventListener('click', function() { if (current < total - 1) scrollTo(current + 1); });
+      updateUI(0);
     });
   </script>
 </PitchLayout>
