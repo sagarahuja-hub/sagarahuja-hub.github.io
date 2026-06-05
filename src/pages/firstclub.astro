@@ -1185,14 +1185,14 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
     @media (min-width: 1180px) {
       .fc-page {
-        max-width: 1320px;
+        max-width: 1280px;
         padding: 36px 40px 80px;
       }
 
       .fc-split {
         display: grid;
-        grid-template-columns: 440px minmax(0, 1fr);
-        gap: 60px;
+        grid-template-columns: 380px minmax(0, 1fr);
+        gap: 72px;
         align-items: start;
       }
 
@@ -1202,11 +1202,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         align-self: start;
       }
 
-      /* Phone frame mockup ===== */
+      /* Phone frame mockup (iPhone-style) */
       .fc-phone {
         background: linear-gradient(160deg, #1a1a1a 0%, #2a2a2a 100%);
-        border-radius: 42px;
-        padding: 14px 12px 16px;
+        border-radius: 44px;
+        padding: 10px 8px 12px;
         box-shadow:
           0 30px 60px rgba(0, 0, 0, 0.28),
           0 12px 30px rgba(28, 74, 30, 0.16),
@@ -1214,49 +1214,53 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           inset 0 1px 0 rgba(255, 255, 255, 0.05);
         position: relative;
       }
-      /* Notch / pill at top */
+      /* Dynamic Island-style pill at top */
       .fc-phone::before {
         content: '';
         position: absolute;
-        top: 6px;
+        top: 18px;
         left: 50%;
         transform: translateX(-50%);
-        width: 110px;
-        height: 7px;
-        background: #2a2a2a;
-        border-radius: 0 0 9px 9px;
-        z-index: 2;
+        width: 95px;
+        height: 24px;
+        background: #000;
+        border-radius: 14px;
+        z-index: 3;
       }
-      /* Side button hint */
+      /* Side button (volume/mute) on the left edge */
       .fc-phone::after {
         content: '';
         position: absolute;
         left: -2px;
-        top: 140px;
+        top: 120px;
         width: 3px;
-        height: 60px;
+        height: 44px;
         background: #2a2a2a;
         border-radius: 2px 0 0 2px;
-        box-shadow: 0 80px 0 #2a2a2a;
+        box-shadow:
+          0 56px 0 #2a2a2a,
+          0 120px 0 0 #2a2a2a,
+          0 120px 0 -8px transparent,
+          0 184px 0 -8px transparent;
       }
 
       .fc-phone-screen {
         background: #fff;
-        border-radius: 32px;
+        border-radius: 36px;
         overflow: hidden;
-        max-height: calc(100vh - 124px);
+        max-height: calc(100vh - 120px);
         overflow-y: auto;
         overflow-x: hidden;
         scrollbar-width: thin;
         scrollbar-color: var(--fc-border) transparent;
         position: relative;
       }
-      .fc-phone-screen::-webkit-scrollbar { width: 5px; }
+      .fc-phone-screen::-webkit-scrollbar { width: 4px; }
       .fc-phone-screen::-webkit-scrollbar-track { background: transparent; }
-      .fc-phone-screen::-webkit-scrollbar-thumb { background: var(--fc-border); border-radius: 3px; }
+      .fc-phone-screen::-webkit-scrollbar-thumb { background: var(--fc-border); border-radius: 2px; }
       .fc-phone-screen::-webkit-scrollbar-thumb:hover { background: var(--fc-green-light); }
 
-      /* Reset showcase styling inside the phone (the phone provides the frame) */
+      /* Reset showcase styling inside the phone */
       .fc-phone .fc-showcase {
         margin: 0;
         max-width: none;
@@ -1264,6 +1268,89 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         border-radius: 0;
         box-shadow: none;
       }
+
+      /* Status-bar-like spacer at top of screen to clear the Dynamic Island */
+      .fc-phone-screen::before {
+        content: '';
+        display: block;
+        height: 54px;
+        background: #fff;
+      }
+
+      /* === Tighten content inside the phone so it does not feel zoomed === */
+      .fc-phone .fc-specials { padding: 22px 12px 22px; }
+      .fc-phone .fc-specials::before { font-size: 52px; top: 8px; }
+      .fc-phone .fc-specials .ts-head { margin-bottom: 14px; }
+      .fc-phone .fc-specials .ts-head h2 { font-size: 22px; }
+      .fc-phone .fc-specials .ts-head .sub { font-size: 11px; }
+      .fc-phone .fc-specials .ts-cards { gap: 6px; }
+      .fc-phone .fc-special-card { padding: 8px 6px 10px; gap: 5px; }
+      .fc-phone .fc-special-card .sc-image { width: 48px; height: 48px; }
+      .fc-phone .fc-special-card .sc-label { font-size: 9px; min-height: 22px; }
+      .fc-phone .fc-special-card .sc-caption { font-size: 10.5px; }
+      .fc-phone .fc-special-card .sc-meta { font-size: 9.5px; }
+
+      .fc-phone .fc-pp .pp-nav { padding: 6px 12px; }
+      .fc-phone .fc-pp .pp-nav .title { font-size: 13px; }
+      .fc-phone .fc-pp .pp-nav .back { width: 22px; height: 22px; font-size: 15px; }
+      .fc-phone .fc-pp .pp-nav .share { width: 26px; height: 26px; font-size: 11px; }
+
+      .fc-phone .fc-pp .pp-hero .pp-badge { font-size: 9.5px; padding: 4px 10px 4px 8px; }
+      .fc-phone .fc-pp .pp-hero .pp-badge svg { width: 10px; height: 10px; }
+
+      .fc-phone .fc-pp .pp-gallery { padding: 18px 9% 28px; gap: 10px; }
+      .fc-phone .fc-pp .pp-gallery .pp-slide { min-height: 248px; }
+      .fc-phone .fc-pp .pp-gallery img { max-width: 190px; height: 230px; border-radius: 12px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide {
+        max-width: 190px;
+        height: 230px;
+        padding: 16px 14px;
+        border-radius: 12px;
+      }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-eyebrow { font-size: 9px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-title { font-size: 18px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-stat { font-size: 30px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-stat-sub { font-size: 10.5px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-sub { font-size: 11.5px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-foot { font-size: 10px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-list li { font-size: 11px; padding: 4px 8px 4px 18px; }
+
+      .fc-phone .fc-pp .pp-arrow { width: 28px; height: 28px; }
+      .fc-phone .fc-pp .pp-arrow svg { width: 13px; height: 13px; }
+
+      .fc-phone .fc-pp .pp-pills { padding: 12px 14px 6px; gap: 6px; }
+      .fc-phone .fc-pp .pp-pill { font-size: 10.5px; padding: 4px 9px; }
+      .fc-phone .fc-pp .pp-brand { padding: 6px 14px 0; font-size: 10px; }
+      .fc-phone .fc-pp .pp-title { padding: 3px 14px 0; font-size: 20px; }
+      .fc-phone .fc-pp .pp-weight { padding: 2px 14px 0; font-size: 13px; }
+      .fc-phone .fc-pp .pp-price { padding: 8px 14px 16px; }
+      .fc-phone .fc-pp .pp-price-now { font-size: 19px; }
+      .fc-phone .fc-pp .pp-price-was { font-size: 13px; }
+
+      .fc-phone .fc-pp .pp-about { padding: 18px 16px 6px; }
+      .fc-phone .fc-pp .pp-about h3 { font-size: 19px; margin-bottom: 12px; }
+      .fc-phone .fc-pp .pp-about p,
+      .fc-phone .fc-pp .pp-about ul li { font-size: 13px; }
+      .fc-phone .fc-pp .pp-about .pp-section-title { font-size: 13px; margin-top: 14px; }
+      .fc-phone .fc-pp .pp-about .pp-refund { font-size: 12px; padding: 10px 12px; }
+
+      .fc-phone .fc-pp .pp-lab { margin: 18px 16px 0; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-head { padding: 10px 12px; gap: 8px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-head .lab-icon { width: 28px; height: 28px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-head .lab-icon svg { width: 14px; height: 14px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-head .lab-eyebrow { font-size: 9px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-head .lab-name { font-size: 14px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-head .lab-verified { font-size: 9px; padding: 2px 7px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-table { padding: 4px 12px 2px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-row { font-size: 11.5px; padding: 7px 0; gap: 8px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-row .lab-status { font-size: 9.5px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-foot { padding: 10px 12px 12px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-meta { font-size: 10px; gap: 4px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-download { font-size: 12px; padding: 9px 12px; }
+
+      .fc-phone .fc-pp .pp-cta-row { padding: 16px 14px 18px; }
+      .fc-phone .fc-pp .pp-cta { font-size: 14.5px; padding: 14px 18px; }
+      .fc-phone .fc-pp .pp-cta svg { width: 16px; height: 16px; }
 
       .fc-split-right > *:first-child { margin-top: 0; }
       .fc-split-right .fc-section-head { margin-top: 0; }
