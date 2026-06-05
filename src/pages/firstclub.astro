@@ -1503,14 +1503,17 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         background: #fff;
         border-radius: 34px;
         overflow: hidden;
-        height: min(580px, calc(100vh - 90px));
         position: relative;
+        /* Stable viewport-based height: svh ignores URL-bar collapse so the
+           phone does not change size mid-scroll. vh fallback for older UAs. */
+        height: min(580px, calc(100vh - 90px));
+        height: min(580px, calc(100svh - 90px));
       }
       /* Status-bar spacer so content does not collide with the island */
       .fc-phone-screen::before {
         content: '';
         display: block;
-        height: 50px;
+        height: 46px;
         background: #fff;
       }
       /* Inner wrapper that JS translates on scroll */
@@ -2775,11 +2778,15 @@ import PitchLayout from '../layouts/PitchLayout.astro';
             if (phoneProgress) phoneProgress.style.setProperty('--fc-progress', '0%');
             return;
           }
-          // Measure without any active transform
+          // Measure without any active transform. Use the phone-screen's own
+          // scrollHeight so the ::before status-bar spacer is included; if we
+          // measured phoneContent alone, the translation would fall short by
+          // the spacer's height and the Add to FirstClub CTA would be hidden.
           phoneContent.style.transform = '';
-          var contentH = phoneContent.scrollHeight;
-          var screenH = phoneScreen.clientHeight;
-          overflow = Math.max(0, contentH - screenH);
+          var scrollH = phoneScreen.scrollHeight;
+          var clientH = phoneScreen.clientHeight;
+          // Small safety pad so trailing margins are not clipped on some UAs.
+          overflow = Math.max(0, scrollH - clientH + 8);
           if (overflow === 0) {
             phonePinner.style.height = '';
             return;
@@ -2817,6 +2824,18 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         });
 
         window.addEventListener('load', recompute);
+
+        // Recompute when in-phone content reflows (lazy-loaded gallery images,
+        // font swap, etc). Without this the very first measurement can be
+        // short, leaving the CTA at the bottom unreachable.
+        if ('ResizeObserver' in window) {
+          var ro = new ResizeObserver(function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(recompute, 120);
+          });
+          ro.observe(phoneContent);
+        }
+
         // Initial run (some content already laid out)
         recompute();
       }
