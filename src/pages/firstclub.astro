@@ -1180,6 +1180,138 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       font-style: italic;
     }
 
+    /* The scroll affordance only shows inside the desktop phone frame */
+    .fc-scroll-hint,
+    .fc-phone-fade { display: none; }
+
+    /* ===== Compact 4-problem cards ===== */
+    .fc-problem .pr-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding-bottom: 18px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--fc-border);
+    }
+    .fc-problem .pr-illus {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.65) 0%, transparent 55%),
+        linear-gradient(135deg, #E5EBC8 0%, #C2D8BC 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--fc-green);
+      border: 1px solid var(--fc-border);
+      box-shadow: inset 0 -2px 6px rgba(28, 74, 30, 0.06);
+    }
+    .fc-problem .pr-illus svg { width: 34px; height: 34px; }
+    .fc-problem .pr-meta { flex: 1; min-width: 0; }
+    .fc-problem .pr-meta .pr-num {
+      font-family: 'Inter', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--fc-green-soft);
+      letter-spacing: 0.18em;
+      line-height: 1;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .fc-problem .pr-meta .pr-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--fc-green);
+      line-height: 1.2;
+      margin-bottom: 3px;
+      letter-spacing: -0.01em;
+    }
+    @media (min-width: 720px) {
+      .fc-problem .pr-meta .pr-title { font-size: 25px; }
+    }
+    .fc-problem .pr-meta .pr-sub {
+      font-size: 13px;
+      color: var(--fc-secondary);
+      font-style: italic;
+      line-height: 1.35;
+    }
+
+    .fc-problem .pr-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .fc-problem .pr-row {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .fc-problem .pr-row-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(28, 74, 30, 0.08);
+      color: var(--fc-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .fc-problem .pr-row-icon svg { width: 16px; height: 16px; }
+    .fc-problem .pr-row-body { min-width: 0; padding-top: 4px; }
+    .fc-problem .pr-row-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--fc-green);
+      margin-bottom: 6px;
+    }
+    .fc-problem .pr-row-body p {
+      font-size: 14px;
+      color: var(--fc-body);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .fc-problem .pr-row-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .fc-problem .pr-row-list li {
+      font-size: 13.5px;
+      color: var(--fc-body);
+      line-height: 1.5;
+      padding: 0 0 0 14px;
+      position: relative;
+    }
+    .fc-problem .pr-row-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--fc-green);
+    }
+    .fc-problem .pr-row-list li strong { color: var(--fc-green); font-weight: 600; }
+    .fc-problem .pr-row-body p::first-letter {
+      font-size: inherit;
+      float: none;
+      margin: 0;
+      color: inherit;
+      font-weight: inherit;
+      line-height: inherit;
+    }
+
     /* ===== Desktop two-column layout (>= 1180px / typical 13"+ screens) ===== */
     .fc-split { display: block; }
 
@@ -1248,12 +1380,63 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         background: #fff;
         border-radius: 36px;
         overflow: hidden;
-        max-height: calc(100vh - 120px);
+        height: 760px;
+        max-height: calc(100vh - 80px);
         overflow-y: auto;
         overflow-x: hidden;
         scrollbar-width: thin;
         scrollbar-color: var(--fc-border) transparent;
         position: relative;
+      }
+
+      /* Soft fade at the bottom of the screen, so cut-off content reads as scrollable */
+      .fc-phone .fc-phone-fade {
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        bottom: 12px;
+        height: 70px;
+        border-radius: 0 0 36px 36px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.92) 70%, #fff 100%);
+        pointer-events: none;
+        z-index: 4;
+        transition: opacity 0.35s ease;
+      }
+
+      /* Scroll affordance pill that lives over the phone screen */
+      .fc-scroll-hint {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        position: absolute;
+        bottom: 28px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--fc-green);
+        color: var(--fc-cream-text);
+        padding: 7px 12px 7px 14px;
+        border-radius: var(--fc-radius-pill);
+        font-family: 'Inter', sans-serif;
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        z-index: 5;
+        pointer-events: none;
+        box-shadow: 0 6px 16px rgba(28, 74, 30, 0.32);
+        animation: scrollHintBob 1.8s ease-in-out infinite;
+        transition: opacity 0.35s ease;
+      }
+      .fc-scroll-hint svg { width: 11px; height: 11px; }
+      .fc-phone.is-scrolled .fc-scroll-hint,
+      .fc-phone.is-scrolled .fc-phone-fade { opacity: 0; }
+
+      @keyframes scrollHintBob {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(-3px); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .fc-scroll-hint { animation: none; }
       }
       .fc-phone-screen::-webkit-scrollbar { width: 4px; }
       .fc-phone-screen::-webkit-scrollbar-track { background: transparent; }
@@ -1718,6 +1901,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     </div>
 
           </div>{/* /.fc-phone-screen */}
+          <div class="fc-phone-fade" aria-hidden="true"></div>
+          <span class="fc-scroll-hint" aria-hidden="true">
+            Scroll inside
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
         </div>{/* /.fc-phone */}
       </div>{/* /.fc-split-left */}
 
@@ -1736,208 +1924,207 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     </div>
 
     <article class="fc-problem reveal">
-      <div class="pr-num">01</div>
-      <h3 class="pr-title">Personalisation - the app treats 170K households the same way</h3>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Problem
-        </span>
-        <p>
-          <em class="c">"Today"</em> is editorially curated but identical for everyone. <em class="c">"Your usuals"</em> is a passive reorder list - no prediction, no neighbourhood intelligence, no individual feed. FirstClub sits on one of the richest behavioural datasets in Indian consumer commerce and uses <strong>almost none of it</strong> at the surface.
-        </p>
-        <div class="fc-callout">A browse experience that shows everyone the same content becomes repetitive by order 10.</div>
-        <p>
-          Unlike any competitor, FirstClub has a <strong class="k">structural data advantage</strong>: a concentrated user base in identifiable apartment societies. <em class="c">Community data, not just location data.</em>
-        </p>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          Solution
-        </span>
-        <ul>
-          <li><strong>Personalised Home Page</strong> - dynamically composed per user. Category weights and featured brands respond to individual order and browse history. UX structure stays; content layer becomes personal.</li>
-          <li><strong>ML-Powered "Your Usuals"</strong> - predictive replenishment engine. Curd every 5-7 days? Surface on day 5. Out of stock? Suggest a quality-matched substitute that passed the same ingredient bar.</li>
-          <li><strong>Society-Level Recommendations</strong> - "Most ordered in your society this week." Social proof, discovery via trusted neighbours, club identity. An unfamiliar brand ordered by 40 families in your building does not feel unfamiliar anymore.</li>
-        </ul>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
-          Success Metrics
-        </span>
-        <p>
-          Orders per month: personalised feed vs. control. Add-to-cart rate on ML "Your usuals" nudges vs. manual reorder. Conversion on society recommendations. Repeat-purchase rate on products discovered through society data.
-        </p>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          ROI
-        </span>
-        <p>
-          1-2 added SKUs per basket = <strong class="k">₹150-300/order</strong>. At <strong>4+ orders/month × 170K households</strong>, a conservative <strong class="k">15% basket lift</strong> from personalisation is real GMV. Compounding value: stickiness - a product that learns you is structurally harder to replace.
-        </p>
-      </div>
-    </article>
-
-    <article class="fc-problem reveal">
-      <div class="pr-num">02</div>
-      <h3 class="pr-title">Multi-city quality at scale is an unsolved product problem</h3>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Problem
-        </span>
-        <p>
-          Quality curation in Bengaluru is <em class="c">founder-led and manual</em> - blind tastings, personal supplier relationships, central checks. Right tool for 0 to 1. <strong>Hyderabad has just launched</strong> with 3 stores and a materially different food culture - biryani masala, mutton, Irani chai, local dairy. A Bengaluru-mirrored catalogue underperforms. But there is no infrastructure to run a Hyderabad-specific curation in parallel.
-        </p>
-        <div class="fc-callout">Founder-led curation is the right tool for proof of concept. It is the wrong tool for five cities simultaneously.</div>
-        <p>
-          Series B capital is explicitly for <strong>geographic expansion</strong>. If each new city needs the same leadership involvement as Bengaluru, expansion is the bottleneck. Inconsistent quality across cities damages national trust <em class="c">before it exists</em>.
-        </p>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          Solution
-        </span>
-        <ul>
-          <li><strong>Curation OS</strong> - internal product for supplier onboarding, blind-test scoring, ingredient compliance, catalogue approval per city. Lifts the work out of spreadsheets and WhatsApp. A team of 3-4 runs curation across cities <em class="c">simultaneously</em>.</li>
-          <li><strong>Community Sourcing for Local Curation</strong> - "nominate a brand" for FirstClub members in each new city. They know local premium better than a Bengaluru-based team. 2-week response window. Converts engaged users into <em class="c">brand evangelists</em>.</li>
-          <li><strong>Local Occasion Calendar</strong> - Hyderabad gets Eid and Bathukamma. Chennai gets Pongal. Mumbai gets Ganesh Chaturthi. Auto-surface city-specific collections rather than defaulting to Bengaluru's.</li>
-          <li><strong>Dark Store Micro-Assortment</strong> - core SKUs stay fixed across stores; a portion flexes by neighbourhood data (tech park vs. multigenerational colony). Quality consistent; assortment locally relevant.</li>
-          <li><strong>Quality Consistency Audits</strong> - quarterly spot-check re-tests of high-volume catalogue SKUs. The quality promise should not <em class="c">degrade silently</em> as supplier relationships age.</li>
-        </ul>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
-          Success Metrics
-        </span>
-        <p>
-          Time from city launch to first 10K orders (Hyderabad baseline vs. next). D30 repeat rate in new city vs. Bengaluru. % of city catalogue locally sourced by day 90. SKUs per category manager across cities.
-        </p>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          ROI
-        </span>
-        <p>
-          A localised launch retains <strong class="k">20-30% more users</strong> in the first 90 days. At <strong>₹1,200 AOV</strong> × 4+ orders/month, 5K additional retained households per city = <strong class="k">₹2.9 crore additional annualised GMV</strong>. Infrastructure pays back in the first city; every city after is <em class="c">compounding return</em>.
-        </p>
+      <header class="pr-header">
+        <div class="pr-illus" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 5l1.7 4.6 4.6 1.7-4.6 1.7L16 17.6l-1.7-4.6-4.6-1.7 4.6-1.7L16 5z"/>
+            <circle cx="7" cy="22" r="2"/>
+            <circle cx="25" cy="24" r="1.6"/>
+            <circle cx="22" cy="7" r="1.2"/>
+            <path d="M6 27l3-3M24 17l3 3"/>
+          </svg>
+        </div>
+        <div class="pr-meta">
+          <div class="pr-num">Problem 01</div>
+          <h3 class="pr-title">Personalisation</h3>
+          <div class="pr-sub">One feed for 170K households</div>
+        </div>
+      </header>
+      <div class="pr-rows">
+        <div class="pr-row">
+          <span class="pr-row-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </span>
+          <div class="pr-row-body">
+            <div class="pr-row-label">The Gap</div>
+            <p><em class="c">"Today"</em> is identical for everyone. <em class="c">"Your Usuals"</em> is a reorder list, not a prediction engine. The richest <strong class="k">community-level data</strong> in Indian commerce, almost none of it surfaced.</p>
+          </div>
+        </div>
+        <div class="pr-row">
+          <span class="pr-row-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </span>
+          <div class="pr-row-body">
+            <div class="pr-row-label">The Fix</div>
+            <ul class="pr-row-list">
+              <li><strong>Personalised home</strong> · per-user category weights</li>
+              <li><strong>ML "Your Usuals"</strong> · curd every 5-7 days, surfaced on day 5</li>
+              <li><strong>Society proof</strong> · most ordered in your building this week</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pr-row">
+          <span class="pr-row-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </span>
+          <div class="pr-row-body">
+            <div class="pr-row-label">Why it pays</div>
+            <p><strong class="k">15% basket lift</strong> × 4+ orders × 170K households. A feed that learns you is structurally hard to replace.</p>
+          </div>
+        </div>
       </div>
     </article>
 
     <article class="fc-problem reveal">
-      <div class="pr-num">03</div>
-      <h3 class="pr-title">Discovery gap - customers do not trust what they cannot recognise</h3>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Problem
-        </span>
-        <p>
-          <strong>60% of the catalogue</strong> is exclusive or unfamiliar brands. Product copy is good but brand context is missing - no explanation of why a brand passed the quality bar. A real user described opening the app as <em class="c">"the same feeling as walking into a Nature's Basket - a subtle fear of overspending"</em> - triggered before a single price is seen.
-        </p>
-        <div class="fc-callout">In Bengaluru, word-of-mouth in premium apartment clusters does the trust-building work. That does not travel.</div>
-        <p>
-          Every new city launch starts from zero brand recognition. The product has to earn trust without human referrals - and today it cannot.
-        </p>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          Solution
-        </span>
-        <ul>
-          <li><strong>"Why This Brand" chip on every product card</strong> - one line, factual: <em class="c">"Cold-pressed in small batches. No hexane extraction."</em> Highest-leverage, lowest-effort change in this set.</li>
-          <li><strong>Brand Story Micro-Pages</strong> - 3-4 screens per brand, accessible with one tap from the product card. Founder photo, what the curation team found, one panel quote.</li>
-          <li><strong>Pre-Delivery Expectation Setting</strong> - the green bag, the founder note, the coriander wrap - surface them digitally right after the first order. First-order anxiety becomes anticipation.</li>
-          <li><strong>"People Who Buy X Also Trust Y"</strong> - bridge unfamiliar brands through brands they already order. No new content required.</li>
-        </ul>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
-          Success Metrics
-        </span>
-        <p>
-          Add-to-cart rate on exclusive SKUs vs. known brands. Time from app-open to first add-to-cart for new-city users. Repeat rate on brands first tried through discovery features.
-        </p>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          ROI
-        </span>
-        <p>
-          <strong class="k">10% add-to-cart lift</strong> on 60% of the catalogue compounds across every order. The strategic number is <em class="c">wallet share</em> - every rupee spent on Blinkit because a brand felt unfamiliar is a rupee FirstClub did not earn.
-        </p>
+      <header class="pr-header">
+        <div class="pr-illus" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 4a5 5 0 0 1 5 5c0 3.5-5 9-5 9s-5-5.5-5-9a5 5 0 0 1 5-5z"/>
+            <circle cx="11" cy="9" r="1.6" fill="currentColor" stroke="none"/>
+            <path d="M22 14a3.5 3.5 0 0 1 3.5 3.5C25.5 20 22 24 22 24s-3.5-4-3.5-6.5A3.5 3.5 0 0 1 22 14z"/>
+            <circle cx="22" cy="17.5" r="1.1" fill="currentColor" stroke="none"/>
+            <path d="M5 22a2.5 2.5 0 0 1 2.5 2.5C7.5 26 5 28.5 5 28.5S2.5 26 2.5 24.5A2.5 2.5 0 0 1 5 22z"/>
+          </svg>
+        </div>
+        <div class="pr-meta">
+          <div class="pr-num">Problem 02</div>
+          <h3 class="pr-title">Multi-city scale</h3>
+          <div class="pr-sub">Founder-led curation does not run five cities</div>
+        </div>
+      </header>
+      <div class="pr-rows">
+        <div class="pr-row">
+          <span class="pr-row-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </span>
+          <div class="pr-row-body">
+            <div class="pr-row-label">The Gap</div>
+            <p>Bengaluru curation is <em class="c">founder-led, manual, central</em>. Right for 0 to 1. Hyderabad has launched - <strong>biryani masala, Irani chai, local dairy</strong> are not solved by a Bengaluru-mirrored catalogue, and there is no system to run both in parallel.</p>
+          </div>
+        </div>
+        <div class="pr-row">
+          <span class="pr-row-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </span>
+          <div class="pr-row-body">
+            <div class="pr-row-label">The Fix</div>
+            <ul class="pr-row-list">
+              <li><strong>Curation OS</strong> · supplier onboarding + blind-test scoring</li>
+              <li><strong>Community sourcing</strong> · "nominate a brand" per city</li>
+              <li><strong>Local calendar</strong> · Bathukamma in Hyderabad, Pongal in Chennai</li>
+              <li><strong>Micro-assortment</strong> · core fixed, flex by neighbourhood</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pr-row">
+          <span class="pr-row-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </span>
+          <div class="pr-row-body">
+            <div class="pr-row-label">Why it pays</div>
+            <p>Localised launches retain <strong class="k">20-30% more</strong> at D90. ~<strong class="k">₹2.9 cr GMV</strong> per city. Infrastructure pays back at city one; every city after compounds.</p>
+          </div>
+        </div>
       </div>
     </article>
 
     <article class="fc-problem reveal">
-      <div class="pr-num">04</div>
-      <h3 class="pr-title">The membership product does not exist</h3>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Problem
-        </span>
-        <p>
-          Ayyappan has publicly stated FirstClub's end-state is <em class="c">Costco-style</em> - profit from membership fees, products at near-cost. Today there is no paid membership. <em class="c">"Subscribe"</em> is auto-delivery scheduling. <strong>The platform is a premium delivery app, not yet a club.</strong>
-        </p>
-        <div class="fc-callout">The 170K households placing 4+ orders/month are the warmest membership audience FirstClub will ever have.</div>
-        <p>
-          Every month without a membership ask, they form habits as free users - making conversion harder later. A working membership product at small scale is <strong>worth more in a Series C conversation than a plan to launch one</strong>.
-        </p>
+      <header class="pr-header">
+        <div class="pr-illus" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 4l10 4v8c0 7-10 13-10 13S6 23 6 16V8l10-4z"/>
+            <polyline points="11 15.5 14.5 19 21 12.5"/>
+          </svg>
+        </div>
+        <div class="pr-meta">
+          <div class="pr-num">Problem 03</div>
+          <h3 class="pr-title">Discovery + trust</h3>
+          <div class="pr-sub">Customers do not buy what they cannot recognise</div>
+        </div>
+      </header>
+      <div class="pr-rows">
+        <div class="pr-row">
+          <span class="pr-row-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </span>
+          <div class="pr-row-body">
+            <div class="pr-row-label">The Gap</div>
+            <p><strong>60% of catalogue</strong> is unfamiliar. A real user said opening the app feels like <em class="c">"walking into Nature's Basket - a subtle fear of overspending"</em>, triggered before a single price is seen. Word-of-mouth covers this in Bengaluru. It does not travel.</p>
+          </div>
+        </div>
+        <div class="pr-row">
+          <span class="pr-row-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </span>
+          <div class="pr-row-body">
+            <div class="pr-row-label">The Fix</div>
+            <ul class="pr-row-list">
+              <li><strong>"Why this brand"</strong> · one factual line on every card</li>
+              <li><strong>Brand story</strong> · 3-screen tap-through per brand</li>
+              <li><strong>Pre-delivery cues</strong> · green bag, founder note, surfaced digitally</li>
+              <li><strong>Trust bridges</strong> · "people who buy X also trust Y"</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pr-row">
+          <span class="pr-row-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </span>
+          <div class="pr-row-body">
+            <div class="pr-row-label">Why it pays</div>
+            <p><strong class="k">10% add-to-cart lift</strong> on 60% of the catalogue compounds every order. The prize is <em class="c">wallet share</em> - every rupee spent on Blinkit because a brand felt unfamiliar.</p>
+          </div>
+        </div>
       </div>
+    </article>
 
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-          Solution
-        </span>
-        <ul>
-          <li><strong>Founding Member programme</strong> - <strong class="k">5K slots</strong>, early-adopter pricing, launched in 3 months. Not a commercial launch - a <em class="c">learning vehicle</em>. Benefits feel like access, not discounts: exclusive SKUs, tasting panel invites, clubhouse access, early brand drops. Priced at <strong class="k">₹1,199/year</strong>.</li>
-          <li><strong>Full commercial launch at 400K-500K households</strong>. 25% conversion × ₹1,200/year = <strong class="k">₹12-15 crore ARR</strong> at near-zero marginal cost. Architecture built at 5K members scales directly to 100K.</li>
-        </ul>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
-          Success Metrics
-        </span>
-        <p>
-          Founding Member conversion rate. Orders/month: paid vs. free. AOV: member vs. non-member. Retention at 3, 6, 12 months.
-        </p>
-      </div>
-
-      <div class="pr-block">
-        <span class="pr-label">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-          ROI
-        </span>
-        <p>
-          Revenue at current scale is not the point. <strong>The Founding Member programme proves the Costco model works in India.</strong> At 400K+ households it becomes a core revenue stream - built once at 5,000, scaled to 100K members without rebuilding.
-        </p>
+    <article class="fc-problem reveal">
+      <header class="pr-header">
+        <div class="pr-illus" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="16" cy="12" r="7"/>
+            <polyline points="11 17.5 9 28 16 24 23 28 21 17.5"/>
+            <path d="M16 8.5l1.15 2.3 2.55.37-1.85 1.8.44 2.55L16 14.3l-2.29 1.22.44-2.55-1.85-1.8 2.55-.37L16 8.5z" fill="currentColor" stroke="none"/>
+          </svg>
+        </div>
+        <div class="pr-meta">
+          <div class="pr-num">Problem 04</div>
+          <h3 class="pr-title">The membership product</h3>
+          <div class="pr-sub">Costco end-state, no paid tier today</div>
+        </div>
+      </header>
+      <div class="pr-rows">
+        <div class="pr-row">
+          <span class="pr-row-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </span>
+          <div class="pr-row-body">
+            <div class="pr-row-label">The Gap</div>
+            <p>Ayyappan has said the end-state is <em class="c">Costco</em>. Today there is no paid tier - <em class="c">"Subscribe"</em> is auto-delivery scheduling. Every month of free habit makes paid conversion harder.</p>
+          </div>
+        </div>
+        <div class="pr-row">
+          <span class="pr-row-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </span>
+          <div class="pr-row-body">
+            <div class="pr-row-label">The Fix</div>
+            <ul class="pr-row-list">
+              <li><strong>Founding Member</strong> · 5K slots, ₹1,199/year, live in 3 months. Access not discounts.</li>
+              <li><strong>Full launch at 400-500K households</strong> · 25% conv × ₹1,200 = <strong class="k">₹12-15 cr ARR</strong></li>
+              <li><strong>Same architecture scales</strong> · 5K → 100K members without rebuild</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pr-row">
+          <span class="pr-row-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </span>
+          <div class="pr-row-body">
+            <div class="pr-row-label">Why it pays</div>
+            <p>Revenue today is not the point. <strong>Proof that Costco-in-India works</strong> is worth more in a Series C conversation than a plan to launch one.</p>
+          </div>
+        </div>
       </div>
     </article>
 
@@ -2079,6 +2266,15 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       if (prevBtn) prevBtn.addEventListener('click', function() { if (current > 0) scrollTo(current - 1); });
       if (nextBtn) nextBtn.addEventListener('click', function() { if (current < total - 1) scrollTo(current + 1); });
       updateUI(0);
+
+      var phone = document.querySelector('.fc-phone');
+      var phoneScreen = document.querySelector('.fc-phone-screen');
+      if (phone && phoneScreen) {
+        phoneScreen.addEventListener('scroll', function() {
+          if (phoneScreen.scrollTop > 30) phone.classList.add('is-scrolled');
+          else phone.classList.remove('is-scrolled');
+        }, { passive: true });
+      }
     });
   </script>
 </PitchLayout>
