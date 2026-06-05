@@ -1185,37 +1185,84 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
     @media (min-width: 1180px) {
       .fc-page {
-        max-width: 1280px;
+        max-width: 1320px;
         padding: 36px 40px 80px;
       }
 
       .fc-split {
         display: grid;
-        grid-template-columns: minmax(0, 600px) minmax(0, 1fr);
-        gap: 40px;
+        grid-template-columns: 440px minmax(0, 1fr);
+        gap: 60px;
         align-items: start;
       }
 
       .fc-split-left {
         position: sticky;
-        top: 24px;
+        top: 28px;
         align-self: start;
-        max-height: calc(100vh - 48px);
+      }
+
+      /* Phone frame mockup ===== */
+      .fc-phone {
+        background: linear-gradient(160deg, #1a1a1a 0%, #2a2a2a 100%);
+        border-radius: 42px;
+        padding: 14px 12px 16px;
+        box-shadow:
+          0 30px 60px rgba(0, 0, 0, 0.28),
+          0 12px 30px rgba(28, 74, 30, 0.16),
+          inset 0 0 0 1.5px #3a3a3a,
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        position: relative;
+      }
+      /* Notch / pill at top */
+      .fc-phone::before {
+        content: '';
+        position: absolute;
+        top: 6px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 110px;
+        height: 7px;
+        background: #2a2a2a;
+        border-radius: 0 0 9px 9px;
+        z-index: 2;
+      }
+      /* Side button hint */
+      .fc-phone::after {
+        content: '';
+        position: absolute;
+        left: -2px;
+        top: 140px;
+        width: 3px;
+        height: 60px;
+        background: #2a2a2a;
+        border-radius: 2px 0 0 2px;
+        box-shadow: 0 80px 0 #2a2a2a;
+      }
+
+      .fc-phone-screen {
+        background: #fff;
+        border-radius: 32px;
+        overflow: hidden;
+        max-height: calc(100vh - 124px);
         overflow-y: auto;
         overflow-x: hidden;
         scrollbar-width: thin;
         scrollbar-color: var(--fc-border) transparent;
-        /* Smooth shadow tint to suggest scroll affordance */
-        padding-right: 4px;
+        position: relative;
       }
-      .fc-split-left::-webkit-scrollbar { width: 6px; }
-      .fc-split-left::-webkit-scrollbar-track { background: transparent; }
-      .fc-split-left::-webkit-scrollbar-thumb { background: var(--fc-border); border-radius: 3px; }
-      .fc-split-left::-webkit-scrollbar-thumb:hover { background: var(--fc-green-light); }
+      .fc-phone-screen::-webkit-scrollbar { width: 5px; }
+      .fc-phone-screen::-webkit-scrollbar-track { background: transparent; }
+      .fc-phone-screen::-webkit-scrollbar-thumb { background: var(--fc-border); border-radius: 3px; }
+      .fc-phone-screen::-webkit-scrollbar-thumb:hover { background: var(--fc-green-light); }
 
-      .fc-split-left .fc-showcase {
+      /* Reset showcase styling inside the phone (the phone provides the frame) */
+      .fc-phone .fc-showcase {
         margin: 0;
         max-width: none;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
       }
 
       .fc-split-right > *:first-child { margin-top: 0; }
@@ -1229,11 +1276,21 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     @media print {
       .fc-split { display: block !important; }
       .fc-split-left,
-      .fc-split-right {
+      .fc-split-right,
+      .fc-phone-screen {
         position: static !important;
         max-height: none !important;
         overflow: visible !important;
       }
+      .fc-phone {
+        background: transparent !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+      }
+      .fc-phone::before,
+      .fc-phone::after { display: none !important; }
+      .fc-phone-screen { border-radius: 0 !important; }
     }
 
     /* ===== Print stylesheet ===== */
@@ -1308,6 +1365,8 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
     <div class="fc-split">
       <div class="fc-split-left">
+        <div class="fc-phone">
+          <div class="fc-phone-screen">
 
     {/* ============ Unified showcase: Today's Specials + Product page ============ */}
     <div class="fc-showcase reveal">
@@ -1571,6 +1630,8 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </article>
     </div>
 
+          </div>{/* /.fc-phone-screen */}
+        </div>{/* /.fc-phone */}
       </div>{/* /.fc-split-left */}
 
       <div class="fc-split-right">
