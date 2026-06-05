@@ -36,8 +36,9 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       line-height: 1.6;
       font-weight: 400;
     }
-    .fc-page { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
-    @media (min-width: 720px) { .fc-page { padding: 56px 32px 96px; } }
+    .fc-page { max-width: 860px; margin: 0 auto; padding: 28px 20px 72px; }
+    @media (min-width: 720px) { .fc-page { padding: 48px 32px 96px; } }
+    @media (max-width: 420px) { .fc-page { padding: 22px 14px 64px; } }
 
     strong.k {
       color: var(--fc-green);
@@ -113,8 +114,8 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
     /* ===== UNIFIED SHOWCASE (Today's Specials + Product Page in one box) ===== */
     .fc-showcase {
-      max-width: 560px;
-      margin: 32px auto;
+      max-width: 600px;
+      margin: 28px auto;
       background: #fff;
       border: 1px solid var(--fc-border);
       border-radius: 14px;
@@ -122,6 +123,9 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       box-shadow:
         0 4px 16px rgba(28, 74, 30, 0.08),
         0 16px 40px rgba(28, 74, 30, 0.06);
+    }
+    @media (max-width: 480px) {
+      .fc-showcase { margin: 22px auto; border-radius: 10px; }
     }
 
     /* ===== Today's Specials inside showcase ===== */
@@ -176,6 +180,14 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       gap: 8px;
       position: relative;
       z-index: 1;
+    }
+    @media (max-width: 400px) {
+      .fc-specials .ts-cards { gap: 6px; }
+      .fc-special-card { padding: 8px 6px 10px; gap: 4px; }
+      .fc-special-card .sc-image { width: 52px; height: 52px; }
+      .fc-special-card .sc-label { font-size: 9px; min-height: 22px; }
+      .fc-special-card .sc-caption { font-size: 10.5px; }
+      .fc-special-card .sc-meta { font-size: 9px; }
     }
     .fc-special-card {
       border-radius: var(--fc-radius-lg);
@@ -321,6 +333,28 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .fc-pp .pp-hero .pp-leaf.tr { top: 18px; right: 18px; width: 32px; height: 32px; transform: rotate(35deg); }
     .fc-pp .pp-hero .pp-leaf.bl { bottom: 40px; left: 18px; width: 28px; height: 28px; transform: rotate(15deg); }
     .fc-pp .pp-hero .pp-leaf.br { bottom: 44px; right: 18px; width: 34px; height: 34px; transform: rotate(-30deg); }
+    .fc-pp .pp-hero .pp-leaf.cl { top: 50%; left: 4%; width: 50px; height: 50px; transform: rotate(-45deg) translateY(-50%); opacity: 0.55; }
+    .fc-pp .pp-hero .pp-leaf.cr { top: 50%; right: 4%; width: 50px; height: 50px; transform: rotate(75deg) translateY(-50%); opacity: 0.55; }
+    /* Soft circle stamps */
+    .fc-pp .pp-hero .pp-stamp {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+      border: 1.5px dashed rgba(28, 74, 30, 0.18);
+      border-radius: 50%;
+    }
+    .fc-pp .pp-hero .pp-stamp.s1 { width: 70px; height: 70px; top: 32%; left: 12%; transform: rotate(-15deg); }
+    .fc-pp .pp-hero .pp-stamp.s2 { width: 56px; height: 56px; bottom: 22%; right: 10%; transform: rotate(20deg); }
+    /* Sparkle dots */
+    .fc-pp .pp-hero .pp-sparkle {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+      color: rgba(28, 74, 30, 0.30);
+    }
+    .fc-pp .pp-hero .pp-sparkle.k1 { top: 22%; right: 22%; width: 16px; height: 16px; }
+    .fc-pp .pp-hero .pp-sparkle.k2 { bottom: 28%; left: 16%; width: 12px; height: 12px; }
+    .fc-pp .pp-hero .pp-sparkle.k3 { top: 14%; left: 36%; width: 10px; height: 10px; }
 
     /* Hand-picked badge floating on the photo */
     .fc-pp .pp-hero .pp-badge {
@@ -378,6 +412,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         0 12px 28px rgba(0, 0, 0, 0.24),
         0 2px 6px rgba(0, 0, 0, 0.12);
       border: 3px solid rgba(255, 255, 255, 0.92);
+    }
+    @media (max-width: 420px) {
+      .fc-pp .pp-gallery img { max-width: 200px; height: 250px; }
+      .fc-pp .pp-gallery .pp-slide { min-height: 260px; }
+      .fc-pp .pp-arrow { width: 30px; height: 30px; }
     }
     .fc-pp .pp-dots {
       position: absolute;
@@ -658,12 +697,16 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     }
     .fc-pp .pp-lab .pp-lab-row {
       display: grid;
-      grid-template-columns: 1fr auto auto;
-      gap: 12px;
+      grid-template-columns: 1.4fr auto auto;
+      gap: 10px;
       align-items: center;
       padding: 9px 0;
       border-bottom: 1px dashed var(--fc-border);
       font-size: 12.5px;
+    }
+    @media (max-width: 420px) {
+      .fc-pp .pp-lab .pp-lab-row { grid-template-columns: 1.2fr 1fr auto; gap: 8px; font-size: 11.5px; }
+      .fc-pp .pp-lab .pp-lab-row .lab-result { font-size: 11.5px; }
     }
     .fc-pp .pp-lab .pp-lab-row:last-child { border-bottom: none; }
     .fc-pp .pp-lab .pp-lab-row .lab-test { color: var(--fc-secondary); font-weight: 500; }
@@ -1036,6 +1079,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         <div class="role">Product Leader · 7 years in PM · Available now</div>
       </div>
       <div class="contact-block">
+        <a href="https://sagarahuja.co" target="_blank" rel="noopener">sagarahuja.co</a><br />
         <a href="mailto:sagarahuja@gmail.com">sagarahuja@gmail.com</a><br />
         <a href="https://linkedin.com/in/sagar-ahuja-/" target="_blank" rel="noopener">linkedin.com/in/sagar-ahuja-</a><br />
         Bengaluru, India
@@ -1054,7 +1098,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           <div class="fc-special-card sc-1">
             <div class="sc-label">Limited<br />Edition</div>
             <div class="sc-image">
-              <img src="https://images.unsplash.com/photo-1605792657660-596af9009e82?w=200&h=200&fit=crop&q=80" alt="" loading="lazy" />
+              <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=200&h=200&fit=crop&q=80" alt="" loading="lazy" />
             </div>
             <div class="sc-caption">1 of 1, hand-crafted</div>
             <div class="sc-meta">11+ years aged</div>
@@ -1070,7 +1114,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           <div class="fc-special-card sc-3">
             <div class="sc-label">Season's<br />Best</div>
             <div class="sc-image">
-              <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=200&h=200&fit=crop&q=80" alt="" loading="lazy" />
+              <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=200&h=200&fit=crop&q=80" alt="" loading="lazy" />
             </div>
             <div class="sc-caption">Available now</div>
             <div class="sc-meta">Zero notice period</div>
@@ -1090,11 +1134,22 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           <svg class="pp-leaf tr" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 4.41 3.59 8 8 8 .55 0 1-.45 1-1V9.41l5.29 5.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L14.41 8H20c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1h-8z"/></svg>
           <svg class="pp-leaf bl" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.5 11C8.36 11 5 14.36 5 18.5c0 1.18.27 2.29.74 3.28L18.5 9.04A7.491 7.491 0 0 0 12.5 11z"/></svg>
           <svg class="pp-leaf br" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+          <svg class="pp-leaf cl" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 4.41 3.59 8 8 8 .55 0 1-.45 1-1V9.41l5.29 5.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L14.41 8H20c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1h-8z"/></svg>
+          <svg class="pp-leaf cr" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
 
-          {/* Hand-picked badge */}
-          <span class="pp-badge">
+          {/* Decorative dashed stamps */}
+          <span class="pp-stamp s1" aria-hidden="true"></span>
+          <span class="pp-stamp s2" aria-hidden="true"></span>
+
+          {/* Sparkles */}
+          <svg class="pp-sparkle k1" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3-1.9 5.7L4 10.5l5.7 1.9L11.6 18l1.9-5.7L19 10.5l-5.5-1.6L12 3Z"/></svg>
+          <svg class="pp-sparkle k2" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3-1.9 5.7L4 10.5l5.7 1.9L11.6 18l1.9-5.7L19 10.5l-5.5-1.6L12 3Z"/></svg>
+          <svg class="pp-sparkle k3" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3-1.9 5.7L4 10.5l5.7 1.9L11.6 18l1.9-5.7L19 10.5l-5.5-1.6L12 3Z"/></svg>
+
+          {/* Dynamic per-slide badge */}
+          <span class="pp-badge" id="pp-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-            Hand-picked for FirstClub
+            <span id="pp-badge-text">Best of the Batch</span>
           </span>
 
           <button class="pp-arrow prev" type="button" id="pp-prev" aria-label="Previous photo">
@@ -1104,11 +1159,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
           <div class="pp-gallery" id="pp-gallery">
-            <div class="pp-slide"><img src="/firstclub/sagar-4.jpg" alt="Sagar Ahuja - portrait" loading="eager" /></div>
-            <div class="pp-slide"><img src="/firstclub/sagar-1.jpg" alt="Sagar Ahuja - speaking" loading="lazy" /></div>
-            <div class="pp-slide"><img src="/firstclub/sagar-2.jpg" alt="Sagar Ahuja - studio portrait" loading="lazy" /></div>
-            <div class="pp-slide"><img src="/firstclub/sagar-3.jpg" alt="Sagar Ahuja - outdoor casual" loading="lazy" /></div>
-            <div class="pp-slide"><img src="/firstclub/sagar-5.jpg" alt="Sagar Ahuja - at ISB" loading="lazy" /></div>
+            <div class="pp-slide" data-tag="Best of the Batch"><img src="/firstclub/sagar-4.jpg" alt="Sagar Ahuja - portrait" loading="eager" /></div>
+            <div class="pp-slide" data-tag="Live tested on stage"><img src="/firstclub/sagar-1.jpg" alt="Sagar Ahuja - speaking" loading="lazy" /></div>
+            <div class="pp-slide" data-tag="Studio fresh"><img src="/firstclub/sagar-2.jpg" alt="Sagar Ahuja - studio portrait" loading="lazy" /></div>
+            <div class="pp-slide" data-tag="Naturally aged"><img src="/firstclub/sagar-3.jpg" alt="Sagar Ahuja - outdoor casual" loading="lazy" /></div>
+            <div class="pp-slide" data-tag="Lab certified at ISB"><img src="/firstclub/sagar-5.jpg" alt="Sagar Ahuja - at ISB" loading="lazy" /></div>
           </div>
           <div class="pp-dots" id="pp-dots" aria-hidden="true">
             <span class="active"></span><span></span><span></span><span></span><span></span>
@@ -1138,7 +1193,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           </span>
         </div>
         <div class="pp-brand">Sagar Ahuja</div>
-        <h2 class="pp-title">Senior Product Leader<br />(Light Notice)</h2>
+        <h2 class="pp-title">Senior Product Leader</h2>
         <div class="pp-weight">11+ years · 7 in product</div>
         <div class="pp-price">
           <span class="pp-price-now">0 days</span>
@@ -1148,7 +1203,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         <div class="pp-about">
           <h3>About This Product</h3>
           <p>
-            Sagar Ahuja Senior Product Leader is a high-quality product builder designed to support consumer platform scaling, retention systems, and post-Series B momentum, with a 12-month build thesis already mapped to FirstClub's exact infrastructure gaps.
+            Sagar Ahuja is a Senior Product Leader and a high-quality product builder designed to support consumer platform scaling, retention systems, and post-Series B momentum, with a high-level 12-month build thesis already mapped to FirstClub's exact infrastructure gaps.
           </p>
 
           <div class="pp-section-title">
@@ -1156,10 +1211,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
             Why You'll Love Him:
           </div>
           <ul class="pp-check">
-            <li>11 years of product experience, 7 in PM</li>
+            <li>11 years of experience, 7 in product management</li>
             <li>Built consumer mobile platforms at Skillz</li>
             <li>Designed ML-driven engagement and retention systems</li>
             <li>Shipped subscription and monetisation programs</li>
+            <li><strong>All-rounder</strong> - has owned marketing, sales, analytics, coaching, and product depending on what the moment needed</li>
             <li>Available immediately - no notice period</li>
           </ul>
 
@@ -1169,10 +1225,10 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           </div>
           <ul class="pp-arrow-list">
             <li>Onboard in week one - no 90-day hiring cycle</li>
-            <li>Assign first to personalisation or membership infrastructure</li>
+            <li>Assign to whatever FirstClub has prioritised next - personalisation, membership, multi-city, anything else. Truly mouldable</li>
             <li>Pair with engineering, category, and marketing teams</li>
-            <li>Best deployed at scale, not at concept stage</li>
-            <li>Compounds when given platform-level ownership</li>
+            <li>Best deployed at scale</li>
+            <li>Compounds when given ownership</li>
           </ul>
 
           <div class="pp-section-title">
@@ -1181,7 +1237,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           </div>
           <ul class="pp-cross">
             <li>Vanity metrics</li>
-            <li>Roadmaps driven by the loudest stakeholder</li>
+            <li>Confusing motion with momentum</li>
             <li>Features shipped without defined success criteria</li>
             <li>Surface-level user research</li>
           </ul>
@@ -1249,7 +1305,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
               </div>
               <a href="/firstclub/sagar-ahuja-resume.pdf" download class="pp-lab-download" aria-label="Download full resume PDF">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download Full Report (PDF)
+                Download Full Report · Resume (PDF)
               </a>
             </div>
           </div>
@@ -1273,16 +1329,16 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       <div class="eyebrow-row">
         <span class="fc-eyebrow">The 12-month thesis</span>
       </div>
-      <h2>From 170,000 to 1,000,000 households.</h2>
+      <h2>How do we go from 170K to 1M households?</h2>
     </div>
     <div class="fc-framing reveal">
-      <p class="quote">Many things that work at 170,000 households break at 1 million.</p>
+      <p class="quote">Many things that work at 170K households break at 1M.</p>
       <p class="tail">These are the four that matter most in the next 12 months.</p>
     </div>
 
     <article class="fc-problem reveal">
       <div class="pr-num">01</div>
-      <h3 class="pr-title">Personalisation - the app treats 170,000 households the same way</h3>
+      <h3 class="pr-title">Personalisation - the app treats 170K households the same way</h3>
 
       <div class="pr-block">
         <span class="pr-label">
@@ -1326,7 +1382,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           ROI
         </span>
         <p>
-          1-2 added SKUs per basket = <strong class="k">₹150-300/order</strong>. At <strong>4+ orders/month × 170,000 households</strong>, a conservative <strong class="k">15% basket lift</strong> from personalisation is real GMV. Compounding value: stickiness - a product that learns you is structurally harder to replace.
+          1-2 added SKUs per basket = <strong class="k">₹150-300/order</strong>. At <strong>4+ orders/month × 170K households</strong>, a conservative <strong class="k">15% basket lift</strong> from personalisation is real GMV. Compounding value: stickiness - a product that learns you is structurally harder to replace.
         </p>
       </div>
     </article>
@@ -1369,7 +1425,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           Success Metrics
         </span>
         <p>
-          Time from city launch to first 10,000 orders (Hyderabad baseline vs. next). D30 repeat rate in new city vs. Bengaluru. % of city catalogue locally sourced by day 90. SKUs per category manager across cities.
+          Time from city launch to first 10K orders (Hyderabad baseline vs. next). D30 repeat rate in new city vs. Bengaluru. % of city catalogue locally sourced by day 90. SKUs per category manager across cities.
         </p>
       </div>
 
@@ -1379,7 +1435,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           ROI
         </span>
         <p>
-          A localised launch retains <strong class="k">20-30% more users</strong> in the first 90 days. At <strong>₹1,200 AOV</strong> × 4+ orders/month, 5,000 additional retained households per city = <strong class="k">₹2.9 crore additional annualised GMV</strong>. Infrastructure pays back in the first city; every city after is <em class="c">compounding return</em>.
+          A localised launch retains <strong class="k">20-30% more users</strong> in the first 90 days. At <strong>₹1,200 AOV</strong> × 4+ orders/month, 5K additional retained households per city = <strong class="k">₹2.9 crore additional annualised GMV</strong>. Infrastructure pays back in the first city; every city after is <em class="c">compounding return</em>.
         </p>
       </div>
     </article>
@@ -1448,7 +1504,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         <p>
           Ayyappan has publicly stated FirstClub's end-state is <em class="c">Costco-style</em> - profit from membership fees, products at near-cost. Today there is no paid membership. <em class="c">"Subscribe"</em> is auto-delivery scheduling. <strong>The platform is a premium delivery app, not yet a club.</strong>
         </p>
-        <div class="fc-callout">The 170,000 households placing 4+ orders/month are the warmest membership audience FirstClub will ever have.</div>
+        <div class="fc-callout">The 170K households placing 4+ orders/month are the warmest membership audience FirstClub will ever have.</div>
         <p>
           Every month without a membership ask, they form habits as free users - making conversion harder later. A working membership product at small scale is <strong>worth more in a Series C conversation than a plan to launch one</strong>.
         </p>
@@ -1460,8 +1516,8 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           Solution
         </span>
         <ul>
-          <li><strong>Founding Member programme</strong> - <strong class="k">5,000 slots</strong>, early-adopter pricing, launched in 3 months. Not a commercial launch - a <em class="c">learning vehicle</em>. Benefits feel like access, not discounts: exclusive SKUs, tasting panel invites, clubhouse access, early brand drops. Priced at <strong class="k">₹1,199/year</strong>.</li>
-          <li><strong>Full commercial launch at 400,000-500,000 households</strong>. 25% conversion × ₹1,200/year = <strong class="k">₹12-15 crore ARR</strong> at near-zero marginal cost. Architecture built at 5,000 members scales directly to 100,000.</li>
+          <li><strong>Founding Member programme</strong> - <strong class="k">5K slots</strong>, early-adopter pricing, launched in 3 months. Not a commercial launch - a <em class="c">learning vehicle</em>. Benefits feel like access, not discounts: exclusive SKUs, tasting panel invites, clubhouse access, early brand drops. Priced at <strong class="k">₹1,199/year</strong>.</li>
+          <li><strong>Full commercial launch at 400K-500K households</strong>. 25% conversion × ₹1,200/year = <strong class="k">₹12-15 crore ARR</strong> at near-zero marginal cost. Architecture built at 5K members scales directly to 100K.</li>
         </ul>
       </div>
 
@@ -1481,7 +1537,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           ROI
         </span>
         <p>
-          Revenue at current scale is not the point. <strong>The Founding Member programme proves the Costco model works in India.</strong> At 400K+ households it becomes a core revenue stream - built once at 5,000, scaled to 100,000 without rebuilding.
+          Revenue at current scale is not the point. <strong>The Founding Member programme proves the Costco model works in India.</strong> At 400K+ households it becomes a core revenue stream - built once at 5,000, scaled to 100K members without rebuilding.
         </p>
       </div>
     </article>
@@ -1524,6 +1580,14 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         At Games24x7 I built and led the centralised experimentation platform from scratch - feature flags, A/B tests, real-time rollouts - which removed release-cycle bottlenecks across every product team. The same pattern (lift the manual work into shared infrastructure, then scale the org around it) is exactly what FirstClub's curation function needs as it moves from one city to five.
       </div>
 
+      <h3>On being an all-rounder</h3>
+      <p>
+        I am at my best in product, but I do not get stuck up on designations. I have owned <strong>marketing, sales, analytics, coaching, and product</strong> at different points - whatever the moment needed. <strong>Truly believe startups require all-rounders</strong>, and a 0 to 1 company at FirstClub's stage benefits more from someone who can move across functions than from someone who only does one well.
+      </p>
+      <div class="metric">
+        Practically, this means: if personalisation is not the priority for the next two quarters, I can pick up category, GTM, lifecycle marketing, or the membership build-out instead. Mouldable to whatever FirstClub has prioritised.
+      </div>
+
       <div class="closing">
         <strong>I am available immediately.</strong> A company that has closed a $55M Series B with four active infrastructure gaps and a 12-month expansion plan cannot afford a 90-day hiring cycle. I can start contributing in week one.
       </div>
@@ -1536,6 +1600,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </p>
       <div class="fc-cta-contact">
         <span class="label">Reach me at</span>
+        <a href="https://sagarahuja.co" target="_blank" rel="noopener">sagarahuja.co</a>
         <a href="mailto:sagarahuja@gmail.com">sagarahuja@gmail.com</a>
         <a href="https://linkedin.com/in/sagar-ahuja-/" target="_blank" rel="noopener">linkedin.com/in/sagar-ahuja-</a>
       </div>
@@ -1578,11 +1643,16 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         return slides[1].offsetLeft - slides[0].offsetLeft;
       }
 
+      var badgeText = document.getElementById('pp-badge-text');
       function updateUI(i) {
         current = i;
         dots.forEach(function(d, idx) { d.classList.toggle('active', idx === i); });
         if (prevBtn) prevBtn.disabled = i <= 0;
         if (nextBtn) nextBtn.disabled = i >= total - 1;
+        if (badgeText && slides[i]) {
+          var tag = slides[i].getAttribute('data-tag');
+          if (tag) badgeText.textContent = tag;
+        }
       }
 
       function scrollTo(i) {
