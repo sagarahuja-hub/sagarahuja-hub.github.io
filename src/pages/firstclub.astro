@@ -97,7 +97,20 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--fc-secondary);
+      margin-bottom: 6px;
     }
+    .fc-header .name-block .website {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--fc-green);
+    }
+    .fc-header .name-block .website a {
+      color: var(--fc-green);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(28, 74, 30, 0.25);
+      transition: border-color 0.15s ease;
+    }
+    .fc-header .name-block .website a:hover { border-color: var(--fc-green); }
     .fc-header .contact-block {
       text-align: right;
       font-size: 12px;
@@ -126,6 +139,77 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     }
     @media (max-width: 480px) {
       .fc-showcase { margin: 22px auto; border-radius: 10px; }
+    }
+
+    /* === Side-by-side layout on desktop === */
+    @media (min-width: 820px) {
+      .fc-showcase {
+        max-width: 920px;
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        align-items: stretch;
+      }
+      .fc-showcase .fc-specials {
+        border-bottom: none;
+        border-right: 1px solid var(--fc-border);
+        padding: 22px 16px 22px;
+        position: sticky;
+        top: 0;
+        align-self: start;
+        max-height: 100vh;
+        overflow-y: auto;
+      }
+      .fc-showcase .fc-specials::before {
+        font-size: 56px;
+        top: 10px;
+      }
+      .fc-showcase .fc-specials .ts-head { margin-bottom: 14px; }
+      .fc-showcase .fc-specials .ts-head h2 { font-size: 24px; }
+      .fc-showcase .fc-specials .ts-head .sub { font-size: 11.5px; }
+      .fc-showcase .fc-specials .ts-cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+      .fc-showcase .fc-special-card {
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        grid-template-rows: auto auto auto;
+        column-gap: 12px;
+        row-gap: 2px;
+        padding: 12px 12px;
+        text-align: left;
+        align-items: center;
+      }
+      .fc-showcase .fc-special-card .sc-image {
+        grid-row: 1 / 4;
+        grid-column: 1;
+        width: 50px;
+        height: 50px;
+        align-self: center;
+      }
+      .fc-showcase .fc-special-card .sc-label {
+        grid-row: 1;
+        grid-column: 2;
+        text-align: left;
+        min-height: 0;
+        justify-content: flex-start;
+        padding: 0;
+        font-size: 10px;
+        line-height: 1.1;
+      }
+      .fc-showcase .fc-special-card .sc-label br { display: none; }
+      .fc-showcase .fc-special-card .sc-caption {
+        grid-row: 2;
+        grid-column: 2;
+        text-align: left;
+        font-size: 12px;
+        padding: 0;
+      }
+      .fc-showcase .fc-special-card .sc-meta {
+        grid-row: 3;
+        grid-column: 2;
+        font-size: 10px;
+      }
     }
 
     /* ===== Today's Specials inside showcase ===== */
@@ -417,6 +501,103 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       .fc-pp .pp-gallery img { max-width: 200px; height: 250px; }
       .fc-pp .pp-gallery .pp-slide { min-height: 260px; }
       .fc-pp .pp-arrow { width: 30px; height: 30px; }
+    }
+
+    /* Inline preview cards inside the gallery (same size as photos) */
+    .fc-pp .pp-gallery .pp-card-slide {
+      width: 100%;
+      max-width: 240px;
+      height: 290px;
+      border-radius: 14px;
+      background: linear-gradient(160deg, #ffffff 0%, #F0F5DC 50%, #DCE8C8 100%);
+      box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.24),
+        0 2px 6px rgba(0, 0, 0, 0.12);
+      border: 3px solid rgba(255, 255, 255, 0.95);
+      padding: 22px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: space-between;
+      text-align: center;
+      position: relative;
+    }
+    @media (max-width: 420px) {
+      .fc-pp .pp-gallery .pp-card-slide { max-width: 200px; height: 250px; padding: 18px 14px 16px; }
+    }
+    .fc-pp .pp-gallery .pp-card-slide .ps-eyebrow {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--fc-green);
+    }
+    .fc-pp .pp-gallery .pp-card-slide .ps-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--fc-green);
+      line-height: 1.15;
+      letter-spacing: -0.015em;
+      margin: 4px 0 0;
+    }
+    .fc-pp .pp-gallery .pp-card-slide .ps-sub {
+      font-size: 12.5px;
+      color: var(--fc-secondary);
+      font-style: italic;
+      margin-top: 4px;
+    }
+    .fc-pp .pp-gallery .pp-card-slide .ps-list {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: left;
+    }
+    .fc-pp .pp-gallery .pp-card-slide .ps-list li {
+      font-size: 12.5px;
+      color: var(--fc-body);
+      font-weight: 500;
+      padding: 5px 10px 5px 22px;
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 6px;
+      position: relative;
+    }
+    .fc-pp .pp-gallery .pp-card-slide .ps-list li::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--fc-green);
+    }
+    .fc-pp .pp-gallery .pp-card-slide .ps-stat {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--fc-green);
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      margin-top: 8px;
+    }
+    .fc-pp .pp-gallery .pp-card-slide .ps-stat-sub {
+      font-size: 11.5px;
+      color: var(--fc-secondary);
+      font-weight: 500;
+      margin-top: 4px;
+    }
+    .fc-pp .pp-gallery .pp-card-slide .ps-foot {
+      font-size: 11px;
+      color: var(--fc-green);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-top: 8px;
     }
     .fc-pp .pp-dots {
       position: absolute;
@@ -1077,10 +1258,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       <div class="name-block">
         <div class="name">Sagar Ahuja</div>
         <div class="role">Product Leader · 7 years in PM · Available now</div>
+        <div class="website"><a href="https://sagarahuja.co" target="_blank" rel="noopener">sagarahuja.co</a></div>
       </div>
       <div class="contact-block">
-        <a href="https://sagarahuja.co" target="_blank" rel="noopener">sagarahuja.co</a><br />
         <a href="mailto:sagarahuja@gmail.com">sagarahuja@gmail.com</a><br />
+        <a href="tel:+919557629225">+91 9557 629 225</a><br />
         <a href="https://linkedin.com/in/sagar-ahuja-/" target="_blank" rel="noopener">linkedin.com/in/sagar-ahuja-</a><br />
         Bengaluru, India
       </div>
@@ -1160,10 +1342,34 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           </button>
           <div class="pp-gallery" id="pp-gallery">
             <div class="pp-slide" data-tag="Best of the Batch"><img src="/firstclub/sagar-4.jpg" alt="Sagar Ahuja - portrait" loading="eager" /></div>
-            <div class="pp-slide" data-tag="Live tested on stage"><img src="/firstclub/sagar-1.jpg" alt="Sagar Ahuja - speaking" loading="lazy" /></div>
-            <div class="pp-slide" data-tag="Studio fresh"><img src="/firstclub/sagar-2.jpg" alt="Sagar Ahuja - studio portrait" loading="lazy" /></div>
-            <div class="pp-slide" data-tag="Naturally aged"><img src="/firstclub/sagar-3.jpg" alt="Sagar Ahuja - outdoor casual" loading="lazy" /></div>
+            <div class="pp-slide" data-tag="Roadmap inside">
+              <div class="pp-card-slide">
+                <div>
+                  <div class="ps-eyebrow">What's ahead</div>
+                  <div class="ps-title">4 problems<br />mapped</div>
+                </div>
+                <ul class="ps-list">
+                  <li>Personalisation</li>
+                  <li>Multi-city scaling</li>
+                  <li>Discovery / trust</li>
+                  <li>Membership build</li>
+                </ul>
+                <div class="ps-foot">Full thesis below ↓</div>
+              </div>
+            </div>
             <div class="pp-slide" data-tag="Lab certified at ISB"><img src="/firstclub/sagar-5.jpg" alt="Sagar Ahuja - at ISB" loading="lazy" /></div>
+            <div class="pp-slide" data-tag="Built for this moment">
+              <div class="pp-card-slide">
+                <div>
+                  <div class="ps-eyebrow">Why now</div>
+                  <div class="ps-stat">$55M<br />Series B</div>
+                  <div class="ps-stat-sub">170K → 1M households</div>
+                </div>
+                <div class="ps-sub">"That's the work I want to do."</div>
+                <div class="ps-foot">- Reason for applying</div>
+              </div>
+            </div>
+            <div class="pp-slide" data-tag="Live tested on stage"><img src="/firstclub/sagar-1.jpg" alt="Sagar Ahuja - speaking" loading="lazy" /></div>
           </div>
           <div class="pp-dots" id="pp-dots" aria-hidden="true">
             <span class="active"></span><span></span><span></span><span></span><span></span>
@@ -1600,8 +1806,9 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </p>
       <div class="fc-cta-contact">
         <span class="label">Reach me at</span>
-        <a href="https://sagarahuja.co" target="_blank" rel="noopener">sagarahuja.co</a>
         <a href="mailto:sagarahuja@gmail.com">sagarahuja@gmail.com</a>
+        <a href="tel:+919557629225">+91 9557 629 225</a>
+        <a href="https://sagarahuja.co" target="_blank" rel="noopener">sagarahuja.co</a>
         <a href="https://linkedin.com/in/sagar-ahuja-/" target="_blank" rel="noopener">linkedin.com/in/sagar-ahuja-</a>
       </div>
     </section>
