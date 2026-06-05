@@ -1179,6 +1179,59 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       color: var(--fc-muted);
       font-style: italic;
     }
+
+    /* ===== Print stylesheet ===== */
+    @media print {
+      /* Make scroll-revealed sections visible on paper */
+      .reveal,
+      .reveal-stagger,
+      .reveal-stagger > * {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+        animation: none !important;
+      }
+
+      /* Hide gallery controls and dots (interactive, not useful on paper) */
+      .fc-pp .pp-arrow,
+      .fc-pp .pp-dots { display: none !important; }
+
+      /* Pulsing CTA halo, hover effects, cursor follower */
+      .fc-pp .pp-cta::after { animation: none !important; }
+
+      /* Prevent major sections from getting split awkwardly across pages */
+      .fc-showcase,
+      .fc-problem,
+      .fc-framing,
+      .fc-section-head,
+      .fc-dark-block,
+      .fc-pp .pp-lab { break-inside: avoid; page-break-inside: avoid; }
+
+      /* Gallery only shows the first photo on paper (scrollable strip otherwise wastes a page) */
+      .fc-pp .pp-gallery {
+        overflow: hidden !important;
+        padding: 18px 0 22px !important;
+      }
+      .fc-pp .pp-gallery .pp-slide:not(:first-child) { display: none !important; }
+      .fc-pp .pp-gallery .pp-slide { flex-basis: 100% !important; }
+
+      /* Tighten outer spacing */
+      .fc-page { padding: 14px 18px 24px !important; max-width: none !important; }
+      .fc-showcase { box-shadow: none !important; max-width: none !important; margin: 14px 0 !important; }
+      body { background: #fff !important; }
+
+      /* Dark CTA block: keep readable on paper */
+      .fc-dark-block { background: #1C4A1E !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+      /* Honour color backgrounds in Today's Specials */
+      .fc-specials,
+      .fc-special-card,
+      .pp-hero,
+      .fc-pp .pp-cta {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
   </style>
 
   <div class="fc-page">
