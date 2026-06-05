@@ -254,48 +254,98 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .fc-pp .pp-nav {
       display: flex;
       align-items: center;
-      padding: 14px 16px;
+      padding: 8px 14px;
       border-bottom: 1px solid var(--fc-border);
       font-size: 14px;
-      gap: 12px;
+      gap: 10px;
     }
     .fc-pp .pp-nav .back {
-      width: 30px;
-      height: 30px;
+      width: 24px;
+      height: 24px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       color: var(--fc-body);
-      font-size: 18px;
+      font-size: 16px;
     }
     .fc-pp .pp-nav .title {
       flex: 1;
       font-weight: 700;
       color: var(--fc-body);
-      font-size: 15px;
+      font-size: 14px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .fc-pp .pp-nav .share {
-      width: 34px;
-      height: 34px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       background: #f3efe5;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       color: var(--fc-secondary);
-      font-size: 13px;
+      font-size: 12px;
     }
 
-    /* ===== Hero gallery with sneak peek + arrows ===== */
+    /* ===== Hero gallery with rich background + sneak peek ===== */
     .fc-pp .pp-hero {
       background:
-        radial-gradient(circle at 30% 20%, rgba(168, 197, 160, 0.6) 0%, transparent 60%),
-        linear-gradient(135deg, #DCE8C8 0%, #B8CDA0 50%, #98B898 100%);
+        radial-gradient(circle at 18% 15%, rgba(255, 240, 200, 0.45) 0%, transparent 38%),
+        radial-gradient(circle at 82% 80%, rgba(168, 197, 160, 0.55) 0%, transparent 42%),
+        radial-gradient(circle at 50% 50%, rgba(220, 232, 200, 0.35) 0%, transparent 70%),
+        linear-gradient(135deg, #B8CDA0 0%, #94B58F 55%, #7BA37A 100%);
       position: relative;
+      overflow: hidden;
     }
+    /* Decorative dot pattern overlay */
+    .fc-pp .pp-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 1px 1px, rgba(28, 74, 30, 0.10) 1px, transparent 0);
+      background-size: 16px 16px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+    /* Decorative leaf SVGs floating in corners */
+    .fc-pp .pp-hero .pp-leaf {
+      position: absolute;
+      pointer-events: none;
+      z-index: 1;
+      color: rgba(28, 74, 30, 0.16);
+    }
+    .fc-pp .pp-hero .pp-leaf.tl { top: 14px; left: 16px; width: 38px; height: 38px; transform: rotate(-20deg); }
+    .fc-pp .pp-hero .pp-leaf.tr { top: 18px; right: 18px; width: 32px; height: 32px; transform: rotate(35deg); }
+    .fc-pp .pp-hero .pp-leaf.bl { bottom: 40px; left: 18px; width: 28px; height: 28px; transform: rotate(15deg); }
+    .fc-pp .pp-hero .pp-leaf.br { bottom: 44px; right: 18px; width: 34px; height: 34px; transform: rotate(-30deg); }
+
+    /* Hand-picked badge floating on the photo */
+    .fc-pp .pp-hero .pp-badge {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%) rotate(-2deg);
+      z-index: 4;
+      background: var(--fc-green);
+      color: var(--fc-cream-text);
+      padding: 5px 12px 5px 10px;
+      border-radius: var(--fc-radius-pill);
+      font-family: 'Inter', sans-serif;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(28, 74, 30, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: none;
+    }
+    .fc-pp .pp-hero .pp-badge svg { width: 12px; height: 12px; }
+
     .fc-pp .pp-gallery {
       display: flex;
       overflow-x: auto;
@@ -303,8 +353,10 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-      padding: 28px 10% 38px;
+      padding: 22px 10% 32px;
       gap: 12px;
+      position: relative;
+      z-index: 1;
     }
     .fc-pp .pp-gallery::-webkit-scrollbar { display: none; }
     .fc-pp .pp-gallery .pp-slide {
@@ -313,16 +365,19 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 280px;
+      min-height: 300px;
     }
     .fc-pp .pp-gallery img {
       width: 100%;
-      max-width: 200px;
-      height: 240px;
-      border-radius: 12px;
+      max-width: 240px;
+      height: 290px;
+      border-radius: 14px;
       object-fit: cover;
       object-position: center 22%;
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+      box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.24),
+        0 2px 6px rgba(0, 0, 0, 0.12);
+      border: 3px solid rgba(255, 255, 255, 0.92);
     }
     .fc-pp .pp-dots {
       position: absolute;
@@ -533,6 +588,135 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       line-height: 1.6;
     }
     .fc-pp .pp-about .pp-refund strong { color: var(--fc-green); font-weight: 700; }
+
+    /* ===== Lab Report ===== */
+    .fc-pp .pp-lab {
+      margin: 22px 18px 0;
+      padding: 0;
+      background: #fff;
+      border: 1px solid var(--fc-border);
+      border-radius: var(--fc-radius);
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(28, 74, 30, 0.06);
+    }
+    .fc-pp .pp-lab .pp-lab-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      background: linear-gradient(135deg, #F4F6E8 0%, #E5EBC8 100%);
+      border-bottom: 1px solid var(--fc-border);
+    }
+    .fc-pp .pp-lab .pp-lab-head .lab-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--fc-green);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .fc-pp .pp-lab .pp-lab-head .lab-icon svg { width: 16px; height: 16px; }
+    .fc-pp .pp-lab .pp-lab-head .lab-titles { flex: 1; min-width: 0; }
+    .fc-pp .pp-lab .pp-lab-head .lab-titles .lab-eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--fc-green);
+      line-height: 1.2;
+    }
+    .fc-pp .pp-lab .pp-lab-head .lab-titles .lab-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--fc-body);
+      letter-spacing: -0.005em;
+      line-height: 1.2;
+      margin-top: 1px;
+    }
+    .fc-pp .pp-lab .pp-lab-head .lab-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      border-radius: var(--fc-radius-pill);
+      background: rgba(28, 74, 30, 0.10);
+      color: var(--fc-green);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .fc-pp .pp-lab .pp-lab-head .lab-verified svg { width: 11px; height: 11px; }
+
+    .fc-pp .pp-lab .pp-lab-table {
+      padding: 6px 14px 4px;
+    }
+    .fc-pp .pp-lab .pp-lab-row {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 12px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px dashed var(--fc-border);
+      font-size: 12.5px;
+    }
+    .fc-pp .pp-lab .pp-lab-row:last-child { border-bottom: none; }
+    .fc-pp .pp-lab .pp-lab-row .lab-test { color: var(--fc-secondary); font-weight: 500; }
+    .fc-pp .pp-lab .pp-lab-row .lab-result { color: var(--fc-body); font-weight: 700; font-family: 'Inter', sans-serif; }
+    .fc-pp .pp-lab .pp-lab-row .lab-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      color: var(--fc-green);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .fc-pp .pp-lab .pp-lab-row .lab-status svg { width: 12px; height: 12px; }
+
+    .fc-pp .pp-lab .pp-lab-foot {
+      padding: 12px 14px 14px;
+      border-top: 1px solid var(--fc-border);
+      background: #fafbf4;
+    }
+    .fc-pp .pp-lab .pp-lab-meta {
+      font-size: 11px;
+      color: var(--fc-muted);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .fc-pp .pp-lab .pp-lab-meta strong { color: var(--fc-secondary); font-weight: 600; }
+    .fc-pp .pp-lab .pp-lab-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      padding: 11px 14px;
+      background: #fff;
+      color: var(--fc-green);
+      border: 1.5px solid var(--fc-green);
+      border-radius: var(--fc-radius-pill);
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      justify-content: center;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+      letter-spacing: 0.01em;
+    }
+    .fc-pp .pp-lab .pp-lab-download:hover {
+      background: var(--fc-green);
+      color: var(--fc-cream-text);
+      transform: translateY(-1px);
+    }
+    .fc-pp .pp-lab .pp-lab-download svg { width: 14px; height: 14px; }
 
     .fc-pp .pp-cta-row {
       padding: 20px 18px 24px;
@@ -901,6 +1085,18 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           <span class="share" aria-hidden="true">↑</span>
         </div>
         <div class="pp-hero">
+          {/* Decorative leaves */}
+          <svg class="pp-leaf tl" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+          <svg class="pp-leaf tr" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C7.59 2 4 5.59 4 10c0 4.41 3.59 8 8 8 .55 0 1-.45 1-1V9.41l5.29 5.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L14.41 8H20c.55 0 1-.45 1-1V3c0-.55-.45-1-1-1h-8z"/></svg>
+          <svg class="pp-leaf bl" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.5 11C8.36 11 5 14.36 5 18.5c0 1.18.27 2.29.74 3.28L18.5 9.04A7.491 7.491 0 0 0 12.5 11z"/></svg>
+          <svg class="pp-leaf br" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/></svg>
+
+          {/* Hand-picked badge */}
+          <span class="pp-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Hand-picked for FirstClub
+          </span>
+
           <button class="pp-arrow prev" type="button" id="pp-prev" aria-label="Previous photo">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
@@ -992,6 +1188,70 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
           <div class="pp-refund">
             <strong>*Regarding the Trial:</strong> 72 hours after the first conversation, if not the right fit - no further commitment. Just a coffee in the books and a sharper view of the four problems below.
+          </div>
+
+          {/* ============ LAB REPORT ============ */}
+          <div class="pp-lab" aria-label="Lab report">
+            <div class="pp-lab-head">
+              <span class="lab-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6L4 18c-1 2 0 4 2 4h12c2 0 3-2 2-4L15 8V2"/><line x1="9" y1="2" x2="15" y2="2"/><line x1="8" y1="14" x2="16" y2="14"/></svg>
+              </span>
+              <div class="lab-titles">
+                <div class="lab-eyebrow">Lab Report</div>
+                <div class="lab-name">Sagar Ahuja</div>
+              </div>
+              <span class="lab-verified">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+                Verified
+              </span>
+            </div>
+            <div class="pp-lab-table">
+              <div class="pp-lab-row">
+                <span class="lab-test">Total experience</span>
+                <span class="lab-result">11 years</span>
+                <span class="lab-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span>
+              </div>
+              <div class="pp-lab-row">
+                <span class="lab-test">In product management</span>
+                <span class="lab-result">7 years</span>
+                <span class="lab-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span>
+              </div>
+              <div class="pp-lab-row">
+                <span class="lab-test">Consumer mobile platforms</span>
+                <span class="lab-result">Skillz, G24x7</span>
+                <span class="lab-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span>
+              </div>
+              <div class="pp-lab-row">
+                <span class="lab-test">Personalisation systems shipped</span>
+                <span class="lab-result">Yes</span>
+                <span class="lab-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span>
+              </div>
+              <div class="pp-lab-row">
+                <span class="lab-test">Subscription / monetisation</span>
+                <span class="lab-result">Built and revamped</span>
+                <span class="lab-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span>
+              </div>
+              <div class="pp-lab-row">
+                <span class="lab-test">Education</span>
+                <span class="lab-result">ISB · Stanford</span>
+                <span class="lab-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span>
+              </div>
+              <div class="pp-lab-row">
+                <span class="lab-test">Notice period</span>
+                <span class="lab-result">0 days</span>
+                <span class="lab-status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span>
+              </div>
+            </div>
+            <div class="pp-lab-foot">
+              <div class="pp-lab-meta">
+                <span><strong>Tested at:</strong> Skillz, Games24x7, Teach For India, Tech Mahindra</span>
+                <span><strong>Last verified:</strong> June 2026</span>
+              </div>
+              <a href="/firstclub/sagar-ahuja-resume.pdf" download class="pp-lab-download" aria-label="Download full resume PDF">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download Full Report (PDF)
+              </a>
+            </div>
           </div>
         </div>
 
