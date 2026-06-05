@@ -1316,9 +1316,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       font-style: italic;
     }
 
-    /* The scroll affordance only shows inside the desktop phone frame */
+    /* The scroll affordance, fade overlay, and progress bar are framed only
+       inside the desktop or mobile phone treatment; hide by default. */
     .fc-scroll-hint,
-    .fc-phone-fade { display: none; }
+    .fc-phone-fade,
+    .fc-phone-progress { display: none; }
 
     /* ===== Compact 4-problem cards ===== */
     .fc-problem .pr-header {
@@ -1446,6 +1448,231 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       color: inherit;
       font-weight: inherit;
       line-height: inherit;
+    }
+
+    /* ===== Mobile phone frame (<= 1179px) - pinned + scroll-jacked ===== */
+    @media (max-width: 1179px) {
+      /* Outer pinner determines how much page scroll maps to in-phone scroll */
+      .fc-phone-pinner {
+        position: relative;
+      }
+
+      .fc-phone {
+        background: linear-gradient(160deg, #1a1a1a 0%, #2a2a2a 100%);
+        border-radius: 42px;
+        padding: 10px 8px 12px;
+        box-shadow:
+          0 18px 36px rgba(0, 0, 0, 0.18),
+          0 8px 22px rgba(28, 74, 30, 0.12),
+          inset 0 0 0 1.5px #3a3a3a,
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        position: sticky;
+        top: 20px;
+        max-width: 380px;
+        margin: 24px auto;
+      }
+      /* Dynamic Island pill */
+      .fc-phone::before {
+        content: '';
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90px;
+        height: 22px;
+        background: #000;
+        border-radius: 14px;
+        z-index: 3;
+      }
+      /* Volume button */
+      .fc-phone::after {
+        content: '';
+        position: absolute;
+        left: -2px;
+        top: 95px;
+        width: 3px;
+        height: 40px;
+        background: #2a2a2a;
+        border-radius: 2px 0 0 2px;
+        box-shadow:
+          0 50px 0 #2a2a2a,
+          0 110px 0 0 #2a2a2a;
+      }
+
+      .fc-phone-screen {
+        background: #fff;
+        border-radius: 34px;
+        overflow: hidden;
+        height: min(580px, calc(100vh - 90px));
+        position: relative;
+      }
+      /* Status-bar spacer so content does not collide with the island */
+      .fc-phone-screen::before {
+        content: '';
+        display: block;
+        height: 50px;
+        background: #fff;
+      }
+      /* Inner wrapper that JS translates on scroll */
+      .fc-phone-content {
+        will-change: transform;
+        transition: transform 0.05s linear;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .fc-phone-content { transition: none; }
+      }
+
+      /* Reset showcase styling inside the phone */
+      .fc-phone .fc-showcase {
+        margin: 0;
+        max-width: none;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      /* Soft fade at the bottom hinting at more content */
+      .fc-phone .fc-phone-fade {
+        display: block;
+        position: absolute;
+        left: 8px;
+        right: 8px;
+        bottom: 12px;
+        height: 60px;
+        border-radius: 0 0 32px 32px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.92) 70%, #fff 100%);
+        pointer-events: none;
+        z-index: 4;
+        transition: opacity 0.35s ease;
+      }
+      /* Scroll affordance pill */
+      .fc-phone .fc-scroll-hint {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        position: absolute;
+        bottom: 26px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--fc-green);
+        color: var(--fc-cream-text);
+        padding: 7px 12px 7px 14px;
+        border-radius: var(--fc-radius-pill);
+        font-family: 'Inter', sans-serif;
+        font-size: 9.5px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        z-index: 5;
+        pointer-events: none;
+        box-shadow: 0 6px 16px rgba(28, 74, 30, 0.32);
+        animation: scrollHintBob 1.8s ease-in-out infinite;
+        transition: opacity 0.35s ease;
+      }
+      .fc-phone .fc-scroll-hint svg { width: 11px; height: 11px; }
+      .fc-phone.is-scrolled .fc-scroll-hint,
+      .fc-phone.is-scrolled .fc-phone-fade { opacity: 0; }
+
+      /* Vertical progress bar on the phone's right edge */
+      .fc-phone .fc-phone-progress {
+        display: block;
+        position: absolute;
+        right: 2px;
+        top: 110px;
+        bottom: 110px;
+        width: 3px;
+        border-radius: 2px;
+        background: rgba(255, 255, 255, 0.08);
+        z-index: 4;
+        overflow: hidden;
+        opacity: 0.85;
+      }
+      .fc-phone .fc-phone-progress::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--fc-progress, 0%);
+        background: linear-gradient(180deg, var(--fc-green-light) 0%, var(--fc-green) 100%);
+        border-radius: 2px;
+        transition: height 0.08s linear;
+      }
+
+      /* Tighten content inside the phone (same scale as desktop overrides) */
+      .fc-phone .fc-specials { padding: 22px 12px 22px; }
+      .fc-phone .fc-specials::before { font-size: 52px; top: 8px; }
+      .fc-phone .fc-specials .ts-head { margin-bottom: 14px; }
+      .fc-phone .fc-specials .ts-head h2 { font-size: 22px; }
+      .fc-phone .fc-specials .ts-head .sub { font-size: 11px; }
+      .fc-phone .fc-specials .ts-cards { gap: 6px; }
+      .fc-phone .fc-special-card { padding: 8px 6px 10px; gap: 5px; }
+      .fc-phone .fc-special-card .sc-image { width: 48px; height: 48px; }
+      .fc-phone .fc-special-card .sc-label { font-size: 9px; min-height: 22px; }
+      .fc-phone .fc-special-card .sc-caption { font-size: 10.5px; }
+      .fc-phone .fc-special-card .sc-meta { font-size: 9.5px; }
+
+      .fc-phone .fc-pp .pp-nav { padding: 6px 12px; }
+      .fc-phone .fc-pp .pp-nav .title { font-size: 13px; }
+      .fc-phone .fc-pp .pp-nav .back { width: 22px; height: 22px; font-size: 15px; }
+      .fc-phone .fc-pp .pp-nav .share { width: 26px; height: 26px; font-size: 11px; }
+
+      .fc-phone .fc-pp .pp-hero .pp-badge { font-size: 9.5px; padding: 4px 10px 4px 8px; }
+      .fc-phone .fc-pp .pp-hero .pp-badge svg { width: 10px; height: 10px; }
+
+      .fc-phone .fc-pp .pp-gallery { padding: 18px 9% 28px; gap: 10px; }
+      .fc-phone .fc-pp .pp-gallery .pp-slide { min-height: 238px; }
+      .fc-phone .fc-pp .pp-gallery img { max-width: 180px; height: 220px; border-radius: 12px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide {
+        max-width: 180px;
+        height: 220px;
+        padding: 14px 12px;
+        border-radius: 12px;
+      }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-eyebrow { font-size: 9px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-title { font-size: 17px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-stat { font-size: 28px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-stat-sub { font-size: 10px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-sub { font-size: 11px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-foot { font-size: 9.5px; }
+      .fc-phone .fc-pp .pp-gallery .pp-card-slide .ps-list li { font-size: 10.5px; padding: 4px 8px 4px 18px; }
+
+      .fc-phone .fc-pp .pp-arrow { width: 28px; height: 28px; }
+      .fc-phone .fc-pp .pp-arrow svg { width: 13px; height: 13px; }
+
+      .fc-phone .fc-pp .pp-pills { padding: 12px 14px 6px; gap: 6px; }
+      .fc-phone .fc-pp .pp-pill { font-size: 10.5px; padding: 4px 9px; }
+      .fc-phone .fc-pp .pp-brand { padding: 6px 14px 0; font-size: 10px; }
+      .fc-phone .fc-pp .pp-title { padding: 3px 14px 0; font-size: 20px; }
+      .fc-phone .fc-pp .pp-weight { padding: 2px 14px 0; font-size: 13px; }
+      .fc-phone .fc-pp .pp-price { padding: 8px 14px 16px; }
+      .fc-phone .fc-pp .pp-price-now { font-size: 19px; }
+      .fc-phone .fc-pp .pp-price-was { font-size: 13px; }
+
+      .fc-phone .fc-pp .pp-about { padding: 18px 16px 6px; }
+      .fc-phone .fc-pp .pp-about h3 { font-size: 19px; margin-bottom: 12px; }
+      .fc-phone .fc-pp .pp-about p,
+      .fc-phone .fc-pp .pp-about ul li { font-size: 13px; }
+      .fc-phone .fc-pp .pp-about .pp-section-title { font-size: 13px; margin-top: 14px; }
+      .fc-phone .fc-pp .pp-about .pp-refund { font-size: 12px; padding: 10px 12px; }
+
+      .fc-phone .fc-pp .pp-lab { margin: 18px 16px 0; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-head { padding: 10px 12px; gap: 8px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-head .lab-icon { width: 28px; height: 28px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-head .lab-icon svg { width: 14px; height: 14px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-head .lab-eyebrow { font-size: 9px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-head .lab-name { font-size: 14px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-head .lab-verified { font-size: 9px; padding: 2px 7px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-table { padding: 4px 12px 2px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-row { font-size: 11.5px; padding: 7px 0; gap: 8px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-row .lab-status { font-size: 9.5px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-foot { padding: 10px 12px 12px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-meta { font-size: 10px; gap: 4px; }
+      .fc-phone .fc-pp .pp-lab .pp-lab-download { font-size: 12px; padding: 9px 12px; }
+
+      .fc-phone .fc-pp .pp-cta-row { padding: 16px 14px 18px; }
+      .fc-phone .fc-pp .pp-cta { font-size: 14.5px; padding: 14px 18px; }
+      .fc-phone .fc-pp .pp-cta svg { width: 16px; height: 16px; }
     }
 
     /* ===== Desktop two-column layout (>= 1180px / typical 13"+ screens) ===== */
@@ -1678,11 +1905,12 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       .fc-split-right .fc-problem { margin-bottom: 22px; }
     }
 
-    /* Print: revert any sticky layout */
+    /* Print: revert any sticky layout, transform, and pinner sizing */
     @media print {
       .fc-split { display: block !important; }
       .fc-split-left,
       .fc-split-right,
+      .fc-phone,
       .fc-phone-screen {
         position: static !important;
         max-height: none !important;
@@ -1693,10 +1921,18 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         padding: 0 !important;
         border-radius: 0 !important;
         box-shadow: none !important;
+        margin: 0 !important;
+        max-width: none !important;
       }
+      .fc-phone-pinner { height: auto !important; }
+      .fc-phone-content { transform: none !important; will-change: auto !important; }
       .fc-phone::before,
       .fc-phone::after { display: none !important; }
-      .fc-phone-screen { border-radius: 0 !important; }
+      .fc-phone-screen { border-radius: 0 !important; height: auto !important; }
+      .fc-phone-screen::before { display: none !important; }
+      .fc-scroll-hint,
+      .fc-phone-fade,
+      .fc-phone-progress { display: none !important; }
     }
 
     /* ===== Print stylesheet ===== */
@@ -1771,8 +2007,10 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
     <div class="fc-split">
       <div class="fc-split-left">
+        <div class="fc-phone-pinner">
         <div class="fc-phone">
           <div class="fc-phone-screen">
+            <div class="fc-phone-content">
 
     {/* ============ Unified showcase: Today's Specials + Product page ============ */}
     <div class="fc-showcase reveal">
@@ -2035,13 +2273,16 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </article>
     </div>
 
+            </div>{/* /.fc-phone-content */}
           </div>{/* /.fc-phone-screen */}
+          <div class="fc-phone-progress" aria-hidden="true"></div>
           <div class="fc-phone-fade" aria-hidden="true"></div>
           <span class="fc-scroll-hint" aria-hidden="true">
             Scroll inside
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </span>
         </div>{/* /.fc-phone */}
+        </div>{/* /.fc-phone-pinner */}
       </div>{/* /.fc-split-left */}
 
       <div class="fc-split-right">
@@ -2490,11 +2731,94 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
       var phone = document.querySelector('.fc-phone');
       var phoneScreen = document.querySelector('.fc-phone-screen');
+      var phoneContent = document.querySelector('.fc-phone-content');
+      var phonePinner = document.querySelector('.fc-phone-pinner');
+      var phoneProgress = document.querySelector('.fc-phone-progress');
+
+      var MOBILE_BREAKPOINT = 1180;
+      function isMobileViewport() { return window.innerWidth < MOBILE_BREAKPOINT; }
+
+      // Desktop: inner scrollTop drives the .is-scrolled fade
       if (phone && phoneScreen) {
         phoneScreen.addEventListener('scroll', function() {
+          if (isMobileViewport()) return;
+          var max = phoneScreen.scrollHeight - phoneScreen.clientHeight;
+          var ratio = max > 0 ? Math.min(1, phoneScreen.scrollTop / max) : 0;
           if (phoneScreen.scrollTop > 30) phone.classList.add('is-scrolled');
           else phone.classList.remove('is-scrolled');
+          if (phoneProgress) phoneProgress.style.setProperty('--fc-progress', (ratio * 100).toFixed(1) + '%');
         }, { passive: true });
+      }
+
+      // On mobile, .fc-phone-screen is overflow:hidden, so reveals nested
+      // inside it can be missed by IntersectionObserver. Force them visible
+      // upfront so they are not stuck at opacity 0 forever.
+      if (phone && isMobileViewport()) {
+        phone.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el) {
+          el.classList.add('visible');
+        });
+      }
+
+      // Mobile: scroll-jack. The phone is position:sticky inside a tall
+      // .fc-phone-pinner; as the page scrolls, we translate .fc-phone-content
+      // upward, then release when content is exhausted.
+      if (phone && phoneScreen && phoneContent && phonePinner) {
+        var overflow = 0;
+        var stickyOffset = 20;
+        var ticking = false;
+
+        function recompute() {
+          if (!isMobileViewport()) {
+            phoneContent.style.transform = '';
+            phonePinner.style.height = '';
+            phone.classList.remove('is-scrolled');
+            if (phoneProgress) phoneProgress.style.setProperty('--fc-progress', '0%');
+            return;
+          }
+          // Measure without any active transform
+          phoneContent.style.transform = '';
+          var contentH = phoneContent.scrollHeight;
+          var screenH = phoneScreen.clientHeight;
+          overflow = Math.max(0, contentH - screenH);
+          if (overflow === 0) {
+            phonePinner.style.height = '';
+            return;
+          }
+          var phoneH = phone.offsetHeight;
+          phonePinner.style.height = (phoneH + overflow) + 'px';
+          applyScroll();
+        }
+
+        function applyScroll() {
+          if (!isMobileViewport() || overflow === 0) return;
+          var rect = phonePinner.getBoundingClientRect();
+          var progress;
+          if (rect.top > stickyOffset) progress = 0;
+          else if (rect.top < stickyOffset - overflow) progress = 1;
+          else progress = (stickyOffset - rect.top) / overflow;
+          var ty = -progress * overflow;
+          phoneContent.style.transform = 'translate3d(0,' + ty.toFixed(1) + 'px,0)';
+          if (progress > 0.04) phone.classList.add('is-scrolled');
+          else phone.classList.remove('is-scrolled');
+          if (phoneProgress) phoneProgress.style.setProperty('--fc-progress', (progress * 100).toFixed(1) + '%');
+        }
+
+        window.addEventListener('scroll', function() {
+          if (!ticking) {
+            window.requestAnimationFrame(function() { applyScroll(); ticking = false; });
+            ticking = true;
+          }
+        }, { passive: true });
+
+        var resizeTimer;
+        window.addEventListener('resize', function() {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(recompute, 150);
+        });
+
+        window.addEventListener('load', recompute);
+        // Initial run (some content already laid out)
+        recompute();
       }
     });
   </script>
