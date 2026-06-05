@@ -1691,44 +1691,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       animation-duration: 1.1s;
     }
 
-    /* Floating 'Apply now' cue above the CTA, only while is-cta-reached */
-    .fc-phone-cta-cue {
-      display: none;
-    }
-    .fc-phone.is-cta-reached .fc-phone-cta-cue {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      position: absolute;
-      bottom: 86px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--fc-green);
-      color: var(--fc-cream-text);
-      padding: 6px 12px;
-      border-radius: var(--fc-radius-pill);
-      font-family: 'Inter', sans-serif;
-      font-size: 9.5px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      z-index: 5;
-      pointer-events: none;
-      box-shadow: 0 6px 16px rgba(28, 74, 30, 0.40);
-      animation: ctaCueIn 0.45s var(--fc-ease) both, ctaCueBob 1.6s ease-in-out 0.45s infinite;
-    }
-    .fc-phone-cta-cue svg { width: 11px; height: 11px; }
-    @keyframes ctaCueIn {
-      0% { opacity: 0; transform: translate(-50%, 6px); }
-      100% { opacity: 1; transform: translate(-50%, 0); }
-    }
-    @keyframes ctaCueBob {
-      0%, 100% { transform: translate(-50%, 0); }
-      50% { transform: translate(-50%, -3px); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .fc-phone.is-cta-reached .fc-phone-cta-cue { animation: none; }
-    }
 
     /* ===== Desktop two-column layout (>= 1180px / typical 13"+ screens) ===== */
     .fc-split { display: block; }
@@ -1987,8 +1949,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       .fc-phone-screen::before { display: none !important; }
       .fc-scroll-hint,
       .fc-phone-fade,
-      .fc-phone-progress,
-      .fc-phone-cta-cue { display: none !important; }
+      .fc-phone-progress { display: none !important; }
     }
 
     /* ===== Print stylesheet ===== */
@@ -2336,10 +2297,6 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           <span class="fc-scroll-hint" aria-hidden="true">
             Scroll inside
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-          </span>
-          <span class="fc-phone-cta-cue" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-            Apply now
           </span>
         </div>{/* /.fc-phone */}
         </div>{/* /.fc-phone-pinner */}
