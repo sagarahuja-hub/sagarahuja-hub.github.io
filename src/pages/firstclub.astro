@@ -1678,6 +1678,58 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       .fc-phone .fc-pp .pp-cta svg { width: 16px; height: 16px; }
     }
 
+    /* CTA emphasis when the mobile scroll lands at the bottom (CTA visible).
+       The class is also applied during the dwell zone, so the styling holds
+       for the ~170px window where the user is being asked to notice it. */
+    .fc-phone .fc-pp .pp-cta {
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.35s ease;
+    }
+    .fc-phone.is-cta-reached .fc-pp .pp-cta {
+      box-shadow: 0 12px 32px rgba(28, 74, 30, 0.55);
+    }
+    .fc-phone.is-cta-reached .fc-pp .pp-cta::after {
+      animation-duration: 1.1s;
+    }
+
+    /* Floating 'Apply now' cue above the CTA, only while is-cta-reached */
+    .fc-phone-cta-cue {
+      display: none;
+    }
+    .fc-phone.is-cta-reached .fc-phone-cta-cue {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      position: absolute;
+      bottom: 86px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--fc-green);
+      color: var(--fc-cream-text);
+      padding: 6px 12px;
+      border-radius: var(--fc-radius-pill);
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      z-index: 5;
+      pointer-events: none;
+      box-shadow: 0 6px 16px rgba(28, 74, 30, 0.40);
+      animation: ctaCueIn 0.45s var(--fc-ease) both, ctaCueBob 1.6s ease-in-out 0.45s infinite;
+    }
+    .fc-phone-cta-cue svg { width: 11px; height: 11px; }
+    @keyframes ctaCueIn {
+      0% { opacity: 0; transform: translate(-50%, 6px); }
+      100% { opacity: 1; transform: translate(-50%, 0); }
+    }
+    @keyframes ctaCueBob {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, -3px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .fc-phone.is-cta-reached .fc-phone-cta-cue { animation: none; }
+    }
+
     /* ===== Desktop two-column layout (>= 1180px / typical 13"+ screens) ===== */
     .fc-split { display: block; }
 
@@ -1935,7 +1987,8 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       .fc-phone-screen::before { display: none !important; }
       .fc-scroll-hint,
       .fc-phone-fade,
-      .fc-phone-progress { display: none !important; }
+      .fc-phone-progress,
+      .fc-phone-cta-cue { display: none !important; }
     }
 
     /* ===== Print stylesheet ===== */
@@ -2283,6 +2336,10 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           <span class="fc-scroll-hint" aria-hidden="true">
             Scroll inside
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </span>
+          <span class="fc-phone-cta-cue" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+            Apply now
           </span>
         </div>{/* /.fc-phone */}
         </div>{/* /.fc-phone-pinner */}
@@ -2741,7 +2798,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       var MOBILE_BREAKPOINT = 1180;
       function isMobileViewport() { return window.innerWidth < MOBILE_BREAKPOINT; }
 
-      // Desktop: inner scrollTop drives the .is-scrolled fade
+      // Desktop: inner scrollTop drives the .is-scrolled fade + CTA reach
       if (phone && phoneScreen) {
         phoneScreen.addEventListener('scroll', function() {
           if (isMobileViewport()) return;
@@ -2749,6 +2806,8 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           var ratio = max > 0 ? Math.min(1, phoneScreen.scrollTop / max) : 0;
           if (phoneScreen.scrollTop > 30) phone.classList.add('is-scrolled');
           else phone.classList.remove('is-scrolled');
+          if (ratio >= 0.94) phone.classList.add('is-cta-reached');
+          else phone.classList.remove('is-cta-reached');
           if (phoneProgress) phoneProgress.style.setProperty('--fc-progress', (ratio * 100).toFixed(1) + '%');
         }, { passive: true });
       }
@@ -2766,21 +2825,36 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       // .fc-phone-pinner; as the page scrolls, we translate .fc-phone-content
       // upward, then release when content is exhausted.
       if (phone && phoneScreen && phoneContent && phonePinner) {
+        // Pacing knobs. The Lab Report and the Add to FirstClub CTA sit at
+        // the very bottom of the content; the user complained both were
+        // 'buried' in the scroll. We slow the last part of the reveal with
+        // an ease-out curve and then hold the phone at progress = 1 for a
+        // short dwell so the CTA gets time to land.
+        var SLOW_FACTOR = 1.15;     // 15% more page scroll than raw content
+        var END_DWELL_PX = 170;     // page-px held at progress = 1 before unstick
+        var CTA_THRESHOLD = 0.94;   // progress at which we flag is-cta-reached
+
         var overflow = 0;
+        var contentScrollPx = 0;
         var stickyOffset = 20;
         var ticking = false;
+
+        // Ease-out quad: fast at start, slow at end. Spends more page scroll
+        // on the last slice of content (the Lab Report and CTA).
+        function easeOutQuad(t) { return 1 - (1 - t) * (1 - t); }
 
         function recompute() {
           if (!isMobileViewport()) {
             phoneContent.style.transform = '';
             phonePinner.style.height = '';
             phone.classList.remove('is-scrolled');
+            phone.classList.remove('is-cta-reached');
             if (phoneProgress) phoneProgress.style.setProperty('--fc-progress', '0%');
             return;
           }
           // Measure without any active transform. Use the phone-screen's own
           // scrollHeight so the ::before status-bar spacer is included; if we
-          // measured phoneContent alone, the translation would fall short by
+          // measured phoneContent alone the translation would fall short by
           // the spacer's height and the Add to FirstClub CTA would be hidden.
           phoneContent.style.transform = '';
           var scrollH = phoneScreen.scrollHeight;
@@ -2792,21 +2866,37 @@ import PitchLayout from '../layouts/PitchLayout.astro';
             return;
           }
           var phoneH = phone.offsetHeight;
-          phonePinner.style.height = (phoneH + overflow) + 'px';
+          contentScrollPx = overflow * SLOW_FACTOR;
+          phonePinner.style.height = (phoneH + contentScrollPx + END_DWELL_PX) + 'px';
           applyScroll();
         }
 
         function applyScroll() {
           if (!isMobileViewport() || overflow === 0) return;
           var rect = phonePinner.getBoundingClientRect();
-          var progress;
-          if (rect.top > stickyOffset) progress = 0;
-          else if (rect.top < stickyOffset - overflow) progress = 1;
-          else progress = (stickyOffset - rect.top) / overflow;
+          var scrolled = stickyOffset - rect.top; // 0 when phone just stuck
+
+          // Linear page-scroll position inside the reveal range, then dwell.
+          var t;
+          if (scrolled <= 0) t = 0;
+          else if (scrolled >= contentScrollPx) t = 1;
+          else t = scrolled / contentScrollPx;
+
+          // Easing converts that linear page-position into actual content
+          // progress. The last 20% of content takes ~35% of the scroll.
+          var progress = easeOutQuad(t);
           var ty = -progress * overflow;
           phoneContent.style.transform = 'translate3d(0,' + ty.toFixed(1) + 'px,0)';
+
           if (progress > 0.04) phone.classList.add('is-scrolled');
           else phone.classList.remove('is-scrolled');
+
+          // Once we are essentially showing the CTA, latch a class so CSS
+          // can give the button a brighter shadow + faster pulse. The class
+          // also persists through the dwell zone (t === 1).
+          if (progress >= CTA_THRESHOLD) phone.classList.add('is-cta-reached');
+          else phone.classList.remove('is-cta-reached');
+
           if (phoneProgress) phoneProgress.style.setProperty('--fc-progress', (progress * 100).toFixed(1) + '%');
         }
 
