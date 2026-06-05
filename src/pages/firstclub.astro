@@ -1180,6 +1180,62 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       font-style: italic;
     }
 
+    /* ===== Desktop two-column layout (>= 1180px / typical 13"+ screens) ===== */
+    .fc-split { display: block; }
+
+    @media (min-width: 1180px) {
+      .fc-page {
+        max-width: 1280px;
+        padding: 36px 40px 80px;
+      }
+
+      .fc-split {
+        display: grid;
+        grid-template-columns: minmax(0, 600px) minmax(0, 1fr);
+        gap: 40px;
+        align-items: start;
+      }
+
+      .fc-split-left {
+        position: sticky;
+        top: 24px;
+        align-self: start;
+        max-height: calc(100vh - 48px);
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: var(--fc-border) transparent;
+        /* Smooth shadow tint to suggest scroll affordance */
+        padding-right: 4px;
+      }
+      .fc-split-left::-webkit-scrollbar { width: 6px; }
+      .fc-split-left::-webkit-scrollbar-track { background: transparent; }
+      .fc-split-left::-webkit-scrollbar-thumb { background: var(--fc-border); border-radius: 3px; }
+      .fc-split-left::-webkit-scrollbar-thumb:hover { background: var(--fc-green-light); }
+
+      .fc-split-left .fc-showcase {
+        margin: 0;
+        max-width: none;
+      }
+
+      .fc-split-right > *:first-child { margin-top: 0; }
+      .fc-split-right .fc-section-head { margin-top: 0; }
+      .fc-split-right .fc-section-head + .fc-framing { margin-top: 18px; }
+      .fc-split-right .fc-framing { margin-top: 18px; }
+      .fc-split-right .fc-problem { margin-bottom: 22px; }
+    }
+
+    /* Print: revert any sticky layout */
+    @media print {
+      .fc-split { display: block !important; }
+      .fc-split-left,
+      .fc-split-right {
+        position: static !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+    }
+
     /* ===== Print stylesheet ===== */
     @media print {
       /* Make scroll-revealed sections visible on paper */
@@ -1249,6 +1305,9 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         Bengaluru, India
       </div>
     </header>
+
+    <div class="fc-split">
+      <div class="fc-split-left">
 
     {/* ============ Unified showcase: Today's Specials + Product page ============ */}
     <div class="fc-showcase reveal">
@@ -1512,7 +1571,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </article>
     </div>
 
-    {/* ============ Section 4: Four problems ============ */}
+      </div>{/* /.fc-split-left */}
+
+      <div class="fc-split-right">
+
+    {/* ============ Section 4: Four problems (right column on desktop) ============ */}
     <div class="fc-section-head reveal">
       <div class="eyebrow-row">
         <span class="fc-eyebrow">The 12-month thesis</span>
@@ -1730,6 +1793,10 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
     </article>
 
+      </div>{/* /.fc-split-right */}
+    </div>{/* /.fc-split */}
+
+    {/* ============ Section 5: Why me (full width again) ============ */}
     <div class="fc-section-head reveal">
       <div class="eyebrow-row">
         <span class="fc-eyebrow">Why I am the right person</span>
