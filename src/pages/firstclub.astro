@@ -2886,6 +2886,84 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         // Initial run (some content already laid out)
         recompute();
       }
+
+      // ============ PostHog custom events ============
+      // Fire only when posthog has finished loading (it is initialised in
+      // PitchLayout's head). All helpers are no-ops if posthog is missing.
+      function ph(event, props) {
+        if (window.posthog && typeof window.posthog.capture === 'function') {
+          window.posthog.capture(event, props || {});
+        }
+      }
+
+      // 1. Resume download click
+      var resumeLink = document.querySelector('.pp-lab-download');
+      if (resumeLink) {
+        resumeLink.addEventListener('click', function() {
+          ph('resume_downloaded', {
+            source: 'firstclub_lab_report',
+            label: 'Download Full Report · Resume',
+          });
+        }, { passive: true });
+      }
+
+      // 2. Add to FirstClub CTA click
+      var ctaLink = document.querySelector('.fc-pp .pp-cta');
+      if (ctaLink) {
+        ctaLink.addEventListener('click', function() {
+          ph('cta_add_to_firstclub_clicked', {
+            source: 'firstclub_product_card',
+            href: ctaLink.getAttribute('href') || '',
+          });
+        }, { passive: true });
+      }
+
+      // 3. Phone scroll completion (fires once per page load, on either
+      // mobile scroll-jack progress or desktop inner-scroll ratio reaching
+      // the CTA-reached threshold).
+      var phoneScrollFired = false;
+      window.markPhoneScrollCompleted = function() {
+        if (phoneScrollFired) return;
+        phoneScrollFired = true;
+        ph('phone_scroll_completed', {
+          viewport_mode: window.innerWidth >= 1180 ? 'desktop' : 'mobile',
+        });
+      };
+      // Watch the is-cta-reached class (added by both scroll paths). The
+      // existing scroll handlers toggle this class; we observe it instead
+      // of re-implementing the threshold logic in two places.
+      if (phone && 'MutationObserver' in window) {
+        var ctaObserver = new MutationObserver(function() {
+          if (phone.classList.contains('is-cta-reached')) {
+            window.markPhoneScrollCompleted();
+          }
+        });
+        ctaObserver.observe(phone, { attributes: true, attributeFilter: ['class'] });
+      }
+
+      // 4. Contact link clicks (mailto / tel / linkedin), wherever they are
+      // on the page. Delegated to document so it covers the header contact
+      // block, the dark closing block, and any future additions.
+      document.addEventListener('click', function(e) {
+        var a = e.target.closest && e.target.closest('a');
+        if (!a) return;
+        var href = a.getAttribute('href') || '';
+        var method = null;
+        if (href.indexOf('mailto:') === 0) method = 'email';
+        else if (href.indexOf('tel:') === 0) method = 'phone';
+        else if (href.indexOf('linkedin.com') !== -1) method = 'linkedin';
+        else if (href === 'https://sagarahuja.co' || href.indexOf('sagarahuja.co') !== -1) method = 'website';
+        if (!method) return;
+        var location = 'other';
+        if (a.closest('.fc-header')) location = 'header';
+        else if (a.closest('.fc-dark-block')) location = 'closing_block';
+        else if (a.closest('.fc-footer')) location = 'footer';
+        ph('contact_clicked', {
+          method: method,
+          location: location,
+          href: href,
+        });
+      }, { passive: true });
     });
   </script>
 </PitchLayout>
