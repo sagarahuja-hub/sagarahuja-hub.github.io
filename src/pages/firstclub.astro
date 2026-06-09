@@ -1504,10 +1504,12 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         border-radius: 34px;
         overflow: hidden;
         position: relative;
-        /* Stable viewport-based height: svh ignores URL-bar collapse so the
-           phone does not change size mid-scroll. vh fallback for older UAs. */
-        height: min(580px, calc(100vh - 90px));
-        height: min(580px, calc(100svh - 90px));
+        /* Dynamic viewport height so the phone grows as the iOS URL bar
+           collapses during scroll; svh would lock the phone at the small
+           viewport and leave a band of cream below it. vh stays as a
+           fallback for browsers without dvh support. */
+        height: min(640px, calc(100vh - 70px));
+        height: min(640px, calc(100dvh - 70px));
       }
       /* Status-bar spacer so content does not collide with the island */
       .fc-phone-screen::before {
