@@ -2941,29 +2941,110 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         ctaObserver.observe(phone, { attributes: true, attributeFilter: ['class'] });
       }
 
-      // 4. Contact link clicks (mailto / tel / linkedin), wherever they are
-      // on the page. Delegated to document so it covers the header contact
-      // block, the dark closing block, and any future additions.
-      document.addEventListener('click', function(e) {
-        var a = e.target.closest && e.target.closest('a');
-        if (!a) return;
-        var href = a.getAttribute('href') || '';
-        var method = null;
-        if (href.indexOf('mailto:') === 0) method = 'email';
-        else if (href.indexOf('tel:') === 0) method = 'phone';
-        else if (href.indexOf('linkedin.com') !== -1) method = 'linkedin';
-        else if (href === 'https://sagarahuja.co' || href.indexOf('sagarahuja.co') !== -1) method = 'website';
-        if (!method) return;
-        var location = 'other';
-        if (a.closest('.fc-header')) location = 'header';
-        else if (a.closest('.fc-dark-block')) location = 'closing_block';
-        else if (a.closest('.fc-footer')) location = 'footer';
-        ph('contact_clicked', {
-          method: method,
-          location: location,
-          href: href,
-        });
-      }, { passive: true });
+      // Contact link tracking lives in PitchLayout.astro now (delegated for
+      // all pitch pages, not just /firstclub).
+
+      // 4. Per-problem-card view tracking. Fires once when each of the four
+      // 12-month thesis cards scrolls into view.
+      if ('IntersectionObserver' in window) {
+        var problemFired = {};
+        var problemIo = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (!entry.isIntersecting) return;
+            var card = entry.target;
+            var key = (card.querySelector('.pr-num') || {}).textContent || '';
+            key = key.trim();
+            if (!key || problemFired[key]) return;
+            problemFired[key] = true;
+            var title = ((card.querySelector('.pr-title') || {}).textContent || '').trim();
+            ph('phone_problem_viewed', {
+              problem_num: key,
+              title: title,
+            });
+            problemIo.unobserve(card);
+          });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('.fc-problem').forEach(function(c) { problemIo.observe(c); });
+
+        // 5. Per-why-me card view tracking
+        var whyFired = {};
+        var whyIo = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (!entry.isIntersecting) return;
+            var card = entry.target;
+            var area = ((card.querySelector('.why-area') || {}).textContent || '').trim();
+            var link = ((card.querySelector('.why-link') || {}).textContent || '').trim();
+            if (!area || whyFired[area]) return;
+            whyFired[area] = true;
+            ph('phone_why_me_viewed', {
+              area: area,
+              mapped_to: link,
+            });
+            whyIo.unobserve(card);
+          });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('.fc-why-card').forEach(function(c) { whyIo.observe(c); });
+      }
+
+      // 6. Hero gallery interactions. Hooks into the existing scrollTo() and
+      // the prev/next/dot click handlers. We re-bind on top of them so the
+      // existing logic still runs first.
+      var galleryEl = document.getElementById('pp-gallery');
+      var prevBtnEl = document.getElementById('pp-prev');
+      var nextBtnEl = document.getElementById('pp-next');
+      var dotsWrapEl = document.getElementById('pp-dots');
+      if (galleryEl) {
+        var slidesEl = galleryEl.querySelectorAll('.pp-slide');
+        function slideTagAt(idx) {
+          var s = slidesEl[idx];
+          return s ? (s.getAttribute('data-tag') || '') : '';
+        }
+        function currentSlideIndex() {
+          var step = slidesEl.length >= 2 ? (slidesEl[1].offsetLeft - slidesEl[0].offsetLeft) : galleryEl.clientWidth;
+          if (step <= 0) return 0;
+          return Math.round(galleryEl.scrollLeft / step);
+        }
+        if (prevBtnEl) {
+          prevBtnEl.addEventListener('click', function() {
+            // Fire after the existing handler has updated current
+            setTimeout(function() {
+              var i = currentSlideIndex();
+              ph('phone_gallery_interaction', { type: 'prev', slide_index: i, slide_tag: slideTagAt(i) });
+            }, 0);
+          }, { passive: true });
+        }
+        if (nextBtnEl) {
+          nextBtnEl.addEventListener('click', function() {
+            setTimeout(function() {
+              var i = currentSlideIndex();
+              ph('phone_gallery_interaction', { type: 'next', slide_index: i, slide_tag: slideTagAt(i) });
+            }, 0);
+          }, { passive: true });
+        }
+        if (dotsWrapEl) {
+          dotsWrapEl.querySelectorAll('span').forEach(function(dot, i) {
+            dot.addEventListener('click', function() {
+              ph('phone_gallery_interaction', { type: 'dot', slide_index: i, slide_tag: slideTagAt(i) });
+            }, { passive: true });
+          });
+        }
+        // Touch-swipe detection: fire once per touch sequence on the gallery
+        var touchStartX = null;
+        galleryEl.addEventListener('touchstart', function(ev) {
+          touchStartX = ev.touches && ev.touches[0] ? ev.touches[0].clientX : null;
+        }, { passive: true });
+        galleryEl.addEventListener('touchend', function(ev) {
+          if (touchStartX === null) return;
+          var endX = ev.changedTouches && ev.changedTouches[0] ? ev.changedTouches[0].clientX : null;
+          touchStartX = null;
+          if (endX === null) return;
+          // Fire after the snap settles
+          setTimeout(function() {
+            var i = currentSlideIndex();
+            ph('phone_gallery_interaction', { type: 'swipe', slide_index: i, slide_tag: slideTagAt(i) });
+          }, 200);
+        }, { passive: true });
+      }
     });
   </script>
 </PitchLayout>

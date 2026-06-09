@@ -53,6 +53,134 @@ const currentPath = pathname ?? Astro.url.pathname;
         person_profiles: 'identified_only',
       });
     </script>
+
+    <!-- PostHog custom events: nav, outbound, contact, theme, resume PDF,
+         project-card, section_reached. All delegated, all no-op safe. -->
+    <script is:inline>
+      (function() {
+        function ph(event, props) {
+          if (window.posthog && typeof window.posthog.capture === 'function') {
+            window.posthog.capture(event, props || {});
+          }
+        }
+        function label(a) {
+          return (a.getAttribute('aria-label') || a.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80);
+        }
+        function ready(fn) {
+          if (document.readyState !== 'loading') fn();
+          else document.addEventListener('DOMContentLoaded', fn);
+        }
+        ready(function() {
+          // Single delegated click handler covers most events.
+          document.addEventListener('click', function(e) {
+            var a = e.target && e.target.closest && e.target.closest('a');
+            if (!a) return;
+            var href = a.getAttribute('href') || '';
+
+            // Resume PDF download (main public resume)
+            if (/\/resume\.pdf(\?|$)/.test(href)) {
+              ph('resume_downloaded', {
+                source_path: location.pathname,
+                label: label(a),
+              });
+            }
+
+            // Project card click (work / projects / side-projects listings)
+            if (a.classList.contains('project-card')) {
+              ph('project_card_clicked', {
+                target_href: href,
+                source_path: location.pathname,
+                label: label(a),
+              });
+            }
+
+            // Nav click (anything inside the site header)
+            if (a.closest('.site-header')) {
+              var navLoc = a.closest('.nav-mobile') ? 'mobile_menu'
+                         : a.closest('.nav-desktop') ? 'desktop_nav'
+                         : a.classList.contains('brand') ? 'brand'
+                         : a.classList.contains('cta-mobile') ? 'mobile_cta'
+                         : 'header_other';
+              ph('nav_clicked', {
+                label: label(a),
+                href: href,
+                location: navLoc,
+                source_path: location.pathname,
+              });
+            }
+
+            // Contact (mailto / tel / linkedin)
+            var method = null;
+            if (href.indexOf('mailto:') === 0) method = 'email';
+            else if (href.indexOf('tel:') === 0) method = 'phone';
+            else if (href.indexOf('linkedin.com') !== -1) method = 'linkedin';
+            if (method) {
+              var contactLoc = a.closest('.site-header') ? 'header'
+                             : a.closest('footer') ? 'footer'
+                             : a.closest('#contact') ? 'contact_section'
+                             : 'other';
+              ph('contact_clicked', {
+                method: method,
+                location: contactLoc,
+                href: href,
+                source_path: location.pathname,
+              });
+            }
+
+            // Outbound (external hostname, not already a contact action)
+            if (!method && href && href.indexOf('#') !== 0 && href.indexOf('javascript:') !== 0) {
+              try {
+                var u = new URL(href, location.href);
+                if (u.hostname && u.hostname !== location.hostname) {
+                  ph('outbound_link_clicked', {
+                    hostname: u.hostname,
+                    href: u.href,
+                    source_path: location.pathname,
+                    label: label(a),
+                  });
+                }
+              } catch (err) { /* relative or invalid href, ignore */ }
+            }
+          }, { passive: true });
+
+          // Theme toggle (the button updates data-theme synchronously; we
+          // read on a microtask so the captured value is the post-toggle state)
+          var themeBtn = document.getElementById('theme-toggle');
+          if (themeBtn) {
+            themeBtn.addEventListener('click', function() {
+              setTimeout(function() {
+                ph('theme_toggled', {
+                  new_theme: document.documentElement.getAttribute('data-theme') || 'unknown',
+                  source_path: location.pathname,
+                });
+              }, 0);
+            }, { passive: true });
+          }
+
+          // Section reached: any element with data-section="<name>" fires
+          // section_reached the first time it scrolls into view.
+          if ('IntersectionObserver' in window) {
+            var fired = {};
+            var sectionIo = new IntersectionObserver(function(entries) {
+              entries.forEach(function(entry) {
+                if (!entry.isIntersecting) return;
+                var name = entry.target.getAttribute('data-section');
+                if (!name || fired[name]) return;
+                fired[name] = true;
+                ph('section_reached', {
+                  section: name,
+                  source_path: location.pathname,
+                });
+                sectionIo.unobserve(entry.target);
+              });
+            }, { threshold: 0.35 });
+            document.querySelectorAll('[data-section]').forEach(function(el) {
+              sectionIo.observe(el);
+            });
+          }
+        });
+      })();
+    </script>
   </head>
   <body>
     <div class="cursor-glow" aria-hidden="true"></div>

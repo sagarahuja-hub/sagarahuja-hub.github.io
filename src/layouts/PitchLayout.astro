@@ -74,6 +74,82 @@ const fontsUrl = `https://fonts.googleapis.com/css2?family=${fonts}&display=swap
     }
   </script>
 
+  <!-- PostHog custom events for pitch pages: contact, outbound, section.
+       Nav and theme do not exist on pitch pages, so those are skipped. -->
+  <script is:inline>
+    (function() {
+      function ph(event, props) {
+        if (window.posthog && typeof window.posthog.capture === 'function') {
+          window.posthog.capture(event, props || {});
+        }
+      }
+      function label(a) {
+        return (a.getAttribute('aria-label') || a.textContent || '').trim().replace(/\s+/g, ' ').slice(0, 80);
+      }
+      function ready(fn) {
+        if (document.readyState !== 'loading') fn();
+        else document.addEventListener('DOMContentLoaded', fn);
+      }
+      ready(function() {
+        document.addEventListener('click', function(e) {
+          var a = e.target && e.target.closest && e.target.closest('a');
+          if (!a) return;
+          var href = a.getAttribute('href') || '';
+
+          // Contact (mailto / tel / linkedin). Location classes match the
+          // FirstClub-style structure used by current pitch pages.
+          var method = null;
+          if (href.indexOf('mailto:') === 0) method = 'email';
+          else if (href.indexOf('tel:') === 0) method = 'phone';
+          else if (href.indexOf('linkedin.com') !== -1) method = 'linkedin';
+          if (method) {
+            var loc = a.closest('.fc-header') ? 'header'
+                    : a.closest('.fc-dark-block') ? 'closing_block'
+                    : a.closest('.fc-footer') ? 'footer'
+                    : 'other';
+            ph('contact_clicked', {
+              method: method,
+              location: loc,
+              href: href,
+            });
+          }
+
+          // Outbound (external hostname, no contact)
+          if (!method && href && href.indexOf('#') !== 0 && href.indexOf('javascript:') !== 0) {
+            try {
+              var u = new URL(href, location.href);
+              if (u.hostname && u.hostname !== location.hostname) {
+                ph('outbound_link_clicked', {
+                  hostname: u.hostname,
+                  href: u.href,
+                  label: label(a),
+                });
+              }
+            } catch (err) { /* relative/invalid, ignore */ }
+          }
+        }, { passive: true });
+
+        // Section reached
+        if ('IntersectionObserver' in window) {
+          var fired = {};
+          var sectionIo = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (!entry.isIntersecting) return;
+              var name = entry.target.getAttribute('data-section');
+              if (!name || fired[name]) return;
+              fired[name] = true;
+              ph('section_reached', { section: name });
+              sectionIo.unobserve(entry.target);
+            });
+          }, { threshold: 0.35 });
+          document.querySelectorAll('[data-section]').forEach(function(el) {
+            sectionIo.observe(el);
+          });
+        }
+      });
+    })();
+  </script>
+
   <slot name="head" />
 </head>
 <body>
