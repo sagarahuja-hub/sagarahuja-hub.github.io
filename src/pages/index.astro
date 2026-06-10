@@ -103,8 +103,8 @@ const experiencePreview = [
 
       <article class="feature feature-firstclub reveal">
         <a href="/firstclub" class="feature-link" aria-label="View the FirstClub pitch page">
-          <div class="feature-visual feature-visual-banner">
-            <img src="/firstclub/lab-report-banner.png" alt="Lab Report header from the FirstClub pitch: Sagar Ahuja, Verified, Total experience 11 years - Pass" loading="lazy" />
+          <div class="feature-visual">
+            <img src="/firstclub/firstclub-specials.jpg" alt="Today's Specials section from the FirstClub pitch: Limited Edition, Member's Pick, Season's Best" loading="lazy" />
             <span class="feature-badge"><span class="feature-dot" aria-hidden="true"></span>Currently shipping</span>
           </div>
           <div class="feature-text">
@@ -120,8 +120,8 @@ const experiencePreview = [
 
       <article class="feature feature-app-redesign reveal">
         <a href="/projects/app-redesign-cohort-lobby" class="feature-link" aria-label="Read the App Redesign case study">
-          <div class="feature-visual feature-visual-portrait">
-            <img src="/case-studies/app-redesign-new-1.png" alt="Phone screenshot of the redesigned Games24x7 lobby" loading="lazy" />
+          <div class="feature-visual">
+            <img src="/case-studies/app-redesign-cohort-illustration.jpg" alt="Three users with phones showing different personalised home screens: Travel, Music, and Home themes" loading="lazy" />
           </div>
           <div class="feature-text">
             <span class="feature-eyebrow">Case study · Games24x7 · 2023</span>
@@ -443,71 +443,60 @@ const experiencePreview = [
       .feature-app-redesign .feature-text   { order: 1; }
     }
 
-    /* Each visual has its own treatment so the page does not feel uniform */
+    /* Unified visual treatment so both features look equal in weight:
+       same aspect (3:2), same object-fit (cover), same rounded frame.
+       What still feels non-card-like vs the sections below: no card
+       background on the row itself, just hairline dividers and bigger
+       typography; alternating image side per item; an overlay badge
+       on the first feature; and a metrics row on the second. */
     .feature-visual {
       position: relative;
       border-radius: 14px;
       overflow: hidden;
-    }
-    .feature-visual img { width: 100%; height: auto; display: block; }
-
-    /* FirstClub uses the lab-report banner: short and wide. Pad it inside a
-       softly tinted frame so it reads as a 'pinned badge' rather than a
-       stretched hero image. */
-    .feature-visual-banner {
-      background: linear-gradient(135deg, var(--accent-soft) 0%, transparent 100%);
-      border: 1px solid var(--border);
-      padding: 1.5rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      min-height: 180px;
-    }
-    @media (min-width: 768px) { .feature-visual-banner { min-height: 240px; padding: 2rem 1.5rem; } }
-    .feature-visual-banner img { max-width: 360px; }
-
-    /* App redesign uses a portrait phone screenshot: let it stand at its
-       natural tall aspect, no frame. */
-    .feature-visual-portrait {
       background: var(--bg-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
+      aspect-ratio: 3 / 2;
     }
-    .feature-visual-portrait img {
-      max-width: 240px;
+    .feature-visual img {
       width: 100%;
-      height: auto;
-    }
-    @media (min-width: 768px) {
-      .feature-visual-portrait img { max-width: 260px; }
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
-    /* 'Currently shipping' pulse pill, only on the FirstClub feature */
+    /* 'Currently shipping' pulse pill, only on the FirstClub feature.
+       Sits as a small overlay in the top-left of the image, with a soft
+       dark glass background so it stays readable on any image content. */
     .feature-badge {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      position: absolute;
+      top: 0.7rem;
+      left: 0.7rem;
+      padding: 0.32rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(15, 18, 26, 0.62);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       font-family: var(--font-mono);
-      font-size: 0.72rem;
-      color: var(--accent);
+      font-size: 0.7rem;
+      color: #fff;
       letter-spacing: 0.14em;
       text-transform: uppercase;
+      z-index: 2;
     }
     .feature-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--accent);
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #5eead4;
+      box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.6);
       animation: featurePulse 2s ease-in-out infinite;
     }
     @keyframes featurePulse {
-      0%, 100% { opacity: 1; }
-      50%      { opacity: 0.4; }
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.6); }
+      50%      { opacity: 0.55; box-shadow: 0 0 0 6px rgba(94, 234, 212, 0); }
     }
     @media (prefers-reduced-motion: reduce) {
-      .feature-dot { animation: none; }
+      .feature-dot { animation: none; box-shadow: none; }
     }
 
     .feature-eyebrow {
