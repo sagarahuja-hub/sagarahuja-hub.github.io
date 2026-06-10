@@ -4,7 +4,7 @@ company: Skillz
 role: Senior PM, Engagement and Monetization
 year: "2025"
 timeframe: 4 months
-summary: Reduced incentive cost from 45% of net gaming revenue by redesigning the loyalty program from upfront entitlement-based rewards to engagement-driven rewards, under a non-negotiable monthly launch deadline.
+summary: Redesigned the loyalty program from upfront entitlements to engagement-driven rewards, cutting incentive cost from 45% of net gaming revenue on a monthly deadline.
 tags: [Loyalty, Monetization, Engagement, LiveOps]
 featured: true
 order: 2

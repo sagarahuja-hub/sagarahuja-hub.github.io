@@ -72,15 +72,18 @@ const experiencePreview = [
 
   <section class="hero" data-has-bg="true" data-section="home_hero">
     <div class="container">
-      <span class="status">Open to AI PM, Senior PM, Lead PM, and Group PM roles</span>
+      <div class="role-chips" aria-label="Roles I am open to">
+        <span class="role-chip is-status"><span class="role-dot" aria-hidden="true"></span>Available now</span>
+        <span class="role-chip">AI PM</span>
+        <span class="role-chip">Senior PM</span>
+        <span class="role-chip">Lead PM</span>
+        <span class="role-chip">Group PM</span>
+      </div>
       <h1>
         I am a <span class="gradient-text">builder at heart</span>. I love experimenting, creating new user experiences and staying close to new technologies.
       </h1>
       <p class="builder-line">
         A product builder shipping AI-native systems powering personalization, lifecycle, and growth.
-      </p>
-      <p class="lede">
-        11 years of experience, 7 in product. Most recently at <strong>Skillz</strong>, leading engagement, monetization, LiveOps, and a 0-to-1 agentic AI tool for campaign automation. Previously at <strong>Games24x7</strong>, owning the experimentation engine, ML-driven communications, and personalization across all games.
       </p>
       <div class="ctas">
         <a href="#contact" class="btn btn-primary">Get in touch <span class="arrow">→</span></a>
@@ -110,7 +113,7 @@ const experiencePreview = [
             <span class="feature-eyebrow">Pitch site · 2026</span>
             <h3 class="feature-headline">FirstClub: a pitch page for a $55M Series B quick commerce</h3>
             <p class="feature-body">
-              A one-page pitch built for a single company. Mirrors their own app's product page. Contains a 12-month outsider's thesis on the four problems FirstClub needs to solve to scale from 170K to 1M households. iPhone-shaped scroll-jacked mobile showcase. PostHog wired in to tell me which problems get read.
+              A one-page pitch built for a single company. Contains a 12-month outsider's thesis on the four problems FirstClub needs to solve to scale from 170K to 1M households.
             </p>
             <span class="feature-cta">View the pitch <span class="arrow">→</span></span>
           </div>
@@ -126,7 +129,7 @@ const experiencePreview = [
             <span class="feature-eyebrow">Case study · Games24x7 · 2023</span>
             <h3 class="feature-headline">The app redesign that moved 17M users to a per-cohort lobby</h3>
             <p class="feature-body">
-              Reimagined the app from the ground up. Moved from a fixed landscape layout to a cohort-configurable architecture with an experimentation engine that ran parallel A/B tests without app releases.
+              Rebuilt the app architecture so it could be configured differently for each user cohort in real time, with parallel A/B tests running without app releases.
             </p>
             <ul class="feature-metrics">
               <li><strong>+9%</strong><span>new user retention</span></li>
@@ -219,27 +222,20 @@ const experiencePreview = [
           <p>
             I am a <strong>product builder</strong> with 11 years of experience, 7 in product. My obsession is figuring out <strong>why users behave the way they do</strong>, and shipping the systems that turn that understanding into growth - increasingly built on AI.
           </p>
-          <p>
-            Most recently at <strong>Skillz</strong> (US-listed gaming company), I owned the full user lifecycle - engagement, loyalty, LiveOps, and lifecycle communications. I also identified an operational gap in marketing and built a 0-to-1 <strong>agentic AI tool</strong> that automated the entire campaign lifecycle (briefing, content, targeting, scheduling, reporting), cutting execution effort by 50%.
-          </p>
-          <p>
-            Before that, at <strong>Games24x7</strong>, I led the Growth Platform charter - the experimentation engine, <strong>ML-driven communications</strong>, personalization systems, and analytics infrastructure used across all games. The work I am most proud of is the app redesign: we rebuilt the architecture so the app could be configured differently for each user cohort in real time, with the experimentation engine running parallel A/B tests without app releases. Result: 9% higher new user retention and 3% ARPU uplift.
-          </p>
-
-          <h3>Before product</h3>
-          <p>
-            MBA at the <strong>Indian School of Business (ISB)</strong>. Before that, business development for Tech Mahindra in Nigeria (BFSI domain, West Africa) and a Teach For India fellowship where I taught 60 kids using technology. That was my first real lesson in user behavior and engagement. I still mentor a few of those students. Some are in college now, which is a strange and wonderful thing to witness.
-          </p>
-
-          <h3>What I am drawn to now</h3>
-          <p>
-            Ambiguous problem spaces where the answer is not obvious, the data is incomplete, and strong product judgment is what separates a good outcome from a great one. Lately I am especially drawn to <strong>AI-native product surfaces</strong> - places where LLMs, agents, and ML change the unit economics of what a product team can ship and how fast a user experience can adapt.
-          </p>
-
-          <h3>Roots and pursuits</h3>
-          <p>
-            State-level chess champion and 4-time national-level player. Travelled internationally representing India in a school cultural exchange. From an ONGC family, I have lived across India from Gujarat to Assam, Andhra Pradesh to Uttarakhand. That and Nigeria taught me to read and adapt to different cultures quickly. Brown IV belt in Karate. 15+ countries, 5 continents.
-          </p>
+          <div class="roots-chips" aria-label="Pursuits outside product">
+            <span class="root-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2h8l-1 4h-6l-1-4z"/><path d="M6 6h12l-2 8H8l-2-8z"/><path d="M9 14v4h6v-4"/><path d="M7 22h10"/></svg>
+              Chess: state champion · 4x national
+            </span>
+            <span class="root-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v6"/><circle cx="12" cy="11" r="3"/><path d="M5 20l4-6 3 2 3-2 4 6"/></svg>
+              Karate: brown IV belt
+            </span>
+            <span class="root-chip">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20"/><path d="M12 2a15 15 0 0 0 0 20"/></svg>
+              15+ countries · 5 continents
+            </span>
+          </div>
         </div>
 
         <div class="about-panels reveal-stagger">
@@ -294,7 +290,6 @@ const experiencePreview = [
           <div class="eyebrow">How I think</div>
           <h2>Principles I work by</h2>
         </div>
-        <span class="link" style="font-family:var(--font-mono);font-size:0.85rem;color:var(--text-muted);">Click any principle to see the case study it came from →</span>
       </div>
       <div class="principles-grid reveal-stagger">
         {principles.map((p, i) => (
@@ -345,9 +340,6 @@ const experiencePreview = [
           <h2>Want to talk?</h2>
         </div>
       </div>
-      <p style="font-size:1.05rem;color:var(--text-muted);">
-        I am currently exploring AI PM, Senior PM, Lead PM, and Group PM roles. If you are hiring, building something interesting, or just want to compare notes on product, I would be glad to hear from you.
-      </p>
       <div class="contact-block">
         <a href="mailto:sagarahuja@gmail.com" class="contact-card">
           <span class="label">Email</span>
@@ -366,6 +358,71 @@ const experiencePreview = [
   </section>
 
   <style>
+    /* ============== Hero role chips ============== */
+    .role-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .role-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0.28rem 0.62rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-card);
+    }
+    .role-chip.is-status {
+      color: var(--accent);
+      background: var(--accent-soft);
+      border-color: var(--accent-line);
+    }
+    .role-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5);
+      animation: rolePulse 2s ease-in-out infinite;
+    }
+    @keyframes rolePulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.55); }
+      50%      { opacity: 0.6; box-shadow: 0 0 0 5px rgba(34, 197, 94, 0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .role-dot { animation: none; }
+    }
+
+    /* ============== About: roots chips ============== */
+    .roots-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+    }
+    .root-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      padding: 0.28rem 0.62rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--bg-card);
+    }
+    .root-chip svg { width: 12px; height: 12px; flex-shrink: 0; opacity: 0.85; }
+
     /* ============== Featured section ==============
        Distinct from the card-grid sections that follow:
        - Centered heading, gentler kerning, accent tag above

@@ -4,7 +4,7 @@ company: Skillz
 role: Self-initiated (outside formal scope)
 year: "2025"
 timeframe: 2 months
-summary: Independently piloted, validated, and rolled out AI tools across the product organization for discovery, PRD authoring, and early design. No budget, no headcount, no formal mandate - led entirely outside formal responsibility.
+summary: Piloted and rolled out AI tools for product discovery, PRD authoring, and early design across the org. No budget, no headcount, no formal mandate.
 tags: [AI, Operational Excellence, Ownership]
 featured: true
 order: 5

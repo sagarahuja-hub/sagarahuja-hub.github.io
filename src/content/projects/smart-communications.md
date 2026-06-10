@@ -4,7 +4,7 @@ company: Games24x7
 role: Senior PM, Growth Platform
 year: "2023"
 timeframe: 4 months
-summary: Launched ML-driven personalization for notification timing as a two-way door decision while engagement was declining. Validated quickly, then expanded the framework to frequency, channel, and content.
+summary: Launched ML-driven personalization for notification timing as a two-way door, then expanded the framework to frequency, channel, and content.
 tags: [Machine Learning, Personalization, Communications]
 featured: true
 order: 6

@@ -4,7 +4,7 @@ company: Games24x7
 role: Senior PM, Growth Platform
 year: "2023"
 timeframe: 9 months
-summary: Reimagined the app from the ground up, moving from a fixed landscape layout to a cohort-configurable architecture with an experimentation engine that ran parallel A/B tests without app releases.
+summary: Rebuilt the app so it could be configured per user cohort in real time, with parallel A/B tests running without app releases.
 tags: [Growth, Personalization, Experimentation, Mobile]
 featured: true
 order: 1

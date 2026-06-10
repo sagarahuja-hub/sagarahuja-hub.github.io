@@ -4,7 +4,7 @@ company: Skillz
 role: Senior PM, LiveOps
 year: "2025"
 timeframe: 3 months
-summary: Conceptualized and led the product vision for an agentic AI tool that automated the end-to-end LiveOps campaign lifecycle - briefing, content, targeting, scheduling, reporting - for the Marketing team across multiple titles.
+summary: Led product vision for an agentic AI tool that ran the full LiveOps campaign lifecycle, briefing through reporting, across multiple Skillz titles.
 tags: [AI, LiveOps, Marketing Automation, Agentic Systems]
 featured: true
 order: 4
