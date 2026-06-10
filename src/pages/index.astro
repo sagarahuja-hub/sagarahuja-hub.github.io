@@ -96,7 +96,7 @@ const experiencePreview = [
     <div class="container">
       <a href="/firstclub" class="spotlight-card" data-spotlight="firstclub">
         <div class="spotlight-image">
-          <img src="/firstclub/lab-report.png" alt="Lab Report card from the FirstClub pitch page showing verified credentials" loading="lazy" />
+          <img src="/firstclub/lab-report-banner.png" alt="Lab Report header from the FirstClub pitch page: Sagar Ahuja, Verified, Total experience 11 years - Pass" loading="lazy" />
         </div>
         <div class="spotlight-content">
           <div class="spotlight-badge">
@@ -362,27 +362,24 @@ const experiencePreview = [
     }
 
     .spotlight-image {
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
-      background: var(--bg-subtle);
+      background: transparent;
       display: flex;
       align-items: center;
       justify-content: center;
-      max-height: 220px;
     }
     .spotlight-image img {
       width: 100%;
       height: auto;
       display: block;
-      object-fit: contain;
     }
 
     @media (min-width: 768px) {
-      .spotlight-card { grid-template-columns: 220px 1fr; gap: 1.75rem; padding: 1.5rem; align-items: center; }
-      .spotlight-image { max-height: 260px; }
+      .spotlight-card { grid-template-columns: 340px 1fr; gap: 1.75rem; padding: 1.5rem; align-items: center; }
     }
     @media (min-width: 1100px) {
-      .spotlight-card { grid-template-columns: 260px 1fr; padding: 1.75rem; }
+      .spotlight-card { grid-template-columns: 380px 1fr; padding: 1.75rem; }
     }
 
     .spotlight-badge {
