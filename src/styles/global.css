@@ -1116,11 +1116,13 @@ p { color: var(--text-muted); }
   display: block;
 }
 @media (min-width: 720px) {
-  /* Stacked: photo first, then the bio paragraphs and chips below.
-     The float-right + text-wrap composition was clever but it left
-     the photo orphaned beside a short paragraph after the trim. */
+  /* Float the photo on the left so the three bio paragraphs wrap to
+     its right, filling the dark band that was sitting next to it in
+     the stacked layout. The roots chips below establish a flex BFC,
+     so they auto-clear the float and appear below the photo. */
   .about-photo {
-    margin: 0 0 1.5rem;
+    float: left;
+    margin: 0.25rem 1.5rem 1rem 0;
     width: 230px;
   }
 }
