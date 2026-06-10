@@ -8,7 +8,7 @@ tags: [Pitch Page, Job Search, Astro, Claude]
 order: 0
 icon: send
 status: Live
-image: "/firstclub/og-firstclub.jpg"
+image: "/firstclub/lab-report.png"
 ---
 
 ## What it is

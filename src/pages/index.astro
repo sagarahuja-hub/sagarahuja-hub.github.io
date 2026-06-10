@@ -91,6 +91,28 @@ const experiencePreview = [
     </div>
   </section>
 
+  {/* Spotlight: latest build, currently shipping ============================== */}
+  <section class="hero-spotlight reveal" aria-label="Latest build">
+    <div class="container">
+      <a href="/firstclub" class="spotlight-card" data-spotlight="firstclub">
+        <div class="spotlight-image">
+          <img src="/firstclub/lab-report.png" alt="Lab Report card from the FirstClub pitch page showing verified credentials" loading="lazy" />
+        </div>
+        <div class="spotlight-content">
+          <div class="spotlight-badge">
+            <span class="spotlight-dot" aria-hidden="true"></span>
+            Latest build · Currently shipping
+          </div>
+          <h3 class="spotlight-title">FirstClub: a pitch page for a $55M Series B</h3>
+          <p class="spotlight-summary">
+            A one-page pitch built for a single company. Mirrors their own app's product page. Contains a 12-month outsider's thesis on the four problems FirstClub needs to solve to scale from 170K to 1M households. iPhone-shaped scroll-jacked mobile showcase. PostHog wired in to tell me which problems get read.
+          </p>
+          <span class="spotlight-cta">View the pitch <span class="arrow">→</span></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
   <section class="section" id="work" data-section="home_work">
     <div class="container">
       <div class="section-title">
@@ -315,4 +337,106 @@ const experiencePreview = [
       </div>
     </div>
   </section>
+
+  <style>
+    .hero-spotlight { padding: 0 0 2rem; }
+    @media (min-width: 768px) { .hero-spotlight { padding: 0.5rem 0 2.5rem; } }
+
+    .spotlight-card {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.25rem;
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      transition: transform 0.22s var(--ease), border-color 0.22s var(--ease), box-shadow 0.22s var(--ease);
+    }
+    .spotlight-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+    }
+
+    .spotlight-image {
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-height: 220px;
+    }
+    .spotlight-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    @media (min-width: 768px) {
+      .spotlight-card { grid-template-columns: 220px 1fr; gap: 1.75rem; padding: 1.5rem; align-items: center; }
+      .spotlight-image { max-height: 260px; }
+    }
+    @media (min-width: 1100px) {
+      .spotlight-card { grid-template-columns: 260px 1fr; padding: 1.75rem; }
+    }
+
+    .spotlight-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .spotlight-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: spotlightPulse 2s ease-in-out infinite;
+      box-shadow: 0 0 0 0 rgba(124, 158, 255, 0.6);
+    }
+    @keyframes spotlightPulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(124, 158, 255, 0.6); }
+      50%      { opacity: 0.45; box-shadow: 0 0 0 6px rgba(124, 158, 255, 0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .spotlight-dot { animation: none; }
+    }
+
+    .spotlight-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0.25rem 0 0.5rem;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+    @media (min-width: 768px) { .spotlight-title { font-size: 1.35rem; } }
+
+    .spotlight-summary {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin: 0 0 0.85rem;
+    }
+    .spotlight-cta {
+      color: var(--accent);
+      font-size: 0.95rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: gap 0.22s var(--ease);
+    }
+    .spotlight-card:hover .spotlight-cta { gap: 0.6rem; }
+  </style>
 </BaseLayout>
