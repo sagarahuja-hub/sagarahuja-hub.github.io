@@ -37,6 +37,9 @@ const sideProjects = defineCollection({
     summary: z.string(),
     link: z.string().url().optional(),
     linkLabel: z.string().optional(),
+    // Optional internal href the card click maps to. Defaults to the
+    // generated /side-projects/<slug> detail page if omitted.
+    mainHref: z.string().optional(),
     tags: z.array(z.string()).default([]),
     order: z.number().default(100),
     icon: z.string().optional(),

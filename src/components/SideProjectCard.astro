@@ -10,6 +10,7 @@ interface Props {
   tags?: string[];
   link?: string;
   linkLabel?: string;
+  mainHref?: string;
   icon?: string;
   status?: string;
   image?: string;
@@ -24,10 +25,16 @@ const {
   tags = [],
   link,
   linkLabel = 'Open',
+  mainHref,
   icon,
   status = 'Completed',
   image
 } = Astro.props;
+
+// The card's primary click target. Defaults to the auto-generated detail
+// page; entries can override (e.g. firstclub-pitch points straight at /firstclub).
+const cardHref = mainHref ?? `/side-projects/${slug}`;
+const readMoreLabel = mainHref ? 'Open project →' : 'Read more →';
 ---
 <article class="side-card">
   <CardVisual icon={icon} status={status} image={image} alt={title} />
@@ -49,10 +56,35 @@ const {
       </div>
     )}
     <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-top:auto;">
-      <a href={`/side-projects/${slug}`} class="external">Read more →</a>
+      {/* The stretched anchor projects a click-area over the whole card via
+          its ::after pseudo-element. Inner explicit links override it via
+          z-index so the secondary CTA still works. */}
+      <a href={cardHref} class="external stretched">{readMoreLabel}</a>
       {link && (
-        <a href={link} target="_blank" rel="noopener" class="external">{linkLabel} ↗</a>
+        <a href={link} target="_blank" rel="noopener" class="external on-top">{linkLabel} ↗</a>
       )}
     </div>
   </div>
 </article>
+
+<style>
+  .side-card { position: relative; }
+  /* Stretched link: the actual <a> still sits in its normal flow position,
+     but its ::after expands to fill the whole .side-card, making any click
+     on the card navigate there. */
+  .side-card .external.stretched::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    border-radius: inherit;
+  }
+  /* The card itself gets a pointer cursor anywhere via the stretched layer.
+     The secondary CTA + tags sit above the stretched area so their own
+     hover state and click target win. */
+  .side-card .external.on-top,
+  .side-card .tag {
+    position: relative;
+    z-index: 2;
+  }
+</style>
