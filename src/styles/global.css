@@ -1081,12 +1081,26 @@ p { color: var(--text-muted); }
 @media (min-width: 768px) { .side-grid { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1.5rem; } }
 
 /* About section (homepage) - floated photo inside text */
-.about-wrap { position: relative; }
+.about-wrap {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 900px) {
+  /* Side-by-side on desktop so the panels fill the vertical space left
+     of the short bio + roots chips instead of sitting in a wide row
+     below it. */
+  .about-wrap {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+}
 
 .about-text { color: var(--text-muted); }
 .about-text p { margin-bottom: 1rem; color: var(--text-muted); font-size: 1rem; }
 .about-text strong { color: var(--text); font-weight: 600; }
-.about-text h3 { color: var(--text); font-size: 1.1rem; margin-top: 1.75rem; margin-bottom: 0.5rem; }
 
 .about-photo {
   width: 200px;
@@ -1128,11 +1142,16 @@ p { color: var(--text-muted); }
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
   clear: both;
 }
 @media (min-width: 560px) { .about-panels { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 900px) { .about-panels { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 900px) {
+  /* No longer below the text on desktop; lives in the right column of
+     .about-wrap, packed as a 2x2 grid so the four panels fit cleanly
+     alongside the bio. */
+  .about-panels { grid-template-columns: repeat(2, 1fr); margin-top: 0; }
+}
 
 .about-panels .panel {
   background: var(--bg-card);
