@@ -30,7 +30,9 @@ const currentPath = pathname ?? Astro.url.pathname;
     <meta property="og:description" content={description} />
     <meta property="og:url" content={Astro.url.href} />
     <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="canonical" href={new URL(currentPath, Astro.site).href} />
     <script is:inline>
       (function() {
