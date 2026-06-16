@@ -23,9 +23,15 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       --sv-violet: #4F46E5;
       --sv-grad: linear-gradient(105deg, #4F46E5 0%, #6366F1 50%, #818CF8 100%);
       --sv-grad-soft: linear-gradient(135deg, rgba(99,102,241,0.10) 0%, rgba(129,140,248,0.12) 100%);
+      --sv-indigo-50: #EEF2FF;
+      --sv-indigo-100: #E0E7FF;
+      --sv-indigo-600: #4F46E5;
+      --sv-indigo-700: #4338CA;
+      --sv-indigo-900: #312E81;
+      --sv-soft-btn: linear-gradient(to bottom, #E0E7FF 0%, #FFFFFF 100%);
       --sv-ink-block: #1E2033;
       --sv-radius: 10px;
-      --sv-radius-lg: 18px;
+      --sv-radius-lg: 24px;
       --sv-radius-pill: 999px;
       --sv-ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -39,10 +45,21 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       line-height: 1.6;
       font-weight: 400;
     }
-    .sv-page { max-width: 1180px; margin: 0 auto; padding: 28px 20px 72px; }
+    /* Sarvam-style fine grain texture over the whole page */
+    body::before {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.045;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .sv-page { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 28px 20px 72px; }
     @media (min-width: 720px) { .sv-page { padding: 44px 32px 96px; } }
     @media (max-width: 420px) { .sv-page { padding: 22px 14px 64px; } }
     .sv-narrow { max-width: 900px; margin-left: auto; margin-right: auto; }
+
+    /* Indian motif section breaker */
+    .sv-divider { display: flex; align-items: center; justify-content: center; gap: 18px; margin: 52px 0 4px; }
+    .sv-divider .ln { flex: 1; max-width: 240px; height: 1px; background: linear-gradient(90deg, transparent, var(--sv-indigo-100)); }
+    .sv-divider .ln.r { background: linear-gradient(90deg, var(--sv-indigo-100), transparent); }
+    .sv-divider .motif { width: 42px; height: 42px; color: var(--sv-indigo-600); flex-shrink: 0; opacity: 0.9; }
 
     strong.k {
       font-weight: 700;
@@ -107,12 +124,12 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .sv-wg-model b { color: var(--sv-magenta); }
     .sv-wg-model svg { width: 12px; height: 12px; color: var(--sv-magenta); }
 
-    .sv-tabs { display: flex; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--sv-border); overflow-x: auto; scrollbar-width: none; }
+    .sv-tabs { display: flex; gap: 6px; padding: 10px 12px; background: #FAF9FE; border-bottom: 1px solid var(--sv-border); overflow-x: auto; scrollbar-width: none; }
     .sv-tabs::-webkit-scrollbar { display: none; }
-    .sv-tab { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 12px; border: 1px solid transparent; background: transparent; color: var(--sv-secondary); font-family: 'Hanken Grotesk', sans-serif; font-size: 13.5px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.18s var(--sv-ease); }
+    .sv-tab { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: var(--sv-radius-pill); border: 1px solid transparent; background: transparent; color: var(--sv-secondary); font-family: 'Hanken Grotesk', sans-serif; font-size: 13.5px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.18s var(--sv-ease); }
     .sv-tab svg { width: 17px; height: 17px; }
     .sv-tab:hover { color: var(--sv-ink); }
-    .sv-tab.active { background: rgba(99,102,241,0.07); border-color: rgba(99,102,241,0.30); color: var(--sv-magenta); }
+    .sv-tab.active { background: var(--sv-soft-btn); border-color: var(--sv-indigo-100); color: var(--sv-indigo-900); box-shadow: inset 0 -1px 0 1px rgba(0,0,0,0.04); }
     @media (min-width: 780px) { .sv-tabs { justify-content: space-between; } .sv-tab { flex: 1 1 auto; justify-content: center; } }
 
     .sv-panel { display: none; }
@@ -128,8 +145,9 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .tts-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 22px; }
     .tts-foot-left { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
     .lang-select { position: relative; }
-    .lang-select select { appearance: none; -webkit-appearance: none; font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: var(--sv-ink); background: var(--sv-surface); border: 1px solid var(--sv-border); border-radius: var(--sv-radius-pill); padding: 8px 32px 8px 14px; cursor: pointer; transition: border-color 0.15s ease; }
+    .lang-select select { appearance: none; -webkit-appearance: none; font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: var(--sv-ink); background: var(--sv-surface); border: 1px solid var(--sv-border); border-radius: var(--sv-radius-pill); padding: 8px 32px 8px 34px; cursor: pointer; transition: border-color 0.15s ease; }
     .lang-select select:hover { border-color: var(--sv-magenta); }
+    .lang-select::before { content: 'अ'; position: absolute; left: 13px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--sv-indigo-600); font-size: 14px; font-weight: 700; }
     .lang-select::after { content: '▾'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--sv-muted); font-size: 11px; }
     .tts-words { font-size: 12.5px; color: var(--sv-secondary); }
     .tts-words b { color: var(--sv-ink); font-weight: 700; }
@@ -143,6 +161,15 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .tts-play.playing { background: var(--sv-magenta); }
     .tts-play.playing .ico-play { display: none; }
     .tts-play.playing .ico-pause { display: block; }
+    .tts-play.disabled { opacity: 0.35; cursor: not-allowed; }
+    .tts-play.disabled:hover { transform: none; }
+
+    /* "Coming soon" language placeholder */
+    .tts-soon { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+    .tts-soon .greet { font-family: 'Fraunces', Georgia, serif; font-size: 32px; line-height: 1.1; color: var(--sv-ink); }
+    .tts-soon .soon-badge { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sv-indigo-700); background: var(--sv-indigo-50); border: 1px solid var(--sv-indigo-100); padding: 5px 11px; border-radius: var(--sv-radius-pill); }
+    .tts-soon .soon-sub { font-family: 'Hanken Grotesk', sans-serif; font-size: 14.5px; color: var(--sv-secondary); line-height: 1.55; }
+    .tts-soon .soon-sub b { color: var(--sv-ink); font-weight: 600; }
 
     .tts-voices { border-top: 1px solid var(--sv-border); padding: 18px 18px 16px; background: #FCFBFA; }
     @media (min-width: 720px) { .tts-voices { border-top: none; border-left: 1px solid var(--sv-border); } }
@@ -180,10 +207,14 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     /* STT */
     .stt { padding: 24px; display: grid; grid-template-columns: 1fr; gap: 18px; }
     @media (min-width: 720px) { .stt { grid-template-columns: 1.5fr 1fr; } }
-    .stt-rec { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--sv-grad-soft); border: 1px solid var(--sv-border); border-radius: 12px; margin-bottom: 16px; }
-    .stt-rec .mic { width: 18px; height: 18px; color: var(--sv-magenta); flex-shrink: 0; }
-    .stt-rec .cap { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--sv-secondary); margin-left: auto; }
-    .stt-text { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 19px; line-height: 1.6; color: var(--sv-ink); }
+    .stt-mic { display: inline-flex; align-items: center; gap: 11px; padding: 10px 16px 10px 13px; border-radius: var(--sv-radius-pill); border: 1px solid var(--sv-indigo-100); background: var(--sv-soft-btn); color: var(--sv-indigo-900); font-family: 'Hanken Grotesk', sans-serif; font-size: 13.5px; font-weight: 600; cursor: pointer; margin-bottom: 16px; box-shadow: inset 0 -1px 0 1px rgba(0,0,0,0.04); transition: all 0.18s var(--sv-ease); }
+    .stt-mic:hover { box-shadow: inset 0 -1px 0 1px rgba(0,0,0,0.04), 0 5px 16px rgba(79,70,229,0.16); }
+    .stt-mic .mic { width: 17px; height: 17px; color: var(--sv-indigo-600); flex-shrink: 0; }
+    .stt-mic.listening { background: linear-gradient(to bottom, #FCE0EC, #FFFFFF); border-color: #F4C6DA; color: #B0337A; }
+    .stt-mic.listening .mic { color: #C2367A; }
+    .stt-mic.disabled { opacity: 0.55; cursor: not-allowed; }
+    .stt-text { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 19px; line-height: 1.6; color: var(--sv-ink); min-height: 3em; }
+    .stt-hint { font-size: 12px; color: var(--sv-muted); margin-top: 14px; line-height: 1.5; }
     .stt-side { background: #FCFBFA; border: 1px solid var(--sv-border); border-radius: 14px; padding: 18px; }
     .stt-side .sl { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sv-muted); }
     .stt-side .sv-detected { font-family: 'Fraunces', Georgia, serif; font-size: 22px; color: var(--sv-ink); margin: 4px 0 16px; }
@@ -248,9 +279,9 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .dub-note { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--sv-muted); margin-top: 16px; text-align: center; }
 
     .sv-stage-cta { text-align: center; margin-top: 22px; }
-    .sv-try { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 15px 28px; border-radius: var(--sv-radius-pill); background: var(--sv-grad); color: #fff; text-decoration: none; font-family: 'Hanken Grotesk', sans-serif; font-size: 15px; font-weight: 700; box-shadow: 0 8px 22px rgba(99,102,241,0.28); transition: transform 0.18s var(--sv-ease), box-shadow 0.18s var(--sv-ease); }
-    .sv-try:hover { transform: translateY(-1px); box-shadow: 0 11px 28px rgba(99,102,241,0.34); }
-    .sv-try svg { width: 17px; height: 17px; }
+    .sv-try { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 14px 28px; border-radius: var(--sv-radius-pill); background: var(--sv-soft-btn); color: var(--sv-indigo-900); text-decoration: none; font-family: 'Hanken Grotesk', sans-serif; font-size: 15px; font-weight: 700; border: 1px solid var(--sv-indigo-100); box-shadow: inset 0 -1px 0 1px rgba(0,0,0,0.04); transition: transform 0.18s var(--sv-ease), box-shadow 0.18s var(--sv-ease); }
+    .sv-try:hover { transform: translateY(-1px); box-shadow: inset 0 -1px 0 1px rgba(0,0,0,0.04), 0 8px 22px rgba(79,70,229,0.18); }
+    .sv-try svg { width: 17px; height: 17px; color: var(--sv-indigo-600); }
     .sv-stage-foot { font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--sv-muted); margin-top: 12px; }
 
     /* ===== Section heads ===== */
@@ -463,12 +494,13 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           <div class="sv-panel sv-panel-min" data-panel="stt">
             <div class="stt">
               <div class="stt-main">
-                <div class="stt-rec">
+                <button class="stt-mic" id="stt-mic" type="button">
                   <svg class="mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
-                  <span class="sv-wave on" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
-                  <span class="cap">Saaras v3 · live</span>
-                </div>
+                  <span id="stt-mic-label">Tap and speak</span>
+                  <span class="sv-wave" id="stt-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+                </button>
                 <p class="stt-text" id="stt-text"></p>
+                <p class="stt-hint" id="stt-hint">This is live, not a mock. Tap the mic and speak - Saaras transcribes in real time. Defaults to the script above.</p>
               </div>
               <div class="stt-side">
                 <div class="sl">Detected language</div>
@@ -559,6 +591,25 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         <div class="sv-stage-foot">no notice period · based in Bengaluru · weights fully transparent</div>
       </div>
     </section>
+
+    <div class="sv-divider reveal" aria-hidden="true">
+      <span class="ln"></span>
+      <svg class="motif" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
+        <g>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(45 24 24)"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(90 24 24)"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(135 24 24)"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(180 24 24)"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(225 24 24)"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(270 24 24)"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(315 24 24)"/>
+        </g>
+        <circle cx="24" cy="24" r="2.6"/>
+        <circle cx="24" cy="24" r="7.5" stroke-dasharray="1 2.6"/>
+      </svg>
+      <span class="ln r"></span>
+    </div>
 
     {/* ============ Thesis + bets ============ */}
     <div class="sv-narrow">
@@ -721,6 +772,25 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </article>
     </div>
 
+    <div class="sv-divider reveal" aria-hidden="true">
+      <span class="ln"></span>
+      <svg class="motif" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round">
+        <g>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(45 24 24)"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(90 24 24)"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(135 24 24)"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(180 24 24)"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(225 24 24)"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(270 24 24)"/>
+          <path d="M24 24C21 17 21 13 24 8 27 13 27 17 24 24Z" transform="rotate(315 24 24)"/>
+        </g>
+        <circle cx="24" cy="24" r="2.6"/>
+        <circle cx="24" cy="24" r="7.5" stroke-dasharray="1 2.6"/>
+      </svg>
+      <span class="ln r"></span>
+    </div>
+
     {/* ============ Why me ============ */}
     <div class="sv-narrow">
       <div class="sv-section-head reveal">
@@ -851,23 +921,18 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       }
 
       // ----- Language data -----
-      // The pitch script, in the languages Sarvam is built to serve.
-      // NOTE: non-English strings should be verified by a native speaker before publishing.
+      // English + Hindi are live (verified). Other languages show a "coming soon"
+      // state using verified greeting words only - real translations ship later.
       var LANGS = [
-        { code: 'en', name: 'English',
+        { code: 'en', name: 'English', bcp: 'en-IN', status: 'live',
           text: 'Sarvam has won the model race. The real prize is adoption: turning world-class models into products that a billion Indians use every day.' },
-        { code: 'hi', name: 'हिन्दी',
+        { code: 'hi', name: 'हिन्दी', bcp: 'hi-IN', status: 'live',
           text: 'सर्वम ने मॉडल की दौड़ जीत ली है। असली इनाम है अपनाना: विश्वस्तरीय मॉडलों को ऐसे प्रोडक्ट में बदलना जिन्हें एक अरब भारतीय रोज़ इस्तेमाल करें।' },
-        { code: 'mr', name: 'मराठी',
-          text: 'सर्वमने मॉडेलची शर्यत जिंकली आहे. खरे बक्षीस आहे स्वीकार: जागतिक दर्जाच्या मॉडेल्सना अशा उत्पादनांत बदलणे जी शंभर कोटी भारतीय रोज वापरतील.' },
-        { code: 'bn', name: 'বাংলা',
-          text: 'সর্বম মডেলের দৌড় জিতেছে। আসল পুরস্কার হলো গ্রহণযোগ্যতা: বিশ্বমানের মডেলকে এমন পণ্যে রূপান্তর করা যা একশো কোটি ভারতীয় প্রতিদিন ব্যবহার করে।' },
-        { code: 'ta', name: 'தமிழ்',
-          text: 'சர்வம் மாடல் பந்தயத்தில் வென்றது. உண்மையான பரிசு ஏற்பு: உலகத்தரம் வாய்ந்த மாடல்களை நூறு கோடி இந்தியர்கள் தினமும் பயன்படுத்தும் தயாரிப்புகளாக மாற்றுவது.' },
-        { code: 'te', name: 'తెలుగు',
-          text: 'సర్వం మోడల్ రేసును గెలిచింది. అసలు బహుమతి స్వీకరణ: ప్రపంచ స్థాయి మోడల్‌లను వంద కోట్ల మంది భారతీయులు ప్రతిరోజూ వాడే ఉత్పత్తులుగా మార్చడం.' },
-        { code: 'kn', name: 'ಕನ್ನಡ',
-          text: 'ಸರ್ವಮ್ ಮಾದರಿ ಓಟವನ್ನು ಗೆದ್ದಿದೆ. ನಿಜವಾದ ಬಹುಮಾನ ಅಳವಡಿಕೆ: ವಿಶ್ವದರ್ಜೆಯ ಮಾದರಿಗಳನ್ನು ನೂರು ಕೋಟಿ ಭಾರತೀಯರು ಪ್ರತಿದಿನ ಬಳಸುವ ಉತ್ಪನ್ನಗಳಾಗಿ ಪರಿವರ್ತಿಸುವುದು.' }
+        { code: 'mr', name: 'मराठी', bcp: 'mr-IN', status: 'soon', greet: 'नमस्कार' },
+        { code: 'bn', name: 'বাংলা', bcp: 'bn-IN', status: 'soon', greet: 'নমস্কার' },
+        { code: 'ta', name: 'தமிழ்', bcp: 'ta-IN', status: 'soon', greet: 'வணக்கம்' },
+        { code: 'te', name: 'తెలుగు', bcp: 'te-IN', status: 'soon', greet: 'నమస్తే' },
+        { code: 'kn', name: 'ಕನ್ನಡ', bcp: 'kn-IN', status: 'soon', greet: 'ನಮಸ್ಕಾರ' }
       ];
 
       var byCode = {};
@@ -901,12 +966,38 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
       function countWords(s) { return (s.trim().match(/\S+/g) || []).length; }
 
+      // refs + state
+      var play = document.getElementById('tts-play');
+      var mic = document.getElementById('stt-mic');
+      var micLabel = document.getElementById('stt-mic-label');
+      var sttWave = document.getElementById('stt-wave');
+      var curLang = byCode['en'];
+
+      function stopSpeech() {
+        if (window.speechSynthesis) { try { window.speechSynthesis.cancel(); } catch (e) {} }
+        if (play) { play.classList.remove('playing'); play.setAttribute('aria-label', 'Play'); }
+      }
+
       function render(code) {
         var l = byCode[code] || LANGS[0];
-        if (ttsText) ttsText.textContent = l.text;
-        if (ttsWords) ttsWords.textContent = countWords(l.text);
-        if (ttsChars) ttsChars.textContent = l.text.length + '/2000';
-        if (sttText) sttText.textContent = l.text;
+        curLang = l;
+        stopSpeech();
+        if (l.status === 'live') {
+          if (ttsText) ttsText.textContent = l.text;
+          if (sttText) sttText.textContent = l.text;
+          if (ttsWords) ttsWords.textContent = countWords(l.text);
+          if (ttsChars) ttsChars.textContent = l.text.length + '/2000';
+          if (play) play.classList.remove('disabled');
+        } else {
+          var ph = '<span class="tts-soon"><span class="greet">' + l.greet + '</span>'
+            + '<span class="soon-badge">Coming soon</span>'
+            + '<span class="soon-sub"><b>' + l.name + '</b> voice is releasing soon. English and हिन्दी are live now - try them.</span></span>';
+          if (ttsText) ttsText.innerHTML = ph;
+          if (sttText) sttText.innerHTML = ph;
+          if (ttsWords) ttsWords.textContent = '0';
+          if (ttsChars) ttsChars.textContent = '0/2000';
+          if (play) play.classList.add('disabled');
+        }
         if (sttLang) sttLang.textContent = l.name;
         if (dubGrid) {
           dubGrid.querySelectorAll('.dub-chip').forEach(function(c) {
@@ -935,19 +1026,80 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           tabs.forEach(function(t) { t.classList.remove('active'); });
           tab.classList.add('active');
           panels.forEach(function(p) { p.classList.toggle('active', p.getAttribute('data-panel') === name); });
+          if (name !== 'tts') stopSpeech();
           if (window.posthog && typeof window.posthog.capture === 'function') {
             window.posthog.capture('playground_tab_opened', { tab: name });
           }
         });
       });
 
-      // ----- Play button (decorative) -----
-      var play = document.getElementById('tts-play');
+      // ----- Text to Speech (real, via Web Speech API) -----
+      function pickVoice(bcp) {
+        if (!window.speechSynthesis) return null;
+        var vs = window.speechSynthesis.getVoices() || [];
+        var exact = vs.filter(function(v){ return v.lang === bcp; })[0];
+        if (exact) return exact;
+        var base = bcp.split('-')[0];
+        return vs.filter(function(v){ return v.lang && v.lang.indexOf(base) === 0; })[0] || null;
+      }
       if (play) {
         play.addEventListener('click', function() {
-          play.classList.toggle('playing');
-          play.setAttribute('aria-label', play.classList.contains('playing') ? 'Pause' : 'Play');
+          if (play.classList.contains('disabled')) return;
+          if (!('speechSynthesis' in window) || !curLang.text) { play.classList.toggle('playing'); return; }
+          if (play.classList.contains('playing')) { stopSpeech(); return; }
+          var u = new SpeechSynthesisUtterance(curLang.text);
+          u.lang = curLang.bcp;
+          var v = pickVoice(curLang.bcp);
+          if (v) u.voice = v;
+          u.rate = 0.98;
+          u.onend = function() { play.classList.remove('playing'); play.setAttribute('aria-label', 'Play'); };
+          u.onerror = function() { play.classList.remove('playing'); };
+          window.speechSynthesis.cancel();
+          window.speechSynthesis.speak(u);
+          play.classList.add('playing');
+          play.setAttribute('aria-label', 'Pause');
         });
+      }
+
+      // ----- Speech to Text (real, via Web Speech API) -----
+      var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      var recog = null, listening = false;
+      if (mic) {
+        if (!SR) {
+          mic.classList.add('disabled');
+          if (micLabel) micLabel.textContent = 'Live mic not supported here';
+        } else {
+          mic.addEventListener('click', function() {
+            if (listening) { try { recog.stop(); } catch (e) {} return; }
+            recog = new SR();
+            recog.lang = (curLang.status === 'live') ? curLang.bcp : 'en-IN';
+            recog.interimResults = true;
+            recog.continuous = false;
+            recog.onstart = function() {
+              listening = true;
+              mic.classList.add('listening');
+              if (micLabel) micLabel.textContent = 'Listening... tap to stop';
+              if (sttWave) sttWave.classList.add('on');
+              if (sttText) sttText.textContent = '';
+            };
+            recog.onresult = function(e) {
+              var t = '';
+              for (var i = 0; i < e.results.length; i++) { t += e.results[i][0].transcript; }
+              if (sttText) sttText.textContent = t;
+            };
+            recog.onerror = function(e) {
+              if (micLabel) micLabel.textContent = (e.error === 'not-allowed' || e.error === 'service-not-allowed') ? 'Allow mic access to try' : 'Did not catch that - try again';
+            };
+            recog.onend = function() {
+              listening = false;
+              mic.classList.remove('listening');
+              if (sttWave) sttWave.classList.remove('on');
+              if (micLabel) micLabel.textContent = 'Tap and speak';
+              if (sttText && !sttText.textContent.trim() && curLang.status === 'live') sttText.textContent = curLang.text;
+            };
+            try { recog.start(); } catch (err) {}
+          });
+        }
       }
     });
   </script>
