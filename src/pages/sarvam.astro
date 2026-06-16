@@ -388,17 +388,17 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         </div>
 
         <div class="sv-tabs" role="tablist" aria-label="Sarvam capabilities">
-          <button class="sv-tab active" type="button" data-tab="tts">
+          <button class="sv-tab active" type="button" data-tab="va">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Voice Agents
+          </button>
+          <button class="sv-tab" type="button" data-tab="tts">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg>
             Text to Speech
           </button>
           <button class="sv-tab" type="button" data-tab="stt">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
             Speech to Text
-          </button>
-          <button class="sv-tab" type="button" data-tab="va">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            Voice Agents
           </button>
           <button class="sv-tab" type="button" data-tab="doc">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
@@ -413,7 +413,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         <div class="sv-panels">
 
           {/* ---- Text to Speech ---- */}
-          <div class="sv-panel active sv-panel-min" data-panel="tts">
+          <div class="sv-panel sv-panel-min" data-panel="tts">
             <div class="tts">
               <div class="tts-main">
                 <p class="tts-text" id="tts-text"></p>
@@ -483,7 +483,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           </div>
 
           {/* ---- Voice Agents ---- */}
-          <div class="sv-panel sv-panel-min" data-panel="va">
+          <div class="sv-panel active sv-panel-min" data-panel="va">
             <div class="va">
               <div class="va-msg user">
                 <span class="av" aria-hidden="true">SR</span>
