@@ -42,27 +42,20 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .sv-page { max-width: 1180px; margin: 0 auto; padding: 28px 20px 72px; }
     @media (min-width: 720px) { .sv-page { padding: 44px 32px 96px; } }
     @media (max-width: 420px) { .sv-page { padding: 22px 14px 64px; } }
+    .sv-narrow { max-width: 900px; margin-left: auto; margin-right: auto; }
 
     strong.k {
       font-weight: 700;
       background: var(--sv-grad);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
       white-space: nowrap;
     }
     em.c { color: var(--sv-violet); font-style: italic; font-weight: 500; }
 
     .sv-eyebrow {
       font-family: 'Hanken Grotesk', sans-serif;
-      font-size: 11.5px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      background: var(--sv-grad);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      font-size: 11.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      background: var(--sv-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
       display: inline-block;
     }
 
@@ -74,371 +67,225 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.20s; }
     .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.30s; }
     .reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal, .reveal-stagger > * { opacity: 1; transform: none; transition: none; }
-    }
+    @media (prefers-reduced-motion: reduce) { .reveal, .reveal-stagger > * { opacity: 1; transform: none; transition: none; } }
 
     /* ===== Header ===== */
-    .sv-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 24px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--sv-line);
-      margin-bottom: 8px;
-      flex-wrap: wrap;
-      position: relative;
-    }
-    .sv-header::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -1px;
-      width: 120px;
-      height: 2px;
-      background: var(--sv-grad);
-    }
-    .sv-header .name-block .name {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: 22px;
-      font-weight: 600;
-      color: var(--sv-ink);
-      letter-spacing: -0.02em;
-      margin-bottom: 4px;
-    }
-    .sv-header .name-block .role {
-      font-size: 10.5px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--sv-secondary);
-      margin-bottom: 6px;
-    }
-    .sv-header .name-block .website a {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--sv-ink);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(24,19,15,0.22);
-      transition: border-color 0.15s ease;
-    }
+    .sv-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--sv-line); margin-bottom: 8px; flex-wrap: wrap; position: relative; }
+    .sv-header::after { content: ''; position: absolute; left: 0; bottom: -1px; width: 120px; height: 2px; background: var(--sv-grad); }
+    .sv-header .name-block .name { font-family: 'Hanken Grotesk', sans-serif; font-size: 22px; font-weight: 700; color: var(--sv-ink); letter-spacing: -0.02em; margin-bottom: 4px; }
+    .sv-header .name-block .role { font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sv-secondary); margin-bottom: 6px; }
+    .sv-header .name-block .website a { font-size: 13px; font-weight: 500; color: var(--sv-ink); text-decoration: none; border-bottom: 1px solid rgba(61,43,26,0.22); transition: border-color 0.15s ease; }
     .sv-header .name-block .website a:hover { border-color: var(--sv-magenta); }
-    .sv-header .contact-block {
-      text-align: right;
-      font-size: 12px;
-      color: var(--sv-secondary);
-      line-height: 1.7;
-    }
+    .sv-header .contact-block { text-align: right; font-size: 12px; color: var(--sv-secondary); line-height: 1.7; }
     .sv-header .contact-block a { color: var(--sv-secondary); text-decoration: none; transition: color 0.15s ease; }
     .sv-header .contact-block a:hover { color: var(--sv-magenta); }
     @media (max-width: 540px) { .sv-header .contact-block { text-align: left; } }
 
-    /* ===== Top hero line ===== */
-    .sv-hero {
-      margin: 30px 0 6px;
-    }
+    /* ===== Hero ===== */
+    .sv-hero { margin: 30px 0 6px; }
     .sv-hero .tag-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
-    .sv-tag {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-family: 'Space Mono', monospace;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.04em;
-      text-transform: uppercase;
-      padding: 5px 11px; border-radius: var(--sv-radius-pill);
-      border: 1px solid var(--sv-border); background: var(--sv-surface); color: var(--sv-secondary);
-    }
+    .sv-tag { display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 5px 11px; border-radius: var(--sv-radius-pill); border: 1px solid var(--sv-border); background: var(--sv-surface); color: var(--sv-secondary); }
     .sv-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--sv-grad); }
-    .sv-hero h1 {
-      font-family: 'Fraunces', Georgia, serif;
-      font-optical-sizing: auto;
-      font-size: 36px;
-      line-height: 1.06;
-      font-weight: 500;
-      letter-spacing: -0.02em;
-      color: var(--sv-ink);
-      max-width: 16ch;
-    }
+    .sv-hero h1 { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 36px; line-height: 1.06; font-weight: 500; letter-spacing: -0.02em; color: var(--sv-ink); max-width: 18ch; }
     @media (min-width: 720px) { .sv-hero h1 { font-size: 52px; } }
-    .sv-hero h1 .grad {
-      background: var(--sv-grad);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .sv-hero .sub {
-      margin-top: 16px;
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--sv-secondary);
-      max-width: 58ch;
-    }
+    .sv-hero h1 .grad { background: var(--sv-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .sv-hero .sub { margin-top: 16px; font-size: 16px; line-height: 1.6; color: var(--sv-secondary); max-width: 60ch; }
     .sv-hero .sub strong { color: var(--sv-ink); font-weight: 600; }
 
-    /* ===== Split layout ===== */
-    .sv-split { display: block; margin-top: 36px; }
-    @media (min-width: 960px) {
-      .sv-split {
-        display: grid;
-        grid-template-columns: minmax(0, 380px) minmax(0, 1fr);
-        gap: 40px;
-        align-items: start;
-      }
-    }
-    .sv-split-left { margin-bottom: 36px; }
-    @media (min-width: 960px) {
-      .sv-split-left { margin-bottom: 0; position: sticky; top: 28px; }
-    }
+    /* ===== Playground stage ===== */
+    .sv-stage { margin: 40px 0 12px; }
+    .sv-stage-cap { text-align: center; margin-bottom: 18px; }
+    .sv-stage-cap h2 { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 24px; font-weight: 500; color: var(--sv-ink); letter-spacing: -0.015em; line-height: 1.2; }
+    @media (min-width: 720px) { .sv-stage-cap h2 { font-size: 30px; } }
+    .sv-stage-cap p { font-size: 13.5px; color: var(--sv-secondary); margin-top: 8px; }
 
-    /* ===== Playground device ===== */
-    .sv-pg {
-      background: var(--sv-surface);
-      border: 1px solid var(--sv-border);
-      border-radius: var(--sv-radius-lg);
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(24,19,15,0.04), 0 22px 50px rgba(24,19,15,0.10);
-    }
-    .sv-pg-chrome {
-      display: flex; align-items: center; gap: 10px;
-      padding: 11px 14px;
-      border-bottom: 1px solid var(--sv-border);
-      background: #fff;
-    }
-    .sv-pg-chrome .dots { display: flex; gap: 6px; }
-    .sv-pg-chrome .dots span { width: 10px; height: 10px; border-radius: 50%; background: var(--sv-line); }
-    .sv-pg-chrome .dots span:first-child { background: #EA580C; }
-    .sv-pg-brand {
-      flex: 1; text-align: center;
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: 12.5px; font-weight: 600; letter-spacing: 0.01em;
-      color: var(--sv-ink);
-      display: inline-flex; align-items: center; justify-content: center; gap: 7px;
-    }
-    .sv-pg-brand .logo { width: 16px; height: 16px; border-radius: 5px; background: var(--sv-grad); display: inline-block; }
-    .sv-pg-chrome .live {
-      font-family: 'Space Mono', monospace; font-size: 9.5px; font-weight: 700;
-      color: var(--sv-secondary); letter-spacing: 0.06em; text-transform: uppercase;
-      display: inline-flex; align-items: center; gap: 5px;
-    }
-    .sv-pg-chrome .live::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #16A34A; box-shadow: 0 0 0 0 rgba(22,163,74,0.5); animation: svPulse 2s infinite; }
-    @keyframes svPulse { 0%{box-shadow:0 0 0 0 rgba(22,163,74,0.5);} 70%{box-shadow:0 0 0 6px rgba(22,163,74,0);} 100%{box-shadow:0 0 0 0 rgba(22,163,74,0);} }
-    @media (prefers-reduced-motion: reduce) { .sv-pg-chrome .live::before { animation: none; } }
+    .sv-wg { background: var(--sv-surface); border: 1px solid var(--sv-border); border-radius: 20px; overflow: hidden; box-shadow: 0 2px 10px rgba(61,43,26,0.04), 0 26px 60px rgba(61,43,26,0.09); }
+    .sv-wg-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 18px; border-bottom: 1px solid var(--sv-border); }
+    .sv-wg-brand { display: inline-flex; align-items: center; gap: 8px; font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; font-weight: 700; color: var(--sv-ink); }
+    .sv-wg-brand .logo { width: 16px; height: 16px; border-radius: 5px; background: var(--sv-grad); }
+    .sv-wg-model { display: inline-flex; align-items: center; gap: 6px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; color: var(--sv-secondary); background: var(--sv-grad-soft); border: 1px solid var(--sv-border); padding: 5px 11px; border-radius: var(--sv-radius-pill); }
+    .sv-wg-model b { color: var(--sv-magenta); }
+    .sv-wg-model svg { width: 12px; height: 12px; color: var(--sv-magenta); }
 
-    /* model selector + language row */
-    .sv-pg-bar {
-      display: flex; align-items: center; justify-content: space-between; gap: 10px;
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--sv-border);
-      background: var(--sv-grad-soft);
-    }
-    .sv-model-pill {
-      display: inline-flex; align-items: center; gap: 7px;
-      padding: 5px 10px; border-radius: var(--sv-radius-pill);
-      background: #fff; border: 1px solid var(--sv-border);
-      font-family: 'Space Mono', monospace; font-size: 11.5px; font-weight: 700; color: var(--sv-ink);
-    }
-    .sv-model-pill .spark { width: 13px; height: 13px; color: var(--sv-magenta); }
-    .sv-model-pill .chev { color: var(--sv-muted); font-size: 10px; }
-    .sv-langs { display: flex; gap: 4px; }
-    .sv-lang {
-      font-family: 'Hanken Grotesk', sans-serif;
-      font-size: 11.5px; font-weight: 600;
-      padding: 4px 8px; border-radius: 7px;
-      border: 1px solid transparent; background: transparent; color: var(--sv-secondary);
-      cursor: pointer; transition: all 0.18s var(--sv-ease);
-    }
-    .sv-lang:hover { color: var(--sv-ink); }
-    .sv-lang.active { background: #fff; border-color: var(--sv-border); color: var(--sv-ink); box-shadow: 0 1px 3px rgba(24,19,15,0.06); }
+    .sv-tabs { display: flex; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--sv-border); overflow-x: auto; scrollbar-width: none; }
+    .sv-tabs::-webkit-scrollbar { display: none; }
+    .sv-tab { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 12px; border: 1px solid transparent; background: transparent; color: var(--sv-secondary); font-family: 'Hanken Grotesk', sans-serif; font-size: 13.5px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.18s var(--sv-ease); }
+    .sv-tab svg { width: 17px; height: 17px; }
+    .sv-tab:hover { color: var(--sv-ink); }
+    .sv-tab.active { background: rgba(99,102,241,0.07); border-color: rgba(99,102,241,0.30); color: var(--sv-magenta); }
+    @media (min-width: 780px) { .sv-tabs { justify-content: space-between; } .sv-tab { flex: 1 1 auto; justify-content: center; } }
 
-    /* chat thread */
-    .sv-chat { padding: 18px 14px 14px; display: flex; flex-direction: column; gap: 14px; background: linear-gradient(180deg, #fff 0%, #FCFAF7 100%); }
-    .sv-msg { display: flex; gap: 10px; align-items: flex-start; }
-    .sv-msg .av {
-      width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 700;
-    }
-    .sv-msg.user .av { background: #F0ECE5; color: var(--sv-secondary); }
-    .sv-msg.bot .av { background: var(--sv-grad); color: #fff; overflow: hidden; }
-    .sv-msg.bot .av img { width: 100%; height: 100%; object-fit: cover; }
-    .sv-bubble {
-      border-radius: 13px; padding: 11px 14px; font-size: 13.5px; line-height: 1.55;
-      max-width: 100%;
-    }
-    .sv-msg.user .sv-bubble { background: #F4F0EA; color: var(--sv-ink); border-top-left-radius: 4px; }
-    .sv-msg.bot .sv-bubble { background: #fff; border: 1px solid var(--sv-border); color: var(--sv-ink); border-top-left-radius: 4px; box-shadow: 0 2px 8px rgba(24,19,15,0.04); }
-    .sv-bubble .greet { font-family: 'Hanken Grotesk', sans-serif; font-weight: 600; color: var(--sv-magenta); }
-    .sv-bubble p { margin: 0 0 8px; }
-    .sv-bubble p:last-child { margin-bottom: 0; }
-    .sv-bubble strong { font-weight: 600; }
-    .sv-answer-list { list-style: none; margin: 8px 0 2px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-    .sv-answer-list li {
-      font-size: 12.5px; font-weight: 500; color: var(--sv-ink);
-      padding: 6px 10px 6px 30px; background: var(--sv-grad-soft); border-radius: 8px; position: relative;
-    }
-    .sv-answer-list li b { font-weight: 700; }
-    .sv-answer-list li .n {
-      position: absolute; left: 9px; top: 50%; transform: translateY(-50%);
-      font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700;
-      background: var(--sv-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    /* voice waveform under bot answer */
-    .sv-wave { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--sv-border); }
-    .sv-wave .mic { width: 14px; height: 14px; color: var(--sv-magenta); flex-shrink: 0; }
-    .sv-wave .bars { display: flex; align-items: center; gap: 2px; height: 18px; }
-    .sv-wave .bars span { width: 2.5px; border-radius: 2px; background: var(--sv-grad); height: 5px; animation: svBar 1.1s ease-in-out infinite; }
-    .sv-wave .bars span:nth-child(2){animation-delay:.1s} .sv-wave .bars span:nth-child(3){animation-delay:.2s}
-    .sv-wave .bars span:nth-child(4){animation-delay:.3s} .sv-wave .bars span:nth-child(5){animation-delay:.15s}
-    .sv-wave .bars span:nth-child(6){animation-delay:.25s} .sv-wave .bars span:nth-child(7){animation-delay:.05s}
-    .sv-wave .bars span:nth-child(8){animation-delay:.35s} .sv-wave .bars span:nth-child(9){animation-delay:.2s}
-    .sv-wave .bars span:nth-child(10){animation-delay:.1s} .sv-wave .bars span:nth-child(11){animation-delay:.3s}
-    .sv-wave .bars span:nth-child(12){animation-delay:.18s}
-    @keyframes svBar { 0%,100%{height:5px} 50%{height:17px} }
-    @media (prefers-reduced-motion: reduce) { .sv-wave .bars span { animation: none; height: 11px; } }
-    .sv-wave .cap { font-family: 'Space Mono', monospace; font-size: 9.5px; color: var(--sv-muted); letter-spacing: 0.03em; }
+    .sv-panel { display: none; }
+    .sv-panel.active { display: block; }
+    .sv-panel-min { min-height: 320px; }
 
-    /* prompt bar */
-    .sv-prompt {
-      display: flex; align-items: center; gap: 8px;
-      margin: 4px 12px 14px; padding: 9px 9px 9px 14px;
-      border: 1px solid var(--sv-border); border-radius: var(--sv-radius-pill); background: #fff;
-    }
-    .sv-prompt .ph { flex: 1; font-size: 12.5px; color: var(--sv-muted); }
-    .sv-prompt .send {
-      width: 30px; height: 30px; border-radius: 50%; border: none; cursor: default;
-      background: var(--sv-grad); color: #fff; display: inline-flex; align-items: center; justify-content: center;
-    }
-    .sv-prompt .send svg { width: 14px; height: 14px; }
+    /* TTS */
+    .tts { display: grid; grid-template-columns: 1fr; }
+    @media (min-width: 720px) { .tts { grid-template-columns: 1.5fr 1fr; } }
+    .tts-main { padding: 28px 24px 18px; display: flex; flex-direction: column; }
+    .tts-text { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 23px; line-height: 1.62; color: var(--sv-ink); font-weight: 400; flex: 1; }
+    @media (max-width: 520px) { .tts-text { font-size: 19px; } }
+    .tts-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 22px; }
+    .tts-foot-left { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .lang-select { position: relative; }
+    .lang-select select { appearance: none; -webkit-appearance: none; font-family: 'Hanken Grotesk', sans-serif; font-size: 13px; font-weight: 600; color: var(--sv-ink); background: var(--sv-surface); border: 1px solid var(--sv-border); border-radius: var(--sv-radius-pill); padding: 8px 32px 8px 14px; cursor: pointer; transition: border-color 0.15s ease; }
+    .lang-select select:hover { border-color: var(--sv-magenta); }
+    .lang-select::after { content: '▾'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--sv-muted); font-size: 11px; }
+    .tts-words { font-size: 12.5px; color: var(--sv-secondary); }
+    .tts-words b { color: var(--sv-ink); font-weight: 700; }
+    .tts-foot-right { display: flex; align-items: center; gap: 14px; }
+    .tts-chars { font-family: 'Space Mono', monospace; font-size: 12px; color: var(--sv-muted); white-space: nowrap; }
+    .tts-play { width: 46px; height: 46px; border-radius: 50%; border: none; cursor: pointer; background: var(--sv-ink-block); color: #fff; display: inline-flex; align-items: center; justify-content: center; transition: transform 0.18s var(--sv-ease), background 0.18s ease; flex-shrink: 0; }
+    .tts-play:hover { transform: scale(1.06); }
+    .tts-play svg { width: 18px; height: 18px; }
+    .tts-play .ico-play { margin-left: 2px; }
+    .tts-play .ico-pause { display: none; }
+    .tts-play.playing { background: var(--sv-magenta); }
+    .tts-play.playing .ico-play { display: none; }
+    .tts-play.playing .ico-pause { display: block; }
 
-    /* ===== Model card (the "spec sheet") ===== */
-    .sv-card {
-      margin: 0; border-top: 1px solid var(--sv-border);
-      background: #FCFAF7;
-    }
-    .sv-card-head { padding: 16px 16px 12px; display: flex; align-items: center; gap: 12px; }
-    .sv-card-head .ava {
-      width: 46px; height: 46px; border-radius: 12px; overflow: hidden; flex-shrink: 0;
-      border: 2px solid #fff; box-shadow: 0 2px 8px rgba(24,19,15,0.12);
-    }
-    .sv-card-head .ava img { width: 100%; height: 100%; object-fit: cover; }
-    .sv-card-head .meta { flex: 1; min-width: 0; }
-    .sv-card-head .meta .nm { font-family: 'Hanken Grotesk', sans-serif; font-size: 16px; font-weight: 600; color: var(--sv-ink); letter-spacing: -0.01em; }
-    .sv-card-head .meta .ver { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--sv-secondary); margin-top: 2px; }
-    .sv-card-head .ready {
-      display: inline-flex; align-items: center; gap: 4px; flex-shrink: 0;
-      font-family: 'Space Mono', monospace; font-size: 9.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
-      color: #15803D; background: rgba(22,163,74,0.12); padding: 4px 8px; border-radius: var(--sv-radius-pill);
-    }
-    .sv-card-head .ready svg { width: 11px; height: 11px; }
+    .tts-voices { border-top: 1px solid var(--sv-border); padding: 18px 18px 16px; background: #FCFBFA; }
+    @media (min-width: 720px) { .tts-voices { border-top: none; border-left: 1px solid var(--sv-border); } }
+    .voices-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .voices-head .vh { font-family: 'Fraunces', Georgia, serif; font-size: 20px; font-weight: 500; color: var(--sv-ink); }
+    .view-all { font-size: 11px; font-weight: 700; color: var(--sv-magenta); background: rgba(99,102,241,0.08); padding: 4px 10px; border-radius: var(--sv-radius-pill); }
+    .voice-card { display: flex; align-items: center; gap: 11px; padding: 9px; border-radius: 12px; border: 1px solid transparent; transition: background 0.18s ease; }
+    .voice-card:hover { background: #fff; }
+    .voice-card.active { border-color: var(--sv-border); background: #fff; box-shadow: 0 2px 8px rgba(61,43,26,0.05); }
+    .voice-play { width: 42px; height: 42px; border-radius: 11px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; }
+    .voice-play svg { width: 15px; height: 15px; margin-left: 1px; }
+    .vc-indigo { background: linear-gradient(135deg, #6366F1, #818CF8); }
+    .vc-green { background: linear-gradient(135deg, #5BA62F, #83C040); }
+    .vc-coral { background: linear-gradient(135deg, #E0533D, #F08A5D); }
+    .vc-gold { background: linear-gradient(135deg, #E0A93D, #F0C14B); }
+    .voice-meta { flex: 1; min-width: 0; }
+    .voice-name { font-family: 'Hanken Grotesk', sans-serif; font-size: 14px; font-weight: 700; color: var(--sv-ink); display: flex; align-items: center; gap: 7px; }
+    .gender { font-size: 9.5px; font-weight: 700; padding: 2px 7px; border-radius: var(--sv-radius-pill); letter-spacing: 0.02em; }
+    .gender.m { background: rgba(99,102,241,0.12); color: #4F46E5; }
+    .gender.f { background: rgba(194,54,122,0.12); color: #C2367A; }
+    .voice-desc { font-size: 11.5px; color: var(--sv-secondary); margin-top: 2px; }
+    .voices-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--sv-border); }
+    .voices-foot span { font-size: 12px; color: var(--sv-secondary); }
+    .credits-btn { background: var(--sv-ink-block); color: #fff; font-size: 12.5px; font-weight: 600; padding: 8px 14px; border-radius: var(--sv-radius-pill); text-decoration: none; white-space: nowrap; transition: transform 0.18s ease; }
+    .credits-btn:hover { transform: translateY(-1px); }
 
-    .sv-card-badges { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 16px 12px; }
-    .sv-badge {
-      font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.02em;
-      color: var(--sv-secondary); background: #fff; border: 1px solid var(--sv-border);
-      padding: 4px 9px; border-radius: var(--sv-radius-pill);
-      display: inline-flex; align-items: center; gap: 5px;
-    }
-    .sv-badge svg { width: 11px; height: 11px; color: var(--sv-magenta); }
+    /* Shared waveform */
+    .sv-wave { display: inline-flex; align-items: center; gap: 2.5px; height: 22px; }
+    .sv-wave span { width: 3px; border-radius: 2px; background: var(--sv-grad); height: 6px; }
+    .sv-wave.on span { animation: svBar 1.1s ease-in-out infinite; }
+    .sv-wave span:nth-child(2n){animation-delay:.12s} .sv-wave span:nth-child(3n){animation-delay:.24s} .sv-wave span:nth-child(4n){animation-delay:.08s} .sv-wave span:nth-child(5n){animation-delay:.3s}
+    @keyframes svBar { 0%,100%{height:6px} 50%{height:21px} }
+    @media (prefers-reduced-motion: reduce) { .sv-wave.on span { animation: none; height: 13px; } }
 
-    .sv-evals { padding: 4px 16px 6px; }
-    .sv-eval-title {
-      font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--sv-muted); padding: 8px 0 6px;
-    }
-    .sv-eval-row {
-      display: grid; grid-template-columns: 1.3fr auto auto; gap: 10px; align-items: center;
-      padding: 9px 0; border-bottom: 1px dashed var(--sv-border); font-size: 12.5px;
-    }
-    .sv-eval-row:last-child { border-bottom: none; }
-    .sv-eval-row .t { color: var(--sv-secondary); font-weight: 500; }
-    .sv-eval-row .v { font-family: 'Space Mono', monospace; color: var(--sv-ink); font-weight: 700; text-align: right; }
-    .sv-eval-row .s { display: inline-flex; align-items: center; gap: 3px; color: #15803D; font-size: 10px; font-weight: 700; font-family: 'Space Mono', monospace; }
-    .sv-eval-row .s svg { width: 12px; height: 12px; }
-    @media (max-width: 380px) { .sv-eval-row { grid-template-columns: 1.2fr auto auto; gap: 7px; font-size: 11.5px; } }
+    /* STT */
+    .stt { padding: 24px; display: grid; grid-template-columns: 1fr; gap: 18px; }
+    @media (min-width: 720px) { .stt { grid-template-columns: 1.5fr 1fr; } }
+    .stt-rec { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--sv-grad-soft); border: 1px solid var(--sv-border); border-radius: 12px; margin-bottom: 16px; }
+    .stt-rec .mic { width: 18px; height: 18px; color: var(--sv-magenta); flex-shrink: 0; }
+    .stt-rec .cap { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--sv-secondary); margin-left: auto; }
+    .stt-text { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 19px; line-height: 1.6; color: var(--sv-ink); }
+    .stt-side { background: #FCFBFA; border: 1px solid var(--sv-border); border-radius: 14px; padding: 18px; }
+    .stt-side .sl { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sv-muted); }
+    .stt-side .sv-detected { font-family: 'Fraunces', Georgia, serif; font-size: 22px; color: var(--sv-ink); margin: 4px 0 16px; }
+    .stt-meter { margin-bottom: 6px; }
+    .stt-meter .row { display: flex; justify-content: space-between; font-size: 12px; color: var(--sv-secondary); margin-bottom: 5px; }
+    .stt-meter .row b { color: var(--sv-ink); font-family: 'Space Mono', monospace; }
+    .stt-meter .bar { height: 6px; background: var(--sv-border); border-radius: 999px; overflow: hidden; }
+    .stt-meter .bar i { display: block; height: 100%; width: 98.7%; background: var(--sv-grad); border-radius: 999px; }
+    .stt-side .note { font-size: 11.5px; color: var(--sv-muted); margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--sv-border); }
 
-    .sv-card-foot { padding: 14px 16px 18px; border-top: 1px solid var(--sv-border); background: #fff; }
-    .sv-deploy {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
-      padding: 15px 22px; border: none; border-radius: var(--sv-radius-pill); cursor: pointer;
-      background: var(--sv-grad); color: #fff; text-decoration: none;
-      font-family: 'Hanken Grotesk', sans-serif; font-size: 15px; font-weight: 600;
-      box-shadow: 0 6px 18px rgba(99,102,241,0.28);
-      transition: transform 0.18s var(--sv-ease), box-shadow 0.18s var(--sv-ease);
-    }
-    .sv-deploy:hover { transform: translateY(-1px); box-shadow: 0 9px 24px rgba(99,102,241,0.34); }
-    .sv-deploy:active { transform: translateY(0); }
-    .sv-deploy svg { width: 17px; height: 17px; }
-    .sv-secondary-link {
-      display: inline-flex; align-items: center; justify-content: center; gap: 7px; width: 100%;
-      margin-top: 10px; padding: 11px 16px; border-radius: var(--sv-radius-pill);
-      border: 1px solid var(--sv-border); background: #fff; color: var(--sv-ink);
-      font-size: 13px; font-weight: 600; text-decoration: none;
-      transition: border-color 0.18s ease, transform 0.18s ease;
-    }
-    .sv-secondary-link:hover { border-color: var(--sv-magenta); transform: translateY(-1px); }
-    .sv-secondary-link svg { width: 14px; height: 14px; color: var(--sv-secondary); }
-    .sv-card-note { font-family: 'Space Mono', monospace; font-size: 10px; color: var(--sv-muted); text-align: center; margin-top: 12px; line-height: 1.5; }
+    /* Voice Agents */
+    .va { padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+    .va-msg { display: flex; gap: 11px; align-items: flex-start; }
+    .va-msg .av { width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: 'Hanken Grotesk', sans-serif; font-size: 12px; font-weight: 700; overflow: hidden; }
+    .va-msg.user .av { background: #F0ECE5; color: var(--sv-secondary); }
+    .va-msg.bot .av { background: var(--sv-grad); color: #fff; }
+    .va-msg.bot .av img { width: 100%; height: 100%; object-fit: cover; }
+    .va-bubble { border-radius: 13px; padding: 12px 15px; font-size: 14px; line-height: 1.55; }
+    .va-msg.user .va-bubble { background: #F4F0EA; color: var(--sv-ink); border-top-left-radius: 4px; }
+    .va-msg.bot .va-bubble { background: #fff; border: 1px solid var(--sv-border); color: var(--sv-ink); border-top-left-radius: 4px; box-shadow: 0 2px 8px rgba(61,43,26,0.04); }
+    .va-list { list-style: none; margin: 10px 0 2px; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+    .va-list li { font-size: 13px; font-weight: 500; color: var(--sv-ink); padding: 7px 11px 7px 32px; background: var(--sv-grad-soft); border-radius: 8px; position: relative; }
+    .va-list li b { font-weight: 700; }
+    .va-list li .n { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; color: var(--sv-magenta); }
+    .va-foot { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--sv-muted); }
+    .va-foot .mic { width: 13px; height: 13px; color: var(--sv-magenta); }
+
+    /* Document Digitisation */
+    .doc { padding: 24px; display: grid; grid-template-columns: 1fr; gap: 20px; }
+    @media (min-width: 720px) { .doc { grid-template-columns: 0.85fr 1fr; } }
+    .doc-paper { position: relative; background: #fff; border: 1px solid var(--sv-border); border-radius: 12px; padding: 18px; overflow: hidden; box-shadow: 0 4px 14px rgba(61,43,26,0.06); }
+    .doc-paper .scan { position: absolute; left: 0; right: 0; height: 40px; top: -40px; background: linear-gradient(180deg, rgba(99,102,241,0.18), transparent); animation: svScan 3.2s var(--sv-ease) infinite; }
+    @keyframes svScan { 0%{top:-40px} 100%{top:100%} }
+    @media (prefers-reduced-motion: reduce) { .doc-paper .scan { display: none; } }
+    .doc-paper .dp-name { font-family: 'Fraunces', Georgia, serif; font-size: 17px; color: var(--sv-ink); font-weight: 500; }
+    .doc-paper .dp-role { font-size: 11px; color: var(--sv-secondary); margin: 2px 0 12px; }
+    .doc-paper .dp-line { height: 7px; background: #F1ECE4; border-radius: 4px; margin-bottom: 8px; }
+    .doc-paper .dp-line.s { width: 60%; }
+    .doc-paper .dp-line.m { width: 85%; }
+    .doc-extract .de-title { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sv-muted); margin-bottom: 10px; }
+    .de-row { display: grid; grid-template-columns: 1.1fr auto auto; gap: 10px; align-items: center; padding: 9px 0; border-bottom: 1px dashed var(--sv-border); font-size: 12.5px; }
+    .de-row:last-of-type { border-bottom: none; }
+    .de-row .t { color: var(--sv-secondary); font-weight: 500; }
+    .de-row .v { font-family: 'Space Mono', monospace; color: var(--sv-ink); font-weight: 700; text-align: right; }
+    .de-row .s { display: inline-flex; align-items: center; gap: 3px; color: #15803D; font-size: 10px; font-weight: 700; font-family: 'Space Mono', monospace; }
+    .de-row .s svg { width: 12px; height: 12px; }
+    .doc-dl { display: inline-flex; align-items: center; justify-content: center; gap: 7px; width: 100%; margin-top: 14px; padding: 11px 16px; border-radius: var(--sv-radius-pill); border: 1px solid var(--sv-border); background: #fff; color: var(--sv-ink); font-size: 13px; font-weight: 600; text-decoration: none; transition: border-color 0.18s ease, transform 0.18s ease; }
+    .doc-dl:hover { border-color: var(--sv-magenta); transform: translateY(-1px); }
+    .doc-dl svg { width: 14px; height: 14px; color: var(--sv-secondary); }
+
+    /* Dubbing */
+    .dub { padding: 24px; }
+    .dub-intro { font-size: 14px; color: var(--sv-secondary); margin-bottom: 16px; }
+    .dub-intro b { color: var(--sv-ink); font-weight: 600; }
+    .dub-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 9px; }
+    @media (min-width: 560px) { .dub-grid { grid-template-columns: repeat(3, 1fr); } }
+    .dub-chip { display: flex; align-items: center; gap: 9px; padding: 10px 12px; border: 1px solid var(--sv-border); border-radius: 11px; background: #fff; transition: all 0.18s ease; }
+    .dub-chip.active { border-color: rgba(99,102,241,0.4); background: var(--sv-grad-soft); }
+    .dub-chip .pp { width: 26px; height: 26px; border-radius: 7px; background: var(--sv-grad); color: #fff; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .dub-chip .pp svg { width: 12px; height: 12px; margin-left: 1px; }
+    .dub-chip .ln { font-size: 13px; font-weight: 600; color: var(--sv-ink); }
+    .dub-note { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--sv-muted); margin-top: 16px; text-align: center; }
+
+    .sv-stage-cta { text-align: center; margin-top: 22px; }
+    .sv-try { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 15px 28px; border-radius: var(--sv-radius-pill); background: var(--sv-grad); color: #fff; text-decoration: none; font-family: 'Hanken Grotesk', sans-serif; font-size: 15px; font-weight: 700; box-shadow: 0 8px 22px rgba(99,102,241,0.28); transition: transform 0.18s var(--sv-ease), box-shadow 0.18s var(--sv-ease); }
+    .sv-try:hover { transform: translateY(-1px); box-shadow: 0 11px 28px rgba(99,102,241,0.34); }
+    .sv-try svg { width: 17px; height: 17px; }
+    .sv-stage-foot { font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--sv-muted); margin-top: 12px; }
 
     /* ===== Section heads ===== */
-    .sv-section-head { margin-top: 8px; margin-bottom: 14px; }
-    .sv-split-right > .sv-section-head:first-child { margin-top: 0; }
+    .sv-section-head { margin-top: 56px; margin-bottom: 14px; }
     .sv-section-head .eyebrow-row { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
     .sv-section-head .eyebrow-row::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(99,102,241,0.5) 0%, transparent 100%); }
-    .sv-section-head h2 {
-      font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-weight: 500; font-size: 27px; line-height: 1.16;
-      color: var(--sv-ink); letter-spacing: -0.015em;
-    }
-    @media (min-width: 720px) { .sv-section-head h2 { font-size: 32px; } }
+    .sv-section-head h2 { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-weight: 500; font-size: 27px; line-height: 1.16; color: var(--sv-ink); letter-spacing: -0.015em; }
+    @media (min-width: 720px) { .sv-section-head h2 { font-size: 34px; } }
     .sv-section-head h2 .grad { background: var(--sv-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
     /* ===== Framing block ===== */
-    .sv-framing {
-      margin: 0 0 26px; padding: 22px 24px;
-      background: var(--sv-ink-block); border-radius: var(--sv-radius-lg);
-      position: relative; overflow: hidden;
-    }
-    .sv-framing::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 100% 0%, rgba(99,102,241,0.22) 0%, transparent 45%), radial-gradient(circle at 0% 100%, rgba(129,140,248,0.20) 0%, transparent 45%);
-      pointer-events: none;
-    }
-    .sv-framing .quote {
-      position: relative;
-      font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 20px; font-weight: 500; line-height: 1.4;
-      color: #fff; letter-spacing: -0.01em; margin-bottom: 12px;
-    }
-    @media (min-width: 720px) { .sv-framing .quote { font-size: 22px; } }
+    .sv-framing { margin: 0 0 26px; padding: 24px 26px; background: var(--sv-ink-block); border-radius: var(--sv-radius-lg); position: relative; overflow: hidden; }
+    .sv-framing::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 100% 0%, rgba(99,102,241,0.22) 0%, transparent 45%), radial-gradient(circle at 0% 100%, rgba(129,140,248,0.20) 0%, transparent 45%); pointer-events: none; }
+    .sv-framing .quote { position: relative; font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 20px; font-weight: 500; line-height: 1.4; color: #fff; letter-spacing: -0.01em; margin-bottom: 12px; }
+    @media (min-width: 720px) { .sv-framing .quote { font-size: 23px; } }
     .sv-framing .quote .grad { background: var(--sv-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
     .sv-framing .tail { position: relative; font-size: 13px; color: rgba(255,255,255,0.62); line-height: 1.6; }
     .sv-framing .tail strong { color: #fff; font-weight: 600; }
 
     /* ===== Bet cards ===== */
-    .sv-bet {
-      background: var(--sv-surface); border: 1px solid var(--sv-border); border-radius: var(--sv-radius-lg);
-      padding: 24px 24px 22px; margin-bottom: 18px; position: relative; overflow: hidden;
-      transition: transform 0.3s var(--sv-ease), box-shadow 0.3s var(--sv-ease);
-    }
+    .sv-bet { background: var(--sv-surface); border: 1px solid var(--sv-border); border-radius: var(--sv-radius-lg); padding: 24px 24px 22px; margin-bottom: 18px; position: relative; overflow: hidden; transition: transform 0.3s var(--sv-ease), box-shadow 0.3s var(--sv-ease); }
     .sv-bet::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--sv-grad); }
-    .sv-bet:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(24,19,15,0.08); }
+    .sv-bet:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(61,43,26,0.08); }
     @media (min-width: 720px) { .sv-bet { padding: 28px 30px 26px; } }
-
     .sv-bet .bet-head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
-    .sv-bet .bet-icon {
-      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
-      background: var(--sv-grad-soft); border: 1px solid var(--sv-border);
-      display: flex; align-items: center; justify-content: center; color: var(--sv-magenta);
-    }
+    .sv-bet .bet-icon { width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0; background: var(--sv-grad-soft); border: 1px solid var(--sv-border); display: flex; align-items: center; justify-content: center; color: var(--sv-magenta); }
     .sv-bet .bet-icon svg { width: 24px; height: 24px; }
     .sv-bet .bet-meta { flex: 1; min-width: 0; }
     .sv-bet .bet-num { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sv-muted); }
-    .sv-bet .bet-title { font-family: 'Hanken Grotesk', sans-serif; font-size: 21px; font-weight: 600; color: var(--sv-ink); line-height: 1.2; letter-spacing: -0.015em; margin-top: 3px; }
+    .sv-bet .bet-title { font-family: 'Hanken Grotesk', sans-serif; font-size: 21px; font-weight: 700; color: var(--sv-ink); line-height: 1.2; letter-spacing: -0.015em; margin-top: 3px; }
     @media (min-width: 720px) { .sv-bet .bet-title { font-size: 23px; } }
     .sv-bet .bet-sub { font-size: 13px; color: var(--sv-secondary); font-style: italic; margin-top: 5px; }
-
     .sv-bet .bet-row { display: flex; gap: 12px; padding-top: 16px; border-top: 1px solid var(--sv-border); }
     .sv-bet .bet-row:first-of-type { border-top: none; padding-top: 0; }
-    .sv-bet .bet-row-icon {
-      width: 26px; height: 26px; border-radius: 8px; flex-shrink: 0; margin-top: 1px;
-      display: inline-flex; align-items: center; justify-content: center;
-      background: #F4F0EA; color: var(--sv-secondary);
-    }
+    .sv-bet .bet-row-icon { width: 26px; height: 26px; border-radius: 8px; flex-shrink: 0; margin-top: 1px; display: inline-flex; align-items: center; justify-content: center; background: #F4F0EA; color: var(--sv-secondary); }
     .sv-bet .bet-row-icon svg { width: 14px; height: 14px; }
     .sv-bet .bet-row-body { flex: 1; min-width: 0; }
     .sv-bet .bet-row-label { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sv-magenta); margin-bottom: 6px; }
@@ -446,11 +293,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .sv-bet .bet-row-body p + p { margin-top: 8px; }
     .sv-bet ul.bet-list { list-style: none; padding: 0; margin: 4px 0 0; }
     .sv-bet ul.bet-list li { font-size: 13.5px; color: var(--sv-ink); line-height: 1.55; padding: 4px 0 4px 22px; position: relative; }
-    .sv-bet ul.bet-list li::before {
-      content: ''; position: absolute; left: 0; top: 9px; width: 13px; height: 13px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366F1' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat; background-size: 13px;
-    }
+    .sv-bet ul.bet-list li::before { content: ''; position: absolute; left: 0; top: 9px; width: 13px; height: 13px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366F1' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='9 18 15 12 9 6'%3E%3C/polyline%3E%3C/svg%3E"); background-repeat: no-repeat; background-size: 13px; }
     .sv-bet ul.bet-list li strong { font-weight: 600; }
 
     /* ===== Why-me ===== */
@@ -458,60 +301,38 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .sv-why-intro p { font-size: 16px; line-height: 1.65; color: var(--sv-ink); }
     .sv-why-intro p strong { font-weight: 600; }
     .sv-why-intro p em { color: var(--sv-violet); font-style: italic; }
-
     .sv-why-grid { display: grid; grid-template-columns: 1fr; gap: 18px; margin: 0 0 24px; }
     @media (min-width: 720px) { .sv-why-grid { grid-template-columns: 1fr 1fr; gap: 20px; } }
-
-    .sv-why-card {
-      background: var(--sv-surface); border: 1px solid var(--sv-border); border-radius: var(--sv-radius-lg);
-      padding: 22px; display: flex; flex-direction: column;
-      transition: transform 0.3s var(--sv-ease), box-shadow 0.3s var(--sv-ease);
-    }
-    .sv-why-card:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(24,19,15,0.08); }
+    .sv-why-card { background: var(--sv-surface); border: 1px solid var(--sv-border); border-radius: var(--sv-radius-lg); padding: 22px; display: flex; flex-direction: column; transition: transform 0.3s var(--sv-ease), box-shadow 0.3s var(--sv-ease); }
+    .sv-why-card:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(61,43,26,0.08); }
     .sv-why-card .why-head { display: flex; align-items: center; gap: 13px; margin-bottom: 14px; padding-bottom: 14px; border-bottom: 1px solid var(--sv-border); }
-    .sv-why-card .why-icon {
-      width: 48px; height: 48px; border-radius: 13px; flex-shrink: 0;
-      background: var(--sv-grad-soft); border: 1px solid var(--sv-border);
-      display: flex; align-items: center; justify-content: center; color: var(--sv-violet);
-    }
+    .sv-why-card .why-icon { width: 48px; height: 48px; border-radius: 13px; flex-shrink: 0; background: var(--sv-grad-soft); border: 1px solid var(--sv-border); display: flex; align-items: center; justify-content: center; color: var(--sv-violet); }
     .sv-why-card .why-icon svg { width: 26px; height: 26px; }
     .sv-why-card .why-meta { flex: 1; min-width: 0; }
     .sv-why-card .why-link { font-family: 'Space Mono', monospace; font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--sv-magenta); margin-bottom: 4px; }
-    .sv-why-card .why-area { font-family: 'Hanken Grotesk', sans-serif; font-size: 18px; font-weight: 600; color: var(--sv-ink); line-height: 1.2; letter-spacing: -0.01em; }
+    .sv-why-card .why-area { font-family: 'Hanken Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--sv-ink); line-height: 1.2; letter-spacing: -0.01em; }
     .sv-why-card .why-claim { font-size: 14px; line-height: 1.6; color: var(--sv-ink); margin-bottom: 14px; }
     .sv-why-card .why-claim strong { font-weight: 600; }
     .sv-why-card .why-claim em { color: var(--sv-violet); font-style: italic; }
-    .sv-why-card .why-proof { margin-top: auto; background: #FCFAF7; border: 1px solid var(--sv-border); border-radius: var(--sv-radius); padding: 14px; }
+    .sv-why-card .why-proof { margin-top: auto; background: #FCFBFA; border: 1px solid var(--sv-border); border-radius: var(--sv-radius); padding: 14px; }
     .sv-why-card .why-proof-label { font-family: 'Space Mono', monospace; font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sv-secondary); margin-bottom: 7px; }
     .sv-why-card .why-proof p { font-size: 13px; line-height: 1.55; color: var(--sv-ink-soft); }
     .sv-why-card .why-proof p strong { color: var(--sv-ink); font-weight: 600; }
     .sv-why-card .why-stats { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; }
     .sv-why-card .why-stats > div { display: flex; flex-direction: column; }
-    .sv-why-card .why-stats strong { font-family: 'Hanken Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--sv-ink); line-height: 1; background: var(--sv-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .sv-why-card .why-stats strong { font-family: 'Hanken Grotesk', sans-serif; font-size: 20px; font-weight: 800; line-height: 1; background: var(--sv-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
     .sv-why-card .why-stats span { font-size: 10.5px; color: var(--sv-secondary); margin-top: 4px; max-width: 14ch; }
-
-    .sv-why-closing {
-      display: flex; align-items: flex-start; gap: 14px;
-      margin-top: 4px; padding: 20px 22px; border-radius: var(--sv-radius-lg);
-      background: var(--sv-grad-soft); border: 1px solid var(--sv-border);
-    }
+    .sv-why-closing { display: flex; align-items: flex-start; gap: 14px; margin-top: 4px; padding: 20px 22px; border-radius: var(--sv-radius-lg); background: var(--sv-grad-soft); border: 1px solid var(--sv-border); }
     .sv-why-closing .closing-icon { width: 34px; height: 34px; flex-shrink: 0; color: var(--sv-magenta); }
     .sv-why-closing .closing-icon svg { width: 100%; height: 100%; }
     .sv-why-closing p { font-size: 14.5px; line-height: 1.6; color: var(--sv-ink); }
     .sv-why-closing p strong { font-weight: 600; }
 
     /* ===== Dark CTA ===== */
-    .sv-dark-block {
-      margin-top: 48px; padding: 44px 32px; border-radius: var(--sv-radius-lg);
-      background: var(--sv-ink-block); text-align: center; position: relative; overflow: hidden;
-    }
-    .sv-dark-block::before {
-      content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 15% 10%, rgba(234,88,12,0.22) 0%, transparent 42%), radial-gradient(circle at 85% 90%, rgba(129,140,248,0.24) 0%, transparent 45%);
-      pointer-events: none;
-    }
+    .sv-dark-block { margin-top: 48px; padding: 44px 32px; border-radius: var(--sv-radius-lg); background: var(--sv-ink-block); text-align: center; position: relative; overflow: hidden; }
+    .sv-dark-block::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 15% 10%, rgba(234,88,12,0.22) 0%, transparent 42%), radial-gradient(circle at 85% 90%, rgba(129,140,248,0.24) 0%, transparent 45%); pointer-events: none; }
     .sv-dark-block h2 { position: relative; font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 30px; font-weight: 500; color: #fff; letter-spacing: -0.015em; margin-bottom: 12px; }
-    @media (min-width: 720px) { .sv-dark-block h2 { font-size: 34px; } }
+    @media (min-width: 720px) { .sv-dark-block h2 { font-size: 36px; } }
     .sv-dark-block p { position: relative; font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.72); max-width: 56ch; margin: 0 auto 24px; }
     .sv-dark-block p strong { color: #fff; font-weight: 600; }
     .sv-cta-contact { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 18px; }
@@ -546,402 +367,459 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       </div>
       <h1>Sarvam won the model race.<br /><span class="grad">Here is how it wins the product race.</span></h1>
       <p class="sub">
-        On <strong>15 June 2026</strong> Sarvam became India's newest AI unicorn. World-class sovereign models, the IndiaAI mandate, roughly 10M API calls a day. And still the line that follows the funding: <strong>"settling for one hero."</strong> The gap is not capability. It is adoption. That gap is a product problem - and that is the work I want to do.
+        On <strong>15 June 2026</strong> Sarvam became India's newest AI unicorn. World-class sovereign models, the IndiaAI mandate, roughly 10M API calls a day. And still the line that follows the funding: <strong>"settling for one hero."</strong> The gap is not capability. It is adoption - and that is a product problem.
       </p>
     </section>
 
-    <div class="sv-split">
+    {/* ============ Playground (Sarvam's own product surface) ============ */}
+    <section class="sv-stage reveal" data-section="playground">
+      <div class="sv-stage-cap">
+        <h2>The platform India builds on needs a product mind too.</h2>
+        <p>So here is my pitch, inside your own playground. Switch the language. Try the tabs.</p>
+      </div>
 
-      {/* ============ LEFT: Sarvam playground device ============ */}
-      <div class="sv-split-left">
-        <div class="sv-pg reveal">
-          <div class="sv-pg-chrome">
-            <span class="dots" aria-hidden="true"><span></span><span></span><span></span></span>
-            <span class="sv-pg-brand"><span class="logo" aria-hidden="true"></span> Sarvam Playground</span>
-            <span class="live">Live</span>
-          </div>
+      <div class="sv-wg">
+        <div class="sv-wg-top">
+          <span class="sv-wg-brand"><span class="logo" aria-hidden="true"></span> Sarvam Playground</span>
+          <span class="sv-wg-model">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.9 5.7L4 10.5l5.7 1.9L11.6 18l1.9-5.7L19 10.5l-5.5-1.6L12 3Z"/></svg>
+            model: <b>Sagar AI PM</b>
+          </span>
+        </div>
 
-          <div class="sv-pg-bar">
-            <span class="sv-model-pill">
-              <svg class="spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.9 5.7L4 10.5l5.7 1.9L11.6 18l1.9-5.7L19 10.5l-5.5-1.6L12 3Z"/></svg>
-              Sagar-PM · 1
-              <span class="chev">▾</span>
-            </span>
-            <div class="sv-langs" role="group" aria-label="Greeting language">
-              <button class="sv-lang active" type="button" data-greet="Hello." data-lang="EN">EN</button>
-              <button class="sv-lang" type="button" data-greet="नमस्ते।" data-lang="HI">हिन्दी</button>
-              <button class="sv-lang" type="button" data-greet="வணக்கம்." data-lang="TA">தமிழ்</button>
-              <button class="sv-lang" type="button" data-greet="నమస్తే." data-lang="TE">తెలుగు</button>
-            </div>
-          </div>
+        <div class="sv-tabs" role="tablist" aria-label="Sarvam capabilities">
+          <button class="sv-tab active" type="button" data-tab="tts">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg>
+            Text to Speech
+          </button>
+          <button class="sv-tab" type="button" data-tab="stt">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+            Speech to Text
+          </button>
+          <button class="sv-tab" type="button" data-tab="va">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Voice Agents
+          </button>
+          <button class="sv-tab" type="button" data-tab="doc">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+            Document Digitisation
+          </button>
+          <button class="sv-tab" type="button" data-tab="dub">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 8 6 6M4 14l6-6 2-3"/><path d="M2 5h12M7 2h1"/><path d="m22 22-5-10-5 10M14 18h6"/></svg>
+            Dubbing
+          </button>
+        </div>
 
-          <div class="sv-chat" id="sv-chat">
-            <div class="sv-msg user">
-              <span class="av" aria-hidden="true">SR</span>
-              <div class="sv-bubble">Sarvam has the best Indian-language models in the country. So why is nobody talking about the products?</div>
-            </div>
-            <div class="sv-msg bot">
-              <span class="av" aria-hidden="true"><img src="/firstclub/sagar-4.jpg" alt="" loading="lazy" /></span>
-              <div class="sv-bubble">
-                <p><span class="greet" id="sv-greet">Hello.</span> Because the model race and the product race are different games. You have won the first. The second is won on adoption, and these are the four bets that get you there:</p>
-                <ul class="sv-answer-list">
-                  <li><span class="n">01</span> Own a <b>consumer surface</b> Bharat actually loves</li>
-                  <li><span class="n">02</span> Distribute through <b>rails Indians already touch</b></li>
-                  <li><span class="n">03</span> Turn <b>open weights</b> into a developer flywheel</li>
-                  <li><span class="n">04</span> Instrument adoption like a <b>growth team</b></li>
-                </ul>
-                <div class="sv-wave" aria-hidden="true">
-                  <svg class="mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
-                  <span class="bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
-                  <span class="cap">Bulbul TTS · reading aloud</span>
+        <div class="sv-panels">
+
+          {/* ---- Text to Speech ---- */}
+          <div class="sv-panel active sv-panel-min" data-panel="tts">
+            <div class="tts">
+              <div class="tts-main">
+                <p class="tts-text" id="tts-text"></p>
+                <div class="tts-foot">
+                  <div class="tts-foot-left">
+                    <span class="lang-select">
+                      <select id="lang-select" aria-label="Language"></select>
+                    </span>
+                    <span class="tts-words"><b id="tts-words">0</b> words</span>
+                  </div>
+                  <div class="tts-foot-right">
+                    <span class="tts-chars" id="tts-chars">0/2000</span>
+                    <button class="tts-play" id="tts-play" type="button" aria-label="Play">
+                      <svg class="ico-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                      <svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="tts-voices">
+                <div class="voices-head"><span class="vh">Voices</span><span class="view-all">View all</span></div>
+                <div class="voice-card active">
+                  <span class="voice-play vc-indigo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></span>
+                  <div class="voice-meta"><div class="voice-name">Shubh <span class="gender m">Male</span></div><div class="voice-desc">Conversational · Friendly</div></div>
+                </div>
+                <div class="voice-card">
+                  <span class="voice-play vc-green" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></span>
+                  <div class="voice-meta"><div class="voice-name">Shreya <span class="gender f">Female</span></div><div class="voice-desc">News · Authoritative</div></div>
+                </div>
+                <div class="voice-card">
+                  <span class="voice-play vc-coral" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></span>
+                  <div class="voice-meta"><div class="voice-name">Manan <span class="gender m">Male</span></div><div class="voice-desc">Conversational · Consistent</div></div>
+                </div>
+                <div class="voice-card">
+                  <span class="voice-play vc-gold" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></span>
+                  <div class="voice-meta"><div class="voice-name">Ishita <span class="gender f">Female</span></div><div class="voice-desc">Entertainment · Dynamic</div></div>
+                </div>
+                <div class="voices-foot">
+                  <span>Want to hire him?</span>
+                  <a class="credits-btn" href="mailto:sagarahuja@gmail.com?subject=20%20minutes%20with%20Sagar%20-%20Sarvam">Book 20 minutes</a>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="sv-prompt" aria-hidden="true">
-            <span class="ph">Ask Sagar-PM about the adoption gap...</span>
-            <button class="send" type="button" tabindex="-1" aria-label="Send">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-            </button>
-          </div>
-
-          {/* ===== Model card ===== */}
-          <div class="sv-card" aria-label="Candidate model card">
-            <div class="sv-card-head">
-              <span class="ava"><img src="/firstclub/sagar-5.jpg" alt="Sagar Ahuja" loading="lazy" /></span>
-              <div class="meta">
-                <div class="nm">Sagar Ahuja</div>
-                <div class="ver">model: Sagar-PM-1 · region: in-blr</div>
+          {/* ---- Speech to Text ---- */}
+          <div class="sv-panel sv-panel-min" data-panel="stt">
+            <div class="stt">
+              <div class="stt-main">
+                <div class="stt-rec">
+                  <svg class="mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+                  <span class="sv-wave on" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span>
+                  <span class="cap">Saaras v3 · live</span>
+                </div>
+                <p class="stt-text" id="stt-text"></p>
               </div>
-              <span class="ready">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                Ready
-              </span>
-            </div>
-
-            <div class="sv-card-badges">
-              <span class="sv-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg> Builds AI products</span>
-              <span class="sv-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 0-day notice</span>
-              <span class="sv-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg> Bengaluru-based</span>
-            </div>
-
-            <div class="sv-evals">
-              <div class="sv-eval-title">Evaluation · what he has actually shipped</div>
-              <div class="sv-eval-row"><span class="t">AI products shipped</span><span class="v">Agentic + workflow</span><span class="s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span></div>
-              <div class="sv-eval-row"><span class="t">Consumer mobile at scale</span><span class="v">Skillz · G24x7</span><span class="s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span></div>
-              <div class="sv-eval-row"><span class="t">Retention / personalisation</span><span class="v">+9% retention</span><span class="s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span></div>
-              <div class="sv-eval-row"><span class="t">Platform / experimentation</span><span class="v">-82% release dep.</span><span class="s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span></div>
-              <div class="sv-eval-row"><span class="t">Total experience</span><span class="v">11 yrs · 7 in PM</span><span class="s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span></div>
-              <div class="sv-eval-row"><span class="t">Education</span><span class="v">ISB · Stanford</span><span class="s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Pass</span></div>
-            </div>
-
-            <div class="sv-card-foot">
-              <a href="mailto:sagarahuja@gmail.com?subject=Deploy%20Sagar%20at%20Sarvam%20-%2020%20minutes" class="sv-deploy">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                Deploy Sagar · Book 20 minutes
-              </a>
-              <a href="/firstclub/sagar-ahuja-resume.pdf" download class="sv-secondary-link">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download model card · Resume
-              </a>
-              <div class="sv-card-note">Self-hosted in Bengaluru · no notice period · weights fully transparent</div>
+              <div class="stt-side">
+                <div class="sl">Detected language</div>
+                <div class="sv-detected" id="stt-lang">English</div>
+                <div class="stt-meter">
+                  <div class="row"><span>Transcription accuracy</span><b>98.7%</b></div>
+                  <div class="bar"><i></i></div>
+                </div>
+                <p class="note">Saaras handles 22+ Indian languages, code-mixing, and transliteration in a single streaming model.</p>
+              </div>
             </div>
           </div>
+
+          {/* ---- Voice Agents ---- */}
+          <div class="sv-panel sv-panel-min" data-panel="va">
+            <div class="va">
+              <div class="va-msg user">
+                <span class="av" aria-hidden="true">SR</span>
+                <div class="va-bubble">Sarvam has the best Indian-language models in the country. So why is nobody talking about the products?</div>
+              </div>
+              <div class="va-msg bot">
+                <span class="av" aria-hidden="true"><img src="/firstclub/sagar-4.jpg" alt="" loading="lazy" /></span>
+                <div class="va-bubble">
+                  The model race and the product race are different games. You have won the first. The second is won on adoption - and these are the four bets that get you there:
+                  <ul class="va-list">
+                    <li><span class="n">01</span> Own a <b>consumer surface</b> Bharat actually loves</li>
+                    <li><span class="n">02</span> Distribute through <b>rails Indians already touch</b></li>
+                    <li><span class="n">03</span> Turn <b>open weights</b> into a developer flywheel</li>
+                    <li><span class="n">04</span> Instrument adoption like a <b>growth team</b></li>
+                  </ul>
+                  <div class="va-foot">
+                    <svg class="mic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>
+                    Read aloud by Bulbul · scroll down for the detail
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ---- Document Digitisation ---- */}
+          <div class="sv-panel sv-panel-min" data-panel="doc">
+            <div class="doc">
+              <div class="doc-paper" aria-hidden="true">
+                <span class="scan"></span>
+                <div class="dp-name">Sagar Ahuja</div>
+                <div class="dp-role">Senior Product Leader · Resume.pdf</div>
+                <div class="dp-line m"></div>
+                <div class="dp-line"></div>
+                <div class="dp-line s"></div>
+                <div class="dp-line m"></div>
+                <div class="dp-line"></div>
+                <div class="dp-line s"></div>
+                <div class="dp-line m"></div>
+              </div>
+              <div class="doc-extract">
+                <div class="de-title">Extracted fields · what he has shipped</div>
+                <div class="de-row"><span class="t">AI products shipped</span><span class="v">Agentic + workflow</span><span class="s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>OK</span></div>
+                <div class="de-row"><span class="t">Consumer mobile at scale</span><span class="v">Skillz · G24x7</span><span class="s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>OK</span></div>
+                <div class="de-row"><span class="t">Retention / personalisation</span><span class="v">+9% retention</span><span class="s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>OK</span></div>
+                <div class="de-row"><span class="t">Platform / experimentation</span><span class="v">-82% release dep.</span><span class="s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>OK</span></div>
+                <div class="de-row"><span class="t">Experience</span><span class="v">11 yrs · 7 in PM</span><span class="s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>OK</span></div>
+                <div class="de-row"><span class="t">Education</span><span class="v">ISB · Stanford</span><span class="s"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>OK</span></div>
+                <a class="doc-dl" href="/firstclub/sagar-ahuja-resume.pdf" download>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  Download source document · Resume
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* ---- Dubbing ---- */}
+          <div class="sv-panel sv-panel-min" data-panel="dub">
+            <div class="dub">
+              <p class="dub-intro">One pitch, <b>dubbed for every India</b>. The same case for hiring me, in the languages Sarvam is built to serve.</p>
+              <div class="dub-grid" id="dub-grid"></div>
+              <p class="dub-note">Powered by Bulbul TTS · 11 languages and counting</p>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      {/* ============ RIGHT: thesis + bets ============ */}
-      <div class="sv-split-right">
+      <div class="sv-stage-cta">
+        <a class="sv-try" href="mailto:sagarahuja@gmail.com?subject=Deploy%20Sagar%20at%20Sarvam%20-%2020%20minutes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          Try Sagar AI PM · Book 20 minutes
+        </a>
+        <div class="sv-stage-foot">no notice period · based in Bengaluru · weights fully transparent</div>
+      </div>
+    </section>
 
-        <div class="sv-section-head reveal">
-          <div class="eyebrow-row"><span class="sv-eyebrow">The adoption gap · The product thesis</span></div>
-          <h2>Great models do not adopt themselves.</h2>
+    {/* ============ Thesis + bets ============ */}
+    <div class="sv-narrow">
+      <div class="sv-section-head reveal">
+        <div class="eyebrow-row"><span class="sv-eyebrow">The adoption gap · The product thesis</span></div>
+        <h2>Great models do not adopt themselves.</h2>
+      </div>
+
+      <div class="sv-framing reveal" data-section="thesis">
+        <p class="quote">Sarvam has the inputs of a generational company. <span class="grad">The missing layer is the one that turns sovereign infrastructure into products a billion Indians reach for.</span></p>
+        <p class="tail"><strong>The critics are half right.</strong> A research lab that open-sources a 105B model and serves government is not the same as a company millions choose. The four bets below are how Sarvam closes that distance in the next 12 months.</p>
+      </div>
+
+      {/* Bet 01 */}
+      <article class="sv-bet reveal">
+        <header class="bet-head">
+          <span class="bet-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></span>
+          <div class="bet-meta">
+            <div class="bet-num">Bet 01</div>
+            <h3 class="bet-title">Own a consumer surface Bharat loves</h3>
+            <div class="bet-sub">An API is plumbing. A habit is a moat.</div>
+          </div>
+        </header>
+        <div class="bet-row">
+          <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+          <div class="bet-row-body">
+            <div class="bet-row-label">The Gap</div>
+            <p>~10M API calls a day is real, but it is <em class="c">someone else's product</em> using Sarvam underneath. The world-class voice stack - <strong>Saaras</strong> for speech, <strong>Bulbul</strong> for voice - has no owned surface that the next 100M Indians, voice-first and not in English, open every day and trust.</p>
+          </div>
         </div>
-
-        <div class="sv-framing reveal" data-section="thesis">
-          <p class="quote">Sarvam has the inputs of a generational company. <span class="grad">The missing layer is the one that turns sovereign infrastructure into products a billion Indians reach for.</span></p>
-          <p class="tail"><strong>The critics are half right.</strong> A research lab that open-sources a 105B model and serves government is not the same as a company millions choose. The four bets below are how Sarvam closes that distance in the next 12 months.</p>
+        <div class="bet-row">
+          <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+          <div class="bet-row-body">
+            <div class="bet-row-label">The Bet</div>
+            <ul class="bet-list">
+              <li><strong>Voice-first by default</strong> · speak, do not type. Designed for low-literacy, non-English users</li>
+              <li><strong>One job, done daily</strong> · pick a high-frequency wedge (money, schemes, farm, health) before breadth</li>
+              <li><strong>Sovereignty as a consumer promise</strong> · "your voice stays in India" becomes a trust feature, not a slide</li>
+            </ul>
+          </div>
         </div>
+        <div class="bet-row">
+          <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+          <div class="bet-row-body">
+            <div class="bet-row-label">Why it compounds</div>
+            <p>A surface that people return to is a <strong class="k">first-party data flywheel</strong> no foundation-model competitor can copy. It is also the proof point that converts the sovereignty narrative into a consumer story.</p>
+          </div>
+        </div>
+      </article>
 
-        {/* Bet 01 */}
-        <article class="sv-bet reveal">
-          <header class="bet-head">
-            <span class="bet-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
-            </span>
-            <div class="bet-meta">
-              <div class="bet-num">Bet 01</div>
-              <h3 class="bet-title">Own a consumer surface Bharat loves</h3>
-              <div class="bet-sub">An API is plumbing. A habit is a moat.</div>
-            </div>
-          </header>
-          <div class="bet-row">
-            <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
-            <div class="bet-row-body">
-              <div class="bet-row-label">The Gap</div>
-              <p>~10M API calls a day is real, but it is <em class="c">someone else's product</em> using Sarvam underneath. The world-class voice stack - <strong>Saaras</strong> for speech, <strong>Bulbul</strong> for voice - has no owned surface that the next 100M Indians, voice-first and not in English, open every day and trust.</p>
-            </div>
+      {/* Bet 02 */}
+      <article class="sv-bet reveal">
+        <header class="bet-head">
+          <span class="bet-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="12" cy="21" r="2"/><path d="M6 6h12M12 9v9M4 8v3a3 3 0 0 0 3 3M20 8v3a3 3 0 0 1-3 3"/></svg></span>
+          <div class="bet-meta">
+            <div class="bet-num">Bet 02</div>
+            <h3 class="bet-title">Distribute through rails Indians already touch</h3>
+            <div class="bet-sub">Do not fight for the app icon. Be inside the apps that already won.</div>
           </div>
-          <div class="bet-row">
-            <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-            <div class="bet-row-body">
-              <div class="bet-row-label">The Bet</div>
-              <ul class="bet-list">
-                <li><strong>Voice-first by default</strong> · speak, do not type. Designed for low-literacy, non-English users</li>
-                <li><strong>One job, done daily</strong> · pick a high-frequency wedge (money, schemes, farm, health) before breadth</li>
-                <li><strong>Sovereignty as a consumer promise</strong> · "your voice stays in India" becomes a trust feature, not a slide</li>
-              </ul>
-            </div>
+        </header>
+        <div class="bet-row">
+          <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+          <div class="bet-row-body">
+            <div class="bet-row-label">The Gap</div>
+            <p>Consumer acquisition against OpenAI and Google is brutal and expensive. But Sarvam has an asset they do not: <em class="c">a founder who built Aadhaar</em>. Distribution, not the model, is the defensible edge - and it is being under-played.</p>
           </div>
-          <div class="bet-row">
-            <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
-            <div class="bet-row-body">
-              <div class="bet-row-label">Why it compounds</div>
-              <p>A surface that people return to is a <strong class="k">first-party data flywheel</strong> no foundation-model competitor can copy. It is also the proof point that converts the sovereignty narrative into a consumer story.</p>
-            </div>
+        </div>
+        <div class="bet-row">
+          <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+          <div class="bet-row-body">
+            <div class="bet-row-label">The Bet</div>
+            <ul class="bet-list">
+              <li><strong>Ride DPI</strong> · embed Sarvam voice into government and public-service journeys, where reach is already national</li>
+              <li><strong>Live where conversations already are</strong> · WhatsApp, telco, bank and insurer flows, not a new download</li>
+              <li><strong>Bundle, do not battle</strong> · the voice layer inside partners' products, with Sarvam as the trusted Indian default</li>
+            </ul>
           </div>
-        </article>
+        </div>
+        <div class="bet-row">
+          <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+          <div class="bet-row-body">
+            <div class="bet-row-label">Why it compounds</div>
+            <p>Distribution through existing rails reaches hundreds of millions <strong>without paying the app-store acquisition tax</strong>. It is the part of the playbook a Silicon Valley competitor cannot run in India.</p>
+          </div>
+        </div>
+      </article>
 
-        {/* Bet 02 */}
-        <article class="sv-bet reveal">
-          <header class="bet-head">
-            <span class="bet-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="2"/><circle cx="20" cy="6" r="2"/><circle cx="12" cy="21" r="2"/><path d="M6 6h12M12 9v9M4 8v3a3 3 0 0 0 3 3M20 8v3a3 3 0 0 1-3 3"/></svg>
-            </span>
-            <div class="bet-meta">
-              <div class="bet-num">Bet 02</div>
-              <h3 class="bet-title">Distribute through rails Indians already touch</h3>
-              <div class="bet-sub">Do not fight for the app icon. Be inside the apps that already won.</div>
-            </div>
-          </header>
-          <div class="bet-row">
-            <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
-            <div class="bet-row-body">
-              <div class="bet-row-label">The Gap</div>
-              <p>Consumer acquisition against OpenAI and Google is brutal and expensive. But Sarvam has an asset they do not: <em class="c">a founder who built Aadhaar</em>. Distribution, not the model, is the defensible edge - and it is being under-played.</p>
-            </div>
+      {/* Bet 03 */}
+      <article class="sv-bet reveal">
+        <header class="bet-head">
+          <span class="bet-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
+          <div class="bet-meta">
+            <div class="bet-num">Bet 03</div>
+            <h3 class="bet-title">Turn open weights into a developer flywheel</h3>
+            <div class="bet-sub">Sarvam-105B and 30B are open. Adoption is not.</div>
           </div>
-          <div class="bet-row">
-            <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-            <div class="bet-row-body">
-              <div class="bet-row-label">The Bet</div>
-              <ul class="bet-list">
-                <li><strong>Ride DPI</strong> · embed Sarvam voice into government and public-service journeys, where reach is already national</li>
-                <li><strong>Live where conversations already are</strong> · WhatsApp, telco, bank and insurer flows, not a new download</li>
-                <li><strong>Bundle, do not battle</strong> · the voice layer inside partners' products, with Sarvam as the trusted Indian default</li>
-              </ul>
-            </div>
+        </header>
+        <div class="bet-row">
+          <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+          <div class="bet-row-body">
+            <div class="bet-row-label">The Gap</div>
+            <p>Open-sourcing <strong>Sarvam-105B</strong> and <strong>30B</strong> under Apache 2.0 was the right move - and a growth lever sitting half-idle. Open weights only compound when developers <em class="c">ship on them and stay</em>. That is a product job, not a release note.</p>
           </div>
-          <div class="bet-row">
-            <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
-            <div class="bet-row-body">
-              <div class="bet-row-label">Why it compounds</div>
-              <p>Distribution through existing rails reaches hundreds of millions <strong>without paying the app-store acquisition tax</strong>. It is the part of the playbook a Silicon Valley competitor cannot run in India.</p>
-            </div>
+        </div>
+        <div class="bet-row">
+          <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+          <div class="bet-row-body">
+            <div class="bet-row-label">The Bet</div>
+            <ul class="bet-list">
+              <li><strong>Become the default Indian-language stack</strong> · the fastest path from idea to shipped vernacular app</li>
+              <li><strong>Vertical-agent templates</strong> · finance, agri, health, gov - cloneable, not built from zero</li>
+              <li><strong>An open eval harness</strong> · let builders prove Sarvam beats global models on Indian languages, in public</li>
+            </ul>
           </div>
-        </article>
+        </div>
+        <div class="bet-row">
+          <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+          <div class="bet-row-body">
+            <div class="bet-row-label">Why it compounds</div>
+            <p>Every developer who ships on Sarvam is <strong class="k">distribution you did not pay for</strong>. Ecosystems are the most durable moat in AI - and the hardest for a competitor to clone overnight.</p>
+          </div>
+        </div>
+      </article>
 
-        {/* Bet 03 */}
-        <article class="sv-bet reveal">
-          <header class="bet-head">
-            <span class="bet-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            </span>
-            <div class="bet-meta">
-              <div class="bet-num">Bet 03</div>
-              <h3 class="bet-title">Turn open weights into a developer flywheel</h3>
-              <div class="bet-sub">Sarvam-105B and 30B are open. Adoption is not.</div>
-            </div>
-          </header>
-          <div class="bet-row">
-            <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
-            <div class="bet-row-body">
-              <div class="bet-row-label">The Gap</div>
-              <p>Open-sourcing <strong>Sarvam-105B</strong> and <strong>30B</strong> under Apache 2.0 was the right move - and a growth lever sitting half-idle. Open weights only compound when developers <em class="c">ship on them and stay</em>. That is a product job, not a release note.</p>
-            </div>
+      {/* Bet 04 */}
+      <article class="sv-bet reveal">
+        <header class="bet-head">
+          <span class="bet-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 11 9 15 12 21 5"/></svg></span>
+          <div class="bet-meta">
+            <div class="bet-num">Bet 04</div>
+            <h3 class="bet-title">Instrument adoption like a growth team</h3>
+            <div class="bet-sub">A lab measures benchmarks. A product measures retention.</div>
           </div>
-          <div class="bet-row">
-            <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-            <div class="bet-row-body">
-              <div class="bet-row-label">The Bet</div>
-              <ul class="bet-list">
-                <li><strong>Become the default Indian-language stack</strong> · the fastest path from idea to shipped vernacular app</li>
-                <li><strong>Vertical-agent templates</strong> · finance, agri, health, gov - cloneable, not built from zero</li>
-                <li><strong>An open eval harness</strong> · let builders prove Sarvam beats global models on Indian languages, in public</li>
-              </ul>
-            </div>
+        </header>
+        <div class="bet-row">
+          <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+          <div class="bet-row-body">
+            <div class="bet-row-label">The Gap</div>
+            <p>Headline numbers - 17M farmers, 45M policyholders - are <em class="c">self-reported and unaudited</em>, which is exactly why critics could call the round "embarrassing". A research-led org optimises eval scores. The missing muscle is activation, retention curves, and cohort experimentation on real users.</p>
           </div>
-          <div class="bet-row">
-            <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
-            <div class="bet-row-body">
-              <div class="bet-row-label">Why it compounds</div>
-              <p>Every developer who ships on Sarvam is <strong class="k">distribution you did not pay for</strong>. Ecosystems are the most durable moat in AI - and the hardest for a competitor to clone overnight.</p>
-            </div>
+        </div>
+        <div class="bet-row">
+          <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
+          <div class="bet-row-body">
+            <div class="bet-row-label">The Bet</div>
+            <ul class="bet-list">
+              <li><strong>One adoption north star</strong> · weekly active vernacular users, not API call counts</li>
+              <li><strong>Experimentation as infrastructure</strong> · cohort tests on the consumer surface without waiting on releases</li>
+              <li><strong>Public, audited traction</strong> · turn the sovereignty story into numbers a Series C cannot dispute</li>
+            </ul>
           </div>
-        </article>
-
-        {/* Bet 04 */}
-        <article class="sv-bet reveal">
-          <header class="bet-head">
-            <span class="bet-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><polyline points="7 14 11 9 15 12 21 5"/></svg>
-            </span>
-            <div class="bet-meta">
-              <div class="bet-num">Bet 04</div>
-              <h3 class="bet-title">Instrument adoption like a growth team</h3>
-              <div class="bet-sub">A lab measures benchmarks. A product measures retention.</div>
-            </div>
-          </header>
-          <div class="bet-row">
-            <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
-            <div class="bet-row-body">
-              <div class="bet-row-label">The Gap</div>
-              <p>Headline numbers - 17M farmers, 45M policyholders - are <em class="c">self-reported and unaudited</em>, which is exactly why critics could call the round "embarrassing". A research-led org optimises eval scores. The missing muscle is activation, retention curves, and cohort experimentation on real users.</p>
-            </div>
+        </div>
+        <div class="bet-row">
+          <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
+          <div class="bet-row-body">
+            <div class="bet-row-label">Why it compounds</div>
+            <p>What gets measured gets grown. Real retention numbers <strong>silence the "one hero" critique</strong> and make the next raise about traction, not promise.</p>
           </div>
-          <div class="bet-row">
-            <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></span>
-            <div class="bet-row-body">
-              <div class="bet-row-label">The Bet</div>
-              <ul class="bet-list">
-                <li><strong>One adoption north star</strong> · weekly active vernacular users, not API call counts</li>
-                <li><strong>Experimentation as infrastructure</strong> · cohort tests on the consumer surface without waiting on releases</li>
-                <li><strong>Public, audited traction</strong> · turn the sovereignty story into numbers a Series C cannot dispute</li>
-              </ul>
-            </div>
-          </div>
-          <div class="bet-row">
-            <span class="bet-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span>
-            <div class="bet-row-body">
-              <div class="bet-row-label">Why it compounds</div>
-              <p>What gets measured gets grown. Real retention numbers <strong>silence the "one hero" critique</strong> and make the next raise about traction, not promise.</p>
-            </div>
-          </div>
-        </article>
-
-      </div>{/* /.sv-split-right */}
-    </div>{/* /.sv-split */}
-
-    {/* ============ Why me ============ */}
-    <div class="sv-section-head reveal">
-      <div class="eyebrow-row"><span class="sv-eyebrow">Why I am the right person</span></div>
-      <h2>All four bets are <span class="grad">adoption problems</span> - and I have shipped AI products, not just admired them.</h2>
+        </div>
+      </article>
     </div>
 
-    <div class="sv-why reveal">
-      <div class="sv-why-intro">
-        <p>
-          Sarvam does not need another model researcher. It needs a product manager who can take world-class AI and make people use it. My last few years were spent <strong>building and shipping AI products on consumer platforms</strong> - <em>agentic systems, ML-driven personalisation, and the experimentation infrastructure that makes adoption measurable.</em>
-        </p>
+    {/* ============ Why me ============ */}
+    <div class="sv-narrow">
+      <div class="sv-section-head reveal">
+        <div class="eyebrow-row"><span class="sv-eyebrow">Why I am the right person</span></div>
+        <h2>All four bets are <span class="grad">adoption problems</span> - and I have shipped AI products, not just admired them.</h2>
       </div>
 
-      <div class="sv-why-grid reveal-stagger">
-
-        <article class="sv-why-card">
-          <div class="why-head">
-            <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div>
-            <div class="why-meta">
-              <div class="why-link">Maps to all four bets</div>
-              <h3 class="why-area">AI products, already shipped</h3>
-            </div>
-          </div>
-          <p class="why-claim">
-            Not an AI tourist. I have shipped <strong>agentic and AI-native products</strong> on a live consumer platform - and driven real adoption of them.
+      <div class="sv-why reveal">
+        <div class="sv-why-intro">
+          <p>
+            Sarvam does not need another model researcher. It needs a product manager who can take world-class AI and make people use it. My last few years were spent <strong>building and shipping AI products on consumer platforms</strong> - <em>agentic systems, ML-driven personalisation, and the experimentation infrastructure that makes adoption measurable.</em>
           </p>
-          <div class="why-proof">
-            <div class="why-proof-label">At Skillz</div>
-            <p>
-              Led the vision for an <strong>agentic AI LiveOps tool</strong> that ran the full campaign lifecycle for non-technical marketers, and separately rolled out AI workflows across the org with no formal mandate.
-            </p>
-            <div class="why-stats">
-              <div><strong>+50%</strong><span>marketing efficiency</span></div>
-              <div><strong>+20%</strong><span>PM execution efficiency</span></div>
-            </div>
-          </div>
-        </article>
+        </div>
 
-        <article class="sv-why-card">
-          <div class="why-head">
-            <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12" y2="18"/><path d="M9 6h6"/></svg></div>
-            <div class="why-meta">
-              <div class="why-link">Maps to Bet 01</div>
-              <h3 class="why-area">Consumer surfaces + retention</h3>
+        <div class="sv-why-grid reveal-stagger">
+          <article class="sv-why-card">
+            <div class="why-head">
+              <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M9 9h6v6H9z"/><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"/></svg></div>
+              <div class="why-meta">
+                <div class="why-link">Maps to all four bets</div>
+                <h3 class="why-area">AI products, already shipped</h3>
+              </div>
             </div>
-          </div>
-          <p class="why-claim">
-            Building a surface Bharat returns to is a <em>retention and personalisation</em> problem. I have rebuilt a consumer app around exactly that.
-          </p>
-          <div class="why-proof">
-            <div class="why-proof-label">At Games24x7</div>
-            <p>
-              Led an app redesign from one-size-fits-all to a <strong>cohort-configurable architecture</strong> serving a different experience per segment in real time.
-            </p>
-            <div class="why-stats">
-              <div><strong>+9%</strong><span>new user retention</span></div>
-              <div><strong>+3%</strong><span>ARPU on existing</span></div>
+            <p class="why-claim">Not an AI tourist. I have shipped <strong>agentic and AI-native products</strong> on a live consumer platform - and driven real adoption of them.</p>
+            <div class="why-proof">
+              <div class="why-proof-label">At Skillz</div>
+              <p>Led the vision for an <strong>agentic AI LiveOps tool</strong> that ran the full campaign lifecycle for non-technical marketers, and separately rolled out AI workflows across the org with no formal mandate.</p>
+              <div class="why-stats">
+                <div><strong>+50%</strong><span>marketing efficiency</span></div>
+                <div><strong>+20%</strong><span>PM execution efficiency</span></div>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="sv-why-card">
-          <div class="why-head">
-            <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6L4 18a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3L15 8V2"/><line x1="8" y1="2" x2="16" y2="2"/><line x1="7.5" y1="13" x2="16.5" y2="13"/></svg></div>
-            <div class="why-meta">
-              <div class="why-link">Maps to Bets 03 + 04</div>
-              <h3 class="why-area">Platform + experimentation</h3>
+          <article class="sv-why-card">
+            <div class="why-head">
+              <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="3"/><path d="M9 6h6"/></svg></div>
+              <div class="why-meta">
+                <div class="why-link">Maps to Bet 01</div>
+                <h3 class="why-area">Consumer surfaces + retention</h3>
+              </div>
             </div>
-          </div>
-          <p class="why-claim">
-            Developer flywheels and adoption instrumentation are <strong>platform problems</strong>. I have built the experimentation infrastructure that makes them run.
-          </p>
-          <div class="why-proof">
-            <div class="why-proof-label">At Games24x7</div>
-            <p>
-              Built a <strong>centralised experimentation platform</strong> from scratch - feature flags, A/B tests, real-time rollouts - decoupling experimentation from app releases across teams.
-            </p>
-            <div class="why-stats">
-              <div><strong>-82%</strong><span>release dependency</span></div>
-              <div><strong>Concurrent</strong><span>multi-team A/B tests</span></div>
+            <p class="why-claim">Building a surface Bharat returns to is a <em>retention and personalisation</em> problem. I have rebuilt a consumer app around exactly that.</p>
+            <div class="why-proof">
+              <div class="why-proof-label">At Games24x7</div>
+              <p>Led an app redesign from one-size-fits-all to a <strong>cohort-configurable architecture</strong> serving a different experience per segment in real time.</p>
+              <div class="why-stats">
+                <div><strong>+9%</strong><span>new user retention</span></div>
+                <div><strong>+3%</strong><span>ARPU on existing</span></div>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <article class="sv-why-card">
-          <div class="why-head">
-            <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 20 7 12 12 4 7 12 2"/><polyline points="4 12 12 17 20 12"/><polyline points="4 17 12 22 20 17"/></svg></div>
-            <div class="why-meta">
-              <div class="why-link">Maps to Bet 02</div>
-              <h3 class="why-area">All-rounder, India-native</h3>
+          <article class="sv-why-card">
+            <div class="why-head">
+              <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2v6L4 18a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3L15 8V2"/><line x1="8" y1="2" x2="16" y2="2"/><line x1="7.5" y1="13" x2="16.5" y2="13"/></svg></div>
+              <div class="why-meta">
+                <div class="why-link">Maps to Bets 03 + 04</div>
+                <h3 class="why-area">Platform + experimentation</h3>
+              </div>
             </div>
-          </div>
-          <p class="why-claim">
-            Distribution needs someone who will own GTM, partnerships, and analytics - not just write specs. I have done all of it, and I am based here.
-          </p>
-          <div class="why-proof">
-            <div class="why-proof-label">In practice</div>
-            <p>
-              Owned <strong>marketing, sales, analytics and product</strong> as the moment required. Bengaluru-based, ISB and Stanford educated, and I understand the Bharat user Sarvam is built for.
-            </p>
-          </div>
-        </article>
+            <p class="why-claim">Developer flywheels and adoption instrumentation are <strong>platform problems</strong>. I have built the experimentation infrastructure that makes them run.</p>
+            <div class="why-proof">
+              <div class="why-proof-label">At Games24x7</div>
+              <p>Built a <strong>centralised experimentation platform</strong> from scratch - feature flags, A/B tests, real-time rollouts - decoupling experimentation from app releases across teams.</p>
+              <div class="why-stats">
+                <div><strong>-82%</strong><span>release dependency</span></div>
+                <div><strong>Concurrent</strong><span>multi-team A/B tests</span></div>
+              </div>
+            </div>
+          </article>
 
-      </div>
+          <article class="sv-why-card">
+            <div class="why-head">
+              <div class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 20 7 12 12 4 7 12 2"/><polyline points="4 12 12 17 20 12"/><polyline points="4 17 12 22 20 17"/></svg></div>
+              <div class="why-meta">
+                <div class="why-link">Maps to Bet 02</div>
+                <h3 class="why-area">All-rounder, India-native</h3>
+              </div>
+            </div>
+            <p class="why-claim">Distribution needs someone who will own GTM, partnerships, and analytics - not just write specs. I have done all of it, and I am based here.</p>
+            <div class="why-proof">
+              <div class="why-proof-label">In practice</div>
+              <p>Owned <strong>marketing, sales, analytics and product</strong> as the moment required. Bengaluru-based, ISB and Stanford educated, and I understand the Bharat user Sarvam is built for.</p>
+            </div>
+          </article>
+        </div>
 
-      <div class="sv-why-closing reveal">
-        <span class="closing-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
-        <p>
-          <strong>Available immediately - I can start in week one.</strong> A company that just became a unicorn, with a mandate to reach a billion Indians and a critique to disprove, cannot afford to spend the next quarter on a hiring cycle.
-        </p>
+        <div class="sv-why-closing reveal">
+          <span class="closing-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+          <p><strong>Available immediately - I can start in week one.</strong> A company that just became a unicorn, with a mandate to reach a billion Indians and a critique to disprove, cannot afford to spend the next quarter on a hiring cycle.</p>
+        </div>
       </div>
     </div>
 
     {/* ============ Dark CTA ============ */}
     <section class="sv-dark-block reveal" data-section="cta">
       <h2>I would welcome 20 minutes.</h2>
-      <p>
-        Happy to go deeper on any of the four bets - or to be told where I am wrong and why. <strong>No agenda beyond the conversation.</strong> If the most urgent gap is somewhere else entirely, I would rather hear that than pitch past it.
-      </p>
+      <p>Happy to go deeper on any of the four bets - or to be told where I am wrong and why. <strong>No agenda beyond the conversation.</strong> If the most urgent gap is somewhere else entirely, I would rather hear that than pitch past it.</p>
       <div class="sv-cta-contact">
         <span class="label">Reach me at</span>
         <a href="mailto:sagarahuja@gmail.com">sagarahuja@gmail.com</a>
@@ -960,14 +838,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 
   <script slot="head" is:inline>
     document.addEventListener('DOMContentLoaded', function() {
-      // Reveal on scroll
+      // ----- Reveal on scroll -----
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              io.unobserve(entry.target);
-            }
+            if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
           });
         }, { threshold: 0.12 });
         document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el) { io.observe(el); });
@@ -975,18 +850,105 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el) { el.classList.add('visible'); });
       }
 
-      // Language toggle: swap the assistant greeting (safe single-word greetings)
-      var greet = document.getElementById('sv-greet');
-      document.querySelectorAll('.sv-lang').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          document.querySelectorAll('.sv-lang').forEach(function(b) { b.classList.remove('active'); });
-          btn.classList.add('active');
-          if (greet) greet.textContent = btn.getAttribute('data-greet');
+      // ----- Language data -----
+      // The pitch script, in the languages Sarvam is built to serve.
+      // NOTE: non-English strings should be verified by a native speaker before publishing.
+      var LANGS = [
+        { code: 'en', name: 'English',
+          text: 'Sarvam has won the model race. The real prize is adoption: turning world-class models into products that a billion Indians use every day.' },
+        { code: 'hi', name: 'हिन्दी',
+          text: 'सर्वम ने मॉडल की दौड़ जीत ली है। असली इनाम है अपनाना: विश्वस्तरीय मॉडलों को ऐसे प्रोडक्ट में बदलना जिन्हें एक अरब भारतीय रोज़ इस्तेमाल करें।' },
+        { code: 'mr', name: 'मराठी',
+          text: 'सर्वमने मॉडेलची शर्यत जिंकली आहे. खरे बक्षीस आहे स्वीकार: जागतिक दर्जाच्या मॉडेल्सना अशा उत्पादनांत बदलणे जी शंभर कोटी भारतीय रोज वापरतील.' },
+        { code: 'bn', name: 'বাংলা',
+          text: 'সর্বম মডেলের দৌড় জিতেছে। আসল পুরস্কার হলো গ্রহণযোগ্যতা: বিশ্বমানের মডেলকে এমন পণ্যে রূপান্তর করা যা একশো কোটি ভারতীয় প্রতিদিন ব্যবহার করে।' },
+        { code: 'ta', name: 'தமிழ்',
+          text: 'சர்வம் மாடல் பந்தயத்தில் வென்றது. உண்மையான பரிசு ஏற்பு: உலகத்தரம் வாய்ந்த மாடல்களை நூறு கோடி இந்தியர்கள் தினமும் பயன்படுத்தும் தயாரிப்புகளாக மாற்றுவது.' },
+        { code: 'te', name: 'తెలుగు',
+          text: 'సర్వం మోడల్ రేసును గెలిచింది. అసలు బహుమతి స్వీకరణ: ప్రపంచ స్థాయి మోడల్‌లను వంద కోట్ల మంది భారతీయులు ప్రతిరోజూ వాడే ఉత్పత్తులుగా మార్చడం.' },
+        { code: 'kn', name: 'ಕನ್ನಡ',
+          text: 'ಸರ್ವಮ್ ಮಾದರಿ ಓಟವನ್ನು ಗೆದ್ದಿದೆ. ನಿಜವಾದ ಬಹುಮಾನ ಅಳವಡಿಕೆ: ವಿಶ್ವದರ್ಜೆಯ ಮಾದರಿಗಳನ್ನು ನೂರು ಕೋಟಿ ಭಾರತೀಯರು ಪ್ರತಿದಿನ ಬಳಸುವ ಉತ್ಪನ್ನಗಳಾಗಿ ಪರಿವರ್ತಿಸುವುದು.' }
+      ];
+
+      var byCode = {};
+      LANGS.forEach(function(l) { byCode[l.code] = l; });
+
+      var sel = document.getElementById('lang-select');
+      var ttsText = document.getElementById('tts-text');
+      var ttsWords = document.getElementById('tts-words');
+      var ttsChars = document.getElementById('tts-chars');
+      var sttText = document.getElementById('stt-text');
+      var sttLang = document.getElementById('stt-lang');
+      var dubGrid = document.getElementById('dub-grid');
+
+      if (sel) {
+        LANGS.forEach(function(l) {
+          var o = document.createElement('option');
+          o.value = l.code; o.textContent = l.name;
+          sel.appendChild(o);
+        });
+      }
+
+      if (dubGrid) {
+        LANGS.forEach(function(l) {
+          var chip = document.createElement('div');
+          chip.className = 'dub-chip' + (l.code === 'en' ? ' active' : '');
+          chip.setAttribute('data-code', l.code);
+          chip.innerHTML = '<span class="pp"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></span><span class="ln">' + l.name + '</span>';
+          dubGrid.appendChild(chip);
+        });
+      }
+
+      function countWords(s) { return (s.trim().match(/\S+/g) || []).length; }
+
+      function render(code) {
+        var l = byCode[code] || LANGS[0];
+        if (ttsText) ttsText.textContent = l.text;
+        if (ttsWords) ttsWords.textContent = countWords(l.text);
+        if (ttsChars) ttsChars.textContent = l.text.length + '/2000';
+        if (sttText) sttText.textContent = l.text;
+        if (sttLang) sttLang.textContent = l.name;
+        if (dubGrid) {
+          dubGrid.querySelectorAll('.dub-chip').forEach(function(c) {
+            c.classList.toggle('active', c.getAttribute('data-code') === code);
+          });
+        }
+      }
+
+      render('en');
+
+      if (sel) {
+        sel.addEventListener('change', function() {
+          render(sel.value);
           if (window.posthog && typeof window.posthog.capture === 'function') {
-            window.posthog.capture('playground_lang_switched', { lang: btn.getAttribute('data-lang') });
+            window.posthog.capture('playground_lang_switched', { lang: sel.value });
+          }
+        });
+      }
+
+      // ----- Tab switching -----
+      var tabs = document.querySelectorAll('.sv-tab');
+      var panels = document.querySelectorAll('.sv-panel');
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          var name = tab.getAttribute('data-tab');
+          tabs.forEach(function(t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+          panels.forEach(function(p) { p.classList.toggle('active', p.getAttribute('data-panel') === name); });
+          if (window.posthog && typeof window.posthog.capture === 'function') {
+            window.posthog.capture('playground_tab_opened', { tab: name });
           }
         });
       });
+
+      // ----- Play button (decorative) -----
+      var play = document.getElementById('tts-play');
+      if (play) {
+        play.addEventListener('click', function() {
+          play.classList.toggle('playing');
+          play.setAttribute('aria-label', play.classList.contains('playing') ? 'Pause' : 'Play');
+        });
+      }
     });
   </script>
 </PitchLayout>
