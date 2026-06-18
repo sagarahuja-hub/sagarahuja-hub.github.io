@@ -3,576 +3,482 @@ import PitchLayout from '../layouts/PitchLayout.astro';
 ---
 <PitchLayout
   title="Sagar Ahuja - Scapia"
-  description="Scapia raised $63M to reach the next India. Here is the 12-month map to get there: a pilgrimage wedge, a product built for first-time flyers, and Yatra Saathi, a voice-first AI companion. An outsider's product map by Sagar Ahuja."
+  description="Scapia raised $63M to reach the next India. A map to the next ten million travellers: a pilgrimage wedge, a product built for first-time flyers, and Yatra Saathi, a voice-first AI companion. Plotted by Sagar Ahuja."
   slug="scapia"
-  fonts="Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700"
+  fonts="Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700"
   ogImage="/firstclub/sagar-4.jpg"
 >
   <style slot="head" is:global>
     :root {
-      --ya-paper: #F4EAD6;
-      --ya-paper-2: #F8F0DF;
-      --ya-surface: #FFFCF5;
-      --ya-ink: #15332B;
-      --ya-ink-soft: #3A5650;
-      --ya-secondary: #5C726B;
-      --ya-muted: #93A39A;
-      --ya-border: #E2D4B6;
-      --ya-line: #D7C6A3;
-      --ya-marigold: #DD862B;
-      --ya-marigold-deep: #C26C16;
-      --ya-teal: #0E8C78;
-      --ya-teal-deep: #0A6A5A;
-      --ya-saffron-soft: rgba(221,134,43,0.10);
-      --ya-teal-soft: rgba(14,140,120,0.10);
-      --ya-grad: linear-gradient(105deg, #C26C16 0%, #DD862B 55%, #E7A24A 100%);
-      --ya-grad-teal: linear-gradient(135deg, #0A6A5A 0%, #0E8C78 100%);
-      --ya-ink-block: #102A24;
-      --ya-radius: 10px;
-      --ya-radius-lg: 22px;
-      --ya-radius-pill: 999px;
-      --ya-ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --bg: #07120F;
+      --bg-2: #0B1A16;
+      --panel: #0F2620;
+      --panel-2: #123029;
+      --lime: #C8F94B;
+      --lime-deep: #A6E02B;
+      --teal: #25D0A8;
+      --teal-deep: #14a585;
+      --gold: #E9B65A;
+      --text: #ECF4ED;
+      --dim: #9FB6AE;
+      --faint: #647A72;
+      --hair: rgba(236,244,237,0.09);
+      --hair-lime: rgba(200,249,75,0.20);
+      --radius: 14px;
+      --radius-lg: 24px;
+      --pill: 999px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      background: var(--ya-paper);
-      color: var(--ya-ink);
-      font-size: 15px;
-      line-height: 1.6;
-      font-weight: 400;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 15px; line-height: 1.62; font-weight: 400;
+      overflow-x: hidden;
     }
-    /* Aged map-paper grain + faint contour rings */
-    body::before {
-      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.05;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    }
-    body::after {
-      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.5;
-      background:
-        radial-gradient(circle at 88% 8%, rgba(221,134,43,0.06) 0%, transparent 22%),
-        radial-gradient(circle at 6% 82%, rgba(14,140,120,0.06) 0%, transparent 24%);
-    }
-    .ya-page { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; padding: 26px 20px 72px; }
-    @media (min-width: 720px) { .ya-page { padding: 44px 30px 96px; } }
-    @media (max-width: 420px) { .ya-page { padding: 22px 14px 60px; } }
-    .ya-narrow { max-width: 760px; margin-left: auto; margin-right: auto; }
+    ::selection { background: rgba(200,249,75,0.28); color: #fff; }
+    .mono { font-family: 'Space Mono', monospace; }
+    strong.k { color: var(--lime); font-weight: 700; }
+    em.c { color: var(--teal); font-style: italic; font-weight: 500; }
 
-    strong.k {
-      font-weight: 700; color: var(--ya-marigold-deep);
-      background: var(--ya-saffron-soft); padding: 1px 5px; border-radius: 3px; white-space: nowrap;
-    }
-    em.c { color: var(--ya-teal-deep); font-style: italic; font-weight: 500; }
-
-    .ya-eyebrow {
-      font-family: 'Space Mono', monospace;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--ya-marigold-deep); display: inline-block;
-    }
-
-    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ya-ease), transform 0.7s var(--ya-ease); }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-stagger > * { opacity: 0; transform: translateY(16px); transition: opacity 0.55s var(--ya-ease), transform 0.55s var(--ya-ease); }
-    .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.0s; }
-    .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.10s; }
-    .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.20s; }
-    .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.30s; }
-    .reveal-stagger.visible > * { opacity: 1; transform: translateY(0); }
-    @media (prefers-reduced-motion: reduce) { .reveal, .reveal-stagger > * { opacity: 1; transform: none; transition: none; } }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
 
-    /* ===== Header (a traveller's chit) ===== */
-    .ya-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; padding-bottom: 16px; border-bottom: 1px dashed var(--ya-line); margin-bottom: 8px; flex-wrap: wrap; position: relative; }
-    .ya-header::after { content: ''; position: absolute; left: 0; bottom: -1px; width: 96px; height: 2px; background: var(--ya-grad); }
-    .ya-header .name-block .name { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 23px; font-weight: 600; color: var(--ya-ink); letter-spacing: -0.01em; margin-bottom: 4px; }
-    .ya-header .name-block .role { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ya-secondary); margin-bottom: 6px; }
-    .ya-header .name-block .website a { font-size: 13px; font-weight: 500; color: var(--ya-ink); text-decoration: none; border-bottom: 1px solid rgba(21,51,43,0.22); transition: border-color 0.15s ease; }
-    .ya-header .name-block .website a:hover { border-color: var(--ya-marigold); }
-    .ya-header .contact-block { text-align: right; font-size: 12px; color: var(--ya-secondary); line-height: 1.7; }
-    .ya-header .contact-block a { color: var(--ya-secondary); text-decoration: none; transition: color 0.15s ease; }
-    .ya-header .contact-block a:hover { color: var(--ya-marigold-deep); }
-    @media (max-width: 540px) { .ya-header .contact-block { text-align: left; } }
+    .wrap { width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 22px; }
+    .wrap.tight { max-width: 760px; }
 
-    /* ===== Hero ===== */
-    .ya-hero { margin: 30px 0 6px; }
-    .ya-hero .tag-row { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; margin-bottom: 18px; }
-    .ya-tag { display: inline-flex; align-items: center; gap: 7px; font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 5px 11px; border-radius: var(--ya-radius-pill); border: 1px solid var(--ya-border); background: var(--ya-surface); color: var(--ya-secondary); }
-    .ya-tag .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--ya-grad); }
-    .ya-tag .dot.teal { background: var(--ya-grad-teal); }
-    .ya-hero h1 { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 35px; line-height: 1.07; font-weight: 500; letter-spacing: -0.02em; color: var(--ya-ink); max-width: 17ch; }
-    @media (min-width: 720px) { .ya-hero h1 { font-size: 52px; } }
-    .ya-hero h1 .grad { background: var(--ya-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-    .ya-hero .sub { margin-top: 18px; font-size: 16px; line-height: 1.62; color: var(--ya-secondary); max-width: 62ch; }
-    .ya-hero .sub strong { color: var(--ya-ink); font-weight: 600; }
+    /* ============ Topo background ============ */
+    .topo { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+    .topo::before {
+      content: ''; position: absolute; inset: 0; opacity: 0.5;
+      background:
+        radial-gradient(60% 50% at 82% -5%, rgba(37,208,168,0.12) 0%, transparent 60%),
+        radial-gradient(55% 45% at 8% 18%, rgba(200,249,75,0.07) 0%, transparent 55%),
+        radial-gradient(70% 60% at 50% 108%, rgba(37,208,168,0.10) 0%, transparent 60%);
+    }
+    .topo::after {
+      content: ''; position: absolute; inset: 0; opacity: 0.5;
+      background-image: radial-gradient(rgba(236,244,237,0.06) 1px, transparent 1px);
+      background-size: 26px 26px;
+      mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 75%);
+      -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 75%);
+    }
+    .page { position: relative; z-index: 1; }
 
-    /* ===== Yatra Saathi demo (the hook) ===== */
-    .ya-stage { margin: 40px 0 12px; }
-    .ya-stage-cap { text-align: center; margin-bottom: 18px; }
-    .ya-stage-cap .ya-eyebrow { margin-bottom: 9px; }
-    .ya-stage-cap h2 { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 25px; font-weight: 500; color: var(--ya-ink); letter-spacing: -0.015em; line-height: 1.18; }
-    @media (min-width: 720px) { .ya-stage-cap h2 { font-size: 31px; } }
-    .ya-stage-cap p { font-size: 13.5px; color: var(--ya-secondary); margin-top: 9px; }
+    /* ============ Map title strip (not a resume header) ============ */
+    .titlebar { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 0 0; font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); flex-wrap: wrap; }
+    .titlebar .mark { display: inline-flex; align-items: center; gap: 9px; color: var(--dim); }
+    .titlebar .mark .compass { width: 16px; height: 16px; color: var(--lime); }
+    .titlebar .sig { color: var(--dim); }
+    .titlebar .sig b { color: var(--text); font-weight: 700; }
 
-    .ya-phone { max-width: 420px; margin: 0 auto; background: var(--ya-ink-block); border-radius: 30px; padding: 9px; box-shadow: 0 4px 16px rgba(16,42,36,0.18), 0 30px 70px rgba(16,42,36,0.28); position: relative; }
-    .ya-phone::before { content: ''; position: absolute; top: 17px; left: 50%; transform: translateX(-50%); width: 92px; height: 5px; border-radius: 99px; background: rgba(255,255,255,0.18); z-index: 5; }
-    .ya-screen { background: #ECE3D2; border-radius: 23px; overflow: hidden; }
+    /* ============ Hero ============ */
+    .hero { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; padding: 40px 0 30px; position: relative; }
+    .hero .coords { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 26px; }
+    .hero .coord { font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--dim); padding: 6px 12px; border: 1px solid var(--hair); border-radius: var(--pill); background: rgba(15,38,32,0.5); display: inline-flex; align-items: center; gap: 7px; }
+    .hero .coord .d { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 8px var(--lime); }
+    .hero .coord .d.teal { background: var(--teal); box-shadow: 0 0 8px var(--teal); }
+    .hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-optical-sizing: auto; font-weight: 700; font-size: 46px; line-height: 0.98; letter-spacing: -0.025em; color: var(--text); max-width: 16ch; }
+    @media (min-width: 720px) { .hero h1 { font-size: 86px; } }
+    @media (min-width: 980px) { .hero h1 { font-size: 100px; } }
+    .hero h1 .lime { color: var(--lime); position: relative; }
+    .hero .sub { margin-top: 28px; font-size: 16.5px; line-height: 1.62; color: var(--dim); max-width: 56ch; }
+    .hero .sub strong { color: var(--text); font-weight: 600; }
+    .hero .sub .hl { color: var(--lime); font-weight: 600; }
 
-    .ya-wa-top { background: var(--ya-grad-teal); padding: 30px 16px 13px; display: flex; align-items: center; gap: 11px; }
-    .ya-wa-av { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; background: var(--ya-grad); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 2px rgba(255,255,255,0.35); }
-    .ya-wa-av svg { width: 22px; height: 22px; color: #fff; }
-    .ya-wa-meta { flex: 1; min-width: 0; }
-    .ya-wa-name { font-size: 15px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 7px; }
-    .ya-wa-name .verify { width: 13px; height: 13px; color: #BFF3E6; }
-    .ya-wa-status { font-size: 11px; color: rgba(255,255,255,0.78); margin-top: 1px; display: flex; align-items: center; gap: 5px; }
-    .ya-wa-status .live { width: 6px; height: 6px; border-radius: 50%; background: #7DF0C6; box-shadow: 0 0 0 0 rgba(125,240,198,0.6); animation: yaPulse 2s infinite; }
-    @keyframes yaPulse { 0%{box-shadow:0 0 0 0 rgba(125,240,198,0.6)} 70%{box-shadow:0 0 0 6px rgba(125,240,198,0)} 100%{box-shadow:0 0 0 0 rgba(125,240,198,0)} }
-    @media (prefers-reduced-motion: reduce) { .ya-wa-status .live { animation: none; } }
-    .ya-wa-lang { position: relative; flex-shrink: 0; }
-    .ya-wa-lang select { appearance: none; -webkit-appearance: none; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: #fff; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.28); border-radius: var(--ya-radius-pill); padding: 6px 26px 6px 12px; cursor: pointer; }
-    .ya-wa-lang select option { color: #15332B; }
-    .ya-wa-lang::after { content: '▾'; position: absolute; right: 11px; top: 50%; transform: translateY(-50%); pointer-events: none; color: rgba(255,255,255,0.8); font-size: 10px; }
+    .hero-foot { display: flex; align-items: center; gap: 22px; margin-top: 40px; flex-wrap: wrap; }
+    .begin { display: inline-flex; align-items: center; gap: 11px; font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); }
+    .begin .arrowdown { width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--hair-lime); display: inline-flex; align-items: center; justify-content: center; color: var(--lime); animation: bob 1.8s var(--ease) infinite; }
+    .begin .arrowdown svg { width: 14px; height: 14px; }
+    @keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(4px)} }
+    @media (prefers-reduced-motion: reduce){ .begin .arrowdown { animation: none; } }
+    .hero-route { flex: 1; min-width: 200px; height: 46px; opacity: 0.8; }
+    .hero-route path.dash { stroke-dasharray: 4 7; }
 
-    .ya-chat { padding: 16px 13px 12px; min-height: 372px; display: flex; flex-direction: column; gap: 11px;
-      background-image: radial-gradient(rgba(16,42,36,0.05) 0.8px, transparent 0.8px); background-size: 16px 16px; }
-    .ya-bubble { max-width: 86%; padding: 9px 12px; font-size: 13.5px; line-height: 1.5; border-radius: 14px; position: relative; box-shadow: 0 1px 1px rgba(16,42,36,0.08); animation: yaPop 0.4s var(--ya-ease) both; }
-    @keyframes yaPop { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
-    @media (prefers-reduced-motion: reduce) { .ya-bubble { animation: none; } }
-    .ya-bubble.user { align-self: flex-end; background: #DDF7C8; color: #173b16; border-bottom-right-radius: 4px; }
-    .ya-bubble.bot { align-self: flex-start; background: #fff; color: var(--ya-ink); border-bottom-left-radius: 4px; }
-    .ya-bubble .t { font-family: 'Space Mono', monospace; font-size: 8.5px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.5; display: block; text-align: right; margin-top: 4px; }
-    .ya-bot-lead { font-weight: 600; margin-bottom: 7px; color: var(--ya-ink); }
-    .ya-check { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
-    .ya-check li { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; line-height: 1.45; color: var(--ya-ink-soft); }
-    .ya-check li .ic { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; color: var(--ya-teal); }
-    .ya-check li b { color: var(--ya-ink); font-weight: 600; }
-    .ya-listen { display: inline-flex; align-items: center; gap: 8px; margin-top: 11px; padding: 7px 13px 7px 9px; border: none; border-radius: var(--ya-radius-pill); background: var(--ya-grad-teal); color: #fff; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; cursor: pointer; transition: transform 0.16s var(--ya-ease); }
-    .ya-listen:hover { transform: translateY(-1px); }
-    .ya-listen .pi { width: 24px; height: 24px; border-radius: 50%; background: rgba(255,255,255,0.2); display: inline-flex; align-items: center; justify-content: center; }
-    .ya-listen .pi svg { width: 12px; height: 12px; }
-    .ya-listen .ico-pause { display: none; }
-    .ya-listen.playing .ico-play { display: none; }
-    .ya-listen.playing .ico-pause { display: inline; }
-    .ya-wave { display: inline-flex; align-items: center; gap: 2px; height: 14px; }
-    .ya-wave span { width: 2.5px; height: 4px; border-radius: 2px; background: rgba(255,255,255,0.85); }
-    .ya-listen.playing .ya-wave span { animation: yaBar 0.9s ease-in-out infinite; }
-    .ya-wave span:nth-child(2n){animation-delay:.12s} .ya-wave span:nth-child(3n){animation-delay:.22s} .ya-wave span:nth-child(4n){animation-delay:.07s}
-    @keyframes yaBar { 0%,100%{height:4px} 50%{height:13px} }
-    @media (prefers-reduced-motion: reduce) { .ya-listen.playing .ya-wave span { animation: none; height: 8px; } }
+    /* ============ Chapter marker ============ */
+    .chapter { display: flex; align-items: baseline; gap: 14px; margin: 0 0 26px; }
+    .chapter .no { font-family: 'Space Mono', monospace; font-size: 12px; font-weight: 700; color: var(--lime); letter-spacing: 0.1em; }
+    .chapter .lbl { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim); }
+    .chapter .rule { flex: 1; height: 1px; background: linear-gradient(90deg, var(--hair-lime), transparent); align-self: center; }
 
-    .ya-chips { display: flex; gap: 7px; padding: 10px 13px 13px; background: #ECE3D2; flex-wrap: wrap; border-top: 1px solid rgba(16,42,36,0.07); }
-    .ya-chip { flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 10px; border-radius: var(--ya-radius-pill); border: 1px solid var(--ya-border); background: var(--ya-surface); color: var(--ya-ink-soft); font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.16s var(--ya-ease); }
-    .ya-chip svg { width: 14px; height: 14px; color: var(--ya-marigold); flex-shrink: 0; }
-    .ya-chip:hover { border-color: var(--ya-marigold); }
-    .ya-chip.active { background: var(--ya-grad); border-color: transparent; color: #fff; }
-    .ya-chip.active svg { color: #fff; }
+    /* ============ Yatra Saathi demo ============ */
+    .demo { padding: 64px 0 20px; }
+    .demo .lead { text-align: center; max-width: 600px; margin: 0 auto 30px; }
+    .demo .lead h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 32px; line-height: 1.05; letter-spacing: -0.02em; color: var(--text); }
+    @media (min-width: 720px){ .demo .lead h2 { font-size: 44px; } }
+    .demo .lead h2 .lime { color: var(--lime); }
+    .demo .lead p { margin-top: 14px; font-size: 14.5px; color: var(--dim); }
 
-    .ya-stage-foot { text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--ya-muted); margin-top: 16px; line-height: 1.6; max-width: 52ch; margin-left: auto; margin-right: auto; }
+    .phone { max-width: 412px; margin: 0 auto; background: #050D0B; border-radius: 34px; padding: 9px; box-shadow: 0 0 0 1px rgba(200,249,75,0.10), 0 30px 80px rgba(0,0,0,0.6), 0 0 60px rgba(37,208,168,0.10); position: relative; }
+    .phone::before { content: ''; position: absolute; top: 18px; left: 50%; transform: translateX(-50%); width: 84px; height: 5px; border-radius: 99px; background: rgba(255,255,255,0.16); z-index: 5; }
+    .screen { background: #08130F; border-radius: 26px; overflow: hidden; }
 
-    /* ===== Section heads ===== */
-    .ya-section-head { margin-top: 58px; margin-bottom: 16px; }
-    .ya-section-head .eyebrow-row { display: flex; align-items: center; gap: 14px; margin-bottom: 11px; }
-    .ya-section-head .eyebrow-row::after { content: ''; flex: 1; height: 1px; background: repeating-linear-gradient(90deg, var(--ya-line) 0 6px, transparent 6px 12px); }
-    .ya-section-head h2 { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-weight: 500; font-size: 27px; line-height: 1.16; color: var(--ya-ink); letter-spacing: -0.015em; }
-    @media (min-width: 720px) { .ya-section-head h2 { font-size: 34px; } }
-    .ya-section-head h2 .grad { background: var(--ya-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .wa-top { padding: 32px 16px 13px; display: flex; align-items: center; gap: 11px; background: linear-gradient(180deg, #0F2620, #0B1A16); border-bottom: 1px solid rgba(200,249,75,0.12); }
+    .wa-av { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; background: linear-gradient(135deg, var(--lime), var(--teal)); display: flex; align-items: center; justify-content: center; }
+    .wa-av svg { width: 22px; height: 22px; color: #07120F; }
+    .wa-meta { flex: 1; min-width: 0; }
+    .wa-name { font-size: 15px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 6px; }
+    .wa-name .v { width: 13px; height: 13px; color: var(--lime); }
+    .wa-status { font-size: 11px; color: var(--teal); margin-top: 1px; display: flex; align-items: center; gap: 6px; }
+    .wa-status .live { width: 6px; height: 6px; border-radius: 50%; background: var(--lime); box-shadow: 0 0 0 0 rgba(200,249,75,0.6); animation: ring 2s infinite; }
+    @keyframes ring { 0%{box-shadow:0 0 0 0 rgba(200,249,75,0.55)} 70%{box-shadow:0 0 0 7px rgba(200,249,75,0)} 100%{box-shadow:0 0 0 0 rgba(200,249,75,0)} }
+    @media (prefers-reduced-motion: reduce){ .wa-status .live { animation: none; } }
+    .wa-lang { position: relative; flex-shrink: 0; }
+    .wa-lang select { appearance: none; -webkit-appearance: none; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: var(--text); background: rgba(200,249,75,0.10); border: 1px solid rgba(200,249,75,0.24); border-radius: var(--pill); padding: 6px 26px 6px 12px; cursor: pointer; }
+    .wa-lang select option { color: #07120F; background: #ECF4ED; }
+    .wa-lang::after { content: '▾'; position: absolute; right: 11px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--lime); font-size: 10px; }
 
-    /* ===== Framing block ===== */
-    .ya-framing { margin: 0 0 30px; padding: 26px 28px; background: var(--ya-ink-block); border-radius: var(--ya-radius-lg); position: relative; overflow: hidden; }
-    .ya-framing::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 100% 0%, rgba(221,134,43,0.20) 0%, transparent 46%), radial-gradient(circle at 0% 100%, rgba(14,140,120,0.20) 0%, transparent 46%); pointer-events: none; }
-    .ya-framing .quote { position: relative; font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 20px; font-weight: 500; line-height: 1.42; color: #fff; letter-spacing: -0.01em; margin-bottom: 13px; }
-    @media (min-width: 720px) { .ya-framing .quote { font-size: 23px; } }
-    .ya-framing .quote .grad { background: linear-gradient(105deg, #E7A24A, #F0C07A); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-    .ya-framing .tail { position: relative; font-size: 13.5px; color: rgba(255,255,255,0.66); line-height: 1.62; }
-    .ya-framing .tail strong { color: #fff; font-weight: 600; }
+    .chat { padding: 16px 13px 13px; min-height: 372px; display: flex; flex-direction: column; gap: 11px;
+      background-image: radial-gradient(rgba(200,249,75,0.05) 0.8px, transparent 0.8px); background-size: 18px 18px; }
+    .bubble { max-width: 86%; padding: 9px 12px; font-size: 13.5px; line-height: 1.5; border-radius: 15px; animation: pop 0.4s var(--ease) both; }
+    @keyframes pop { from{opacity:0;transform:translateY(7px)} to{opacity:1;transform:translateY(0)} }
+    @media (prefers-reduced-motion: reduce){ .bubble { animation: none; } }
+    .bubble.user { align-self: flex-end; background: linear-gradient(135deg, var(--lime-deep), var(--lime)); color: #07120F; border-bottom-right-radius: 4px; font-weight: 500; }
+    .bubble.bot { align-self: flex-start; background: #11302A; color: var(--text); border: 1px solid rgba(236,244,237,0.07); border-bottom-left-radius: 4px; }
+    .bubble .t { font-family: 'Space Mono', monospace; font-size: 8.5px; letter-spacing: 0.05em; opacity: 0.45; display: block; text-align: right; margin-top: 4px; }
+    .bot-lead { font-weight: 600; margin-bottom: 8px; color: var(--text); }
+    .check { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+    .check li { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; line-height: 1.45; color: var(--dim); }
+    .check li .ic { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; color: var(--lime); }
+    .check li b { color: var(--text); font-weight: 600; }
+    .listen { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 7px 14px 7px 8px; border: none; border-radius: var(--pill); background: rgba(200,249,75,0.12); border: 1px solid rgba(200,249,75,0.3); color: var(--lime); font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; cursor: pointer; transition: transform 0.16s var(--ease), background 0.16s; }
+    .listen:hover { transform: translateY(-1px); background: rgba(200,249,75,0.2); }
+    .listen .pi { width: 24px; height: 24px; border-radius: 50%; background: var(--lime); color: #07120F; display: inline-flex; align-items: center; justify-content: center; }
+    .listen .pi svg { width: 12px; height: 12px; }
+    .listen .ico-pause { display: none; }
+    .listen.playing .ico-play { display: none; }
+    .listen.playing .ico-pause { display: inline; }
+    .wv { display: inline-flex; align-items: center; gap: 2px; height: 14px; }
+    .wv span { width: 2.5px; height: 4px; border-radius: 2px; background: var(--lime); }
+    .listen.playing .wv span { animation: bar 0.9s ease-in-out infinite; }
+    .wv span:nth-child(2n){animation-delay:.12s} .wv span:nth-child(3n){animation-delay:.22s} .wv span:nth-child(4n){animation-delay:.07s}
+    @keyframes bar { 0%,100%{height:4px} 50%{height:13px} }
+    @media (prefers-reduced-motion: reduce){ .listen.playing .wv span { animation: none; height: 8px; } }
 
-    /* ===== The route (3 stops) ===== */
-    .ya-route { position: relative; margin-top: 6px; padding-left: 56px; }
-    @media (max-width: 480px) { .ya-route { padding-left: 44px; } }
-    .ya-route::before { content: ''; position: absolute; left: 19px; top: 8px; bottom: 60px; width: 0; border-left: 2px dashed var(--ya-marigold); opacity: 0.55; }
-    @media (max-width: 480px) { .ya-route::before { left: 15px; } }
-    .ya-stop { position: relative; margin-bottom: 22px; }
-    .ya-pin { position: absolute; left: -56px; top: 0; width: 40px; height: 40px; }
-    @media (max-width: 480px) { .ya-pin { left: -44px; width: 32px; height: 32px; } }
-    .ya-pin .marker { width: 100%; height: 100%; border-radius: 50% 50% 50% 2px; transform: rotate(45deg); background: var(--ya-grad); box-shadow: 0 4px 12px rgba(194,108,22,0.35); display: flex; align-items: center; justify-content: center; }
-    .ya-pin .marker span { transform: rotate(-45deg); font-family: 'Space Mono', monospace; font-size: 14px; font-weight: 700; color: #fff; }
-    @media (max-width: 480px) { .ya-pin .marker span { font-size: 12px; } }
+    .chips { display: flex; gap: 7px; padding: 11px 13px 14px; background: #0B1A16; flex-wrap: wrap; border-top: 1px solid rgba(236,244,237,0.06); }
+    .chip { flex: 1 1 auto; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 10px; border-radius: var(--pill); border: 1px solid var(--hair); background: rgba(15,38,32,0.6); color: var(--dim); font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.16s var(--ease); }
+    .chip svg { width: 14px; height: 14px; color: var(--lime); flex-shrink: 0; }
+    .chip:hover { border-color: var(--hair-lime); color: var(--text); }
+    .chip.active { background: var(--lime); border-color: var(--lime); color: #07120F; }
+    .chip.active svg { color: #07120F; }
+    .demo-note { text-align: center; font-family: 'Space Mono', monospace; font-size: 10px; color: var(--faint); margin-top: 18px; line-height: 1.7; max-width: 52ch; margin-left: auto; margin-right: auto; }
 
-    .ya-stop-card { background: var(--ya-surface); border: 1px solid var(--ya-border); border-radius: var(--ya-radius-lg); padding: 22px 22px 20px; transition: transform 0.3s var(--ya-ease), box-shadow 0.3s var(--ya-ease); }
-    .ya-stop-card:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(21,51,43,0.10); }
-    @media (min-width: 720px) { .ya-stop-card { padding: 26px 28px 24px; } }
-    .ya-stop-card .stop-coord { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ya-marigold-deep); }
-    .ya-stop-card .stop-title { font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 22px; font-weight: 600; color: var(--ya-ink); line-height: 1.2; letter-spacing: -0.01em; margin-top: 4px; }
-    @media (min-width: 720px) { .ya-stop-card .stop-title { font-size: 25px; } }
-    .ya-stop-card .stop-sub { font-size: 13.5px; color: var(--ya-teal-deep); font-style: italic; margin-top: 6px; }
-    .ya-stop-card .stop-divider { height: 1px; background: var(--ya-border); margin: 18px 0; }
-    .ya-row { display: flex; gap: 13px; }
-    .ya-row + .ya-row { margin-top: 16px; }
-    .ya-row-ic { width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0; margin-top: 1px; display: inline-flex; align-items: center; justify-content: center; }
-    .ya-row-ic svg { width: 15px; height: 15px; }
-    .ya-row-ic.gap { background: var(--ya-saffron-soft); color: var(--ya-marigold-deep); }
-    .ya-row-ic.move { background: var(--ya-teal-soft); color: var(--ya-teal-deep); }
-    .ya-row-ic.grow { background: rgba(16,42,36,0.06); color: var(--ya-ink); }
-    .ya-row-body { flex: 1; min-width: 0; }
-    .ya-row-label { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
-    .ya-row-label.gap { color: var(--ya-marigold-deep); }
-    .ya-row-label.move { color: var(--ya-teal-deep); }
-    .ya-row-label.grow { color: var(--ya-ink-soft); }
-    .ya-row-body p { font-size: 14px; color: var(--ya-ink-soft); line-height: 1.62; }
-    .ya-row-body p strong { color: var(--ya-ink); font-weight: 600; }
-    .ya-row-body p em { color: var(--ya-teal-deep); font-style: italic; }
+    /* ============ Thesis ============ */
+    .thesis { padding: 70px 0 8px; }
+    .thesis .quote { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; font-size: 26px; line-height: 1.22; letter-spacing: -0.02em; color: var(--text); }
+    @media (min-width: 720px){ .thesis .quote { font-size: 38px; } }
+    .thesis .quote .lime { color: var(--lime); }
+    .thesis .tail { margin-top: 22px; font-size: 15px; line-height: 1.65; color: var(--dim); max-width: 60ch; border-left: 2px solid var(--hair-lime); padding-left: 18px; }
+    .thesis .tail strong { color: var(--text); font-weight: 600; }
 
-    .ya-flag { position: relative; margin-top: 4px; }
-    .ya-flag .ya-pin { top: -2px; }
-    .ya-flag .ya-pin .marker { border-radius: 50%; background: var(--ya-grad-teal); box-shadow: 0 4px 12px rgba(10,106,90,0.3); }
-    .ya-flag .ya-pin .marker span { transform: rotate(-45deg); }
-    .ya-flag .marker.flagspin span { transform: none; }
-    .ya-dest { background: var(--ya-teal-soft); border: 1px dashed var(--ya-teal); border-radius: var(--ya-radius-lg); padding: 18px 22px; }
-    .ya-dest p { font-size: 14.5px; line-height: 1.6; color: var(--ya-ink); }
-    .ya-dest p strong { font-weight: 600; color: var(--ya-teal-deep); }
+    /* ============ Route ============ */
+    .route { padding: 50px 0 10px; }
+    .ways { position: relative; max-width: 1000px; margin: 0 auto; }
+    .ways::before { content: ''; position: absolute; left: 50%; top: 4px; bottom: 90px; width: 2px; margin-left: -1px;
+      background: linear-gradient(180deg, transparent, var(--lime) 5%, var(--teal) 95%, transparent);
+      box-shadow: 0 0 16px rgba(200,249,75,0.35); opacity: 0.55; }
+    .way { position: relative; width: 47%; margin-bottom: 54px; }
+    .way:nth-child(odd) { margin-right: auto; }
+    .way:nth-child(even) { margin-left: auto; }
+    .node { position: absolute; top: 6px; width: 22px; height: 22px; border-radius: 50%; background: var(--bg); border: 2px solid var(--lime); box-shadow: 0 0 14px rgba(200,249,75,0.6); display: flex; align-items: center; justify-content: center; }
+    .node::after { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--lime); }
+    .way:nth-child(odd) .node { right: -54px; }
+    .way:nth-child(even) .node { left: -54px; }
+    .way:nth-child(odd) .connector { position: absolute; right: -44px; top: 16px; width: 34px; height: 1px; background: var(--hair-lime); }
+    .way:nth-child(even) .connector { position: absolute; left: -44px; top: 16px; width: 34px; height: 1px; background: var(--hair-lime); }
 
-    /* ===== Why me ===== */
-    .ya-why-intro { margin: 0 0 24px; }
-    .ya-why-intro p { font-size: 16px; line-height: 1.65; color: var(--ya-ink); }
-    .ya-why-intro p strong { font-weight: 600; }
-    .ya-why-intro p em { color: var(--ya-teal-deep); font-style: italic; }
-    .ya-why-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin: 0 0 22px; }
-    @media (min-width: 700px) { .ya-why-grid { grid-template-columns: 1fr 1fr; gap: 18px; } }
-    .ya-why-card { background: var(--ya-surface); border: 1px solid var(--ya-border); border-radius: var(--ya-radius-lg); padding: 22px; display: flex; flex-direction: column; transition: transform 0.3s var(--ya-ease), box-shadow 0.3s var(--ya-ease); }
-    .ya-why-card:hover { transform: translateY(-2px); box-shadow: 0 16px 38px rgba(21,51,43,0.10); }
-    .ya-why-card .why-head { display: flex; align-items: center; gap: 12px; margin-bottom: 13px; padding-bottom: 13px; border-bottom: 1px solid var(--ya-border); }
-    .ya-why-card .why-icon { width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0; background: var(--ya-saffron-soft); border: 1px solid var(--ya-border); display: flex; align-items: center; justify-content: center; color: var(--ya-marigold-deep); }
-    .ya-why-card .why-icon svg { width: 23px; height: 23px; }
-    .ya-why-card .why-link { font-family: 'Space Mono', monospace; font-size: 9.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ya-teal-deep); margin-bottom: 3px; }
-    .ya-why-card .why-area { font-family: 'Fraunces', Georgia, serif; font-size: 18px; font-weight: 600; color: var(--ya-ink); line-height: 1.2; }
-    .ya-why-card .why-claim { font-size: 13.5px; line-height: 1.6; color: var(--ya-ink-soft); margin-bottom: 13px; }
-    .ya-why-card .why-claim strong { font-weight: 600; color: var(--ya-ink); }
-    .ya-why-card .why-proof { margin-top: auto; background: var(--ya-paper-2); border: 1px solid var(--ya-border); border-radius: var(--ya-radius); padding: 12px 14px; }
-    .ya-why-card .why-proof-label { font-family: 'Space Mono', monospace; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ya-secondary); margin-bottom: 6px; }
-    .ya-why-card .why-proof p { font-size: 12.5px; line-height: 1.55; color: var(--ya-ink-soft); }
-    .ya-why-card .why-proof p strong { color: var(--ya-ink); font-weight: 600; }
-    .ya-why-closing { display: flex; align-items: flex-start; gap: 14px; padding: 20px 22px; border-radius: var(--ya-radius-lg); background: var(--ya-saffron-soft); border: 1px solid var(--ya-border); }
-    .ya-why-closing .closing-icon { width: 32px; height: 32px; flex-shrink: 0; color: var(--ya-marigold-deep); }
-    .ya-why-closing .closing-icon svg { width: 100%; height: 100%; }
-    .ya-why-closing p { font-size: 14.5px; line-height: 1.6; color: var(--ya-ink); }
-    .ya-why-closing p strong { font-weight: 600; }
+    .loc { position: relative; background: linear-gradient(180deg, var(--panel), var(--bg-2)); border: 1px solid var(--hair); border-radius: var(--radius-lg); padding: 24px 24px 22px; overflow: hidden; transition: transform 0.3s var(--ease), border-color 0.3s; }
+    .loc:hover { transform: translateY(-3px); border-color: var(--hair-lime); }
+    .loc .ghost { position: absolute; top: -18px; right: 8px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 120px; line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(200,249,75,0.10); pointer-events: none; }
+    .loc .coord { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal); position: relative; }
+    .loc h3 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 24px; line-height: 1.1; letter-spacing: -0.02em; color: var(--text); margin-top: 8px; position: relative; }
+    @media (min-width: 720px){ .loc h3 { font-size: 27px; } }
+    .loc .one { font-size: 14px; color: var(--lime); font-style: italic; margin-top: 8px; position: relative; }
+    .loc .gap { font-size: 14px; line-height: 1.62; color: var(--dim); margin-top: 16px; position: relative; }
+    .loc .gap strong { color: var(--text); font-weight: 600; }
+    .loc .gap em { color: var(--teal); font-style: italic; }
+    .loc .build { position: relative; margin-top: 16px; padding: 14px 16px; border-radius: var(--radius); background: rgba(200,249,75,0.07); border: 1px solid rgba(200,249,75,0.18); }
+    .loc .build .bl { font-family: 'Space Mono', monospace; font-size: 9.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--lime); margin-bottom: 6px; }
+    .loc .build p { font-size: 13.5px; line-height: 1.6; color: var(--text); }
+    .loc .build p strong { color: var(--lime); font-weight: 600; }
+    .loc .win { display: flex; gap: 9px; align-items: flex-start; margin-top: 14px; position: relative; font-size: 13px; line-height: 1.55; color: var(--dim); }
+    .loc .win svg { width: 16px; height: 16px; color: var(--teal); flex-shrink: 0; margin-top: 2px; }
+    .loc .win strong { color: var(--text); font-weight: 600; }
 
-    /* ===== Dark CTA ===== */
-    .ya-dark-block { margin-top: 50px; padding: 46px 32px; border-radius: var(--ya-radius-lg); background: var(--ya-ink-block); text-align: center; position: relative; overflow: hidden; }
-    .ya-dark-block::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 15% 8%, rgba(221,134,43,0.22) 0%, transparent 44%), radial-gradient(circle at 85% 92%, rgba(14,140,120,0.24) 0%, transparent 46%); pointer-events: none; }
-    .ya-dark-block .ya-eyebrow { color: #E7A24A; position: relative; }
-    .ya-dark-block h2 { position: relative; font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 29px; font-weight: 500; color: #fff; letter-spacing: -0.015em; margin: 10px 0 12px; }
-    @media (min-width: 720px) { .ya-dark-block h2 { font-size: 36px; } }
-    .ya-dark-block p { position: relative; font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.72); max-width: 56ch; margin: 0 auto 24px; }
-    .ya-dark-block p strong { color: #fff; font-weight: 600; }
-    .ya-cta-contact { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 18px; }
-    .ya-cta-contact .label { font-family: 'Space Mono', monospace; font-size: 10.5px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); width: 100%; margin-bottom: 4px; }
-    .ya-cta-contact a { color: #fff; text-decoration: none; font-size: 14px; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 1px; transition: border-color 0.15s ease; }
-    .ya-cta-contact a:hover { border-color: #E7A24A; }
+    .dest { position: relative; max-width: 620px; margin: 12px auto 0; text-align: center; }
+    .dest .flag { width: 52px; height: 52px; margin: 0 auto 16px; border-radius: 50%; background: linear-gradient(135deg, var(--lime), var(--teal)); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(200,249,75,0.45); }
+    .dest .flag svg { width: 26px; height: 26px; color: #07120F; }
+    .dest .dl { font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--teal); margin-bottom: 10px; }
+    .dest p { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 600; font-size: 22px; line-height: 1.3; letter-spacing: -0.015em; color: var(--text); }
+    @media (min-width: 720px){ .dest p { font-size: 26px; } }
+    .dest p .lime { color: var(--lime); }
 
-    .ya-footer { margin-top: 36px; text-align: center; font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--ya-muted); line-height: 1.75; letter-spacing: 0.02em; }
+    @media (max-width: 820px) {
+      .ways::before { left: 11px; bottom: 70px; }
+      .way { width: 100%; margin-left: 0 !important; margin-right: 0 !important; padding-left: 40px; margin-bottom: 30px; }
+      .way .node { left: 1px !important; right: auto !important; }
+      .way .connector { display: none; }
+      .loc .ghost { font-size: 90px; top: -10px; }
+    }
+
+    /* ============ Cartographer (why me) ============ */
+    .carto { padding: 78px 0 10px; }
+    .carto-panel { background: linear-gradient(135deg, var(--panel), var(--bg-2)); border: 1px solid var(--hair); border-radius: var(--radius-lg); padding: 30px 26px; }
+    @media (min-width: 760px){ .carto-panel { padding: 40px 44px; } }
+    .carto-top { display: flex; align-items: center; gap: 18px; margin-bottom: 22px; }
+    .carto-top .portrait { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex-shrink: 0; border: 2px solid var(--hair-lime); }
+    .carto-top h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 26px; line-height: 1.08; letter-spacing: -0.02em; color: var(--text); }
+    @media (min-width: 720px){ .carto-top h2 { font-size: 34px; } }
+    .carto-top h2 .lime { color: var(--lime); }
+    .carto-top .role { font-family: 'Space Mono', monospace; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--faint); margin-top: 6px; }
+    .carto-body { font-size: 15.5px; line-height: 1.7; color: var(--dim); max-width: 64ch; }
+    .carto-body strong { color: var(--text); font-weight: 600; }
+    .carto-body em { color: var(--teal); font-style: italic; }
+    .carto-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; margin: 26px 0 0; background: var(--hair); border: 1px solid var(--hair); border-radius: var(--radius); overflow: hidden; }
+    @media (min-width: 640px){ .carto-stats { grid-template-columns: repeat(4, 1fr); } }
+    .carto-stats > div { background: var(--bg-2); padding: 18px 16px; }
+    .carto-stats .fig { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 26px; line-height: 1; color: var(--lime); letter-spacing: -0.02em; }
+    .carto-stats .cap { font-size: 11.5px; color: var(--dim); margin-top: 7px; line-height: 1.4; }
+    .carto-map { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .carto-map .legend { font-family: 'Space Mono', monospace; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); padding: 7px 12px; border: 1px solid var(--hair); border-radius: var(--pill); display: inline-flex; align-items: center; gap: 8px; }
+    .carto-map .legend b { color: var(--text); font-weight: 700; }
+    .carto-map .legend .pin { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+    .carto-avail { display: flex; align-items: flex-start; gap: 13px; margin-top: 22px; padding-top: 22px; border-top: 1px solid var(--hair); }
+    .carto-avail svg { width: 24px; height: 24px; color: var(--lime); flex-shrink: 0; margin-top: 2px; }
+    .carto-avail p { font-size: 14.5px; line-height: 1.6; color: var(--text); }
+    .carto-avail p strong { color: var(--lime); font-weight: 600; }
+
+    /* ============ CTA ============ */
+    .cta { padding: 80px 0 24px; text-align: center; }
+    .cta .dl { font-family: 'Space Mono', monospace; font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--lime); }
+    .cta h2 { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 38px; line-height: 1.0; letter-spacing: -0.025em; color: var(--text); margin: 14px 0 16px; }
+    @media (min-width: 720px){ .cta h2 { font-size: 64px; } }
+    .cta h2 .lime { color: var(--lime); }
+    .cta p { font-size: 15.5px; line-height: 1.65; color: var(--dim); max-width: 54ch; margin: 0 auto 30px; }
+    .cta p strong { color: var(--text); font-weight: 600; }
+    .cta-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px; }
+    .cta-links a { display: inline-flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 20px; border-radius: var(--pill); transition: transform 0.16s var(--ease), background 0.16s, border-color 0.16s; }
+    .cta-links a.primary { background: var(--lime); color: #07120F; }
+    .cta-links a.primary:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(200,249,75,0.22); }
+    .cta-links a.ghost { color: var(--text); border: 1px solid var(--hair); }
+    .cta-links a.ghost:hover { border-color: var(--hair-lime); transform: translateY(-2px); }
+    .cta-links a svg { width: 15px; height: 15px; }
+
+    .foot { padding: 40px 0 24px; text-align: center; font-family: 'Space Mono', monospace; font-size: 10.5px; color: var(--faint); line-height: 1.8; letter-spacing: 0.03em; }
+    .foot .ln { width: 40px; height: 1px; background: var(--hair-lime); margin: 0 auto 20px; }
   </style>
 
-  <div class="ya-page">
+  <div class="topo" aria-hidden="true"></div>
 
-    <header class="ya-header fc-header reveal">
-      <div class="name-block">
-        <div class="name">Sagar Ahuja</div>
-        <div class="role">Senior Product Leader · 11 yrs · Available now</div>
-        <div class="website"><a href="https://sagarahuja.co" target="_blank" rel="noopener">sagarahuja.co</a></div>
+  <div class="page">
+
+    {/* ============ Map title strip ============ */}
+    <div class="wrap">
+      <div class="titlebar">
+        <span class="mark">
+          <svg class="compass" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.2 7.8 13.4 13.4 7.8 16.2 10.6 10.6 16.2 7.8" fill="currentColor" stroke="none"/></svg>
+          A 12-month yatra · for Scapia
+        </span>
+        <span class="sig">Cartography — <b>Sagar Ahuja</b></span>
       </div>
-      <div class="contact-block">
-        <a href="mailto:sagarahuja@gmail.com">sagarahuja@gmail.com</a><br />
-        <a href="tel:+919557629225">+91 9557 629 225</a><br />
-        <a href="https://linkedin.com/in/sagar-ahuja-/" target="_blank" rel="noopener">linkedin.com/in/sagar-ahuja-</a><br />
-        Bengaluru, India
-      </div>
-    </header>
+    </div>
 
     {/* ============ Hero ============ */}
-    <section class="ya-hero reveal" data-section="hero">
-      <div class="tag-row">
-        <span class="ya-tag"><span class="dot"></span> An outsider's product map</span>
-        <span class="ya-tag"><span class="dot teal"></span> Prepared for Scapia</span>
+    <section class="hero wrap reveal" data-section="hero">
+      <div class="coords">
+        <span class="coord"><span class="d"></span> $63M Series C · May 2026</span>
+        <span class="coord"><span class="d teal"></span> Led by General Catalyst</span>
+        <span class="coord">Destination · the next 10M</span>
       </div>
-      <h1>Scapia raised $63M to reach the next India.<br /><span class="grad">Here is the map to get there.</span></h1>
+      <h1>A map to the <span class="lime">next ten&nbsp;million.</span></h1>
       <p class="sub">
-        Last month, <strong>Scapia closed a $63M Series C</strong> led by General Catalyst, crossing a $500M valuation on the back of <strong>7x growth</strong>, with the demand coming fastest from Tier 2 and Tier 3 India. The mandate is clear: become AI-first and reach the <strong>next ten million travellers</strong>. Those travellers are not seasoned flyers chasing forex perks. They travel for faith, and many are about to take a <strong>first flight</strong>. This is a 12-month map drawn for them.
+        Last month Scapia raised <strong>$63M to become AI-first and reach the next India</strong>. Those travellers are not seasoned flyers chasing forex perks. <span class="hl">They travel for faith, and many are about to take a first flight.</span> Three waypoints, one companion, twelve months.
       </p>
-    </section>
-
-    {/* ============ Yatra Saathi live demo (the hook) ============ */}
-    <section class="ya-stage reveal" data-section="saathi_demo">
-      <div class="ya-stage-cap">
-        <span class="ya-eyebrow">The companion · Live demo</span>
-        <h2>Meet Yatra Saathi.</h2>
-        <p>A voice-first AI travel companion, on WhatsApp, in your own language. Switch the language. Tap a question. Press listen, and she speaks.</p>
-      </div>
-
-      <div class="ya-phone">
-        <div class="ya-screen">
-          <div class="ya-wa-top">
-            <span class="ya-wa-av" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="16.2 7.8 13.4 13.4 7.8 16.2 10.6 10.6 16.2 7.8" fill="currentColor" stroke="none"/></svg>
-            </span>
-            <div class="ya-wa-meta">
-              <div class="ya-wa-name">Yatra Saathi <svg class="verify" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 1.8 3-.2 1 2.8 2.6 1.5-1 2.8 1 2.8-2.6 1.5-1 2.8-3-.2L12 22l-2.4-1.8-3 .2-1-2.8L3 16.3l1-2.8-1-2.8 2.6-1.5 1-2.8 3 .2z"/><path d="M8.5 12.3l2.3 2.3 4.4-4.6" fill="none" stroke="#0A6A5A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              <div class="ya-wa-status"><span class="live" aria-hidden="true"></span> online · speaks your language</div>
-            </div>
-            <span class="ya-wa-lang">
-              <select id="ya-lang" aria-label="Language"></select>
-            </span>
-          </div>
-
-          <div class="ya-chat" id="ya-chat" aria-live="polite"></div>
-
-          <div class="ya-chips" id="ya-chips"></div>
-        </div>
-      </div>
-
-      <p class="ya-stage-foot">A working concept built by Sagar Ahuja, not a Scapia product. English and हिन्दी speak live through your browser. Other languages show the greeting only, since real translations should ship verified.</p>
-    </section>
-
-    {/* ============ The thesis ============ */}
-    <div class="ya-narrow">
-      <div class="ya-section-head reveal">
-        <div class="eyebrow-row"><span class="ya-eyebrow">Why this yatra · Why now</span></div>
-        <h2>The map points away from the customer you already have.</h2>
-      </div>
-
-      <div class="ya-framing reveal" data-section="thesis">
-        <p class="quote">A Series C buys reach. The risk is spending it on more features for the metro flyer Scapia already won. <span class="grad">The growth is somewhere else: the next ten million, who travel for faith first and fly for the first time.</span></p>
-        <p class="tail">Two traps follow a raise built on "more offerings": <strong>feature sprawl</strong> and rising <strong>acquisition cost</strong> as the easy metro base runs dry. Anil Goteti framed the goal as "products that help our users travel and lead richer lives." The three stops below sequence exactly that, for the customer the funding is actually chasing.</p>
-      </div>
-    </div>
-
-    {/* ============ The route ============ */}
-    <div class="ya-narrow">
-      <div class="ya-route">
-
-        {/* Stop 01 */}
-        <article class="ya-stop reveal" data-section="stop_pilgrimage">
-          <div class="ya-pin" aria-hidden="true"><div class="marker"><span>1</span></div></div>
-          <div class="ya-stop-card">
-            <div class="stop-coord">Stop 01 · The entry point</div>
-            <h3 class="stop-title">Start where India already travels</h3>
-            <div class="stop-sub">The biggest first journey is not a holiday. It is a pilgrimage.</div>
-            <div class="stop-divider"></div>
-            <div class="ya-row">
-              <span class="ya-row-ic gap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
-              <div class="ya-row-body">
-                <div class="ya-row-label gap">The gap</div>
-                <p>Zero forex markup and international lounges speak to the <em>metro outbound flyer</em>. But the 7x growth and the next ten million sit in Tier 2 and Tier 3, where the highest-intent, group-sized, repeat travel is faith: <strong>Tirupati, Vaishno Devi, the Char Dham, Shirdi, Ajmer, the Kumbh</strong>. No premium travel-fintech is built for it.</p>
-              </div>
-            </div>
-            <div class="ya-row">
-              <span class="ya-row-ic move" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-              <div class="ya-row-body">
-                <div class="ya-row-label move">The move</div>
-                <p>A purpose-built pilgrimage product: <strong>darshan and queue bookings</strong>, verified stays near the temple, <strong>group coordination</strong> for families travelling together, and Scapia Coins that mean something on a route people take every single year.</p>
-              </div>
-            </div>
-            <div class="ya-row">
-              <span class="ya-row-ic grow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
-              <div class="ya-row-body">
-                <div class="ya-row-label grow">Why it compounds</div>
-                <p>Pilgrimage is repeat, seasonal, and deeply word-of-mouth. One trusted family brings the next ten. It is the <strong>lowest-cost door</strong> into exactly the customer the Series C is chasing.</p>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        {/* Stop 02 */}
-        <article class="ya-stop reveal" data-section="stop_firsttimer">
-          <div class="ya-pin" aria-hidden="true"><div class="marker"><span>2</span></div></div>
-          <div class="ya-stop-card">
-            <div class="stop-coord">Stop 02 · The experience</div>
-            <h3 class="stop-title">Build for the first journey, not the hundredth</h3>
-            <div class="stop-sub">The seasoned flyer is not the next customer. The first-timer is.</div>
-            <div class="stop-divider"></div>
-            <div class="ya-row">
-              <span class="ya-row-ic gap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
-              <div class="ya-row-body">
-                <div class="ya-row-label gap">The gap</div>
-                <p>The app assumes travel fluency. It expects you to know what a lounge is, how forex works, how to read a boarding pass. The next ten million are often taking a <strong>first flight</strong>. The barrier is not reward value. It is <em>confidence and anxiety</em>.</p>
-              </div>
-            </div>
-            <div class="ya-row">
-              <span class="ya-row-ic move" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-              <div class="ya-row-body">
-                <div class="ya-row-label move">The move</div>
-                <p>Re-centre the product on the first-timer: <strong>vernacular, plain-language onboarding</strong>, a guided "your first flight" walkthrough from booking to boarding, <strong>domestic value</strong> front and centre instead of international forex, and a lounge made to feel welcoming rather than intimidating.</p>
-              </div>
-            </div>
-            <div class="ya-row">
-              <span class="ya-row-ic grow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
-              <div class="ya-row-body">
-                <div class="ya-row-label grow">Why it compounds</div>
-                <p>Win someone's first journey and you own every journey after it. It is the <strong>cheapest, stickiest loyalty</strong> there is, and it is invisible to competitors fighting over frequent flyers.</p>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        {/* Stop 03 */}
-        <article class="ya-stop reveal" data-section="stop_saathi">
-          <div class="ya-pin" aria-hidden="true"><div class="marker"><span>3</span></div></div>
-          <div class="ya-stop-card">
-            <div class="stop-coord">Stop 03 · The companion</div>
-            <h3 class="stop-title">A companion who speaks your language</h3>
-            <div class="stop-sub">You met her at the top of this map. This is why she matters.</div>
-            <div class="stop-divider"></div>
-            <div class="ya-row">
-              <span class="ya-row-ic gap" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
-              <div class="ya-row-body">
-                <div class="ya-row-label gap">The gap</div>
-                <p>AI-first cannot only mean a smarter backend. For a first-time pilgrim in their own language, the unlock is a companion that <strong>holds their hand across the whole journey</strong>: by voice, on WhatsApp, with no new app to learn.</p>
-              </div>
-            </div>
-            <div class="ya-row">
-              <span class="ya-row-ic move" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
-              <div class="ya-row-body">
-                <div class="ya-row-label move">The move</div>
-                <p><strong>Yatra Saathi.</strong> A vernacular, voice-first AI travel companion. She books, reminds, guides through the airport, handles delays, and answers in the traveller's own language. She is how Stops 01 and 02 <strong>scale to millions without a call centre</strong>.</p>
-              </div>
-            </div>
-            <div class="ya-row">
-              <span class="ya-row-ic grow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></span>
-              <div class="ya-row-body">
-                <div class="ya-row-label grow">Why it compounds</div>
-                <p>This is the truest expression of the <strong>AI-native</strong> bet the Series C is funding, pointed at the customer who needs it most, and it is the one feature a metro-built competitor will not think to build.</p>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        {/* Destination flag */}
-        <div class="ya-stop ya-flag reveal">
-          <div class="ya-pin" aria-hidden="true"><div class="marker flagspin"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M4 22V4M4 4h13l-2.5 4L17 12H4"/></svg></div></div>
-          <div class="ya-dest">
-            <p><strong>Destination:</strong> the default travel-money companion for the next India. Pilgrimage opens the door, the first-timer experience earns the trust, and Yatra Saathi carries it to millions. One map, sequenced, not a wish list.</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    {/* ============ Why me ============ */}
-    <div class="ya-narrow">
-      <div class="ya-section-head reveal">
-        <div class="eyebrow-row"><span class="ya-eyebrow">Why I am the right guide</span></div>
-        <h2>Every guide has <span class="grad">walked the route before.</span></h2>
-      </div>
-
-      <div class="ya-why-intro reveal">
-        <p>I have spent my career building consumer products at scale for exactly this user: <strong>mass-market India, often first-time, often not in English</strong>. That is the same person Scapia's next ten million will be.</p>
-      </div>
-
-      <div class="ya-why-grid reveal-stagger">
-        <div class="ya-why-card">
-          <div class="why-head">
-            <span class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-            <div class="why-meta">
-              <div class="why-link">Maps to Stop 01 + 02</div>
-              <div class="why-area">Consumer scale in Bharat</div>
-            </div>
-          </div>
-          <p class="why-claim">I have shipped <strong>real-money mobile products to millions</strong> of mass-market Indian users, where trust and first-time confidence decide whether someone stays.</p>
-          <div class="why-proof">
-            <div class="why-proof-label">Proof</div>
-            <p>Consumer mobile at scale at <strong>Skillz and Games24x7</strong>, designing for low-trust, first-time users.</p>
-          </div>
-        </div>
-
-        <div class="ya-why-card">
-          <div class="why-head">
-            <span class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.7L4 10.5l5.7 1.9L11.6 18l1.9-5.7L19 10.5l-5.5-1.6L12 3Z"/></svg></span>
-            <div class="why-meta">
-              <div class="why-link">Maps to Stop 03</div>
-              <div class="why-area">AI products, shipped</div>
-            </div>
-          </div>
-          <p class="why-claim">I have built <strong>agentic and AI-workflow products</strong>, not slide decks about them. Yatra Saathi above is the kind of thing I ship, not just propose.</p>
-          <div class="why-proof">
-            <div class="why-proof-label">Proof</div>
-            <p>Shipped <strong>agentic AI and AI-driven workflows</strong>; this page carries a working voice demo, not a mock.</p>
-          </div>
-        </div>
-
-        <div class="ya-why-card">
-          <div class="why-head">
-            <span class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
-            <div class="why-meta">
-              <div class="why-link">Maps to the goal</div>
-              <div class="why-area">Retention and personalisation</div>
-            </div>
-          </div>
-          <p class="why-claim">Reaching ten million is the easy half. <strong>Keeping them</strong> is the hard half, and it is the half I have measurably moved.</p>
-          <div class="why-proof">
-            <div class="why-proof-label">Proof</div>
-            <p><strong>+9% retention</strong> through personalisation, plus <strong>-82% release dependency</strong> by building the platform underneath.</p>
-          </div>
-        </div>
-
-        <div class="ya-why-card">
-          <div class="why-head">
-            <span class="why-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span>
-            <div class="why-meta">
-              <div class="why-link">The whole map</div>
-              <div class="why-area">Built to sequence, not sprawl</div>
-            </div>
-          </div>
-          <p class="why-claim">The post-raise risk is doing everything at once. I lead by <strong>sequencing bets</strong> against the customer, which is exactly what this map argues.</p>
-          <div class="why-proof">
-            <div class="why-proof-label">Proof</div>
-            <p><strong>11 years</strong> across product, <strong>ISB and Stanford</strong>, and a habit of saying no to the tempting feature.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="ya-why-closing reveal">
-        <span class="closing-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.2 7.8 13.4 13.4 7.8 16.2 10.6 10.6 16.2 7.8" fill="currentColor" stroke="none"/></svg></span>
-        <p><strong>Available immediately, no notice period.</strong> A company that just raised $63M to reach the next India cannot afford a quarter spent on a slow hiring cycle. I can start walking the route in week one.</p>
-      </div>
-    </div>
-
-    {/* ============ Dark CTA ============ */}
-    <section class="ya-dark-block fc-dark-block reveal" data-section="cta">
-      <span class="ya-eyebrow">The first mile</span>
-      <h2>Walk the first mile with me.</h2>
-      <p>Twenty minutes. Happy to go deeper on any of the three stops, or to be told where the map is wrong and why. <strong>If the most urgent route is somewhere else, I would rather hear that than pitch past it.</strong></p>
-      <div class="ya-cta-contact">
-        <span class="label">Reach me at</span>
-        <a href="mailto:sagarahuja@gmail.com?subject=20%20minutes%20on%20the%20Scapia%20map">sagarahuja@gmail.com</a>
-        <a href="tel:+919557629225">+91 9557 629 225</a>
-        <a href="https://sagarahuja.co" target="_blank" rel="noopener">sagarahuja.co</a>
-        <a href="https://linkedin.com/in/sagar-ahuja-/" target="_blank" rel="noopener">linkedin.com/in/sagar-ahuja-</a>
+      <div class="hero-foot">
+        <span class="begin">
+          <span class="arrowdown" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="6 13 12 19 18 13"/></svg></span>
+          Begin the yatra
+        </span>
+        <svg class="hero-route" viewBox="0 0 600 46" fill="none" preserveAspectRatio="none" aria-hidden="true">
+          <path class="dash" d="M4 38 C 120 38, 150 8, 250 12 S 420 40, 520 14 L 596 10" stroke="rgba(200,249,75,0.5)" stroke-width="2"/>
+          <circle cx="4" cy="38" r="4" fill="#C8F94B"/>
+          <circle cx="250" cy="12" r="3.5" fill="#25D0A8"/>
+          <circle cx="520" cy="14" r="3.5" fill="#25D0A8"/>
+          <circle cx="596" cy="10" r="5" fill="#C8F94B"/>
+        </svg>
       </div>
     </section>
 
-    <footer class="ya-footer fc-footer">
-      Prepared for Scapia · June 2026 · An unsolicited product map, shared by direct link only<br />
-      Yatra Saathi is a working concept demo built by Sagar Ahuja, not a Scapia product. Funding facts verified against Scapia announcements and Tier-1 press: Series C, $63M, led by General Catalyst, May 2026.
+    {/* ============ Yatra Saathi demo ============ */}
+    <section class="demo wrap reveal" data-section="saathi_demo">
+      <div class="chapter"><span class="no">00</span><span class="lbl">The companion · live</span><span class="rule"></span></div>
+      <div class="lead">
+        <h2>Meet <span class="lime">Yatra Saathi.</span></h2>
+        <p>A voice-first AI companion, on WhatsApp, in your own language. Switch the language. Tap a question. Press listen, and she speaks.</p>
+      </div>
+
+      <div class="phone">
+        <div class="screen">
+          <div class="wa-top">
+            <span class="wa-av" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polygon points="16.2 7.8 13.4 13.4 7.8 16.2 10.6 10.6 16.2 7.8" fill="currentColor" stroke="none"/></svg></span>
+            <div class="wa-meta">
+              <div class="wa-name">Yatra Saathi <svg class="v" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.4 1.8 3-.2 1 2.8 2.6 1.5-1 2.8 1 2.8-2.6 1.5-1 2.8-3-.2L12 22l-2.4-1.8-3 .2-1-2.8L3 16.3l1-2.8-1-2.8 2.6-1.5 1-2.8 3 .2z"/><path d="M8.5 12.3l2.3 2.3 4.4-4.6" fill="none" stroke="#07120F" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div class="wa-status"><span class="live" aria-hidden="true"></span> online · speaks your language</div>
+            </div>
+            <span class="wa-lang"><select id="ya-lang" aria-label="Language"></select></span>
+          </div>
+          <div class="chat" id="ya-chat" aria-live="polite"></div>
+          <div class="chips" id="ya-chips"></div>
+        </div>
+      </div>
+
+      <p class="demo-note">A working concept built by Sagar Ahuja, not a Scapia product. English and हिन्दी speak live through your browser. Other languages show the greeting only, since real translations should ship verified.</p>
+    </section>
+
+    {/* ============ Thesis ============ */}
+    <section class="thesis wrap tight reveal" data-section="thesis">
+      <div class="chapter"><span class="no">01</span><span class="lbl">Why this yatra · why now</span><span class="rule"></span></div>
+      <p class="quote">A Series C buys reach. The risk is spending it on more features for the metro flyer Scapia already won. <span class="lime">The growth is somewhere else: the next ten million, who travel for faith first and fly for the first time.</span></p>
+      <p class="tail">Two traps follow a raise built on "more offerings": <strong>feature sprawl</strong> and rising <strong>acquisition cost</strong> as the easy metro base runs dry. Anil Goteti framed the goal as "products that help our users travel and lead richer lives." The three waypoints below sequence exactly that, for the customer the funding is actually chasing.</p>
+    </section>
+
+    {/* ============ Route ============ */}
+    <section class="route wrap reveal" data-section="route">
+      <div class="chapter"><span class="no">02</span><span class="lbl">The route · three waypoints</span><span class="rule"></span></div>
+
+      <div class="ways">
+
+        {/* Waypoint 01 */}
+        <article class="way" data-section="stop_pilgrimage">
+          <span class="node" aria-hidden="true"></span><span class="connector" aria-hidden="true"></span>
+          <div class="loc">
+            <span class="ghost" aria-hidden="true">01</span>
+            <div class="coord">Waypoint 01 · 13.63°N 79.42°E · Tirupati</div>
+            <h3>Start where India already travels</h3>
+            <div class="one">The biggest first journey is not a holiday. It is a pilgrimage.</div>
+            <p class="gap">Zero forex and international lounges speak to the <em>metro outbound flyer</em>. But the 7x growth and the next ten million sit in Tier 2 and Tier 3, where the highest-intent, group-sized, repeat travel is faith: <strong>Tirupati, Vaishno Devi, the Char Dham, Shirdi, the Kumbh</strong>. No premium travel-fintech is built for it.</p>
+            <div class="build">
+              <div class="bl">What I would build</div>
+              <p>A purpose-built pilgrimage product: <strong>darshan and queue bookings</strong>, verified stays near the temple, group coordination for families, and Coins that mean something on a route people take every single year.</p>
+            </div>
+            <div class="win"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><span><strong>Why it wins:</strong> pilgrimage is repeat, seasonal, and word-of-mouth. One trusted family brings the next ten. The lowest-cost door into the exact customer the Series C is chasing.</span></div>
+          </div>
+        </article>
+
+        {/* Waypoint 02 */}
+        <article class="way" data-section="stop_firsttimer">
+          <span class="node" aria-hidden="true"></span><span class="connector" aria-hidden="true"></span>
+          <div class="loc">
+            <span class="ghost" aria-hidden="true">02</span>
+            <div class="coord">Waypoint 02 · 25.45°N 82.86°E · Varanasi</div>
+            <h3>Build for the first journey, not the hundredth</h3>
+            <div class="one">The seasoned flyer is not the next customer. The first-timer is.</div>
+            <p class="gap">The app assumes travel fluency. It expects you to know what a lounge is, how forex works, how to read a boarding pass. The next ten million are often taking a <strong>first flight</strong>. The barrier is not reward value. It is <em>confidence and anxiety</em>.</p>
+            <div class="build">
+              <div class="bl">What I would build</div>
+              <p>Re-centre on the first-timer: <strong>vernacular, plain-language onboarding</strong>, a guided "your first flight" walkthrough from booking to boarding, domestic value front and centre, and a lounge made to feel welcoming rather than intimidating.</p>
+            </div>
+            <div class="win"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><span><strong>Why it wins:</strong> win someone's first journey and you own every journey after it. The cheapest, stickiest loyalty there is, and invisible to competitors fighting over frequent flyers.</span></div>
+          </div>
+        </article>
+
+        {/* Waypoint 03 */}
+        <article class="way" data-section="stop_saathi">
+          <span class="node" aria-hidden="true"></span><span class="connector" aria-hidden="true"></span>
+          <div class="loc">
+            <span class="ghost" aria-hidden="true">03</span>
+            <div class="coord">Waypoint 03 · reach · 22 languages</div>
+            <h3>A companion who speaks your language</h3>
+            <div class="one">You met her at the top of this map. This is why she matters.</div>
+            <p class="gap">AI-first cannot only mean a smarter backend. For a first-time pilgrim in their own language, the unlock is a companion that <strong>holds their hand across the whole journey</strong>: by voice, on WhatsApp, with no new app to learn.</p>
+            <div class="build">
+              <div class="bl">What I would build</div>
+              <p><strong>Yatra Saathi.</strong> A vernacular, voice-first AI travel companion. She books, reminds, guides through the airport, handles delays, and answers in the traveller's own language. She is how Waypoints 01 and 02 scale to millions without a call centre.</p>
+            </div>
+            <div class="win"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg><span><strong>Why it wins:</strong> the truest expression of the AI-native bet the Series C is funding, pointed at the customer who needs it most. The one feature a metro-built competitor will not think to build.</span></div>
+          </div>
+        </article>
+
+        {/* Destination */}
+        <div class="dest reveal">
+          <span class="flag" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22V4M5 4h13l-2.5 4L18 12H5"/></svg></span>
+          <div class="dl">Destination reached</div>
+          <p>The default travel-money companion for the next India. Pilgrimage opens the door, the first-timer experience earns the trust, and <span class="lime">Yatra Saathi carries it to millions.</span></p>
+        </div>
+
+      </div>
+    </section>
+
+    {/* ============ Cartographer ============ */}
+    <section class="carto wrap tight reveal" data-section="cartographer">
+      <div class="chapter"><span class="no">03</span><span class="lbl">The cartographer</span><span class="rule"></span></div>
+      <div class="carto-panel">
+        <div class="carto-top">
+          <img class="portrait" src="/firstclub/sagar-4.jpg" alt="Sagar Ahuja" loading="lazy" />
+          <div>
+            <h2>Why trust this map <span class="lime">to me.</span></h2>
+            <div class="role">Senior Product Leader · 11 yrs · available now</div>
+          </div>
+        </div>
+        <p class="carto-body">I have spent my career building consumer products at scale for exactly this user: <strong>mass-market India, often first-time, often not in English</strong>. That is the same person Scapia's next ten million will be. And Yatra Saathi above is not a slide about AI. It is a <em>working voice product I built for this page</em>, which is how I work.</p>
+        <div class="carto-stats">
+          <div><div class="fig">11 yrs</div><div class="cap">across product, consumer-first</div></div>
+          <div><div class="fig">Millions</div><div class="cap">of mass-market Indian users served</div></div>
+          <div><div class="fig">+9%</div><div class="cap">retention via personalisation</div></div>
+          <div><div class="fig">ISB · Stanford</div><div class="cap">and shipped agentic AI</div></div>
+        </div>
+        <div class="carto-map">
+          <span class="legend"><span class="pin"></span> Consumer scale <b>→ Waypoint 01 + 02</b></span>
+          <span class="legend"><span class="pin"></span> AI products shipped <b>→ Waypoint 03</b></span>
+          <span class="legend"><span class="pin"></span> Sequencing, not sprawl <b>→ the whole map</b></span>
+        </div>
+        <div class="carto-avail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <p><strong>Available immediately, no notice period.</strong> A company that just raised $63M to reach the next India cannot afford a quarter on a slow hiring cycle. I can start walking the route in week one.</p>
+        </div>
+      </div>
+    </section>
+
+    {/* ============ CTA ============ */}
+    <section class="cta wrap fc-dark-block" data-section="cta">
+      <div class="dl">The first mile</div>
+      <h2>Walk it <span class="lime">with me.</span></h2>
+      <p>Twenty minutes. Happy to go deeper on any waypoint, or to be told where the map is wrong and why. <strong>If the most urgent route is somewhere else, I would rather hear that than pitch past it.</strong></p>
+      <div class="cta-links">
+        <a class="primary" href="mailto:sagarahuja@gmail.com?subject=20%20minutes%20on%20the%20Scapia%20map">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z" fill="none"/><polyline points="22 6 12 13 2 6"/></svg>
+          sagarahuja@gmail.com
+        </a>
+        <a class="ghost" href="tel:+919557629225">+91 9557 629 225</a>
+        <a class="ghost" href="https://linkedin.com/in/sagar-ahuja-/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="ghost" href="https://sagarahuja.co" target="_blank" rel="noopener">sagarahuja.co</a>
+      </div>
+    </section>
+
+    <footer class="foot fc-footer">
+      <div class="ln"></div>
+      Plotted for Scapia · June 2026 · An unsolicited product map, shared by direct link only<br />
+      Yatra Saathi is a working concept demo by Sagar Ahuja, not a Scapia product. Funding facts verified against Scapia announcements and Tier-1 press: Series C, $63M, led by General Catalyst, May 2026.
     </footer>
 
   </div>
 
   <script slot="head" is:inline>
     document.addEventListener('DOMContentLoaded', function() {
-      // ----- Reveal on scroll -----
       if ('IntersectionObserver' in window) {
         var io = new IntersectionObserver(function(entries) {
           entries.forEach(function(entry) {
             if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); }
           });
         }, { threshold: 0.12 });
-        document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el) { io.observe(el); });
+        document.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
       } else {
-        document.querySelectorAll('.reveal, .reveal-stagger').forEach(function(el) { el.classList.add('visible'); });
+        document.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('visible'); });
       }
 
-      // ----- Yatra Saathi demo data -----
-      // English + Hindi are written out and speak live. Other languages show the
-      // verified greeting only - real translations should ship verified, not faked.
       var LANGS = [
         { code: 'en', name: 'English', bcp: 'en-IN', status: 'live' },
         { code: 'hi', name: 'हिन्दी', bcp: 'hi-IN', status: 'live' },
@@ -587,73 +493,55 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         {
           id: 'first', icon: 'plane',
           label: { en: 'My first flight', hi: 'पहली उड़ान' },
-          q: {
-            en: 'I am flying for the very first time, going to Tirupati. What should I keep ready?',
-            hi: 'मैं ज़िंदगी में पहली बार हवाई जहाज़ में बैठ रहा हूँ, तिरुपति जा रहा हूँ। क्या तैयार रखूँ?'
-          },
+          q: { en: 'I am flying for the very first time, going to Tirupati. What should I keep ready?',
+               hi: 'मैं ज़िंदगी में पहली बार हवाई जहाज़ में बैठ रहा हूँ, तिरुपति जा रहा हूँ। क्या तैयार रखूँ?' },
           lead: { en: 'Do not worry, I will be with you the whole way.', hi: 'चिंता मत कीजिए, मैं पूरे सफ़र में आपके साथ हूँ।' },
-          a: {
-            en: [
+          a: { en: [
               'Carry one government photo ID. Your <b>Aadhaar</b> is enough.',
               'Reach the airport <b>2 hours before</b>. I will remind you tonight.',
               'At security, take out phone, keys and metal. I will walk you through the gate.',
               'Your <b>lounge is free</b> with Scapia. Rest and eat there before the flight.',
-              'Booked on <b>Scapia Coins</b>. Nothing more to pay at Tirupati.'
-            ],
+              'Booked on <b>Scapia Coins</b>. Nothing more to pay at Tirupati.' ],
             hi: [
               'एक सरकारी फोटो पहचान-पत्र रखें। <b>आधार</b> काफ़ी है।',
               'हवाई अड्डे <b>2 घंटे पहले</b> पहुँचें। मैं आज रात याद दिला दूँगी।',
               'जाँच पर फ़ोन, चाबी और धातु बाहर निकालें। मैं गेट तक साथ रहूँगी।',
               '<b>लाउंज Scapia के साथ मुफ़्त</b> है। उड़ान से पहले वहाँ आराम करें और खाएँ।',
-              '<b>Scapia Coins</b> से बुक है। तिरुपति में और कुछ नहीं देना।'
-            ]
-          }
+              '<b>Scapia Coins</b> से बुक है। तिरुपति में और कुछ नहीं देना।' ] }
         },
         {
           id: 'delay', icon: 'clock',
           label: { en: 'Flight delayed', hi: 'उड़ान में देरी' },
-          q: {
-            en: 'My flight is delayed by 3 hours. What do I do now?',
-            hi: 'मेरी उड़ान 3 घंटे लेट हो गई है। अब मैं क्या करूँ?'
-          },
+          q: { en: 'My flight is delayed by 3 hours. What do I do now?',
+               hi: 'मेरी उड़ान 3 घंटे लेट हो गई है। अब मैं क्या करूँ?' },
           lead: { en: 'You are not stranded. I am already on it.', hi: 'आप फँसे नहीं हैं। मैं पहले से संभाल रही हूँ।' },
-          a: {
-            en: [
+          a: { en: [
               'Wait in the <b>lounge</b>. Your Scapia card lets you in free.',
               'A <b>delay payout in Scapia Coins</b> is already on its way to you.',
               'I am tracking the flight live and will tell you the moment it boards.',
-              'If it is cancelled, I will <b>rebook the next flight</b> for you, free.'
-            ],
+              'If it is cancelled, I will <b>rebook the next flight</b> for you, free.' ],
             hi: [
               '<b>लाउंज</b> में इंतज़ार करें। Scapia कार्ड से मुफ़्त प्रवेश है।',
               'देरी का <b>Scapia Coins मुआवज़ा</b> पहले ही आपको भेजा जा रहा है।',
               'मैं उड़ान पर नज़र रखे हूँ, बोर्डिंग होते ही बता दूँगी।',
-              'अगर रद्द हुई, तो मैं <b>अगली उड़ान मुफ़्त बुक</b> कर दूँगी।'
-            ]
-          }
+              'अगर रद्द हुई, तो मैं <b>अगली उड़ान मुफ़्त बुक</b> कर दूँगी।' ] }
         },
         {
           id: 'budget', icon: 'wallet',
           label: { en: 'Trip cost', hi: 'खर्च कितना' },
-          q: {
-            en: 'How much will the whole Tirupati trip cost me?',
-            hi: 'पूरी तिरुपति यात्रा में मेरा कितना खर्च होगा?'
-          },
+          q: { en: 'How much will the whole Tirupati trip cost me?',
+               hi: 'पूरी तिरुपति यात्रा में मेरा कितना खर्च होगा?' },
           lead: { en: 'Here is the full picture, no surprises.', hi: 'पूरा हिसाब यहाँ है, कोई छिपी बात नहीं।' },
-          a: {
-            en: [
+          a: { en: [
               'Flights and stay come to about <b>₹11,000</b> together.',
               'Pay over <b>3 months</b>. No cost, no hidden charges.',
               'You earn <b>1,100 Scapia Coins</b> back on this trip.',
-              'I can add <b>darshan booking</b> and a cab to the temple too.'
-            ],
+              'I can add <b>darshan booking</b> and a cab to the temple too.' ],
             hi: [
               'उड़ान और ठहरना मिलाकर लगभग <b>₹11,000</b>।',
               '<b>3 महीनों</b> में चुकाएँ। कोई शुल्क नहीं, कोई छिपा खर्च नहीं।',
               'इस यात्रा पर आपको <b>1,100 Scapia Coins</b> वापस मिलेंगे।',
-              '<b>दर्शन बुकिंग</b> और मंदिर तक कैब, दोनों मैं जोड़ सकती हूँ।'
-            ]
-          }
+              '<b>दर्शन बुकिंग</b> और मंदिर तक कैब, दोनों मैं जोड़ सकती हूँ।' ] }
         }
       ];
 
@@ -664,16 +552,12 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       };
 
       var SUPPORTED = { en: true, hi: true };
-
       var sel = document.getElementById('ya-lang');
       var chatEl = document.getElementById('ya-chat');
       var chipsEl = document.getElementById('ya-chips');
       var byCode = {}; LANGS.forEach(function(l){ byCode[l.code] = l; });
+      var curLangCode = 'en', curScenarioId = 'first';
 
-      var curLangCode = 'en';
-      var curScenarioId = 'first';
-
-      // populate language select
       if (sel) {
         LANGS.forEach(function(l) {
           var o = document.createElement('option');
@@ -683,24 +567,17 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         sel.value = 'en';
       }
 
-      // populate scenario chips
-      function chipLabel(s) {
-        var k = SUPPORTED[curLangCode] ? curLangCode : 'en';
-        return s.label[k] || s.label.en;
-      }
+      function chipLabel(s) { var k = SUPPORTED[curLangCode] ? curLangCode : 'en'; return s.label[k] || s.label.en; }
       function buildChips() {
         if (!chipsEl) return;
         chipsEl.innerHTML = '';
         SCENARIOS.forEach(function(s) {
           var b = document.createElement('button');
           b.type = 'button';
-          b.className = 'ya-chip' + (s.id === curScenarioId ? ' active' : '');
-          b.setAttribute('data-id', s.id);
+          b.className = 'chip' + (s.id === curScenarioId ? ' active' : '');
           b.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + ICONS[s.icon] + '</svg>' + chipLabel(s);
           b.addEventListener('click', function() {
-            curScenarioId = s.id;
-            stopSpeech();
-            render();
+            curScenarioId = s.id; stopSpeech(); render();
             if (window.posthog && window.posthog.capture) window.posthog.capture('saathi_scenario', { scenario: s.id, lang: curLangCode });
           });
           chipsEl.appendChild(b);
@@ -708,9 +585,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       }
 
       function answerText(scn, code) {
-        // strip <b> for speech
-        var lines = scn.a[code] || [];
-        var lead = scn.lead[code] || '';
+        var lines = scn.a[code] || []; var lead = scn.lead[code] || '';
         return (lead + '. ' + lines.join('. ')).replace(/<[^>]+>/g, '');
       }
 
@@ -721,50 +596,41 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         var qLang = live ? curLangCode : 'en';
         chatEl.innerHTML = '';
 
-        // user bubble
         var u = document.createElement('div');
-        u.className = 'ya-bubble user';
+        u.className = 'bubble user';
         u.innerHTML = scn.q[qLang] + '<span class="t">09:24</span>';
         chatEl.appendChild(u);
 
-        // bot bubble
         var b = document.createElement('div');
-        b.className = 'ya-bubble bot';
-
+        b.className = 'bubble bot';
         if (live) {
-          var listItems = scn.a[curLangCode].map(function(li) {
+          var items = scn.a[curLangCode].map(function(li) {
             return '<li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><span>' + li + '</span></li>';
           }).join('');
-          b.innerHTML = '<div class="ya-bot-lead">' + scn.lead[curLangCode] + '</div>'
-            + '<ul class="ya-check">' + listItems + '</ul>'
-            + '<button class="ya-listen" id="ya-listen" type="button">'
+          b.innerHTML = '<div class="bot-lead">' + scn.lead[curLangCode] + '</div>'
+            + '<ul class="check">' + items + '</ul>'
+            + '<button class="listen" id="ya-listen" type="button">'
             + '<span class="pi"><svg class="ico-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>'
             + '<svg class="ico-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14"/><rect x="14" y="5" width="4" height="14"/></svg></span>'
             + (curLangCode === 'hi' ? 'सुनिए' : 'Listen')
-            + '<span class="ya-wave" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>'
-            + '</button>'
-            + '<span class="t">09:24</span>';
+            + '<span class="wv" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></span>'
+            + '</button><span class="t">09:24</span>';
         } else {
           var l = byCode[curLangCode];
-          b.innerHTML = '<div class="ya-bot-lead" style="font-family:Fraunces,Georgia,serif;font-size:21px;">' + l.greet + '</div>'
-            + '<div style="font-size:13px;color:var(--ya-secondary);line-height:1.5;">Saathi will speak <b>' + l.name + '</b> soon. English and हिन्दी are live now. Switch the language to try them.</div>'
+          b.innerHTML = '<div class="bot-lead" style="font-family:Bricolage Grotesque,sans-serif;font-size:22px;color:var(--lime);">' + l.greet + '</div>'
+            + '<div style="font-size:13px;color:var(--dim);line-height:1.5;">Saathi will speak <b style="color:var(--text)">' + l.name + '</b> soon. English and हिन्दी are live now. Switch the language to try them.</div>'
             + '<span class="t">09:24</span>';
         }
         chatEl.appendChild(b);
 
-        // wire listen button
         var listen = document.getElementById('ya-listen');
-        if (listen) {
-          listen.addEventListener('click', function() {
-            if (listen.classList.contains('playing')) { stopSpeech(); return; }
-            speak(answerText(scn, curLangCode), byCode[curLangCode].bcp, listen);
-          });
-        }
-        // rebuild chips to reflect language on labels + active state
+        if (listen) listen.addEventListener('click', function() {
+          if (listen.classList.contains('playing')) { stopSpeech(); return; }
+          speak(answerText(scn, curLangCode), byCode[curLangCode].bcp, listen);
+        });
         buildChips();
       }
 
-      // ----- Speech (Web Speech API) -----
       var activeBtn = null;
       function stopSpeech() {
         if (window.speechSynthesis) { try { window.speechSynthesis.cancel(); } catch (e) {} }
@@ -779,7 +645,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         return vs.filter(function(v){ return v.lang && v.lang.indexOf(base) === 0; })[0] || null;
       }
       function speak(text, bcp, btn) {
-        if (!('speechSynthesis' in window)) { return; }
+        if (!('speechSynthesis' in window)) return;
         stopSpeech();
         var u = new SpeechSynthesisUtterance(text);
         u.lang = bcp; u.rate = 0.97;
@@ -787,21 +653,15 @@ import PitchLayout from '../layouts/PitchLayout.astro';
         u.onend = function() { btn.classList.remove('playing'); activeBtn = null; };
         u.onerror = function() { btn.classList.remove('playing'); activeBtn = null; };
         window.speechSynthesis.speak(u);
-        btn.classList.add('playing');
-        activeBtn = btn;
+        btn.classList.add('playing'); activeBtn = btn;
         if (window.posthog && window.posthog.capture) window.posthog.capture('saathi_listen', { scenario: curScenarioId, lang: curLangCode });
       }
-      // some browsers load voices async
-      if (window.speechSynthesis) { window.speechSynthesis.onvoiceschanged = function(){ /* voices ready */ }; }
+      if (window.speechSynthesis) { window.speechSynthesis.onvoiceschanged = function(){}; }
 
-      if (sel) {
-        sel.addEventListener('change', function() {
-          curLangCode = sel.value;
-          stopSpeech();
-          render();
-          if (window.posthog && window.posthog.capture) window.posthog.capture('saathi_lang', { lang: curLangCode });
-        });
-      }
+      if (sel) sel.addEventListener('change', function() {
+        curLangCode = sel.value; stopSpeech(); render();
+        if (window.posthog && window.posthog.capture) window.posthog.capture('saathi_lang', { lang: curLangCode });
+      });
 
       render();
     });
