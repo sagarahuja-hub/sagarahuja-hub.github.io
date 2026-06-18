@@ -29,6 +29,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       --sv-indigo-700: #4338CA;
       --sv-indigo-900: #312E81;
       --sv-soft-btn: linear-gradient(to bottom, #E0E7FF 0%, #FFFFFF 100%);
+      --sv-mandala: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.3' stroke-linejoin='round'%3E%3Ccircle cx='60' cy='60' r='9'/%3E%3Ccircle cx='60' cy='60' r='27' stroke-dasharray='2 5'/%3E%3Ccircle cx='60' cy='60' r='55'/%3E%3Cg%3E%3Cpath d='M60 33C64 43 64 49 60 57 56 49 56 43 60 33Z'/%3E%3Cpath d='M60 33C64 43 64 49 60 57 56 49 56 43 60 33Z' transform='rotate(30 60 60)'/%3E%3Cpath d='M60 33C64 43 64 49 60 57 56 49 56 43 60 33Z' transform='rotate(60 60 60)'/%3E%3Cpath d='M60 33C64 43 64 49 60 57 56 49 56 43 60 33Z' transform='rotate(90 60 60)'/%3E%3Cpath d='M60 33C64 43 64 49 60 57 56 49 56 43 60 33Z' transform='rotate(120 60 60)'/%3E%3Cpath d='M60 33C64 43 64 49 60 57 56 49 56 43 60 33Z' transform='rotate(150 60 60)'/%3E%3Cpath d='M60 33C64 43 64 49 60 57 56 49 56 43 60 33Z' transform='rotate(180 60 60)'/%3E%3Cpath d='M60 33C64 43 64 49 60 57 56 49 56 43 60 33Z' transform='rotate(210 60 60)'/%3E%3Cpath d='M60 33C64 43 64 49 60 57 56 49 56 43 60 33Z' transform='rotate(240 60 60)'/%3E%3Cpath d='M60 33C64 43 64 49 60 57 56 49 56 43 60 33Z' transform='rotate(270 60 60)'/%3E%3Cpath d='M60 33C64 43 64 49 60 57 56 49 56 43 60 33Z' transform='rotate(300 60 60)'/%3E%3Cpath d='M60 33C64 43 64 49 60 57 56 49 56 43 60 33Z' transform='rotate(330 60 60)'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
       --sv-ink-block: #1E2033;
       --sv-radius: 10px;
       --sv-radius-lg: 24px;
@@ -50,6 +51,12 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.045;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
+    /* Faint jaali (lattice) pattern in the background */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%234F46E5' stroke-width='1'%3E%3Ccircle cx='0' cy='0' r='20'/%3E%3Ccircle cx='40' cy='0' r='20'/%3E%3Ccircle cx='0' cy='40' r='20'/%3E%3Ccircle cx='40' cy='40' r='20'/%3E%3Ccircle cx='20' cy='20' r='20'/%3E%3C/g%3E%3C/svg%3E");
+      background-size: 86px 86px;
+    }
     .sv-page { position: relative; z-index: 1; max-width: 1180px; margin: 0 auto; padding: 28px 20px 72px; }
     @media (min-width: 720px) { .sv-page { padding: 44px 32px 96px; } }
     @media (max-width: 420px) { .sv-page { padding: 22px 14px 64px; } }
@@ -59,7 +66,9 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .sv-divider { display: flex; align-items: center; justify-content: center; gap: 18px; margin: 52px 0 4px; }
     .sv-divider .ln { flex: 1; max-width: 240px; height: 1px; background: linear-gradient(90deg, transparent, var(--sv-indigo-100)); }
     .sv-divider .ln.r { background: linear-gradient(90deg, var(--sv-indigo-100), transparent); }
-    .sv-divider .motif { width: 42px; height: 42px; color: var(--sv-indigo-600); flex-shrink: 0; opacity: 0.9; }
+    .sv-divider .motif { width: 42px; height: 42px; color: var(--sv-indigo-600); flex-shrink: 0; opacity: 0.9; animation: svSpin 60s linear infinite; transform-origin: 50% 50%; }
+    @keyframes svSpin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .sv-divider .motif { animation: none; } }
 
     strong.k {
       font-weight: 700;
@@ -278,6 +287,28 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     .dub-chip .ln { font-size: 13px; font-weight: 600; color: var(--sv-ink); }
     .dub-note { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--sv-muted); margin-top: 16px; text-align: center; }
 
+    /* Interactive voices + dubbing */
+    .voice-card { cursor: pointer; }
+    .voice-card.speaking { border-color: var(--sv-indigo-100); background: var(--sv-grad-soft); box-shadow: 0 2px 12px rgba(79,70,229,0.14); }
+    .voice-card.speaking .voice-play { animation: svScalePulse 1s ease-in-out infinite; }
+    @keyframes svScalePulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.09); } }
+    @media (prefers-reduced-motion: reduce) { .voice-card.speaking .voice-play { animation: none; } }
+
+    .dub-chip { cursor: pointer; }
+    .dub-chip .dub-wave { display: none; align-items: center; gap: 2px; height: 14px; }
+    .dub-chip .dub-wave span { width: 2.5px; border-radius: 2px; background: var(--sv-indigo-600); height: 4px; animation: svDubBar 0.9s ease-in-out infinite; }
+    .dub-chip .dub-wave span:nth-child(2) { animation-delay: .15s; } .dub-chip .dub-wave span:nth-child(3) { animation-delay: .3s; } .dub-chip .dub-wave span:nth-child(4) { animation-delay: .1s; }
+    @keyframes svDubBar { 0%,100% { height: 4px; } 50% { height: 13px; } }
+    @media (prefers-reduced-motion: reduce) { .dub-chip .dub-wave span { animation: none; height: 9px; } }
+    .dub-chip.playing { border-color: rgba(99,102,241,0.5); background: var(--sv-grad-soft); }
+    .dub-chip.playing .pp { display: none; }
+    .dub-chip.playing .dub-wave { display: inline-flex; }
+    .dub-chip .dub-soon { margin-left: auto; font-family: 'Space Mono', monospace; font-size: 8.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--sv-muted); }
+    .dub-chip.flash { animation: svFlash 0.7s var(--sv-ease); }
+    @keyframes svFlash { 0%,100% { background: #fff; } 35% { background: var(--sv-indigo-50); } }
+    .dub-status { margin-top: 16px; text-align: center; font-size: 13px; color: var(--sv-secondary); min-height: 1.3em; transition: color 0.2s ease; }
+    .dub-status b { color: var(--sv-indigo-700); font-weight: 700; }
+
     .sv-stage-cta { text-align: center; margin-top: 22px; }
     .sv-try { display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 14px 28px; border-radius: var(--sv-radius-pill); background: var(--sv-soft-btn); color: var(--sv-indigo-900); text-decoration: none; font-family: 'Hanken Grotesk', sans-serif; font-size: 15px; font-weight: 700; border: 1px solid var(--sv-indigo-100); box-shadow: inset 0 -1px 0 1px rgba(0,0,0,0.04); transition: transform 0.18s var(--sv-ease), box-shadow 0.18s var(--sv-ease); }
     .sv-try:hover { transform: translateY(-1px); box-shadow: inset 0 -1px 0 1px rgba(0,0,0,0.04), 0 8px 22px rgba(79,70,229,0.18); }
@@ -295,6 +326,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     /* ===== Framing block ===== */
     .sv-framing { margin: 0 0 26px; padding: 24px 26px; background: var(--sv-ink-block); border-radius: var(--sv-radius-lg); position: relative; overflow: hidden; }
     .sv-framing::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 100% 0%, rgba(99,102,241,0.22) 0%, transparent 45%), radial-gradient(circle at 0% 100%, rgba(129,140,248,0.20) 0%, transparent 45%); pointer-events: none; }
+    .sv-framing::after { content: ''; position: absolute; right: -34px; bottom: -34px; width: 190px; height: 190px; background-image: var(--sv-mandala); background-size: contain; background-repeat: no-repeat; opacity: 0.09; pointer-events: none; }
     .sv-framing .quote { position: relative; font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 20px; font-weight: 500; line-height: 1.4; color: #fff; letter-spacing: -0.01em; margin-bottom: 12px; }
     @media (min-width: 720px) { .sv-framing .quote { font-size: 23px; } }
     .sv-framing .quote .grad { background: var(--sv-grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
@@ -362,6 +394,8 @@ import PitchLayout from '../layouts/PitchLayout.astro';
     /* ===== Dark CTA ===== */
     .sv-dark-block { margin-top: 48px; padding: 44px 32px; border-radius: var(--sv-radius-lg); background: var(--sv-ink-block); text-align: center; position: relative; overflow: hidden; }
     .sv-dark-block::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 15% 10%, rgba(234,88,12,0.22) 0%, transparent 42%), radial-gradient(circle at 85% 90%, rgba(129,140,248,0.24) 0%, transparent 45%); pointer-events: none; }
+    .sv-dark-block::after { content: ''; position: absolute; left: -40px; top: -40px; width: 220px; height: 220px; background-image: var(--sv-mandala); background-size: contain; background-repeat: no-repeat; opacity: 0.08; pointer-events: none; animation: svSpin 90s linear infinite; transform-origin: 50% 50%; }
+    @media (prefers-reduced-motion: reduce) { .sv-dark-block::after { animation: none; } }
     .sv-dark-block h2 { position: relative; font-family: 'Fraunces', Georgia, serif; font-optical-sizing: auto; font-size: 30px; font-weight: 500; color: #fff; letter-spacing: -0.015em; margin-bottom: 12px; }
     @media (min-width: 720px) { .sv-dark-block h2 { font-size: 36px; } }
     .sv-dark-block p { position: relative; font-size: 15px; line-height: 1.65; color: rgba(255,255,255,0.72); max-width: 56ch; margin: 0 auto 24px; }
@@ -576,6 +610,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
             <div class="dub">
               <p class="dub-intro">One pitch, <b>dubbed for every India</b>. The same case for hiring me, in the languages Sarvam is built to serve.</p>
               <div class="dub-grid" id="dub-grid"></div>
+              <div class="dub-status" id="dub-status" data-idle="Tap a language to hear the pitch dubbed aloud.">Tap a language to hear the pitch dubbed aloud.</div>
               <p class="dub-note">Powered by Bulbul TTS · 11 languages and counting</p>
             </div>
           </div>
@@ -959,7 +994,11 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           var chip = document.createElement('div');
           chip.className = 'dub-chip' + (l.code === 'en' ? ' active' : '');
           chip.setAttribute('data-code', l.code);
-          chip.innerHTML = '<span class="pp"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></span><span class="ln">' + l.name + '</span>';
+          chip.setAttribute('role', 'button');
+          chip.innerHTML = '<span class="pp"><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg></span>'
+            + '<span class="dub-wave" aria-hidden="true"><span></span><span></span><span></span><span></span></span>'
+            + '<span class="ln">' + l.name + '</span>'
+            + (l.status !== 'live' ? '<span class="dub-soon">soon</span>' : '');
           dubGrid.appendChild(chip);
         });
       }
@@ -976,6 +1015,22 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       function stopSpeech() {
         if (window.speechSynthesis) { try { window.speechSynthesis.cancel(); } catch (e) {} }
         if (play) { play.classList.remove('playing'); play.setAttribute('aria-label', 'Play'); }
+        document.querySelectorAll('.voice-card.speaking').forEach(function(c) { c.classList.remove('speaking'); });
+        if (dubGrid) dubGrid.querySelectorAll('.dub-chip.playing').forEach(function(c) { c.classList.remove('playing'); });
+        var ds = document.getElementById('dub-status');
+        if (ds && ds.getAttribute('data-idle')) ds.textContent = ds.getAttribute('data-idle');
+      }
+      function speakText(text, bcp, onEnd) {
+        if (!('speechSynthesis' in window) || !text) return false;
+        var u = new SpeechSynthesisUtterance(text);
+        u.lang = bcp;
+        var v = pickVoice(bcp); if (v) u.voice = v;
+        u.rate = 0.98;
+        u.onend = function() { onEnd && onEnd(); };
+        u.onerror = function() { onEnd && onEnd(); };
+        window.speechSynthesis.cancel();
+        window.speechSynthesis.speak(u);
+        return true;
       }
 
       function render(code) {
@@ -1026,7 +1081,7 @@ import PitchLayout from '../layouts/PitchLayout.astro';
           tabs.forEach(function(t) { t.classList.remove('active'); });
           tab.classList.add('active');
           panels.forEach(function(p) { p.classList.toggle('active', p.getAttribute('data-panel') === name); });
-          if (name !== 'tts') stopSpeech();
+          stopSpeech();
           if (window.posthog && typeof window.posthog.capture === 'function') {
             window.posthog.capture('playground_tab_opened', { tab: name });
           }
@@ -1045,21 +1100,29 @@ import PitchLayout from '../layouts/PitchLayout.astro';
       if (play) {
         play.addEventListener('click', function() {
           if (play.classList.contains('disabled')) return;
-          if (!('speechSynthesis' in window) || !curLang.text) { play.classList.toggle('playing'); return; }
-          if (play.classList.contains('playing')) { stopSpeech(); return; }
-          var u = new SpeechSynthesisUtterance(curLang.text);
-          u.lang = curLang.bcp;
-          var v = pickVoice(curLang.bcp);
-          if (v) u.voice = v;
-          u.rate = 0.98;
-          u.onend = function() { play.classList.remove('playing'); play.setAttribute('aria-label', 'Play'); };
-          u.onerror = function() { play.classList.remove('playing'); };
-          window.speechSynthesis.cancel();
-          window.speechSynthesis.speak(u);
-          play.classList.add('playing');
-          play.setAttribute('aria-label', 'Pause');
+          var was = play.classList.contains('playing');
+          stopSpeech();
+          if (was) return;
+          if (speakText(curLang.text, curLang.bcp, function() { play.classList.remove('playing'); play.setAttribute('aria-label', 'Play'); })) {
+            play.classList.add('playing'); play.setAttribute('aria-label', 'Pause');
+          } else {
+            play.classList.add('playing'); // graceful fallback (animation only)
+          }
         });
       }
+
+      // ----- Voice cards: click to hear the script spoken aloud -----
+      document.querySelectorAll('.voice-card').forEach(function(card) {
+        card.addEventListener('click', function() {
+          if (curLang.status !== 'live' || !curLang.text) return;
+          var was = card.classList.contains('speaking');
+          stopSpeech();
+          if (was) return;
+          if (speakText(curLang.text, curLang.bcp, function() { card.classList.remove('speaking'); })) {
+            card.classList.add('speaking');
+          }
+        });
+      });
 
       // ----- Speech to Text (real, via Web Speech API) -----
       var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -1100,6 +1163,34 @@ import PitchLayout from '../layouts/PitchLayout.astro';
             try { recog.start(); } catch (err) {}
           });
         }
+      }
+
+      // ----- Dubbing: click a language to hear the pitch dubbed aloud -----
+      var dubStatus = document.getElementById('dub-status');
+      if (dubGrid) {
+        dubGrid.addEventListener('click', function(e) {
+          var chip = e.target.closest ? e.target.closest('.dub-chip') : null;
+          if (!chip) return;
+          var code = chip.getAttribute('data-code');
+          var l = byCode[code];
+          if (!l) return;
+          var wasPlaying = chip.classList.contains('playing');
+          stopSpeech();
+          if (wasPlaying) return;
+          if (l.status !== 'live') {
+            chip.classList.add('flash');
+            setTimeout(function() { chip.classList.remove('flash'); }, 700);
+            if (dubStatus) dubStatus.innerHTML = '<b>' + l.name + '</b> dub is releasing soon - English and हिन्दी play now.';
+            return;
+          }
+          if (speakText(l.text, l.bcp, function() {
+            chip.classList.remove('playing');
+            if (dubStatus) dubStatus.textContent = dubStatus.getAttribute('data-idle');
+          })) {
+            chip.classList.add('playing');
+            if (dubStatus) dubStatus.innerHTML = 'Now dubbing in <b>' + l.name + '</b>…';
+          }
+        });
       }
     });
   </script>
