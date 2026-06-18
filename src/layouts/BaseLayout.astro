@@ -79,8 +79,11 @@ const currentPath = pathname ?? Astro.url.pathname;
             if (!a) return;
             var href = a.getAttribute('href') || '';
 
-            // Resume PDF download (main public resume)
-            if (/\/resume\.pdf(\?|$)/.test(href)) {
+            // Resume PDF download. Matches the new canonical
+            // /Sagar Ahuja Resume.pdf (encoded or decoded) and the
+            // legacy /resume.pdf path in case anything still points
+            // at it.
+            if (/Sagar(%20|\s|\+)Ahuja(%20|\s|\+)Resume\.pdf(\?|$)/i.test(href) || /\/resume\.pdf(\?|$)/i.test(href)) {
               ph('resume_downloaded', {
                 source_path: location.pathname,
                 label: label(a),
