@@ -120,6 +120,23 @@ const experiencePreview = [
         </a>
       </article>
 
+      <article class="feature feature-mygate reveal">
+        <a href="/mygate/" class="feature-link" aria-label="View the MyGate Homes prototype">
+          <div class="feature-visual">
+            <img src="/mygate/mygate-verified-owners.jpg" alt="MyGate Homes prototype: Verified owners only card, Sell or rent out your home button, and Pre-verified address / No broker spam / Zero brokerage chips" loading="lazy" />
+            <span class="feature-badge"><span class="feature-dot" aria-hidden="true"></span>Currently shipping</span>
+          </div>
+          <div class="feature-text">
+            <span class="feature-eyebrow">Prototype · 2026</span>
+            <h3 class="feature-headline">MyGate Homes: a real-estate prototype for 5.7M verified residents</h3>
+            <p class="feature-body">
+              A clickable React prototype of MyGate Homes plus a 12-month roadmap. Built on MyGate's real moat: verified residents, verified addresses, and gate-issued visit passes. Verified owners only, zero brokerage.
+            </p>
+            <span class="feature-cta">View the prototype <span class="arrow">→</span></span>
+          </div>
+        </a>
+      </article>
+
       <article class="feature feature-app-redesign reveal">
         <a href="/projects/app-redesign-cohort-lobby" class="feature-link" aria-label="Read the App Redesign case study">
           <div class="feature-visual">
@@ -489,11 +506,13 @@ const experiencePreview = [
         gap: 2rem;
         align-items: center;
       }
-      /* Alternate side on the second feature so the page has visual rhythm
-         and does not read as two identical rows. */
-      .feature-app-redesign .feature-link { grid-template-columns: 8fr 4fr; }
-      .feature-app-redesign .feature-visual { order: 2; }
-      .feature-app-redesign .feature-text   { order: 1; }
+      /* Alternate the image side on every even-numbered feature so the
+         page reads as zigzag rows instead of identical bands. Generalised
+         from a hard-coded .feature-app-redesign override so a fourth or
+         fifth feature inherits the rhythm without further CSS. */
+      .feature:nth-of-type(even) .feature-link { grid-template-columns: 8fr 4fr; }
+      .feature:nth-of-type(even) .feature-visual { order: 2; }
+      .feature:nth-of-type(even) .feature-text   { order: 1; }
     }
 
     /* Unified visual treatment so both features look equal in weight:

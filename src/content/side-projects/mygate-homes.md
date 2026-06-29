@@ -8,6 +8,7 @@ tags: [Prototype, Roadmap, Proptech, React, Claude]
 order: 1
 icon: smartphone
 status: Live
+image: "/mygate/mygate-verified-owners.jpg"
 ---
 
 ## What it is
